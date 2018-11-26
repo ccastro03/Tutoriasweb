@@ -10,19 +10,13 @@
 
     <title>{{ config('app.name', 'Tutorias Web') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-	
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>	
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -75,11 +69,16 @@
         @endguest
       </div>   
       </nav>
-      <main class="container">
+      <main class="container" style="top: 20px">
         <div class="columns is-mobile">
           @yield('content')
         </div>        
       </main>      
-    </div>    
+    </div>  
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+	<script src="{{ asset('js/bootstrap.min.js') }}"></script>	
 </body>
 </html>

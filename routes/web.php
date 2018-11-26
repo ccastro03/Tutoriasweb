@@ -18,5 +18,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/role/obtenerlistadoroles', 'RoleController@obtenerListadoRoles');
+
 Route::resource('/role', 'RoleController');
 

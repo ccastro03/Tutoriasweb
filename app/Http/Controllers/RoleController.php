@@ -61,4 +61,11 @@ class RoleController extends Controller
 		Role::find($id)->delete();
 		return redirect()->route('admin.role.index')->with('success','Registro eliminado satisfactoriamente');
     }
+	
+    public function obtenerListadoRoles(Request $request){
+        $role = Role::where([
+            ['name', 'like', '%'.$request->input('name').'%' ],
+        ])->get();
+        return response()->json($role);
+    }		
 }

@@ -6,20 +6,18 @@
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Nombre</th>
             <th scope="col">Descripcion</th>  
             <th scope="col"> &nbsp; </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="role in roles" :key="role.id">
-            <td>{{ role.id }}</td>            
+          <tr v-for="role in roles" :key="role.id">           
             <td><a :href="'/roles/' + role.id">{{ role.name }}</a></td>
             <td>{{ role.descripcion }}</td>
             <td>
 				<a class="button is-link is-rounded is-outlined" :href="'/roles/' + role.id + '/editar'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" :href="'/roles/eliminar/'+ role.id">Eliminar</a>
+				<a class="button is-link is-rounded is-outlined" id="BtnDelRol" :value="role.id" >Eliminar</a>
 			</td>
           </tr>
         </tbody>

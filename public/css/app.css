@@ -7637,7 +7637,6 @@ body.has-navbar-fixed-bottom {
 a.navbar-item,
 .navbar-link {
   cursor: pointer;
-  color: #fff;
 }
 
 a.navbar-item:hover,
@@ -12254,6 +12253,10 @@ main.container {
 }
 
 /* End Tiles section */
+
+a.navbar-item {
+  color: #fff;
+}
 
 /* End Main Section */
 

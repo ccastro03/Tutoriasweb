@@ -62,6 +62,40 @@ window.$(document).on('click', '.notification > button.delete', function() {
     return false;
 });
 
+window.$(document).on('click', '#BtnDelRol', function (){
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		button: "Aceptar",
+	});	
+    /*$.ajax({
+        url: "/roles/eliminar",
+        dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+        method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+        data: {'id':beneficiario},
+        success: function(response){
+            
+            if(!$.isEmptyObject(response)){
+                console.log(response);
+                swal({
+                    title: "Encontramos una ayuda brindada",
+                    text: 'La ultima ayuda entregada fue el ' + response.fecha_ayuda,
+                    icon: "warning",
+                    button: "Aceptar",
+                });
+            }
+            
+            
+        },
+        error: function(errorThrown){
+            alert(errorThrown);
+            swal("Encontramos un error al tratar de traer los datos del beneficiario!");
+        }  
+    });*/
+});
+
+/************************************************************************************/
 /* Deshabilitar boton de  guardar*/
 $('#btnBeneficiario').attr("disabled", true);
 

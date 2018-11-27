@@ -1135,6 +1135,40 @@ window.$(document).on('click', '.notification > button.delete', function () {
     return false;
 });
 
+window.$(document).on('click', '#BtnDelRol', function () {
+    swal({
+        title: "¿Está seguro de eliminar el registro?",
+        text: 'Después de eliminado, no se podrá recuperar la información',
+        icon: "warning",
+        button: "Aceptar"
+    });
+    /*$.ajax({
+        url: "/roles/eliminar",
+        dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+        method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+        data: {'id':beneficiario},
+        success: function(response){
+            
+            if(!$.isEmptyObject(response)){
+                console.log(response);
+                swal({
+                    title: "Encontramos una ayuda brindada",
+                    text: 'La ultima ayuda entregada fue el ' + response.fecha_ayuda,
+                    icon: "warning",
+                    button: "Aceptar",
+                });
+            }
+            
+            
+        },
+        error: function(errorThrown){
+            alert(errorThrown);
+            swal("Encontramos un error al tratar de traer los datos del beneficiario!");
+        }  
+    });*/
+});
+
+/************************************************************************************/
 /* Deshabilitar boton de  guardar*/
 $('#btnBeneficiario').attr("disabled", true);
 
@@ -43517,8 +43551,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -43593,8 +43625,6 @@ var render = function() {
             "tbody",
             _vm._l(_vm.roles, function(role) {
               return _c("tr", { key: role.id }, [
-                _c("td", [_vm._v(_vm._s(role.id))]),
-                _vm._v(" "),
                 _c("td", [
                   _c("a", { attrs: { href: "/roles/" + role.id } }, [
                     _vm._v(_vm._s(role.name))
@@ -43617,7 +43647,7 @@ var render = function() {
                     "a",
                     {
                       staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { href: "/roles/eliminar/" + role.id }
+                      attrs: { id: "BtnDelRol", value: role.id }
                     },
                     [_vm._v("Eliminar")]
                   )
@@ -43637,8 +43667,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Descripcion")]),

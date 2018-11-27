@@ -15,5 +15,5 @@
       <div class="tile is-ancestor has-text-centered">
       </div>
     </section>
-  </div>
+  </div>  
 @endsection

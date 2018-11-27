@@ -10,16 +10,13 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -30,14 +27,14 @@
           <a href="/" class="navbar-item">
             <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
           </a>
-          <a class="navbar-burger burger" aria-label="menu" role="button" aria-expanded="false" data-target="navbarArquidiocesis">
+          <a class="navbar-burger burger" aria-label="menu" role="button" aria-expanded="false" data-target="navbarpptal">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
 
-        <div id="navbarArquidiocesis" class="navbar-menu">
+        <div id="navbarPptal" class="navbar-menu">
         @guest
           <div class="navbar-end">
               <div class="navbar-item">
@@ -50,7 +47,20 @@
         
           <div class="navbar-start">              
             <a href="{{ url('/home') }}" class="navbar-item">Inicio</a>
-            <a href="{{ url('/roles') }}" class="navbar-item">Roles</a>            
+			
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle navbar-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+				<li><a href="{{ url('/roles') }}">Roles</a></li>
+				<li><a href="{{ url('/funciones') }}">Funciones</a></li>
+				<li><a href="#">Something else here</a></li>
+				<li role="separator" class="divider"></li>
+				<li><a href="#">Separated link</a></li>
+				<li role="separator" class="divider"></li>
+				<li><a href="#">One more separated link</a></li>
+			  </ul>
+			</li>
+			
           </div>
           <div class="navbar-end">
             <div class="navbar-item">          
@@ -78,5 +88,10 @@
         </div>        
       </main>      
     </div>    
+	
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+	<script src="{{ asset('js/bootstrap.min.js') }}"></script>		
 </body>
 </html>

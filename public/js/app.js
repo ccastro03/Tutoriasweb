@@ -43617,7 +43617,7 @@ var render = function() {
                     "a",
                     {
                       staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { href: "/roles/" + role.id + "/eliminar" }
+                      attrs: { href: "/roles/eliminar/" + role.id }
                     },
                     [_vm._v("Eliminar")]
                   )

@@ -8282,7 +8282,6 @@ a.navbar-item.is-active,
 
 .panel {
   font-size: 1rem;
-  margin-left : 15px;
 }
 
 .panel:not(:last-child) {
@@ -12223,6 +12222,11 @@ body {
 .long-form,
 #crud {
   width: 100%;
+}
+
+.panel {
+  font-size: 1rem;
+  margin-left: 20px;
 }
 
 .is-hidden {

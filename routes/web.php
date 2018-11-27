@@ -21,5 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/roles/obtenerlistadoroles', 'RolesController@obtenerListadoRoles');
 
+	
+Route::get('/roles/eliminar/{id}', 'RolesController@eliminar');
 Route::resource('/roles', 'RolesController');
-    

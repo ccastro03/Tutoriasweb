@@ -8,7 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Tutorias Web') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -16,7 +20,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -24,17 +27,17 @@
       <!-- Navbar start -->
       <nav class="navbar is-info" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item">
-            <img src="{{ asset('img/logo.jpg') }}" width="112" height="28">
+          <a href="/" class="navbar-item">
+            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
           </a>
-          <a class="navbar-burger burger" aria-label="menu" role="button" aria-expanded="false" data-target="navbarTuto">
+          <a class="navbar-burger burger" aria-label="menu" role="button" aria-expanded="false" data-target="navbarArquidiocesis">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
 
-        <div id="navbarTuto" class="navbar-menu">
+        <div id="navbarArquidiocesis" class="navbar-menu">
         @guest
           <div class="navbar-end">
               <div class="navbar-item">
@@ -47,7 +50,7 @@
         
           <div class="navbar-start">              
             <a href="{{ url('/home') }}" class="navbar-item">Inicio</a>
-			<a href="{{ url('/role') }}" class="navbar-item">Roles</a>
+            <a href="{{ url('/roles') }}" class="navbar-item">Roles</a>            
           </div>
           <div class="navbar-end">
             <div class="navbar-item">          
@@ -69,16 +72,11 @@
         @endguest
       </div>   
       </nav>
-      <main class="container" style="top: 20px">
+      <main class="container">
         <div class="columns is-mobile">
           @yield('content')
         </div>        
       </main>      
-    </div>  
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-	<script src="{{ asset('js/bootstrap.min.js') }}"></script>	
+    </div>    
 </body>
 </html>

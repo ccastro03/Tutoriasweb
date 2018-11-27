@@ -11,5 +11,9 @@
         </div>
       </div>
     </section>
+    <section class="info-tiles">
+      <div class="tile is-ancestor has-text-centered">
+      </div>
+    </section>
   </div>
 @endsection

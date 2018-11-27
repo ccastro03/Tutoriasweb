@@ -14,11 +14,12 @@
 Route::get('/', function () {
     return redirect()->route('login');
 });
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/role/obtenerlistadoroles', 'RoleController@obtenerListadoRoles');
+Route::get('/roles/obtenerlistadoroles', 'RolesController@obtenerListadoRoles');
 
-Route::resource('/role', 'RoleController');
-
+Route::resource('/roles', 'RolesController');
+    

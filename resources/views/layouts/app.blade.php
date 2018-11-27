@@ -1,68 +1,31 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Tutorias Web') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-		<!-- Fonts -->
-		<link rel="dns-prefetch" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-	
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    </head>
-    <body>
-        <div id="app">
-            <nav class="navbar has-shadow">
-                <div class="container">
-                    <div class="navbar-brand">
-                        <div class="navbar-burger burger" data-target="navMenu">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
-                    <div class="navbar-menu" id="navMenu">
-                        <div class="navbar-start"></div>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-                        <div class="navbar-end">
-                            @if (Auth::guest())
-                                
-                            @else
-                                <div class="navbar-item has-dropdown is-hoverable">
-                                    <a class="navbar-link" href="#">{{ Auth::user()->name }}</a>
-
-                                    <div class="navbar-dropdown">
-                                        <a class="navbar-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                              style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </nav>
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <main class="container">
             @yield('content')
-        </div>
-
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}"></script>
-		<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    </body>
+        </main>
+    </div>
+</body>
 </html>

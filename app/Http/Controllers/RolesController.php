@@ -21,12 +21,14 @@ class RolesController extends Controller
     public function store(Request $request)
     {
 		$data = request()->validate([
-		'name'=>'required',
-		'descripcion'=>'required',
+			'nombre'=>'required',
+			'descripcion'=>'required',
 		]);
 		
-		$Role = new Role($data);
-		$Role->save();
+		$role = new Role($data);
+        $role->name = $data['nombre'];
+        $role->descripcion = $data['descripcion'];		
+		$role->save();
 		return redirect()->route('roles.index')->with('success','Registro creado satisfactoriamente');
     }
 
@@ -43,12 +45,12 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         $data = request()->validate([
-			'name'=>'required',
+			'nombre'=>'required',
 			'descripcion'=>'required',
         ]);
  
 		$role = Role::findOrFail($id);
-        $role->name = $data['name'];
+        $role->name = $data['nombre'];
         $role->descripcion = $data['descripcion'];
 		$role->save();
         return redirect()->route('roles.index')->with('success','Registro actualizado satisfactoriamente');

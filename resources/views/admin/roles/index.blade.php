@@ -15,7 +15,7 @@
 		  </div>
 		</div>      
 		@endif
-		<div class="panel-block">
+		<div class="panel-block" id="divList">
 		  <tabla-roles></tabla-roles>
 		</div>            
 	  

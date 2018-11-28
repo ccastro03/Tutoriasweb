@@ -54,11 +54,12 @@ class RolesController extends Controller
         return redirect()->route('roles.index')->with('success','Registro actualizado satisfactoriamente');
     }
 
-    public function eliminar($id)
+    public function eliminar()
     {
+		$id = $_GET["id"];
 		$role = Role::findOrFail($id);
 		$role->delete();
-		return redirect()->route('roles.index')->with('success','Registro eliminado satisfactoriamente');
+		return response()->json($role);
     }
 	
     public function obtenerListadoRoles(Request $request){

@@ -1136,11 +1136,35 @@ window.$(document).on('click', '.notification > button.delete', function () {
 });
 
 window.$(document).on('click', '#BtnDelRol', function () {
+    var RolId = $(this).attr("attr-id");
     swal({
         title: "¿Está seguro de eliminar el registro?",
         text: 'Después de eliminado, no se podrá recuperar la información',
         icon: "warning",
-        button: "Aceptar"
+        buttons: ["Cancelar", "Aceptar"],
+        dangerMode: true
+    }).then(function (willDelete) {
+        if (willDelete) {
+            $.ajax({
+                url: "/roles/eliminar",
+                dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+                method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+                data: { 'id': RolId },
+                success: function success(data) {
+                    var arrayDatos = $.map(data, function (value, index) {
+                        return [value];
+                    });
+
+                    if (arrayDatos[0] != "" & arrayDatos[0] != null) {
+                        swal("Registro eliminado correctamente!", "", "success").then(function (value) {
+                            location.href = 'roles';
+                        });
+                    } else {
+                        swal("Error al eliminar el registro!", "", "warning");
+                    }
+                }
+            });
+        }
     });
     /*$.ajax({
         url: "/roles/eliminar",
@@ -43647,7 +43671,7 @@ var render = function() {
                     "a",
                     {
                       staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelRol", value: role.id }
+                      attrs: { id: "BtnDelRol", "attr-id": role.id }
                     },
                     [_vm._v("Eliminar")]
                   )

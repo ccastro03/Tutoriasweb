@@ -17,7 +17,7 @@
             <td>{{ role.descripcion }}</td>
             <td>
 				<a class="button is-link is-rounded is-outlined" :href="'/roles/' + role.id + '/editar'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" id="BtnDelRol" :value="role.id" >Eliminar</a>
+				<a class="button is-link is-rounded is-outlined" id="BtnDelRol" :attr-id="role.id" >Eliminar</a>
 			</td>
           </tr>
         </tbody>

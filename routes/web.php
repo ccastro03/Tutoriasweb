@@ -41,4 +41,20 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('/paises', 'PaisesController',
 		['except' => ['destroy']])->middleware('auth');
 	/************/
+	
+	/*  CIUDADES  */
+	Route::get('/ciudades/obtenerlistadociudades', 'CiudadesController@obtenerListadoCiudades');
+	Route::get('/ciudades/eliminar', 'CiudadesController@eliminar');
+	Route::resource('/ciudades', 'CiudadesController',
+		['except' => ['destroy']])->middleware('auth');
+	/**************/	
+	
+
+
+	/*  EPS  */
+	Route::get('/eps/obtenerlistadoeps', 'EpsController@obtenerListadoEps');
+	Route::get('/eps/eliminar', 'EpsController@eliminar');
+	Route::resource('/eps', 'EpsController',
+		['except' => ['destroy']])->middleware('auth');
+	/*********/	
 });

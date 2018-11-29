@@ -167,6 +167,111 @@ window.$(document).on('click', '#BtnDelPais', function (){
 	});	
 });
 
+/* ELIMINAR CIUDADES */
+window.$(document).on('click', '#BtnDelCiu', function (){
+	var CiuId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/ciudades/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':CiuId},
+			success: function(data){
+				var arrayDatos = $.map(data, function(value, index) {
+                    return [value];
+                });
+				
+				if (arrayDatos[0] != "" & arrayDatos[0] != null){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'ciudades';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
+
+/* ELIMINAR PREPAGADAS */
+window.$(document).on('click', '#BtnDelPrepa', function (){
+	var PrepaId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/prepagada/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':PrepaId},
+			success: function(data){
+				var arrayDatos = $.map(data, function(value, index) {
+                    return [value];
+                });
+				
+				if (arrayDatos[0] != "" & arrayDatos[0] != null){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'prepagada';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
+
+/* ELIMINAR EPS */
+window.$(document).on('click', '#BtnDelEps', function (){
+	var EpsId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/eps/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':EpsId},
+			success: function(data){
+				var arrayDatos = $.map(data, function(value, index) {
+                    return [value];
+                });
+				
+				if (arrayDatos[0] != "" & arrayDatos[0] != null){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'eps';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
+
 /************************************************************************************/
 /* Deshabilitar boton de  guardar*/
 $('#btnBeneficiario').attr("disabled", true);

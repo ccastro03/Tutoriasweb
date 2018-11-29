@@ -1172,6 +1172,9 @@ window.Vue = __webpack_require__(39);
 Vue.component('tabla-roles', __webpack_require__(40));
 Vue.component('tabla-funciones', __webpack_require__(43));
 Vue.component('tabla-paises', __webpack_require__(46));
+Vue.component('tabla-ciudades', __webpack_require__(54));
+Vue.component('tabla-prepagada', __webpack_require__(57));
+Vue.component('tabla-eps', __webpack_require__(60));
 
 var app = new Vue({
   el: '#app'
@@ -1192,9 +1195,9 @@ window.swal = __webpack_require__(17);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(19);
+	window.$ = window.jQuery = __webpack_require__(19);
 
-  //require('bootstrap');
+	//require('bootstrap');
 } catch (e) {}
 
 /**
@@ -1216,9 +1219,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+	window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+	console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -1241,110 +1244,212 @@ if (token) {
 /* Cerrar Notificaciones de bulma */
 
 window.$(document).on('click', '.notification > button.delete', function () {
-  $(this).parent().addClass('is-hidden');
-  return false;
+	$(this).parent().addClass('is-hidden');
+	return false;
 });
 
 /* ELIMINAR ROLES */
 window.$(document).on('click', '#BtnDelRol', function () {
-  var RolId = $(this).attr("attr-id");
-  swal({
-    title: "¿Está seguro de eliminar el registro?",
-    text: 'Después de eliminado, no se podrá recuperar la información',
-    icon: "warning",
-    buttons: ["Cancelar", "Aceptar"],
-    dangerMode: true
-  }).then(function (willDelete) {
-    if (willDelete) {
-      $.ajax({
-        url: "/roles/eliminar",
-        dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
-        method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-        data: { 'id': RolId },
-        success: function success(data) {
-          var arrayDatos = $.map(data, function (value, index) {
-            return [value];
-          });
+	var RolId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true
+	}).then(function (willDelete) {
+		if (willDelete) {
+			$.ajax({
+				url: "/roles/eliminar",
+				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: { 'id': RolId },
+				success: function success(data) {
+					var arrayDatos = $.map(data, function (value, index) {
+						return [value];
+					});
 
-          if (arrayDatos[0] != "" & arrayDatos[0] != null) {
-            swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-              location.href = 'roles';
-            });
-          } else {
-            swal("Error al eliminar el registro!", "", "warning");
-          }
-        }
-      });
-    }
-  });
+					if (arrayDatos[0] != "" & arrayDatos[0] != null) {
+						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
+							location.href = 'roles';
+						});
+					} else {
+						swal("Error al eliminar el registro!", "", "warning");
+					}
+				}
+			});
+		}
+	});
 });
 
 /* ELIMINAR FUNCIONES */
 window.$(document).on('click', '#BtnDelFunc', function () {
-  var FuncId = $(this).attr("attr-id");
-  swal({
-    title: "¿Está seguro de eliminar el registro?",
-    text: 'Después de eliminado, no se podrá recuperar la información',
-    icon: "warning",
-    buttons: ["Cancelar", "Aceptar"],
-    dangerMode: true
-  }).then(function (willDelete) {
-    if (willDelete) {
-      $.ajax({
-        url: "/funciones/eliminar",
-        dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
-        method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-        data: { 'id': FuncId },
-        success: function success(data) {
-          var arrayDatos = $.map(data, function (value, index) {
-            return [value];
-          });
+	var FuncId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true
+	}).then(function (willDelete) {
+		if (willDelete) {
+			$.ajax({
+				url: "/funciones/eliminar",
+				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: { 'id': FuncId },
+				success: function success(data) {
+					var arrayDatos = $.map(data, function (value, index) {
+						return [value];
+					});
 
-          if (arrayDatos[0] != "" & arrayDatos[0] != null) {
-            swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-              location.href = 'funciones';
-            });
-          } else {
-            swal("Error al eliminar el registro!", "", "warning");
-          }
-        }
-      });
-    }
-  });
+					if (arrayDatos[0] != "" & arrayDatos[0] != null) {
+						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
+							location.href = 'funciones';
+						});
+					} else {
+						swal("Error al eliminar el registro!", "", "warning");
+					}
+				}
+			});
+		}
+	});
 });
 
 /* ELIMINAR PAISES */
 window.$(document).on('click', '#BtnDelPais', function () {
-  var PaisId = $(this).attr("attr-id");
-  swal({
-    title: "¿Está seguro de eliminar el registro?",
-    text: 'Después de eliminado, no se podrá recuperar la información',
-    icon: "warning",
-    buttons: ["Cancelar", "Aceptar"],
-    dangerMode: true
-  }).then(function (willDelete) {
-    if (willDelete) {
-      $.ajax({
-        url: "/paises/eliminar",
-        dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
-        method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-        data: { 'id': PaisId },
-        success: function success(data) {
-          var arrayDatos = $.map(data, function (value, index) {
-            return [value];
-          });
+	var PaisId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true
+	}).then(function (willDelete) {
+		if (willDelete) {
+			$.ajax({
+				url: "/paises/eliminar",
+				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: { 'id': PaisId },
+				success: function success(data) {
+					var arrayDatos = $.map(data, function (value, index) {
+						return [value];
+					});
 
-          if (arrayDatos[0] != "" & arrayDatos[0] != null) {
-            swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-              location.href = 'paises';
-            });
-          } else {
-            swal("Error al eliminar el registro!", "", "warning");
-          }
-        }
-      });
-    }
-  });
+					if (arrayDatos[0] != "" & arrayDatos[0] != null) {
+						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
+							location.href = 'paises';
+						});
+					} else {
+						swal("Error al eliminar el registro!", "", "warning");
+					}
+				}
+			});
+		}
+	});
+});
+
+/* ELIMINAR CIUDADES */
+window.$(document).on('click', '#BtnDelCiu', function () {
+	var CiuId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true
+	}).then(function (willDelete) {
+		if (willDelete) {
+			$.ajax({
+				url: "/ciudades/eliminar",
+				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: { 'id': CiuId },
+				success: function success(data) {
+					var arrayDatos = $.map(data, function (value, index) {
+						return [value];
+					});
+
+					if (arrayDatos[0] != "" & arrayDatos[0] != null) {
+						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
+							location.href = 'ciudades';
+						});
+					} else {
+						swal("Error al eliminar el registro!", "", "warning");
+					}
+				}
+			});
+		}
+	});
+});
+
+/* ELIMINAR PREPAGADAS */
+window.$(document).on('click', '#BtnDelPrepa', function () {
+	var PrepaId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true
+	}).then(function (willDelete) {
+		if (willDelete) {
+			$.ajax({
+				url: "/prepagada/eliminar",
+				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: { 'id': PrepaId },
+				success: function success(data) {
+					var arrayDatos = $.map(data, function (value, index) {
+						return [value];
+					});
+
+					if (arrayDatos[0] != "" & arrayDatos[0] != null) {
+						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
+							location.href = 'prepagada';
+						});
+					} else {
+						swal("Error al eliminar el registro!", "", "warning");
+					}
+				}
+			});
+		}
+	});
+});
+
+/* ELIMINAR EPS */
+window.$(document).on('click', '#BtnDelEps', function () {
+	var EpsId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true
+	}).then(function (willDelete) {
+		if (willDelete) {
+			$.ajax({
+				url: "/eps/eliminar",
+				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: { 'id': EpsId },
+				success: function success(data) {
+					var arrayDatos = $.map(data, function (value, index) {
+						return [value];
+					});
+
+					if (arrayDatos[0] != "" & arrayDatos[0] != null) {
+						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
+							location.href = 'eps';
+						});
+					} else {
+						swal("Error al eliminar el registro!", "", "warning");
+					}
+				}
+			});
+		}
+	});
 });
 
 /************************************************************************************/
@@ -1354,81 +1459,81 @@ $('#btnBeneficiario').attr("disabled", true);
 /* Validacion de direccion del beneficiario */
 
 window.$(document).on('click', '#confirmarDireccion', function () {
-  //Capturar valores del select
-  var step1 = $('#step1 option:selected').text();
-  var step1index = $('#step1 option:selected').index();
-  var step2 = $("#step2").val();
-  var step3 = $("#step3").val();
-  var step4 = $("#step4").val();
+	//Capturar valores del select
+	var step1 = $('#step1 option:selected').text();
+	var step1index = $('#step1 option:selected').index();
+	var step2 = $("#step2").val();
+	var step3 = $("#step3").val();
+	var step4 = $("#step4").val();
 
-  // Armar texto campo direccion
-  var address = step1.concat(' ', step2, ' #', step3, '-', step4);
+	// Armar texto campo direccion
+	var address = step1.concat(' ', step2, ' #', step3, '-', step4);
 
-  /* Validaciones a los input y al select */
-  if (step1index !== 0) {
-    if (step2.length > 0 && step3.length > 0 && step4.length > 0) {
-      /* activar el input y asignar valor para que laravel lo pueda capturar */
-      $('#direccionBeneficiario').removeAttr("disabled");
-      $('#direccionBeneficiario').attr('readonly', true);
-      $('#direccionBeneficiario').val(address);
+	/* Validaciones a los input y al select */
+	if (step1index !== 0) {
+		if (step2.length > 0 && step3.length > 0 && step4.length > 0) {
+			/* activar el input y asignar valor para que laravel lo pueda capturar */
+			$('#direccionBeneficiario').removeAttr("disabled");
+			$('#direccionBeneficiario').attr('readonly', true);
+			$('#direccionBeneficiario').val(address);
 
-      /*  peticion ajax para validar si la direccion existe en la base de datos */
-      $.ajax({
-        url: "/beneficiarios/validardireccion",
-        dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
-        method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-        data: { 'direccion': address }, //parametros GET o POST 
-        success: function success(response) {
-          if (response === 1) {
-            swal({
-              title: "Hay un beneficiario registrado con la misma direccion!",
-              text: "¿desea registrar este beneficiario con la misma direccion?",
-              icon: "warning",
-              buttons: ["Volver", "Continuar"],
-              dangerMode: true
-            }).then(function (willDelete) {
-              if (willDelete) {
-                $('#btnBeneficiario').removeAttr('disabled');
-              }
-            });
-          } else {
-            $('#btnBeneficiario').removeAttr('disabled');
-          }
-        }
-      });
-    } else {
-      window.swal('Debe de llenar completos los campos de la direccion');
-    }
-  } else {
-    window.swal('Debe de seleccionar una opción entre avenida, calle, carrera, diagonal o trasversal');
-  }
+			/*  peticion ajax para validar si la direccion existe en la base de datos */
+			$.ajax({
+				url: "/beneficiarios/validardireccion",
+				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: { 'direccion': address }, //parametros GET o POST 
+				success: function success(response) {
+					if (response === 1) {
+						swal({
+							title: "Hay un beneficiario registrado con la misma direccion!",
+							text: "¿desea registrar este beneficiario con la misma direccion?",
+							icon: "warning",
+							buttons: ["Volver", "Continuar"],
+							dangerMode: true
+						}).then(function (willDelete) {
+							if (willDelete) {
+								$('#btnBeneficiario').removeAttr('disabled');
+							}
+						});
+					} else {
+						$('#btnBeneficiario').removeAttr('disabled');
+					}
+				}
+			});
+		} else {
+			window.swal('Debe de llenar completos los campos de la direccion');
+		}
+	} else {
+		window.swal('Debe de seleccionar una opción entre avenida, calle, carrera, diagonal o trasversal');
+	}
 });
 
 window.$(document).on('change', '#selectBeneficiario', function () {
-  var beneficiario = $('#selectBeneficiario option:selected').val();
+	var beneficiario = $('#selectBeneficiario option:selected').val();
 
-  $.ajax({
-    url: "/ayudas/validarayuda",
-    dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
-    method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-    data: { 'id_beneficiario': beneficiario },
-    success: function success(response) {
+	$.ajax({
+		url: "/ayudas/validarayuda",
+		dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+		data: { 'id_beneficiario': beneficiario },
+		success: function success(response) {
 
-      if (!$.isEmptyObject(response)) {
-        console.log(response);
-        swal({
-          title: "Encontramos una ayuda brindada",
-          text: 'La ultima ayuda entregada fue el ' + response.fecha_ayuda,
-          icon: "warning",
-          button: "Aceptar"
-        });
-      }
-    },
-    error: function error(errorThrown) {
-      alert(errorThrown);
-      swal("Encontramos un error al tratar de traer los datos del beneficiario!");
-    }
-  });
+			if (!$.isEmptyObject(response)) {
+				console.log(response);
+				swal({
+					title: "Encontramos una ayuda brindada",
+					text: 'La ultima ayuda entregada fue el ' + response.fecha_ayuda,
+					icon: "warning",
+					button: "Aceptar"
+				});
+			}
+		},
+		error: function error(errorThrown) {
+			alert(errorThrown);
+			swal("Encontramos un error al tratar de traer los datos del beneficiario!");
+		}
+	});
 });
 
 /***/ }),
@@ -44191,6 +44296,660 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(55)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TableCiudadesComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e9287640", Component.options)
+  } else {
+    hotAPI.reload("data-v-e9287640", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      ciudades: [],
+      name: null
+    };
+  },
+  created: function created() {
+    this.getCiudades();
+  },
+
+  watch: {
+    name: function name(after, before) {
+      this.getCiudades();
+    }
+  },
+  methods: {
+    getCiudades: function getCiudades() {
+      var _this = this;
+
+      var url = 'ciudades/obtenerlistadociudades';
+      axios.get(url, { params: { name: this.name } }).then(function (response) {
+        _this.ciudades = response.data;
+        var array = _this.ciudades;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row", attrs: { id: "crud" } }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.name,
+          expression: "name"
+        }
+      ],
+      staticClass: "input",
+      attrs: { type: "text", name: "name", placeholder: "Buscar ciudad" },
+      domProps: { value: _vm.name },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.name = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-striped table is-fullwidth" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.ciudades, function(ciudad) {
+              return _c("tr", { key: ciudad.cod_ciudad }, [
+                _c("td", [
+                  _c(
+                    "a",
+                    { attrs: { href: "/ciudades/" + ciudad.cod_ciudad } },
+                    [_vm._v(_vm._s(ciudad.cod_ciudad))]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(ciudad.nombre))]),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "right" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: {
+                        href: "/ciudades/" + ciudad.cod_ciudad + "/editar"
+                      }
+                    },
+                    [_vm._v("Editar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: { id: "BtnDelCiu", "attr-id": ciudad.cod_ciudad }
+                    },
+                    [_vm._v("Eliminar")]
+                  )
+                ])
+              ])
+            })
+          )
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codigo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { colspan: "2" } }, [_vm._v("   ")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e9287640", module.exports)
+  }
+}
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(58)
+/* template */
+var __vue_template__ = __webpack_require__(59)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TablePrepagadaComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-de0679ce", Component.options)
+  } else {
+    hotAPI.reload("data-v-de0679ce", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      prepagada: [],
+      name: null
+    };
+  },
+  created: function created() {
+    this.getPrepagada();
+  },
+
+  watch: {
+    name: function name(after, before) {
+      this.getPrepagada();
+    }
+  },
+  methods: {
+    getPrepagada: function getPrepagada() {
+      var _this = this;
+
+      var url = 'prepagada/obtenerlistadoprepagada';
+      axios.get(url, { params: { name: this.name } }).then(function (response) {
+        _this.prepagada = response.data;
+        var array = _this.prepagada;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row", attrs: { id: "crud" } }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.name,
+          expression: "name"
+        }
+      ],
+      staticClass: "input",
+      attrs: { type: "text", name: "name", placeholder: "Buscar prepagada" },
+      domProps: { value: _vm.name },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.name = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-striped table is-fullwidth" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.prepagada, function(prepa) {
+              return _c("tr", { key: prepa.codigo }, [
+                _c("td", [
+                  _c("a", { attrs: { href: "/prepagada/" + prepa.codigo } }, [
+                    _vm._v(_vm._s(prepa.codigo))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(prepa.nombre))]),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "right" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: { href: "/prepagada/" + prepa.codigo + "/editar" }
+                    },
+                    [_vm._v("Editar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: { id: "BtnDelPrepa", "attr-id": prepa.codigo }
+                    },
+                    [_vm._v("Eliminar")]
+                  )
+                ])
+              ])
+            })
+          )
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codigo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { colspan: "2" } }, [_vm._v("   ")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-de0679ce", module.exports)
+  }
+}
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(61)
+/* template */
+var __vue_template__ = __webpack_require__(62)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TableEpsComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9a739e08", Component.options)
+  } else {
+    hotAPI.reload("data-v-9a739e08", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      eps: [],
+      name: null
+    };
+  },
+  created: function created() {
+    this.getEps();
+  },
+
+  watch: {
+    name: function name(after, before) {
+      this.getEps();
+    }
+  },
+  methods: {
+    getEps: function getEps() {
+      var _this = this;
+
+      var url = 'eps/obtenerlistadoeps';
+      axios.get(url, { params: { name: this.name } }).then(function (response) {
+        _this.eps = response.data;
+        var array = _this.eps;
+        console.log(array);
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row", attrs: { id: "crud" } }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.name,
+          expression: "name"
+        }
+      ],
+      staticClass: "input",
+      attrs: { type: "text", name: "name", placeholder: "Buscar eps" },
+      domProps: { value: _vm.name },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.name = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-striped table is-fullwidth" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.eps, function(ep) {
+              return _c("tr", { key: ep.codigo }, [
+                _c("td", [
+                  _c("a", { attrs: { href: "/eps/" + ep.codigo } }, [
+                    _vm._v(_vm._s(ep.codigo))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(ep.nombre))]),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "right" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: { href: "/eps/" + ep.codigo + "/editar" }
+                    },
+                    [_vm._v("Editar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: { id: "BtnDelEps", "attr-id": ep.codigo }
+                    },
+                    [_vm._v("Eliminar")]
+                  )
+                ])
+              ])
+            })
+          )
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codigo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { colspan: "2" } }, [_vm._v("   ")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-9a739e08", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -8,65 +8,69 @@ use Illuminate\Http\Request;
 
 class CiudadesController extends Controller
 {
+    public function __construct()
+    {
+		$this->middleware('auth');
+    }
+	
     public function index()
     {
-        $paises = Paises::orderBy('codigo','nombre')->paginate(3);
-        return view('admin.paises.index',compact('paises'));
+        return view('admin.ciudades.index');
     }
 
     public function create()
     {
-		return view('admin.paises.create');
+		return view('admin.ciudades.create');
     }
 
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'cod_ciudad'=>'required',
 			'nombre'=>'required',
 		]);
 		
-		$paises = new Paises($data);
-        $paises->codigo = $data['codigo'];
-        $paises->nombre = $data['nombre'];		
-		$paises->save();
-		return redirect()->route('paises.index');
+		$ciudad = new Ciudades($data);
+		$ciudad->cod_ciudad = $data['cod_ciudad'];
+        $ciudad->nombre = $data['nombre'];		
+		$ciudad->save();
+		return redirect()->route('ciudades.index');
     }
 
-    public function show($id)
+    public function show($cod_ciudad)
     {	
-		$paises = DB::table('paises')->where('codigo', '=', $id)->get();
-		return view('admin.paises.show', ['paises' => ($paises[0])]);
+		$ciudades = DB::table('ciudades')->where('cod_ciudad', '=', $cod_ciudad)->get();
+		return view('admin.ciudades.show', ['ciudades' => ($ciudades[0])]);
     }
 
-    public function edit($id)
+    public function edit($cod_ciudad)
     {	
-		$paises = DB::table('paises')->where('codigo', '=', $id)->get();
-		return view('admin.paises.edit', ['paises' => ($paises[0])]);
+		$ciudades = DB::table('ciudades')->where('cod_ciudad', '=', $cod_ciudad)->get();
+		return view('admin.ciudades.edit', ['ciudades' => ($ciudades[0])]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $cod_ciudad)
     {
         $data = request()->validate([
 			'nombre'=>'required',
         ]);
  
-		$paises = Paises::findOrFail($id);
-        $paises->nombre = $data['nombre'];
-		$paises->save();
-        return redirect()->route('paises.index');
+		$ciudad = Ciudades::findOrFail($cod_ciudad);
+        $ciudad->nombre = $data['nombre'];
+		$ciudad->save();
+        return redirect()->route('ciudades.index');
     }
 
     public function eliminar()
     {
-		$id = $_GET["id"];
-		$paises = Paises::findOrFail($id);
-		$paises->delete();
-		return response()->json($paises);
+		$cod_ciudad = $_GET["id"];
+		$ciudad = Ciudades::findOrFail($cod_ciudad);
+		$ciudad->delete();
+		return response()->json($ciudad);
     }
 	
-    public function obtenerListadoPaises(Request $request){
-		$paises = DB::table('paises')->where('nombre', 'like', '%'.$request->input('name').'%')->get();
-        return response()->json($paises);
+    public function obtenerListadoCiudades(Request $request){
+		$ciudades = DB::table('ciudades')->where('nombre', 'like', '%'.$request->input('name').'%')->get();
+        return response()->json($ciudades);
     }		
 }

@@ -55,6 +55,8 @@
 					<a class="navbar-item" href="{{ url('/funciones') }}">Funciones</a>
 					<a class="navbar-item" href="{{ url('/paises') }}">Paises</a>
 					<a class="navbar-item" href="{{ url('/ciudades') }}">Ciudades</a>
+					<a class="navbar-item" href="{{ url('/prepagada') }}">Prepagadas</a>
+					<a class="navbar-item" href="{{ url('/eps') }}">EPS</a>
 					<!-- <hr class="navbar-divider"> -->
 				</div>
 			</div>

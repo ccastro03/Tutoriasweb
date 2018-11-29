@@ -54,6 +54,7 @@
 					<a class="navbar-item" href="{{ url('/roles') }}">Roles</a>
 					<a class="navbar-item" href="{{ url('/funciones') }}">Funciones</a>
 					<a class="navbar-item" href="{{ url('/paises') }}">Paises</a>
+					<a class="navbar-item" href="{{ url('/ciudades') }}">Ciudades</a>
 					<!-- <hr class="navbar-divider"> -->
 				</div>
 			</div>

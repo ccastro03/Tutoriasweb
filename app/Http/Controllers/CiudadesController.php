@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Paises;
+use App\Ciudades;
 use DB;
 use Illuminate\Http\Request;
 
-class PaisesController extends Controller
+class CiudadesController extends Controller
 {
     public function index()
     {

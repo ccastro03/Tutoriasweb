@@ -5,7 +5,7 @@
   <div class="panel">
     <p class="panel-heading">Edición de <b>{{ $paises->codigo }}</b></p>
     <div class="panel-block">
-      <form class="long-form" action="{{ route('paises.update', $paises->codigo) }}" method="post">
+      <form class="long-form" action="{{ route('paises.update', $paises->codigo ) }}" method="post">
         @method('put')
         @csrf
         @if(count($errors) > 0)
@@ -22,7 +22,7 @@
         <div class="columns">
 			<div class="column is-half">
 				<label for="codigo" class="label">Codigo</label>
-				<input type="text" name="codigo" class="input {{ $errors->has('codigo') ? ' is-danger' : '' }}" value="{{ old('codigo', $paises->codigo) }}" disabled>
+				<input type="text" name="codigo" class="input {{ $errors->has('codigo') ? ' is-danger' : '' }}" value="{{ old('codigo', $paises->codigo ) }}" disabled>
 				@if ($errors->has('codigo'))
 					<p class="help is-danger">{{ $errors->first('codigo') }}</p>
 				@endif
@@ -31,7 +31,7 @@
 			<div class="column">
 				<div class="field">
 					<label class="label">Nombre</label>
-					<input type="text" name="nombre" class="input {{ $errors->has('nombre') ? ' is-danger' : '' }}" value="{{ old('nombre', $paises->nombre) }}">
+					<input type="text" name="nombre" class="input {{ $errors->has('nombre') ? ' is-danger' : '' }}" value="{{ old('nombre', $paises->nombre ) }}">
 					@if ($errors->has('nombre'))
 						<p class="help is-danger">{{ $errors->first('nombre') }}</p>
 					@endif

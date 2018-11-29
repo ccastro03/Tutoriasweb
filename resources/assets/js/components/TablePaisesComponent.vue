@@ -48,6 +48,7 @@ export default {
       axios.get(url, { params: { name: this.name }}).then(response => {
         this.paises = response.data;
         var array = this.paises;
+		console.log(array);
       });
     }
   }

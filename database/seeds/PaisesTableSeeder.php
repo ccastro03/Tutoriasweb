@@ -13,10 +13,9 @@ class PaisesTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-
+    {	
         $pais = new Paises();
-        $pais->codigo = 'AF';
+        $pais->codigo = '1AS';
         $pais->nombre = 'Afganistán';
         $pais->save();		
     }

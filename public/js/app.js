@@ -44076,6 +44076,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get(url, { params: { name: this.name } }).then(function (response) {
         _this.paises = response.data;
         var array = _this.paises;
+        console.log(array);
       });
     }
   }

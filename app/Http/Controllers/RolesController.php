@@ -29,7 +29,7 @@ class RolesController extends Controller
         $role->name = $data['nombre'];
         $role->descripcion = $data['descripcion'];		
 		$role->save();
-		return redirect()->route('roles.index')->with('success','Registro creado satisfactoriamente');
+		return redirect()->route('roles.index');
     }
 
     public function show($id)
@@ -53,7 +53,7 @@ class RolesController extends Controller
         $role->name = $data['nombre'];
         $role->descripcion = $data['descripcion'];
 		$role->save();
-        return redirect()->route('roles.index')->with('success','Registro actualizado satisfactoriamente');
+        return redirect()->route('roles.index');
     }
 
     public function eliminar()

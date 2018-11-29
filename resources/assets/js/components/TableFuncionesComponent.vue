@@ -1,6 +1,6 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar rol">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar funcion">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
@@ -12,12 +12,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="role in roles" :key="role.id">           
-            <td><a :href="'/roles/' + role.id">{{ role.name }}</a></td>
-            <td>{{ role.descripcion }}</td>
+          <tr v-for="funcion in funciones" :key="funcion.id">           
+            <td><a :href="'/funciones/' + funcion.id">{{ funcion.nombre }}</a></td>
+            <td>{{ funcion.descripcion }}</td>
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/roles/' + role.id + '/editar'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" id="BtnDelRol" :attr-id="role.id" >Eliminar</a>
+				<a class="button is-link is-rounded is-outlined" :href="'/funciones/' + funcion.id + '/editar'">Editar</a>
+				<a class="button is-link is-rounded is-outlined" id="BtnDelFunc" :attr-id="funcion.id" >Eliminar</a>
 			</td>
           </tr>
         </tbody>
@@ -30,24 +30,24 @@
 export default {
   data() {
     return {
-      roles: [],
+      funciones: [],
       name: null,
     }
   },
   created() {
-    this.getRoles();
+    this.getFunciones();
   },
   watch: {
     name(after,before) {
-      this.getRoles();				
+      this.getFunciones();				
     }
   },
   methods: {
-    getRoles() {
-      var url = 'roles/obtenerlistadoroles';                
+    getFunciones() {
+      var url = 'funciones/obtenerlistadofunciones';                
       axios.get(url, { params: { name: this.name }}).then(response => {
-        this.roles = response.data;
-        var array = this.roles;
+        this.funciones = response.data;
+        var array = this.funciones;
       });
     }
   }

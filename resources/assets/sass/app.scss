@@ -101,4 +101,36 @@ main.container {
 a.navbar-item{
   color: #fff;
 }
+
+.navbar-dropdown {
+  background-color: #209cee;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-top: 2px solid #dbdbdb;
+  -webkit-box-shadow: 0 8px 8px rgba(10, 10, 10, 0.1);
+          box-shadow: 0 8px 8px rgba(10, 10, 10, 0.1);
+  display: none;
+  font-size: 0.875rem;
+  left: 0;
+  min-width: 100%;
+  position: absolute;
+  top: 100%;
+  z-index: 20;
+}
+  
+.navbar-dropdown a.navbar-item:hover {
+  background-color: #118fe4;
+  color: #fff;
+}
+
+.box {
+  background-color: white;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+          box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  color: #4a4a4a;
+  display: block;
+  padding: 1.25rem;
+  margin-top: 20px;
+}
 /* End Main Section */ 

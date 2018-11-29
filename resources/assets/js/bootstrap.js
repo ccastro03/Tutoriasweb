@@ -62,6 +62,7 @@ window.$(document).on('click', '.notification > button.delete', function() {
     return false;
 });
 
+/* ELIMINAR ROLES */
 window.$(document).on('click', '#BtnDelRol', function (){
 	var RolId = $(this).attr("attr-id");
 	swal({
@@ -94,30 +95,76 @@ window.$(document).on('click', '#BtnDelRol', function (){
 		});
 	}
 	});	
-    /*$.ajax({
-        url: "/roles/eliminar",
-        dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
-        method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-        data: {'id':beneficiario},
-        success: function(response){
-            
-            if(!$.isEmptyObject(response)){
-                console.log(response);
-                swal({
-                    title: "Encontramos una ayuda brindada",
-                    text: 'La ultima ayuda entregada fue el ' + response.fecha_ayuda,
-                    icon: "warning",
-                    button: "Aceptar",
+});
+
+/* ELIMINAR FUNCIONES */
+window.$(document).on('click', '#BtnDelFunc', function (){
+	var FuncId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/funciones/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':FuncId},
+			success: function(data){
+				var arrayDatos = $.map(data, function(value, index) {
+                    return [value];
                 });
-            }
-            
-            
-        },
-        error: function(errorThrown){
-            alert(errorThrown);
-            swal("Encontramos un error al tratar de traer los datos del beneficiario!");
-        }  
-    });*/
+				
+				if (arrayDatos[0] != "" & arrayDatos[0] != null){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'funciones';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
+
+/* ELIMINAR PAISES */
+window.$(document).on('click', '#BtnDelPais', function (){
+	var PaisId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/paises/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':PaisId},
+			success: function(data){
+				var arrayDatos = $.map(data, function(value, index) {
+                    return [value];
+                });
+				
+				if (arrayDatos[0] != "" & arrayDatos[0] != null){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'paises';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
 });
 
 /************************************************************************************/

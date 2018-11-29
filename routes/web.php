@@ -17,10 +17,28 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/roles/obtenerlistadoroles', 'RolesController@obtenerListadoRoles');
-
+Route::group(array('before' => 'auth'), function()
+{
+	Route::get('/home', 'HomeController@index')->name('home');
 	
-Route::get('/roles/eliminar', 'RolesController@eliminar');
-Route::resource('/roles', 'RolesController');
+	/*  ROLES  */
+	Route::get('/roles/obtenerlistadoroles', 'RolesController@obtenerListadoRoles');
+	Route::get('/roles/eliminar', 'RolesController@eliminar');
+	Route::resource('/roles', 'RolesController',
+		['except' => ['destroy']])->middleware('auth');
+	/***********/
+
+	/*  FUNCIONES  */
+	Route::get('/funciones/obtenerlistadofunciones', 'FuncionesController@obtenerListadoFunciones');
+	Route::get('/funciones/eliminar', 'FuncionesController@eliminar');
+	Route::resource('/funciones', 'FuncionesController',
+		['except' => ['destroy']])->middleware('auth');
+	/***************/
+
+	/*  PAISES  */
+	Route::get('/paises/obtenerlistadopaises', 'PaisesController@obtenerListadoPaises');
+	Route::get('/paises/eliminar', 'PaisesController@eliminar');
+	Route::resource('/paises', 'PaisesController',
+		['except' => ['destroy']])->middleware('auth');
+	/************/
+});

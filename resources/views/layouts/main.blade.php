@@ -48,19 +48,16 @@
           <div class="navbar-start">              
             <a href="{{ url('/home') }}" class="navbar-item">Inicio</a>
 			
-			<li class="dropdown">
-			  <a href="#" class="dropdown-toggle navbar-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos <span class="caret"></span></a>
-			  <ul class="dropdown-menu">
-				<li><a href="{{ url('/roles') }}">Roles</a></li>
-				<li><a href="{{ url('/funciones') }}">Funciones</a></li>
-				<li><a href="#">Something else here</a></li>
-				<li role="separator" class="divider"></li>
-				<li><a href="#">Separated link</a></li>
-				<li role="separator" class="divider"></li>
-				<li><a href="#">One more separated link</a></li>
-			  </ul>
-			</li>
-			
+			<div class="navbar-item has-dropdown is-hoverable">
+				<a class="navbar-link" >Maestros</a>
+				<div class="navbar-dropdown is-boxed">
+					<a class="navbar-item" href="{{ url('/roles') }}">Roles</a>
+					<a class="navbar-item" href="{{ url('/funciones') }}">Funciones</a>
+					<a class="navbar-item" href="{{ url('/paises') }}">Paises</a>
+					<!-- <hr class="navbar-divider"> -->
+				</div>
+			</div>
+	  
           </div>
           <div class="navbar-end">
             <div class="navbar-item">          

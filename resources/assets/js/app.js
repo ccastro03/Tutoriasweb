@@ -16,8 +16,9 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('tabla-roles', require('./components/TableRolesComponent.vue'));
+Vue.component('tabla-funciones', require('./components/TableFuncionesComponent.vue'));
+Vue.component('tabla-paises', require('./components/TablePaisesComponent.vue'));
 
 
 

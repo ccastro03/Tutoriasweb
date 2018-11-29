@@ -3,9 +3,9 @@
 @section('content')
 <div class="column is-12">
 	<div class="panel">
-		<p class="panel-heading">Listado de roles</p>
+		<p class="panel-heading">Listado de paises</p>
 		<div class="panel-block">
-			<a href="{{ url('/roles/crear') }}" class="button is-medium is-link is-rounded is-outlined">Crear</a>
+			<a href="{{ url('/paises/crear') }}" class="button is-medium is-link is-rounded is-outlined">Crear</a>
 		</div>
 		@if (session('status'))
 		<div class="panel-block">
@@ -16,7 +16,7 @@
 		</div>      
 		@endif
 		<div class="panel-block">
-		  <tabla-roles></tabla-roles>
+		  <tabla-paises></tabla-paises>
 		</div>            
 	  
 	</div>

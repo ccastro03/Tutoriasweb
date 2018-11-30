@@ -30,7 +30,7 @@ class BarriosController extends Controller
 			'cod_ciudad'=>'required',
 			'cod_barrio'=>'required',
 			'nombre'=>'required',
-	]);
+		]);
 		
 		$barrio = new Barrios($data);
 		$barrio->cod_ciudad = $request->input("cod_ciudad"); //

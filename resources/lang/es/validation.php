@@ -148,6 +148,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+		'cod_ciudad'=>'ciudad',
+		'cod_barrio'=>'barrio'
+	],
 
 ];

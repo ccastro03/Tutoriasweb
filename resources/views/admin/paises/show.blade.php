@@ -8,7 +8,7 @@
 		<div class="columns">
 			<div class="column is-12">
 				<div class="field">
-					<label class="label">nombre</label>
+					<label class="label">Nombre</label>
 					<input class="input" value="{{ $paises->nombre }}" disabled>
 				</div>
 			</div>

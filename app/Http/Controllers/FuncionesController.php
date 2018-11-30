@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class FuncionesController extends Controller
 {
+    public function __construct()
+    {
+		$this->middleware('auth');
+    }
+	
     public function index()
     {
         $funciones = Funciones::orderBy('id','descripcion')->paginate(3);

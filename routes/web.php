@@ -62,4 +62,12 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('/eps', 'EpsController',
 		['except' => ['destroy']])->middleware('auth');
 	/*********/	
+	
+	/*  BARRIOS  */
+	Route::get('/barrios/obtenerlistadobarrios', 'BarriosController@obtenerListadoBarrios')->middleware('auth');
+	Route::get('/barrios/eliminar', 'BarriosController@eliminar')->middleware('auth');
+	Route::get('/barrios/{cod_ciudad}/{cod_barrio}/show', 'BarriosController@show')->middleware('auth');
+	Route::resource('/barrios', 'BarriosController',
+		['except' => ['destroy','show']])->middleware('auth');
+	/*************/		
 });

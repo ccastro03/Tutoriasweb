@@ -8,4 +8,5 @@ class Paises extends Model
 {
 	protected $fillable = ['codigo', 'nombre'];
 	protected $primaryKey = 'codigo';
+	protected $table = 'paises';
 }

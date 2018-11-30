@@ -1175,6 +1175,7 @@ Vue.component('tabla-paises', __webpack_require__(46));
 Vue.component('tabla-ciudades', __webpack_require__(49));
 Vue.component('tabla-prepagada', __webpack_require__(52));
 Vue.component('tabla-eps', __webpack_require__(55));
+Vue.component('tabla-barrios', __webpack_require__(63));
 
 var app = new Vue({
   el: '#app'
@@ -44934,6 +44935,245 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(64)
+/* template */
+var __vue_template__ = __webpack_require__(65)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TableBarriosComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-06373776", Component.options)
+  } else {
+    hotAPI.reload("data-v-06373776", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      barrios: [],
+      name: null
+    };
+  },
+  created: function created() {
+    this.getBarrios();
+  },
+
+  watch: {
+    name: function name(after, before) {
+      this.getBarrios();
+    }
+  },
+  methods: {
+    getBarrios: function getBarrios() {
+      var _this = this;
+
+      var url = 'barrios/obtenerlistadobarrios';
+      axios.get(url, { params: { name: this.name } }).then(function (response) {
+        _this.barrios = response.data;
+        var array = _this.barrios;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row", attrs: { id: "crud" } }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.name,
+          expression: "name"
+        }
+      ],
+      staticClass: "input",
+      attrs: { type: "text", name: "name", placeholder: "Buscar barrio" },
+      domProps: { value: _vm.name },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.name = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-striped table is-fullwidth" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.barrios, function(barrio) {
+              return _c("tr", { key: barrio.cod_barrio }, [
+                _c("td", [_vm._v(_vm._s(barrio.cod_ciudad))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href:
+                          "/barrios/" +
+                          barrio.cod_ciudad +
+                          "/" +
+                          barrio.cod_barrio +
+                          "/show"
+                      }
+                    },
+                    [_vm._v(_vm._s(barrio.nombre))]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "right" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: {
+                        href:
+                          "/barrios/" +
+                          barrio.cod_ciudad +
+                          barrio.cod_barrio +
+                          "/editar"
+                      }
+                    },
+                    [_vm._v("Editar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: {
+                        id: "BtnDelBar",
+                        "attr-id": barrio.cod_ciudad + "*" + barrio.cod_barrio
+                      }
+                    },
+                    [_vm._v("Eliminar")]
+                  )
+                ])
+              ])
+            })
+          )
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ciudad")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { colspan: "2" } }, [_vm._v("   ")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-06373776", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -22,7 +22,7 @@ Vue.component('tabla-paises', require('./components/TablePaisesComponent.vue'));
 Vue.component('tabla-ciudades', require('./components/TableCiudadesComponent.vue'));
 Vue.component('tabla-prepagada', require('./components/TablePrepagadaComponent.vue'));
 Vue.component('tabla-eps', require('./components/TableEpsComponent.vue'));
-
+Vue.component('tabla-barrios', require('./components/TableBarriosComponent.vue'));
 
 
 const app = new Vue({

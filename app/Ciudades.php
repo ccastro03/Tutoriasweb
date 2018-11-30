@@ -8,4 +8,5 @@ class Ciudades extends Model
 {
 	protected $fillable = ['cod_ciudad', 'nombre'];
 	protected $primaryKey = 'cod_ciudad';
+	protected $table = 'ciudades';
 }

@@ -133,4 +133,9 @@ a.navbar-item{
   padding: 1.25rem;
   margin-top: 20px;
 }
+
+.label:not(:last-child) {
+  margin-bottom: 0.5em;
+  margin-left: 0.8em;
+}
 /* End Main Section */ 

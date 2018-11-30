@@ -16,7 +16,7 @@
 		</div>      
 		@endif
 		<div class="panel-block">
-		  <tabla-paises></tabla-paises>
+			<tabla-paises></tabla-paises>
 		</div>            
 	  
 	</div>

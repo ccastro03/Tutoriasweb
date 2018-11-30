@@ -10,8 +10,7 @@ class PaisesController extends Controller
 {
     public function index()
     {
-        $paises = Paises::orderBy('codigo','nombre')->paginate(3);
-        return view('admin.paises.index',compact('paises'));
+        return view('admin.paises.index');
     }
 
     public function create()
@@ -60,8 +59,7 @@ class PaisesController extends Controller
     public function eliminar()
     {
 		$id = $_GET["id"];
-		$paises = Paises::findOrFail($id);
-		$paises->delete();
+		$paises = DB::table('paises')->where('codigo', '=', $id)->delete();
 		return response()->json($paises);
     }
 	

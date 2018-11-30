@@ -57,10 +57,9 @@ class PrepagadaController extends Controller
     }
 
     public function eliminar()
-    {
+    {		
 		$id = $_GET["id"];
-		$prepagada = Prepagada::findOrFail($id);
-		$prepagada->delete();
+		$prepagada = DB::table('prepagada')->where('codigo', '=', $id)->delete();
 		return response()->json($prepagada);
     }
 	

@@ -64,8 +64,7 @@ class CiudadesController extends Controller
     public function eliminar()
     {
 		$cod_ciudad = $_GET["id"];
-		$ciudad = Ciudades::findOrFail($cod_ciudad);
-		$ciudad->delete();
+		$ciudad = DB::table('ciudades')->where('codigo', '=', $id)->delete();
 		return response()->json($ciudad);
     }
 	

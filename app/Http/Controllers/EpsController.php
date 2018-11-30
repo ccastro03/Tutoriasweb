@@ -57,10 +57,9 @@ class EpsController extends Controller
     }
 
     public function eliminar()
-    {
+    {	
 		$id = $_GET["id"];
-		$eps = Eps::findOrFail($id);
-		$eps->delete();
+		$eps = DB::table('eps')->where('codigo', '=', $id)->delete();
 		return response()->json($eps);
     }
 	

@@ -14,7 +14,8 @@ class CreateEpsTable extends Migration
     public function up()
     {
         Schema::create('eps', function (Blueprint $table) {
-            $table->increments('id');
+			$table->string('codigo')->unique();
+			$table->string('nombre');
             $table->timestamps();
         });
     }

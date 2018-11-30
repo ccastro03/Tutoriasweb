@@ -149,11 +149,8 @@ window.$(document).on('click', '#BtnDelPais', function (){
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':PaisId},
 			success: function(data){
-				var arrayDatos = $.map(data, function(value, index) {
-                    return [value];
-                });
-				
-				if (arrayDatos[0] != "" & arrayDatos[0] != null){				
+				//console.log(data);
+				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
 						location.href = 'paises';
@@ -184,11 +181,8 @@ window.$(document).on('click', '#BtnDelCiu', function (){
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':CiuId},
 			success: function(data){
-				var arrayDatos = $.map(data, function(value, index) {
-                    return [value];
-                });
-				
-				if (arrayDatos[0] != "" & arrayDatos[0] != null){				
+				//console.log(data);
+				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
 						location.href = 'ciudades';
@@ -219,11 +213,8 @@ window.$(document).on('click', '#BtnDelPrepa', function (){
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':PrepaId},
 			success: function(data){
-				var arrayDatos = $.map(data, function(value, index) {
-                    return [value];
-                });
-				
-				if (arrayDatos[0] != "" & arrayDatos[0] != null){				
+				//console.log(data);
+				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
 						location.href = 'prepagada';
@@ -254,11 +245,8 @@ window.$(document).on('click', '#BtnDelEps', function (){
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':EpsId},
 			success: function(data){
-				var arrayDatos = $.map(data, function(value, index) {
-                    return [value];
-                });
-				
-				if (arrayDatos[0] != "" & arrayDatos[0] != null){				
+				//console.log(data);
+				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
 						location.href = 'eps';

@@ -150,7 +150,7 @@ return [
 
     'attributes' => [
 		'cod_ciudad'=>'ciudad',
-		'cod_barrio'=>'barrio'
+		'cod_barrio'=>'codigo barrio'
 	],
 
 ];

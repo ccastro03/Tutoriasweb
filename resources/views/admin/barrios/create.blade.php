@@ -22,13 +22,16 @@
 				<label class="label">Ciudad</label>
 				<div class="control">
 					<div class="select">
-						<select name="cod_ciudad">
-							<option value="nada">Seleccione...</option>
+						<select name="cod_ciudad" id="cod_ciudad">
+							<option value="">Seleccione...</option>
 							@foreach($ciudades->all() as $ciudad)
 								<option value="{{ $ciudad->cod_ciudad }}">{{ $ciudad->nombre }}</option>
 							@endforeach							
 						</select>
 					</div>
+					@if ($errors->has('cod_ciudad'))
+						<p class="help is-danger">{{ $errors->first('cod_ciudad') }}</p>
+					@endif					
 				</div>
 			</div>
 			

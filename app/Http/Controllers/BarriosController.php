@@ -15,7 +15,7 @@ class BarriosController extends Controller
 	
     public function index()
     {
-        return view('admin.barrios.index');
+		return view('admin.barrios.index');
     }
 
     public function create()
@@ -31,12 +31,9 @@ class BarriosController extends Controller
 			'cod_barrio'=>'required',
 			'nombre'=>'required',
 		]);
-		
-		$barrio = new Barrios($data);
-		$barrio->cod_ciudad = $request->input("cod_ciudad"); //
-		$barrio->cod_barrio = $data['cod_barrio'];
-        $barrio->nombre = $data['nombre'];		
-		$barrio->save();
+
+		$barrio = DB::table('barrios')->insert(['cod_ciudad' => $request->input("cod_ciudad"),
+		'cod_barrio' => $request->input("cod_barrio"), 'nombre' => $request->input("nombre")]);
 		return redirect()->route('barrios.index');
     }
 
@@ -46,35 +43,44 @@ class BarriosController extends Controller
 		return view('admin.barrios.show', ['barrios' => ($barrios[0])]);
     }
 
-	/*
-    public function edit($cod_ciudad)
+    public function edit($cod_ciudad, $cod_barrio)
     {	
-		$ciudades = DB::table('ciudades')->where('cod_ciudad', '=', $cod_ciudad)->get();
-		return view('admin.ciudades.edit', ['ciudades' => ($ciudades[0])]);
+		$ciudades = DB::table('ciudades')->get();
+		$barrios = DB::table('barrios')->where('cod_ciudad', '=', $cod_ciudad)->where('cod_barrio', '=', $cod_barrio)->get();
+		return view('admin.barrios.edit', ['barrios' => ($barrios[0]), 'ciudades' => ($ciudades)]);
     }
 
-    public function update(Request $request, $cod_ciudad)
-    {
+	
+    public function update(Request $request)
+    {		
         $data = request()->validate([
 			'nombre'=>'required',
         ]);
- 
-		$ciudad = Ciudades::findOrFail($cod_ciudad);
-        $ciudad->nombre = $data['nombre'];
-		$ciudad->save();
-        return redirect()->route('ciudades.index');
+		$barrio = DB::table('barrios')
+						->where('cod_ciudad', '=', $request->input("cod_ciudad"))->where('cod_barrio', '=', $request->input("cod_barrio"))
+						->update(['nombre' => $request->input("nombre")]);
+        return redirect()->route('barrios.index');
     }
 
     public function eliminar()
     {
-		$cod_ciudad = $_GET["id"];
-		$ciudad = DB::table('ciudades')->where('codigo', '=', $id)->delete();
-		return response()->json($ciudad);
+		$cod_ciudad = $_GET["cod_ciudad"];
+		$cod_barrio = $_GET["cod_barrio"];
+		$barrio = DB::table('barrios')->where('cod_ciudad', '=', $cod_ciudad)->where('cod_barrio', '=', $cod_barrio)->delete();
+		return response()->json($barrio);
     }
-	*/
 	
     public function obtenerListadoBarrios(Request $request){
-		$barrios = DB::table('barrios')->where('nombre', 'like', '%'.$request->input('name').'%')->get();
-        return response()->json($barrios);
-    }		
+		$ciudades = DB::table('ciudades')->get();
+		$barrios = Barrios::where('nombre', 'like', '%'.$request->input('name').'%')->paginate(1);		
+		//$barrios = DB::table('barrios')->where('nombre', 'like', '%'.$request->input('name').'%')->get();
+        return response()->json(['barrios'=>$barrios, 'ciudades' => $ciudades, 'paginate' => [
+                'total'         =>  $barrios->total(),
+                'current_page'  =>  $barrios->currentPage(),
+                'per_page'      =>  $barrios->perPage(),
+                'last_page'     =>  $barrios->lastPage(),
+                'from '         =>  $barrios->firstItem(),
+                'to'            =>  $barrios->lastPage()],
+				]);
+    }	
 }

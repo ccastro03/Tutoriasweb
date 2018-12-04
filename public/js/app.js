@@ -1441,6 +1441,38 @@ window.$(document).on('click', '#BtnDelEps', function () {
 	});
 });
 
+/* ELIMINAR BARRIOS */
+window.$(document).on('click', '#BtnDelBar', function () {
+	var CiuId = $(this).attr("attr-id");
+	var BarId = $(this).attr("attr-id2");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true
+	}).then(function (willDelete) {
+		if (willDelete) {
+			$.ajax({
+				url: "/barrios/eliminar",
+				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: { 'cod_ciudad': CiuId, 'cod_barrio': BarId },
+				success: function success(data) {
+					//console.log(data);
+					if (data = 1) {
+						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
+							location.href = 'barrios';
+						});
+					} else {
+						swal("Error al eliminar el registro!", "", "warning");
+					}
+				}
+			});
+		}
+	});
+});
+
 /************************************************************************************/
 /* Deshabilitar boton de  guardar*/
 $('#btnBeneficiario').attr("disabled", true);
@@ -45011,12 +45043,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       barrios: [],
-      name: null
+      pagination: {
+        'current_page': 0,
+        'per_page': 0,
+        'first_item': 0,
+        'last_item': 0,
+        'last_page': 0,
+        'total': 0
+      },
+      name: null,
+      offset: 3
     };
   },
   created: function created() {
@@ -45028,15 +45082,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getBarrios();
     }
   },
+  computed: {
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    }
+  },
   methods: {
-    getBarrios: function getBarrios() {
+    getBarrios: function getBarrios(page) {
       var _this = this;
 
-      var url = 'barrios/obtenerlistadobarrios';
+      var url = 'barrios/obtenerlistadobarrios?page=' + page;
       axios.get(url, { params: { name: this.name } }).then(function (response) {
-        _this.barrios = response.data;
-        var array = _this.barrios;
+        var array = response.data;
+        console.log(array);
+        _this.pagination = array['paginate'];
+        _this.barrios = array['barrios'];
+        _this.ciudades = array['ciudades'];
       });
+    },
+    changePage: function changePage(page) {
+      this.pagination.current_page = page;
+      this.getBarrios(page);
     }
   }
 });
@@ -45084,54 +45169,130 @@ var render = function() {
           _c(
             "tbody",
             _vm._l(_vm.barrios, function(barrio) {
-              return _c("tr", { key: barrio.cod_barrio }, [
-                _c("td", [_vm._v(_vm._s(barrio.cod_ciudad))]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        href:
-                          "/barrios/" +
-                          barrio.cod_ciudad +
-                          "/" +
-                          barrio.cod_barrio +
-                          "/show"
-                      }
-                    },
-                    [_vm._v(_vm._s(barrio.nombre))]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "right" } }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: {
-                        href:
-                          "/barrios/" +
-                          barrio.cod_ciudad +
-                          barrio.cod_barrio +
-                          "/editar"
-                      }
-                    },
-                    [_vm._v("Editar")]
-                  ),
+              return _c(
+                "tr",
+                { key: barrio.cod_barrio },
+                [
+                  _vm._l(_vm.ciudades, function(ciudad) {
+                    return ciudad.cod_ciudad === barrio.cod_ciudad
+                      ? _c("td", [_vm._v(_vm._s(ciudad.nombre))])
+                      : _vm._e()
+                  }),
                   _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: {
-                        id: "BtnDelBar",
-                        "attr-id": barrio.cod_ciudad + "*" + barrio.cod_barrio
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href:
+                            "/barrios/" +
+                            barrio.cod_ciudad +
+                            "/" +
+                            barrio.cod_barrio +
+                            "/show"
+                        }
+                      },
+                      [_vm._v(_vm._s(barrio.nombre))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "right" } }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "button is-link is-rounded is-outlined",
+                        attrs: {
+                          href:
+                            "/barrios/" +
+                            barrio.cod_ciudad +
+                            "/" +
+                            barrio.cod_barrio +
+                            "/edit"
+                        }
+                      },
+                      [_vm._v("Editar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "button is-link is-rounded is-outlined",
+                        attrs: {
+                          id: "BtnDelBar",
+                          "attr-id": barrio.cod_ciudad,
+                          "attr-id2": barrio.cod_barrio
+                        }
+                      },
+                      [_vm._v("Eliminar")]
+                    )
+                  ])
+                ],
+                2
+              )
+            })
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "nav",
+        {
+          staticClass: "pagination",
+          attrs: { role: "navigation", "aria-label": "pagination" }
+        },
+        [
+          _vm.pagination.current_page > 1
+            ? _c(
+                "a",
+                {
+                  staticClass: "pagination-previous",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.changePage(_vm.pagination.current_page - 1)
+                    }
+                  }
+                },
+                [_vm._v("Anterior")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pagination.current_page < _vm.pagination.last_page
+            ? _c(
+                "a",
+                {
+                  staticClass: "pagination-next",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.changePage(_vm.pagination.current_page + 1)
+                    }
+                  }
+                },
+                [_vm._v("Siguiente")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "ul",
+            { staticClass: "pagination-list" },
+            _vm._l(_vm.pagesNumber, function(page) {
+              return _c("li", { key: page }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "pagination-link",
+                    class: [page == _vm.isActived ? "is-current" : ""],
+                    attrs: { "aria-label": "Goto page 1" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.changePage(page)
                       }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
-                ])
+                    }
+                  },
+                  [_vm._v("\n              " + _vm._s(page) + "\n            ")]
+                )
               ])
             })
           )

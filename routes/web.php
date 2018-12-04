@@ -67,7 +67,9 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('/barrios/obtenerlistadobarrios', 'BarriosController@obtenerListadoBarrios')->middleware('auth');
 	Route::get('/barrios/eliminar', 'BarriosController@eliminar')->middleware('auth');
 	Route::get('/barrios/{cod_ciudad}/{cod_barrio}/show', 'BarriosController@show')->middleware('auth');
+	Route::get('/barrios/{cod_ciudad}/{cod_barrio}/edit', 'BarriosController@edit')->middleware('auth');
+	Route::put('/barrios/update/{cod_ciudad}/{cod_barrio}', 'BarriosController@update')->middleware('auth');
 	Route::resource('/barrios', 'BarriosController',
-		['except' => ['destroy','show']])->middleware('auth');
+		['except' => ['destroy','show','edit','update']])->middleware('auth');
 	/*************/		
 });

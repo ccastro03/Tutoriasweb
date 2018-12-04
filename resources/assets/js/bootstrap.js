@@ -260,6 +260,39 @@ window.$(document).on('click', '#BtnDelEps', function (){
 	});	
 });
 
+/* ELIMINAR BARRIOS */
+window.$(document).on('click', '#BtnDelBar', function (){
+	var CiuId = $(this).attr("attr-id");
+	var BarId = $(this).attr("attr-id2");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/barrios/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'cod_ciudad':CiuId,'cod_barrio':BarId},
+			success: function(data){
+				//console.log(data);
+				if (data = 1){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'barrios';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
+
 /************************************************************************************/
 /* Deshabilitar boton de  guardar*/
 $('#btnBeneficiario').attr("disabled", true);

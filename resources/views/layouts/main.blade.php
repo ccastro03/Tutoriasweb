@@ -58,7 +58,8 @@
 					<a class="navbar-item" href="{{ url('/prepagada') }}">Prepagadas</a>
 					<a class="navbar-item" href="{{ url('/eps') }}">EPS</a>
 					<a class="navbar-item" href="{{ url('/barrios') }}">Barrios</a>
-					<!-- <hr class="navbar-divider"> -->
+					<hr class="navbar-divider">
+					<a class="navbar-item" href="{{ url('/incripciones') }}">Incripciones</a>
 				</div>
 			</div>
 	  

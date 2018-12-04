@@ -15,7 +15,7 @@
 		</div>
 	</div>
     <div class="panel-block">
-		<a class="button is-medium is-link is-outlined" href="{{ url('/barrios/'.$barrios->cod_ciudad.'/'.$barrios->cod_barrio.'/editar') }}">Editar</a>
+		<a class="button is-medium is-link is-outlined" href="{{ url('/barrios/'.$barrios->cod_ciudad.'/'.$barrios->cod_barrio.'/edit') }}">Editar</a>
 		<a class="button is-medium is-link is-outlined align-left" href=" {{ url('barrios') }}">Volver</a>
     </div>  
   </div>

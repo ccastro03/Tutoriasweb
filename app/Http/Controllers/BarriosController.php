@@ -72,8 +72,7 @@ class BarriosController extends Controller
 	
     public function obtenerListadoBarrios(Request $request){
 		$ciudades = DB::table('ciudades')->get();
-		$barrios = Barrios::where('nombre', 'like', '%'.$request->input('name').'%')->paginate(1);		
-		//$barrios = DB::table('barrios')->where('nombre', 'like', '%'.$request->input('name').'%')->get();
+		$barrios = DB::table('barrios')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);
         return response()->json(['barrios'=>$barrios, 'ciudades' => $ciudades, 'paginate' => [
                 'total'         =>  $barrios->total(),
                 'current_page'  =>  $barrios->currentPage(),

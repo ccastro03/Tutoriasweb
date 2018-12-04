@@ -72,4 +72,9 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('/barrios', 'BarriosController',
 		['except' => ['destroy','show','edit','update']])->middleware('auth');
 	/*************/		
+	
+	/*  INSCRIPCIONES  */
+	Route::resource('/incripciones', 'InscripcionController',
+		['except' => ['destroy']])->middleware('auth');
+	/*******************/
 });

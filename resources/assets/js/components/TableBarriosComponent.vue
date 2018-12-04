@@ -93,9 +93,8 @@ export default {
       var url = 'barrios/obtenerlistadobarrios?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
         var array = response.data;
-		console.log(array);
 		this.pagination = array['paginate'];
-		this.barrios = array['barrios'];
+		this.barrios = array['barrios']['data'];
 		this.ciudades = array['ciudades'];
       });
     },

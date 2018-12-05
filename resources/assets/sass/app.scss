@@ -144,3 +144,13 @@ a.navbar-item{
   margin-left: 0.95em;
 }
 /* End Main Section */ 
+
+input[type="radio"], .tab-pane { display: none; }
+
+/* the magic */
+#pic:checked ~ .tab-content > .content-pic,
+#music:checked ~ .tab-content > .content-music,
+#video:checked ~ .tab-content > .content-video,
+#doc:checked ~ .tab-content > .content-doc {
+  display: block;
+}

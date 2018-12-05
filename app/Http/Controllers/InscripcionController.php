@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 
 class InscripcionController extends Controller
@@ -20,13 +21,15 @@ class InscripcionController extends Controller
 
     public function create()
     {
-		return view('admin.incripciones.create');
+		$ciudades = DB::table('ciudades')->get();
+		$paises = DB::table('paises')->get();
+		return view('admin.incripciones.create', ['ciudades' => ($ciudades),'paises' => ($paises)]);
     }
 
     public function validarEstudiante(Request $request)
     {
 		$data = $request;		
 		//var_dump("entro - ".$data);
-		return redirect()->route('incripciones.create');
+		return redirect()->route('incripciones.create');		
     }	
 }

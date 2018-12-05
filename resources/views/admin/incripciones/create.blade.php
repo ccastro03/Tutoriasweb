@@ -23,7 +23,7 @@
 
 		<div class="tab-content">
 			<div class="tab-pane content-estudiante">
-				<form class="long-form" action="{{ url('incripciones/validarEstudiante') }}" method="post">
+				<form class="long-form" action="" method="post">
 					@csrf
 					@if(count($errors) > 0)
 					<div class="notification is-danger">
@@ -67,7 +67,7 @@
 							<label class="label">Genero</label>
 							<div class="select">
 								<select name="tipgenero" id="tipgenero">
-									<option value="">Selecionar</option>
+									<option value="">Seleccione</option>
 									<option value="H">Hombre</option>
 									<option value="M">Mujer</option>
 								</select>
@@ -78,33 +78,49 @@
 							<label class="label">Tipo Documento</label>
 							<div class="select">
 								<select name="tipdocu" id="tipdocu">
-									<option value="">Selecionar</option>
+									<option value="">Seleccione</option>
 									<option value="TI">Tarjeta Identidad</option>
 									<option value="TE">Tarjeta Extranjeria</option>
 									<option value="CC">Cedula Ciudadania</option>
+									<option value="OT">Otro</option>
 								</select>
 							</div>			
 						</div>
 						
-						<div class="column">
-							<label class="label"># Documento</label>
-							<input type="text" name="numdocu" id="numdocu" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" placeholder="Ingrese el numero de documento">
+						<div class="column is-one-fifth" style="width: 135px;">
+							<label class="label">Documento</label>
+							<input type="text" name="numdocu" id="numdocu" style="width: 113px;" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" placeholder="Ingrese el numero de documento">
 							@if ($errors->has('numdocu'))
 								<p class="help is-danger">{{ $errors->first('numdocu') }}</p>
 							@endif
 						</div>
 						
-						<div class="column">
-							<label class="label">Direccion</label>
+						<div class="column is-one-fifth">
+							<label class="label">Dirección</label>
 							<input type="text" name="direccion" id="direccion" class="input {{ $errors->has('direccion') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección">
 							@if ($errors->has('direccion'))
 								<p class="help is-danger">{{ $errors->first('direccion') }}</p>
 							@endif
-						</div>			
+						</div>
+						
+						<div class="column is-one-fifth">
+							<label class="label">Barrio</label>
+							<div class="select">
+								<select name="barrio" id="barrio">
+									<option value="">Seleccione</option>
+									@foreach($ciudades->all() as $ciudad)
+										<option value="{{ $ciudad->cod_ciudad }}">{{ $ciudad->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
+							@if ($errors->has('ciunace'))
+								<p class="help is-danger">{{ $errors->first('ciunace') }}</p>
+							@endif
+						</div>						
 					</div>
 					
 					<div class="columns">
-						<div class="column">
+						<div class="column is-one-fifth">
 							<label class="label"># Telefono</label>
 							<input type="text" name="numfijo" id="numfijo" class="input {{ $errors->has('numfijo') ? ' is-danger' : '' }}" placeholder="Ingrese el numero de telefono">
 							@if ($errors->has('numfijo'))
@@ -112,7 +128,7 @@
 							@endif
 						</div>
 
-						<div class="column">
+						<div class="column is-one-fifth">
 							<label class="label"># Celular</label>
 							<input type="text" name="numcelular" id="numcelular" class="input {{ $errors->has('numcelular') ? ' is-danger' : '' }}" placeholder="Ingrese el numero de celular">
 							@if ($errors->has('numcelular'))
@@ -121,7 +137,7 @@
 						</div>	
 
 						<div class="column">
-							<label class="label">Correo electronico</label>
+							<label class="label">Correo electrónico</label>
 							<input type="email" name="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección de correo electronico">
 							@if ($errors->has('email'))
 								<p class="help is-danger">{{ $errors->first('email') }}</p>
@@ -130,21 +146,60 @@
 					</div>
 
 					<div class="columns">
-						<div class="column">
+						<div class="column is-one-fifth" style="width: 175px">
 							<label class="label">Fecha nacimiento</label>
-							<input type="date" name="facnaci" class="input {{ $errors->has('facnaci') ? ' is-danger' : '' }}">
+							<input type="date" name="facnaci" class="input {{ $errors->has('facnaci') ? ' is-danger' : '' }}" max="<?php echo date('Y-m-d');?>">
 							@if ($errors->has('facnaci'))
 								<p class="help is-danger">{{ $errors->first('facnaci') }}</p>
 							@endif
 						</div>
 						
-						<div class="column">
+						<div class="column is-one-fifth" style="width: 182px">
 							<label class="label">Ciudad nacimiento</label>
-							<input type="text" id="ciunace" name="ciunace" class="input {{ $errors->has('ciunace') ? ' is-danger' : '' }}">
+							<div class="select">
+								<select name="ciunace" id="ciunace">
+									<option value="">Seleccione</option>
+									@foreach($ciudades->all() as $ciudad)
+										<option value="{{ $ciudad->cod_ciudad }}">{{ $ciudad->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
 							@if ($errors->has('ciunace'))
 								<p class="help is-danger">{{ $errors->first('ciunace') }}</p>
 							@endif
-						</div>							
+						</div>
+
+						<div class="column is-one-fifth" style="width: 159px">
+							<label class="label">País nacimiento</label>
+							<div class="select">
+								<select name="painace" id="painace">
+									<option value="">Seleccione</option>
+									@foreach($paises->all() as $pais)
+										<option value="{{ $pais->codigo }}">{{ $pais->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
+							@if ($errors->has('painace'))
+								<p class="help is-danger">{{ $errors->first('painace') }}</p>
+							@endif
+						</div>	
+
+						<div class="column is-one-fifth">
+							<label class="label">RH</label>
+							<div class="select">
+								<select name="tiprh" id="tiprh">
+									<option value="">Seleccione</option>
+									<option value="O+">O+</option>
+									<option value="O-">O-</option>
+									<option value="A+">A+</option>
+									<option value="A-">A-</option>
+									<option value="B+">B+</option>
+									<option value="B-">B-</option>
+									<option value="AB+">AB+</option>
+									<option value="AB-">AB-</option>
+								</select>
+							</div>
+						</div>
 					</div>
 					
 					<hr>

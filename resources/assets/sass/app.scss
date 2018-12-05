@@ -145,12 +145,10 @@ a.navbar-item{
 }
 /* End Main Section */ 
 
-input[type="radio"], .tab-pane { display: none; }
+input[type="radio"], .tab-pane {display: none; }
 
-/* the magic */
-#pic:checked ~ .tab-content > .content-pic,
-#music:checked ~ .tab-content > .content-music,
-#video:checked ~ .tab-content > .content-video,
-#doc:checked ~ .tab-content > .content-doc {
+#estudiante:checked ~ .tab-content > .content-estudiante,
+#responsable:checked ~ .tab-content > .content-responsable,
+#acudiente:checked ~ .tab-content > .content-acudiente{
   display: block;
 }

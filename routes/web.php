@@ -74,6 +74,7 @@ Route::group(array('before' => 'auth'), function()
 	/*************/		
 	
 	/*  INSCRIPCIONES  */
+	Route::post('/incripciones/validarEstudiante', 'InscripcionController@validarEstudiante')->middleware('auth');
 	Route::resource('/incripciones', 'InscripcionController',
 		['except' => ['destroy']])->middleware('auth');
 	/*******************/

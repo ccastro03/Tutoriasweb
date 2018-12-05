@@ -21,5 +21,12 @@ class InscripcionController extends Controller
     public function create()
     {
 		return view('admin.incripciones.create');
+    }
+
+    public function validarEstudiante(Request $request)
+    {
+		$data = $request;		
+		//var_dump("entro - ".$data);
+		return redirect()->route('incripciones.create');
     }	
 }

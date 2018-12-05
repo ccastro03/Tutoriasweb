@@ -3,7 +3,7 @@
 @section('content')
 <div class="column is-12">
 	<div class="panel">
-		<p class="panel-heading">Listado de incripciones gdgdf</p>
+		<p class="panel-heading">Listado de inscripciones</p>
 		<div class="panel-block">
 			<a href="{{ url('/incripciones/crear') }}" class="button is-medium is-link is-rounded is-outlined">Crear</a>
 		</div>

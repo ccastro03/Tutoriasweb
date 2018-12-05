@@ -159,12 +159,3 @@
   </div>
 </div> 
 @endsection
-
-<script>
-	$( function() {
-		var availableTags = ['si','no','sddfgh'];
-		$("#ciunace").autocomplete({
-			source: availableTags
-		});
-	});	
-  </script>

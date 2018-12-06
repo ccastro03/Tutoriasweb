@@ -71,7 +71,35 @@ Route::group(array('before' => 'auth'), function()
 	Route::put('/barrios/update/{cod_ciudad}/{cod_barrio}', 'BarriosController@update')->middleware('auth');
 	Route::resource('/barrios', 'BarriosController',
 		['except' => ['destroy','show','edit','update']])->middleware('auth');
-	/*************/		
+	/*************/	
+
+	/*  SEDES  */
+	Route::get('/sedes/obtenerlistadosedes', 'SedesController@obtenerListadoSedes')->middleware('auth');
+	Route::get('/sedes/eliminar', 'SedesController@eliminar')->middleware('auth');
+	Route::resource('/sedes', 'SedesController',
+		['except' => ['destroy']])->middleware('auth');
+	/*********/		
+	
+	/*  JORNADAS  */
+	Route::get('/jornadas/obtenerlistadojornadas', 'JornadasController@obtenerListadoJornadas')->middleware('auth');
+	Route::get('/jornadas/eliminar', 'JornadasController@eliminar')->middleware('auth');
+	Route::resource('/jornadas', 'JornadasController',
+		['except' => ['destroy']])->middleware('auth');
+	/*********/
+
+	/*  GRADOS  */
+	Route::get('/grados/obtenerlistadogrados', 'GradosController@obtenerListadoGrados')->middleware('auth');
+	Route::get('/grados/eliminar', 'GradosController@eliminar')->middleware('auth');
+	Route::resource('/grados', 'GradosController',
+		['except' => ['destroy']])->middleware('auth');
+	/*********/	
+	
+	/*  ETNIAS  */
+	Route::get('/etnias/obtenerlistadoetnias', 'EtniasController@obtenerListadoEtnias')->middleware('auth');
+	Route::get('/etnias/eliminar', 'EtniasController@eliminar')->middleware('auth');
+	Route::resource('/etnias', 'EtniasController',
+		['except' => ['destroy']])->middleware('auth');
+	/*********/	
 	
 	/*  INSCRIPCIONES  */
 	Route::post('/incripciones/validarEstudiante', 'InscripcionController@validarEstudiante')->middleware('auth');

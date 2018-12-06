@@ -12302,11 +12302,14 @@ a.navbar-item {
 
 /* End Main Section */
 
-input[type="radio"], .tab-pane {display: none; }
+input[type="radio"],
+.tab-pane {
+  display: none;
+}
 
 #estudiante:checked ~ .tab-content > .content-estudiante,
 #responsable:checked ~ .tab-content > .content-responsable,
-#acudiente:checked ~ .tab-content > .content-acudiente{
+#acudiente:checked ~ .tab-content > .content-acudiente {
   display: block;
 }
 

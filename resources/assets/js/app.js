@@ -23,6 +23,10 @@ Vue.component('tabla-ciudades', require('./components/TableCiudadesComponent.vue
 Vue.component('tabla-prepagada', require('./components/TablePrepagadaComponent.vue'));
 Vue.component('tabla-eps', require('./components/TableEpsComponent.vue'));
 Vue.component('tabla-barrios', require('./components/TableBarriosComponent.vue'));
+Vue.component('tabla-sedes', require('./components/TableSedesComponent.vue'));
+Vue.component('tabla-jornadas', require('./components/TableJornadasComponent.vue'));
+Vue.component('tabla-grados', require('./components/TableGradosComponent.vue'));
+Vue.component('tabla-etnias', require('./components/TableEtniasComponent.vue'));
 
 
 const app = new Vue({

@@ -37,7 +37,7 @@
 					@endif
 				
 					<div class="columns">
-						<div class="column is-one-third">
+						<div class="column is-one-fifth">
 							<label class="label">Nombre</label>
 							<input type="text" name="name" id="nombre" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" placeholder="Ingrese el nombre">
 							@if ($errors->has('name'))
@@ -45,7 +45,7 @@
 							@endif
 						</div>
 
-						<div class="column">
+						<div class="column is-one-fifth">
 							<label class="label">Primer apellido</label>
 							<input type="text" name="apellido1" id="apellido1" class="input {{ $errors->has('apellido1') ? ' is-danger' : '' }}" placeholder="Ingrese el primer apellido">
 							@if ($errors->has('apellido1'))
@@ -53,17 +53,15 @@
 							@endif
 						</div>
 
-						<div class="column">
+						<div class="column is-one-fifth">
 							<label class="label">Segundo apellido</label>
 							<input type="text" name="apellido2" id="apellido2" class="input {{ $errors->has('apellido2') ? ' is-danger' : '' }}" placeholder="Ingrese el segundo apellido">
 							@if ($errors->has('apellido2'))
 								<p class="help is-danger">{{ $errors->first('apellido2') }}</p>
 							@endif
-						</div>			
-					</div>
+						</div>
 
-					<div class="columns">			
-						<div class="column is-one-fifth" style="width: 165px">
+						<div class="column is-one-fifth" style="width: 155px">
 							<label class="label">Genero</label>
 							<div class="select">
 								<select name="tipgenero" id="tipgenero">
@@ -74,7 +72,7 @@
 							</div>			
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 180px;">
+						<div class="column is-one-fifth" style="width: 205px;">
 							<label class="label">Tipo Documento</label>
 							<div class="select">
 								<select name="tipdocu" id="tipdocu">
@@ -87,13 +85,17 @@
 							</div>			
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 135px;">
+						<div class="column is-one-fifth">
 							<label class="label">Documento</label>
 							<input type="text" name="numdocu" id="numdocu" style="width: 113px;" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" placeholder="Ingrese el numero de documento">
 							@if ($errors->has('numdocu'))
 								<p class="help is-danger">{{ $errors->first('numdocu') }}</p>
 							@endif
-						</div>
+						</div>						
+					</div>
+
+					<div class="columns">									
+						
 						
 						<div class="column is-one-fifth">
 							<label class="label">Dirección</label>
@@ -103,7 +105,7 @@
 							@endif
 						</div>
 						
-						<div class="column is-one-fifth">
+						<div class="column is-one-fifth" style="width: 155px;">
 							<label class="label">Barrio</label>
 							<div class="select">
 								<select name="barrio" id="barrio">
@@ -116,44 +118,46 @@
 							@if ($errors->has('ciunace'))
 								<p class="help is-danger">{{ $errors->first('ciunace') }}</p>
 							@endif
-						</div>						
-					</div>
-					
-					<div class="columns">
-						<div class="column is-one-fifth">
+						</div>
+
+						<div class="column is-one-fifth" style="width: 157px">
 							<label class="label"># Telefono</label>
-							<input type="text" name="numfijo" id="numfijo" class="input {{ $errors->has('numfijo') ? ' is-danger' : '' }}" placeholder="Ingrese el numero de telefono">
+							<input type="text" name="numfijo" id="numfijo" class="input {{ $errors->has('numfijo') ? ' is-danger' : '' }}" placeholder="Ingrese el telefono">
 							@if ($errors->has('numfijo'))
 								<p class="help is-danger">{{ $errors->first('numfijo') }}</p>
 							@endif
 						</div>
 
-						<div class="column is-one-fifth">
+						<div class="column is-one-fifth" style="width: 157px">
 							<label class="label"># Celular</label>
-							<input type="text" name="numcelular" id="numcelular" class="input {{ $errors->has('numcelular') ? ' is-danger' : '' }}" placeholder="Ingrese el numero de celular">
+							<input type="text" name="numcelular" id="numcelular" class="input {{ $errors->has('numcelular') ? ' is-danger' : '' }}" placeholder="Ingrese el celular">
 							@if ($errors->has('numcelular'))
 								<p class="help is-danger">{{ $errors->first('numcelular') }}</p>
 							@endif
 						</div>	
 
-						<div class="column">
+						<div class="column is-one-quarter">
 							<label class="label">Correo electrónico</label>
-							<input type="email" name="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección de correo electronico">
+							<input type="email" name="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" placeholder="Ingrese el e-mail">
 							@if ($errors->has('email'))
 								<p class="help is-danger">{{ $errors->first('email') }}</p>
 							@endif
 						</div>
-					</div>
 
-					<div class="columns">
-						<div class="column is-one-fifth" style="width: 175px">
+						<div class="column is-one-fifth" style="width: 190px">
 							<label class="label">Fecha nacimiento</label>
 							<input type="date" name="facnaci" class="input {{ $errors->has('facnaci') ? ' is-danger' : '' }}" max="<?php echo date('Y-m-d');?>">
 							@if ($errors->has('facnaci'))
 								<p class="help is-danger">{{ $errors->first('facnaci') }}</p>
 							@endif
-						</div>
-						
+						</div>						
+					</div>
+					
+					<div class="columns">
+
+					</div>
+
+					<div class="columns">						
 						<div class="column is-one-fifth" style="width: 182px">
 							<label class="label">Ciudad nacimiento</label>
 							<div class="select">

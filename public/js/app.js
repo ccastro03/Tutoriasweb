@@ -1146,7 +1146,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(64);
+module.exports = __webpack_require__(73);
 
 
 /***/ }),
@@ -1177,9 +1177,11 @@ Vue.component('tabla-prepagada', __webpack_require__(52));
 Vue.component('tabla-eps', __webpack_require__(55));
 Vue.component('tabla-barrios', __webpack_require__(58));
 Vue.component('tabla-sedes', __webpack_require__(61));
-Vue.component('tabla-jornadas', __webpack_require__(69));
-Vue.component('tabla-grados', __webpack_require__(72));
-Vue.component('tabla-etnias', __webpack_require__(75));
+Vue.component('tabla-jornadas', __webpack_require__(64));
+Vue.component('tabla-grados', __webpack_require__(67));
+Vue.component('tabla-etnias', __webpack_require__(70));
+Vue.component('tabla-religiones', __webpack_require__(78));
+Vue.component('tabla-aseguradoras', __webpack_require__(81));
 
 var app = new Vue({
   el: '#app'
@@ -1591,6 +1593,68 @@ window.$(document).on('click', '#BtnDelEtni', function () {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
 							location.href = 'etnias';
+						});
+					} else {
+						swal("Error al eliminar el registro!", "", "warning");
+					}
+				}
+			});
+		}
+	});
+});
+
+/* ELIMINAR ASEGURADORA */
+window.$(document).on('click', '#BtnDelAseg', function () {
+	var AsegId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true
+	}).then(function (willDelete) {
+		if (willDelete) {
+			$.ajax({
+				url: "/aseguradora/eliminar",
+				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: { 'id': AsegId },
+				success: function success(data) {
+					//console.log(data);
+					if (data = 1) {
+						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
+							location.href = 'aseguradora';
+						});
+					} else {
+						swal("Error al eliminar el registro!", "", "warning");
+					}
+				}
+			});
+		}
+	});
+});
+
+/* ELIMINAR RELIGION */
+window.$(document).on('click', '#BtnDelReli', function () {
+	var ReliId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true
+	}).then(function (willDelete) {
+		if (willDelete) {
+			$.ajax({
+				url: "/religion/eliminar",
+				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: { 'id': ReliId },
+				success: function success(data) {
+					//console.log(data);
+					if (data = 1) {
+						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
+							location.href = 'religion';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -45792,24 +45856,14 @@ if (false) {
 
 /***/ }),
 /* 64 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(70)
+var __vue_script__ = __webpack_require__(65)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(66)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45848,7 +45902,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 70 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45963,7 +46017,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 71 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46142,15 +46196,15 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(73)
+var __vue_script__ = __webpack_require__(68)
 /* template */
-var __vue_template__ = __webpack_require__(74)
+var __vue_template__ = __webpack_require__(69)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46189,7 +46243,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 73 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46304,7 +46358,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 74 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46479,15 +46533,15 @@ if (false) {
 }
 
 /***/ }),
-/* 75 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(76)
+var __vue_script__ = __webpack_require__(71)
 /* template */
-var __vue_template__ = __webpack_require__(77)
+var __vue_template__ = __webpack_require__(72)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46526,7 +46580,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 76 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46641,7 +46695,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 77 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46812,6 +46866,704 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-191d10ec", module.exports)
+  }
+}
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(79)
+/* template */
+var __vue_template__ = __webpack_require__(80)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TableReligionComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-aa6eeed6", Component.options)
+  } else {
+    hotAPI.reload("data-v-aa6eeed6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 79 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      religiones: [],
+      pagination: {
+        'current_page': 0,
+        'per_page': 0,
+        'first_item': 0,
+        'last_item': 0,
+        'last_page': 0,
+        'total': 0
+      },
+      name: null,
+      offset: 3
+    };
+  },
+  created: function created() {
+    this.getReligion();
+  },
+
+  watch: {
+    name: function name(after, before) {
+      this.getReligion();
+    }
+  },
+  computed: {
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    }
+  },
+  methods: {
+    getReligion: function getReligion(page) {
+      var _this = this;
+
+      var url = 'religion/obtenerlistadoreligiones?page=' + page;
+      axios.get(url, { params: { name: this.name } }).then(function (response) {
+        var array = response.data;
+        _this.pagination = array['paginate'];
+        _this.religiones = array['religion']['data'];
+      });
+    },
+    changePage: function changePage(page) {
+      this.pagination.current_page = page;
+      this.getReligion(page);
+    }
+  }
+});
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row", attrs: { id: "crud" } }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.name,
+          expression: "name"
+        }
+      ],
+      staticClass: "input",
+      attrs: {
+        type: "text",
+        name: "name",
+        placeholder: "Buscar nombre religion"
+      },
+      domProps: { value: _vm.name },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.name = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-striped table is-fullwidth" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.religiones, function(religion) {
+              return _c("tr", { key: religion.codigo }, [
+                _c("td", [
+                  _c("a", { attrs: { href: "/religion/" + religion.codigo } }, [
+                    _vm._v(_vm._s(religion.codigo))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(religion.nombre))]),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "right" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: {
+                        href: "/religion/" + religion.codigo + "/editar"
+                      }
+                    },
+                    [_vm._v("Editar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: { id: "BtnDelReli", "attr-id": religion.codigo }
+                    },
+                    [_vm._v("Eliminar")]
+                  )
+                ])
+              ])
+            })
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _vm.pagination.total != 0
+        ? _c(
+            "nav",
+            {
+              staticClass: "pagination",
+              attrs: { role: "navigation", "aria-label": "pagination" }
+            },
+            [
+              _vm.pagination.current_page > 1
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-previous",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page - 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Anterior")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.pagination.current_page < _vm.pagination.last_page
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-next",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "pagination-list" },
+                _vm._l(_vm.pagesNumber, function(page) {
+                  return _c("li", { key: page }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "pagination-link",
+                        class: [page == _vm.isActived ? "is-current" : ""],
+                        attrs: { "aria-label": "Goto page 1" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.changePage(page)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              " + _vm._s(page) + "\n            "
+                        )
+                      ]
+                    )
+                  ])
+                })
+              )
+            ]
+          )
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codigo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { colspan: "2" } }, [_vm._v("   ")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-aa6eeed6", module.exports)
+  }
+}
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(82)
+/* template */
+var __vue_template__ = __webpack_require__(83)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TableAseguradoraComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-776c2dda", Component.options)
+  } else {
+    hotAPI.reload("data-v-776c2dda", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 82 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      aseguradoras: [],
+      pagination: {
+        'current_page': 0,
+        'per_page': 0,
+        'first_item': 0,
+        'last_item': 0,
+        'last_page': 0,
+        'total': 0
+      },
+      name: null,
+      offset: 3
+    };
+  },
+  created: function created() {
+    this.getAseguradora();
+  },
+
+  watch: {
+    name: function name(after, before) {
+      this.getAseguradora();
+    }
+  },
+  computed: {
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    }
+  },
+  methods: {
+    getAseguradora: function getAseguradora(page) {
+      var _this = this;
+
+      var url = 'aseguradora/obtenerlistadoaseguradoras?page=' + page;
+      axios.get(url, { params: { name: this.name } }).then(function (response) {
+        var array = response.data;
+        _this.pagination = array['paginate'];
+        _this.aseguradoras = array['aseguradora']['data'];
+      });
+    },
+    changePage: function changePage(page) {
+      this.pagination.current_page = page;
+      this.getAseguradora(page);
+    }
+  }
+});
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row", attrs: { id: "crud" } }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.name,
+          expression: "name"
+        }
+      ],
+      staticClass: "input",
+      attrs: {
+        type: "text",
+        name: "name",
+        placeholder: "Buscar nombre aseguradora"
+      },
+      domProps: { value: _vm.name },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.name = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-striped table is-fullwidth" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.aseguradoras, function(aseguradora) {
+              return _c("tr", { key: aseguradora.codigo }, [
+                _c("td", [
+                  _c(
+                    "a",
+                    { attrs: { href: "/aseguradora/" + aseguradora.codigo } },
+                    [_vm._v(_vm._s(aseguradora.codigo))]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(aseguradora.nombre))]),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "right" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: {
+                        href: "/aseguradora/" + aseguradora.codigo + "/editar"
+                      }
+                    },
+                    [_vm._v("Editar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: { id: "BtnDelAseg", "attr-id": aseguradora.codigo }
+                    },
+                    [_vm._v("Eliminar")]
+                  )
+                ])
+              ])
+            })
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _vm.pagination.total != 0
+        ? _c(
+            "nav",
+            {
+              staticClass: "pagination",
+              attrs: { role: "navigation", "aria-label": "pagination" }
+            },
+            [
+              _vm.pagination.current_page > 1
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-previous",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page - 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Anterior")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.pagination.current_page < _vm.pagination.last_page
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-next",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "pagination-list" },
+                _vm._l(_vm.pagesNumber, function(page) {
+                  return _c("li", { key: page }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "pagination-link",
+                        class: [page == _vm.isActived ? "is-current" : ""],
+                        attrs: { "aria-label": "Goto page 1" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.changePage(page)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              " + _vm._s(page) + "\n            "
+                        )
+                      ]
+                    )
+                  ])
+                })
+              )
+            ]
+          )
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codigo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { colspan: "2" } }, [_vm._v("   ")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-776c2dda", module.exports)
   }
 }
 

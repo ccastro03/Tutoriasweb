@@ -152,27 +152,8 @@
 							@endif
 						</div>						
 					</div>
-					
+				
 					<div class="columns">
-
-					</div>
-
-					<div class="columns">						
-						<div class="column is-one-fifth" style="width: 182px">
-							<label class="label">Ciudad nacimiento</label>
-							<div class="select">
-								<select name="ciunace" id="ciunace">
-									<option value="">Seleccione</option>
-									@foreach($ciudades->all() as $ciudad)
-										<option value="{{ $ciudad->cod_ciudad }}">{{ $ciudad->nombre }}</option>
-									@endforeach							
-								</select>
-							</div>
-							@if ($errors->has('ciunace'))
-								<p class="help is-danger">{{ $errors->first('ciunace') }}</p>
-							@endif
-						</div>
-
 						<div class="column is-one-fifth" style="width: 159px">
 							<label class="label">País nacimiento</label>
 							<div class="select">
@@ -186,9 +167,24 @@
 							@if ($errors->has('painace'))
 								<p class="help is-danger">{{ $errors->first('painace') }}</p>
 							@endif
+						</div>
+						
+						<div class="column is-one-fifth" style="width: 182px">
+							<label class="label">Ciudad nacimiento</label>
+							<div class="select">
+								<select name="ciunace" id="ciunace">
+									<option value="">Seleccione</option>
+									@foreach($ciudades->all() as $ciudad)
+										<option value="{{ $ciudad->cod_ciudad }}">{{ $ciudad->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
+							@if ($errors->has('ciunace'))
+								<p class="help is-danger">{{ $errors->first('ciunace') }}</p>
+							@endif
 						</div>	
 
-						<div class="column is-one-fifth">
+						<div class="column is-one-fifth" style="width: 159px">
 							<label class="label">RH</label>
 							<div class="select">
 								<select name="tiprh" id="tiprh">
@@ -204,8 +200,146 @@
 								</select>
 							</div>
 						</div>
+						
+						<!-- <div class="panel"> 
+							<header class="panel-header">
+								<p class="panel-heading">Información Colegio</p>
+							</header>	
+							<div class="panel-block"> -->
+								<div class="column is-one-fifth" style="width: 150px">
+									<label class="label">Sede</label>
+									<div class="select">
+										<select name="sede" id="sede">
+											<option value="">Seleccione</option>
+											@foreach($sedes->all() as $sede)
+												<option value="{{ $sede->codigo }}">{{ $sede->nombre }}</option>
+											@endforeach							
+										</select>
+									</div>
+									@if ($errors->has('sede'))
+										<p class="help is-danger">{{ $errors->first('sede') }}</p>
+									@endif
+								</div>
+
+								<div class="column is-one-fifth" style="width: 150px">
+									<label class="label">Grado</label>
+									<div class="select">
+										<select name="grado" id="grado">
+											<option value="">Seleccione</option>
+											@foreach($grados->all() as $grado)
+												<option value="{{ $grado->codigo }}">{{ $grado->nombre }}</option>
+											@endforeach							
+										</select>
+									</div>
+									@if ($errors->has('grado'))
+										<p class="help is-danger">{{ $errors->first('grado') }}</p>
+									@endif
+								</div>
+
+								<div class="column is-one-fifth" style="width: 150px">
+									<label class="label">Jornada</label>
+									<div class="select">
+										<select name="jornada" id="jornada">
+											<option value="">Seleccione</option>
+											@foreach($jornadas->all() as $jornada)
+												<option value="{{ $jornada->codigo }}">{{ $jornada->nombre }}</option>
+											@endforeach							
+										</select>
+									</div>
+									@if ($errors->has('jornada'))
+										<p class="help is-danger">{{ $errors->first('jornada') }}</p>
+									@endif
+								</div>
+							<!--</div>
+						</div> -->
+
+						<div class="column is-one-fifth">
+							<label class="label">Etnia</label>
+							<div class="select">
+								<select name="etnia" id="etnia">
+									<option value="">Seleccione</option>
+									@foreach($etnias->all() as $etnia)
+										<option value="{{ $etnia->codigo }}">{{ $etnia->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
+							@if ($errors->has('etnia'))
+								<p class="help is-danger">{{ $errors->first('etnia') }}</p>
+							@endif						
+						</div>						
 					</div>
 					
+					<div class="columns">
+						<div class="column is-one-fifth" style="width: 70px">
+							<label class="label">Sisben</label>
+							<input type="checkbox" style="margin-left: 28px;">
+						</div>
+						
+						<div class="column is-one-fifth" style="width: 110px">
+							<label class="label">Nivel</label>
+							<div class="select">
+								<select name="sisnvl" id="sisnvl">
+									<option value="">Otro</option>							
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+								</select>
+							</div>							
+						</div>
+					
+						<div class="column is-one-fifth" style="width: 150px">
+							<label class="label">EPS</label>
+							<div class="select">
+								<select name="eps" id="eps">
+									<option value="">Seleccione</option>
+									@foreach($eps->all() as $ep)
+										<option value="{{ $ep->codigo }}">{{ $ep->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
+							@if ($errors->has('eps'))
+								<p class="help is-danger">{{ $errors->first('eps') }}</p>
+							@endif						
+						</div>
+						
+						<div class="column is-one-fifth" style="width: 150px">
+							<label class="label">Prepagada</label>
+							<div class="select">
+								<select name="prepagada" id="prepagada">
+									<option value="">Ninguna</option>
+									@foreach($prepagadas->all() as $prepagada)
+										<option value="{{ $prepagada->codigo }}">{{ $prepagada->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
+							@if ($errors->has('prepagada'))
+								<p class="help is-danger">{{ $errors->first('prepagada') }}</p>
+							@endif						
+						</div>
+
+						<div class="column is-one-fifth" style="width: 128px">
+							<label class="label">Seguro vida</label>
+							<input type="checkbox" style="margin-left: 53px;">
+						</div>
+						
+						<div class="column is-one-fifth" style="width: 110px">
+							<label class="label">Aseguradora</label>
+							<div class="select">
+								<select name="aseguradora" id="aseguradora">
+									<option value="">Otra</option>
+								</select>
+							</div>							
+						</div>						
+					</div>					
+					
+					<label class="checkbox">
+						<input type="checkbox">
+						Tiene cobertura?
+					</label>
+					<label class="checkbox">
+						<input type="checkbox">
+						Es Desplazado?
+					</label>					
 					<hr>
 					<button type="submit" class="button is-link is-medium is-outlined">Guardar</button>
 					<a href="" class="button is-medium is-link is-outlined">Salir</a>

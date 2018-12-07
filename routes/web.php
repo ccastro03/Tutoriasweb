@@ -101,6 +101,20 @@ Route::group(array('before' => 'auth'), function()
 		['except' => ['destroy']])->middleware('auth');
 	/*********/	
 	
+	/*  RELIGION  */
+	Route::get('/religion/obtenerlistadoreligiones', 'ReligionController@obtenerListadoReligiones')->middleware('auth');
+	Route::get('/religion/eliminar', 'ReligionController@eliminar')->middleware('auth');
+	Route::resource('/religion', 'ReligionController',
+		['except' => ['destroy']])->middleware('auth');
+	/*********/	
+
+	/*  ASEGURADORAS  */
+	Route::get('/aseguradora/obtenerlistadoaseguradoras', 'AseguradoraController@obtenerListadoAseguradoras')->middleware('auth');
+	Route::get('/aseguradora/eliminar', 'AseguradoraController@eliminar')->middleware('auth');
+	Route::resource('/aseguradora', 'AseguradoraController',
+		['except' => ['destroy']])->middleware('auth');
+	/*********/		
+	
 	/*  INSCRIPCIONES  */
 	Route::post('/incripciones/validarEstudiante', 'InscripcionController@validarEstudiante')->middleware('auth');
 	Route::resource('/incripciones', 'InscripcionController',

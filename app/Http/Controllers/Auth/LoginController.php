@@ -46,7 +46,14 @@ class LoginController extends Controller
      */
     protected function credentials(Request $request)
     {
-        $credentials = $request->only($this->username(), 'password');
+		$posbusque = strpos($request->email, '@tw.com');
+		if ($posbusque != 0){
+			$user = $request->email;			
+		}else{
+			$user = $this->username()."@tw.com";
+		}
+		
+        $credentials = $request->only($user, 'password');
         $credentials['estado'] = 1;
 
         return $credentials;

@@ -421,6 +421,70 @@ window.$(document).on('click', '#BtnDelEtni', function (){
 	});	
 });
 
+/* ELIMINAR ASEGURADORA */
+window.$(document).on('click', '#BtnDelAseg', function (){
+	var AsegId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/aseguradora/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':AsegId},
+			success: function(data){
+				//console.log(data);
+				if (data = 1){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'aseguradora';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
+
+/* ELIMINAR RELIGION */
+window.$(document).on('click', '#BtnDelReli', function (){
+	var ReliId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/religion/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':ReliId},
+			success: function(data){
+				//console.log(data);
+				if (data = 1){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'religion';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
+
 /************************************************************************************/
 /* Deshabilitar boton de  guardar*/
 $('#btnBeneficiario').attr("disabled", true);

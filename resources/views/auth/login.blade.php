@@ -16,7 +16,7 @@
                   @csrf
                   <div class="field">
                     <div class="control">
-                      <input class="input {{ $errors->has('email') ? ' is-danger' : '' }}" type="email" name="email" placeholder="Correo Electrónico" autofocus="">
+                      <input class="input {{ $errors->has('email') ? ' is-danger' : '' }}" type="text" name="email" placeholder="Usuario" autofocus="">
                       @if ($errors->has('email'))
                         <p class="help is-danger">{{ $errors->first('email') }}</p>
                       @endif

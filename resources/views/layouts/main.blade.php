@@ -61,7 +61,9 @@
 					<a class="navbar-item" href="{{ url('/sedes') }}">Sedes</a>
 					<a class="navbar-item" href="{{ url('/jornadas') }}">Jornadas</a>
 					<a class="navbar-item" href="{{ url('/grados') }}">Grados</a>
-					<a class="navbar-item" href="{{ url('/etnias') }}">Etnias</a>										
+					<a class="navbar-item" href="{{ url('/etnias') }}">Etnias</a>
+					<a class="navbar-item" href="{{ url('/aseguradora') }}">Aseguradoras</a>
+					<a class="navbar-item" href="{{ url('/religion') }}">Religiones</a>
 					<hr class="navbar-divider">
 					<a class="navbar-item" href="{{ url('/incripciones') }}">Incripciones</a>
 				</div>

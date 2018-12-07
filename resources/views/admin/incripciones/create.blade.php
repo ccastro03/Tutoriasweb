@@ -7,7 +7,7 @@
 	<input type="radio" id="responsable" name="nav-tab" disabled>
 	<input type="radio" id="acudiente" name="nav-tab" disabled>
 
-	<div class="tabs is-boxed">
+	<div class="tabs is-boxed" style="margin-bottom: 0px;">
 		<ul>
 			<li class="is-active">
 				<a><label for="estudiante">Estudiante</label></a>
@@ -319,16 +319,37 @@
 
 						<div class="column is-one-fifth" style="width: 128px">
 							<label class="label">Seguro vida</label>
-							<input type="checkbox" style="margin-left: 53px;">
+							<input type="checkbox" id="segvida" style="margin-left: 53px;">
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 110px">
+						<div class="column is-one-fifth" style="width: 240px">
 							<label class="label">Aseguradora</label>
 							<div class="select">
 								<select name="aseguradora" id="aseguradora">
-									<option value="">Otra</option>
+									<option value="">Ninguno</option>
+									@foreach($aseguradoras->all() as $aseguradora)
+										<option value="{{ $aseguradora->codigo }}">{{ $aseguradora->nombre }}</option>
+									@endforeach
 								</select>
-							</div>							
+							</div>
+							@if ($errors->has('aseguradora'))
+								<p class="help is-danger">{{ $errors->first('aseguradora') }}</p>
+							@endif							
+						</div>
+
+						<div class="column is-one-fifth" style="width: 150px">
+							<label class="label">Religion</label>
+							<div class="select">
+								<select name="religion" id="religion">
+									<option value="">Ninguna</option>
+									@foreach($religiones->all() as $religion)
+										<option value="{{ $religion->codigo }}">{{ $religion->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
+							@if ($errors->has('religion'))
+								<p class="help is-danger">{{ $errors->first('religion') }}</p>
+							@endif						
 						</div>						
 					</div>					
 					

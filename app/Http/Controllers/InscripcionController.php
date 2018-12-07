@@ -29,8 +29,11 @@ class InscripcionController extends Controller
 		$etnias = DB::table('etnias')->get();
 		$eps = DB::table('eps')->get();
 		$prepagadas = DB::table('prepagada')->get();
+		$religiones = DB::table('religion')->get();
+		$aseguradoras = DB::table('aseguradora')->get();
 		return view('admin.incripciones.create', ['ciudades' => ($ciudades),'paises' => ($paises),'sedes' => ($sedes),'grados' => ($grados),
-		'jornadas' => ($jornadas),'etnias' => ($etnias),'eps' => ($eps),'prepagadas' => ($prepagadas)]);
+		'jornadas' => ($jornadas),'etnias' => ($etnias),'eps' => ($eps),'prepagadas' => ($prepagadas),'religiones' => ($religiones),
+		'aseguradoras' => ($aseguradoras)]);
     }
 
     public function validarEstudiante(Request $request)

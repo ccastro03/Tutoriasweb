@@ -1,6 +1,5 @@
 @extends('layouts.main')
-
-@section('content')
+@section('content')	
 <div class="column is-12">
 
 	<input type="radio" id="estudiante" name="nav-tab" checked>
@@ -23,7 +22,7 @@
 
 		<div class="tab-content">
 			<div class="tab-pane content-estudiante">
-				<form class="long-form" action="" method="post">
+				<form class="long-form" action="" method="post" autocomplete="on">
 					@csrf
 					@if(count($errors) > 0)
 					<div class="notification is-danger">
@@ -110,13 +109,13 @@
 							<div class="select">
 								<select name="barrio" id="barrio">
 									<option value="">Seleccione</option>
-									@foreach($ciudades->all() as $ciudad)
-										<option value="{{ $ciudad->cod_ciudad }}">{{ $ciudad->nombre }}</option>
+									@foreach($barrios->all() as $barrio)
+										<option value="{{ $barrio->cod_ciudad }}">{{ $barrio->nombre }}</option>
 									@endforeach							
 								</select>
 							</div>
-							@if ($errors->has('ciunace'))
-								<p class="help is-danger">{{ $errors->first('ciunace') }}</p>
+							@if ($errors->has('barrio'))
+								<p class="help is-danger">{{ $errors->first('barrio') }}</p>
 							@endif
 						</div>
 
@@ -252,7 +251,7 @@
 								</div>
 							<!--</div>
 						</div> -->
-
+						
 						<div class="column is-one-fifth">
 							<label class="label">Etnia</label>
 							<div class="select">
@@ -272,7 +271,7 @@
 					<div class="columns">
 						<div class="column is-one-fifth" style="width: 70px">
 							<label class="label">Sisben</label>
-							<input type="checkbox" style="margin-left: 28px;">
+							<input type="checkbox" id="checksisben" style="margin-left: 28px;" onclick="ValidaSisben()">
 						</div>
 						
 						<div class="column is-one-fifth" style="width: 110px">
@@ -350,17 +349,47 @@
 							@if ($errors->has('religion'))
 								<p class="help is-danger">{{ $errors->first('religion') }}</p>
 							@endif						
-						</div>						
-					</div>					
+						</div>
+					</div>
 					
-					<label class="checkbox">
-						<input type="checkbox">
-						Tiene cobertura?
-					</label>
-					<label class="checkbox">
-						<input type="checkbox">
-						Es Desplazado?
-					</label>					
+					<div class="columns">						
+						<div class="column is-one-fifth">
+							<label class="label">Ciudad procedencia</label>
+							<div class="select">
+								<select name="ciuproce" id="ciuproce">
+									<option value="">Seleccione</option>
+									@foreach($ciudades->all() as $ciudad)
+										<option value="{{ $ciudad->cod_ciudad }}">{{ $ciudad->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
+							@if ($errors->has('ciuproce'))
+								<p class="help is-danger">{{ $errors->first('ciuproce') }}</p>
+							@endif
+						</div>
+
+						<div class="column is-one-fifth">
+							<label class="label">Colegio procedencia</label>
+							<input type="text" name="colproce" id="colproce" class="input {{ $errors->has('colproce') ? ' is-danger' : '' }}" placeholder="Ingrese la procedencia">
+							@if ($errors->has('colproce'))
+								<p class="help is-danger">{{ $errors->first('colproce') }}</p>
+							@endif
+						</div>
+						<div class="column is-one-fifth" style="width: 164px">
+							<label class="label">Tiene cobertura?</label>
+							<input type="checkbox" id="cobertura" style="margin-left: 65px;">						
+						</div>
+						
+						<div class="column is-one-fifth" style="width: 164px">
+							<label class="label">Es desplazado?</label>
+							<input type="checkbox" id="desplaza" style="margin-left: 65px;">						
+						</div>
+						
+						<div class="column is-one-fifth" style="width: 164px">
+							<label class="label">Complete</label>
+							<input type="text" name="prbcom" id="prbcom">
+						</div>							
+					</div>
 					<hr>
 					<button type="submit" class="button is-link is-medium is-outlined">Guardar</button>
 					<a href="" class="button is-medium is-link is-outlined">Salir</a>
@@ -371,5 +400,34 @@
 		</div>
     </div>   
   </div>
-</div> 
+</div>
+<script>
+	function ValidaSisben(){
+		if($("#checksisben").is(':checked') == true){ 
+			$("#sisnvl").attr('disabled','disabled');
+			$("#eps").attr('disabled','disabled');
+			$("#prepagada").attr('disabled','disabled');
+        }else{
+			$("#sisnvl").removeAttr('disabled');
+			$("#eps").removeAttr('disabled');
+			$("#prepagada").removeAttr('disabled');
+		}			
+	};
+	
+		var opcionesCodigo = ["prueba", "123456", "cali", "valle del cauca"];
+		var tags1 = opcionesCodigo;
+		$("#prbcom").autocomplete({
+			source: tags1,
+			select: function (e, ui) {
+				var value = ui.item.value;
+				for (var i=0 ; i<tags1.length ; i++){		
+					if(value === opcionesCodigo[i]){
+						$("#prbcom").focusin();
+						$("#prbcom").val(tags1[i]);
+					}
+				}
+			}
+		});
+	
+</script>
 @endsection

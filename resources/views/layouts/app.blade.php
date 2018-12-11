@@ -17,6 +17,13 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
+	
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>}
+	<script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 </head>
 <body>
     <div id="app">
@@ -24,10 +31,5 @@
             @yield('content')
         </main>
     </div>
-	
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-	<script src="{{ asset('js/bootstrap.min.js') }}"></script>		
 </body>
 </html>

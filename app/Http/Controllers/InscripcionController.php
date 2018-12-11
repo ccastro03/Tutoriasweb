@@ -22,6 +22,7 @@ class InscripcionController extends Controller
     public function create()
     {
 		$ciudades = DB::table('ciudades')->get();
+		$barrios = DB::table('barrios')->get();
 		$paises = DB::table('paises')->get();
 		$sedes = DB::table('sedes')->get();
 		$grados = DB::table('grados')->get();
@@ -33,7 +34,7 @@ class InscripcionController extends Controller
 		$aseguradoras = DB::table('aseguradora')->get();
 		return view('admin.incripciones.create', ['ciudades' => ($ciudades),'paises' => ($paises),'sedes' => ($sedes),'grados' => ($grados),
 		'jornadas' => ($jornadas),'etnias' => ($etnias),'eps' => ($eps),'prepagadas' => ($prepagadas),'religiones' => ($religiones),
-		'aseguradoras' => ($aseguradoras)]);
+		'aseguradoras' => ($aseguradoras),'barrios' => ($barrios)]);
     }
 
     public function validarEstudiante(Request $request)

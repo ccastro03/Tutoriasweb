@@ -23,7 +23,7 @@
 
 		<div class="tab-content">
 			<div class="tab-pane content-estudiante">
-				<form class="long-form" action="{{ url('incripciones/validarEstudiante') }}" method="post">
+				<form class="long-form">
 					@csrf
 					@if(count($errors) > 0)
 					<div class="notification is-danger">
@@ -154,41 +154,43 @@
 					</div>
 				
 					<div class="columns">
-						<div class="column is-one-fifth" style="width: 159px">
+						<div class="column is-one-fifth" >
 							<label class="label">País nacimiento</label>
-							<div class="select">
+							<input type="text" name="painace" id="painace" attr-value="CO" value="Colombia" class="input {{ $errors->has('painace') ? ' is-danger' : '' }}">
+							<!-- <div class="select">
 								<select name="painace" id="painace">
 									<option value="">Seleccione</option>
 									@foreach($paises->all() as $pais)
 										<option value="{{ $pais->codigo }}">{{ $pais->nombre }}</option>
 									@endforeach							
 								</select>
-							</div>
+							</div> -->
 							@if ($errors->has('painace'))
 								<p class="help is-danger">{{ $errors->first('painace') }}</p>
 							@endif
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 182px">
+						<div class="column is-one-fifth">
 							<label class="label">Ciudad nacimiento</label>
-							<div class="select">
+							<input type="text" name="ciunace" id="ciunace" attr-value="01" value="Cali" class="input {{ $errors->has('ciunace') ? ' is-danger' : '' }}">
+							<!-- <div class="select">
 								<select name="ciunace" id="ciunace">
 									<option value="">Seleccione</option>
 									@foreach($ciudades->all() as $ciudad)
 										<option value="{{ $ciudad->cod_ciudad }}">{{ $ciudad->nombre }}</option>
 									@endforeach							
 								</select>
-							</div>
+							</div> -->
 							@if ($errors->has('ciunace'))
 								<p class="help is-danger">{{ $errors->first('ciunace') }}</p>
 							@endif
 						</div>	
 
-						<div class="column is-one-fifth" style="width: 159px">
+						<div class="column is-one-fifth" style="width: 105px">
 							<label class="label">RH</label>
 							<div class="select">
 								<select name="tiprh" id="tiprh">
-									<option value="">Seleccione</option>
+									<option value="">Sel</option>
 									<option value="O+">O+</option>
 									<option value="O-">O-</option>
 									<option value="A+">A+</option>
@@ -198,7 +200,7 @@
 									<option value="AB+">AB+</option>
 									<option value="AB-">AB-</option>
 								</select>
-							</div>
+							</div>						
 						</div>
 						
 						<!-- <div class="panel"> 
@@ -206,7 +208,7 @@
 								<p class="panel-heading">Información Colegio</p>
 							</header>	
 							<div class="panel-block"> -->
-								<div class="column is-one-fifth" style="width: 150px">
+								<div class="column is-one-fifth" style="width: 240px">
 									<label class="label">Sede</label>
 									<div class="select">
 										<select name="sede" id="sede">
@@ -221,11 +223,11 @@
 									@endif
 								</div>
 
-								<div class="column is-one-fifth" style="width: 150px">
+								<div class="column is-one-fifth" style="width: 105px">
 									<label class="label">Grado</label>
 									<div class="select">
 										<select name="grado" id="grado">
-											<option value="">Seleccione</option>
+											<option value="">Sel</option>
 											@foreach($grados->all() as $grado)
 												<option value="{{ $grado->codigo }}">{{ $grado->nombre }}</option>
 											@endforeach							
@@ -252,8 +254,10 @@
 								</div>
 							<!--</div>
 						</div> -->
-						
-						<div class="column is-one-fifth">
+					</div>
+					
+					<div class="columns">
+						<div class="column is-one-fifth" style="width: 150px">
 							<label class="label">Etnia</label>
 							<div class="select">
 								<select name="etnia" id="etnia">
@@ -266,10 +270,8 @@
 							@if ($errors->has('etnia'))
 								<p class="help is-danger">{{ $errors->first('etnia') }}</p>
 							@endif						
-						</div>						
-					</div>
-					
-					<div class="columns">
+						</div>
+						
 						<div class="column is-one-fifth" style="width: 70px">
 							<label class="label">Sisben</label>
 							<input type="checkbox" id="checksisben" style="margin-left: 28px;" onclick="ValidaSisben()">
@@ -319,7 +321,7 @@
 
 						<div class="column is-one-fifth" style="width: 128px">
 							<label class="label">Seguro vida</label>
-							<input type="checkbox" id="segvida" style="margin-left: 53px;">
+							<input type="checkbox" id="segvida" style="margin-left: 53px;" onclick="ValidaSegVida()">
 						</div>
 						
 						<div class="column is-one-fifth" style="width: 240px">
@@ -356,14 +358,15 @@
 					<div class="columns">						
 						<div class="column is-one-fifth">
 							<label class="label">Ciudad procedencia</label>
-							<div class="select">
+							<input type="text" name="ciuproce" id="ciuproce" attr-value="01" value="Cali" class="input {{ $errors->has('ciuproce') ? ' is-danger' : '' }}">
+							<!-- <div class="select">
 								<select name="ciuproce" id="ciuproce">
 									<option value="">Seleccione</option>
 									@foreach($ciudades->all() as $ciudad)
 										<option value="{{ $ciudad->cod_ciudad }}">{{ $ciudad->nombre }}</option>
 									@endforeach							
 								</select>
-							</div>
+							</div> -->
 							@if ($errors->has('ciuproce'))
 								<p class="help is-danger">{{ $errors->first('ciuproce') }}</p>
 							@endif
@@ -384,16 +387,10 @@
 						<div class="column is-one-fifth" style="width: 164px">
 							<label class="label">Es desplazado?</label>
 							<input type="checkbox" id="desplaza" style="margin-left: 65px;">						
-						</div>
-						
-						<div class="column is-one-fifth" style="width: 164px">
-							<label class="label">Complete</label>
-							<input type="text" name="prbcom" id="prbcom">
-							<input hidden type="text" name="prbcom2" id="prbcom2">
-						</div>							
+						</div>						
 					</div>
 					<hr>
-					<button type="submit" class="button is-link is-medium is-outlined">Guardar</button>
+					<button class="button is-link is-medium is-outlined" onclick="GuardarDatos()">Guardar</button>
 					<a href="" class="button is-medium is-link is-outlined">Salir</a>
 				</form>
 			</div>
@@ -404,6 +401,11 @@
   </div>
 </div>
 <script>
+	$(function() {
+		$("#sisnvl").attr('disabled','disabled');
+		$("#aseguradora").attr('disabled','disabled');
+	});
+	
 	function ValidaSisben(){
 		if($("#checksisben").is(':checked') == true){ 
 			$("#sisnvl").removeAttr('disabled');
@@ -416,23 +418,67 @@
 		}			
 	};
 	
+	function ValidaSegVida(){
+		if($("#segvida").is(':checked') == true){ 
+			$("#aseguradora").removeAttr('disabled');
+        }else{
+			$("#aseguradora").attr('disabled','disabled');
+		}			
+	};	
+	
+	/* PAISES */
 	var Arrpaises = <?php echo $paises;?>;
 	var paises = [];
 	for (i = 0; i < Arrpaises.length; ++i) {
 		paises[i] = Arrpaises[i].nombre;
 	}
 	
-	$( "#prbcom" ).autocomplete({
+	$("#painace").autocomplete({
 		source: paises,
 		select: function (e, ui) {		       
 			var value = ui.item.value;
 			for (var i=0 ; i<paises.length ; i++){		
 				if(value === Arrpaises[i].nombre){
-					$("#prbcom").attr('attr-value',Arrpaises[i].codigo);
-					$("#prbcom2").val(Arrpaises[i].codigo);
+					$("#painace").attr('attr-value',Arrpaises[i].codigo);
+				}
+			}
+		}
+	});
+	
+	/* CIUDADES */
+	var Arrcuidades = <?php echo $ciudades;?>;
+	var ciudades = [];
+	for (i = 0; i < Arrcuidades.length; ++i) {
+		ciudades[i] = Arrcuidades[i].nombre;
+	}
+	
+	$("#ciunace").autocomplete({
+		source: ciudades,
+		select: function (e, ui) {		       
+			var value = ui.item.value;
+			for (var i=0 ; i<ciudades.length ; i++){		
+				if(value === Arrcuidades[i].nombre){
+					$("#ciunace").attr('attr-value',Arrcuidades[i].codigo);
+				}
+			}
+		}
+	});
+	
+	$("#ciuproce").autocomplete({
+		source: ciudades,
+		select: function (e, ui) {		       
+			var value = ui.item.value;
+			for (var i=0 ; i<ciudades.length ; i++){		
+				if(value === Arrcuidades[i].nombre){
+					$("#ciuproce").attr('attr-value',Arrcuidades[i].codigo);
 				}
 			}
 		}
 	});	
+	
+	function GuardarDatos(){
+		var Valprbcom = $("#painace").attr("attr-value");
+		alert(Valprbcom);
+	};		
 </script>
 @endsection

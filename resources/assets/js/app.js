@@ -6,8 +6,6 @@
  */
 require('./bootstrap');
 
-
-
 window.Vue = require('vue');
 
 /**
@@ -32,5 +30,5 @@ Vue.component('tabla-aseguradoras', require('./components/TableAseguradoraCompon
 
 
 const app = new Vue({
-    el: '#app'
+    el: '#appPrueba'
 });

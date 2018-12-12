@@ -1,4 +1,5 @@
 @extends('layouts.main')
+
 @section('content')	
 <div class="column is-12">
 
@@ -22,7 +23,7 @@
 
 		<div class="tab-content">
 			<div class="tab-pane content-estudiante">
-				<form class="long-form" action="" method="post" autocomplete="on">
+				<form class="long-form" action="{{ url('incripciones/validarEstudiante') }}" method="post">
 					@csrf
 					@if(count($errors) > 0)
 					<div class="notification is-danger">
@@ -388,6 +389,7 @@
 						<div class="column is-one-fifth" style="width: 164px">
 							<label class="label">Complete</label>
 							<input type="text" name="prbcom" id="prbcom">
+							<input hidden type="text" name="prbcom2" id="prbcom2">
 						</div>							
 					</div>
 					<hr>
@@ -404,30 +406,33 @@
 <script>
 	function ValidaSisben(){
 		if($("#checksisben").is(':checked') == true){ 
-			$("#sisnvl").attr('disabled','disabled');
+			$("#sisnvl").removeAttr('disabled');
 			$("#eps").attr('disabled','disabled');
 			$("#prepagada").attr('disabled','disabled');
         }else{
-			$("#sisnvl").removeAttr('disabled');
+			$("#sisnvl").attr('disabled','disabled');
 			$("#eps").removeAttr('disabled');
 			$("#prepagada").removeAttr('disabled');
 		}			
 	};
 	
-		var opcionesCodigo = ["prueba", "123456", "cali", "valle del cauca"];
-		var tags1 = opcionesCodigo;
-		$("#prbcom").autocomplete({
-			source: tags1,
-			select: function (e, ui) {
-				var value = ui.item.value;
-				for (var i=0 ; i<tags1.length ; i++){		
-					if(value === opcionesCodigo[i]){
-						$("#prbcom").focusin();
-						$("#prbcom").val(tags1[i]);
-					}
+	var Arrpaises = <?php echo $paises;?>;
+	var paises = [];
+	for (i = 0; i < Arrpaises.length; ++i) {
+		paises[i] = Arrpaises[i].nombre;
+	}
+	
+	$( "#prbcom" ).autocomplete({
+		source: paises,
+		select: function (e, ui) {		       
+			var value = ui.item.value;
+			for (var i=0 ; i<paises.length ; i++){		
+				if(value === Arrpaises[i].nombre){
+					$("#prbcom").attr('attr-value',Arrpaises[i].codigo);
+					$("#prbcom2").val(Arrpaises[i].codigo);
 				}
 			}
-		});
-	
+		}
+	});	
 </script>
 @endsection

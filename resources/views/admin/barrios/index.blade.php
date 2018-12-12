@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="column is-12">
+<div class="column is-12" id="appPrueba">
 	<div class="panel">
 		<p class="panel-heading">Listado de barrios</p>
 		<div class="panel-block">

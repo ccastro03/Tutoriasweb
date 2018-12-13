@@ -40,17 +40,13 @@
 						<div class="column is-one-fifth">
 							<label class="label">Nombre</label>
 							<input type="text" name="name" id="nombre" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" placeholder="Ingrese el nombre">
-							@if ($errors->has('name'))
-								<p class="help is-danger">{{ $errors->first('name') }}</p>
-							@endif
+							<p class="help is-danger" id="ErrNombre" hidden>*El campo nombre es obligatorio*</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Primer apellido</label>
 							<input type="text" name="apellido1" id="apellido1" class="input {{ $errors->has('apellido1') ? ' is-danger' : '' }}" placeholder="Ingrese el primer apellido">
-							@if ($errors->has('apellido1'))
-								<p class="help is-danger">{{ $errors->first('apellido1') }}</p>
-							@endif
+							<p class="help is-danger" id="ErrApellido1" hidden>*El campo primer apellido es obligatorio*</p>
 						</div>
 
 						<div class="column is-one-fifth">
@@ -477,18 +473,74 @@
 	});	
 	
 	function GuardarDatos(){
+		var contError = 0;
+		var Errores = "";
+		var Identifi = "";
 		var painace = $("#painace").attr("attr-value");
+		var nombre = $("#nombre").val();
+		var apellido1 = $("#apellido1").val();
+		var apellido2 = $("#apellido2").val();
 		var numdocumento = $("#numdocu").val();
-		$.ajax({
-			url: "/incripciones/validarEstudiante",
-			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
-			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-			data: {'numdocumento':numdocumento},
-			success: function(data){
-				swal(data, "", "warning");
-				console.log(data);
-			}
-		});
+		
+		if(nombre == ""){
+			contError += 1;
+			Identifi = "#nombre";
+			Errores += "Debe digitar un nombre valido!\n"
+			$("#ErrNombre").removeAttr('hidden');
+		}else{
+			$("#ErrNombre").attr('hidden','hidden');
+		}
+		if(apellido1 == ""){
+			contError += 1;
+			Identifi = "#apellido1";
+			Errores += "Debe digitar el primer apellido!\n"
+			$("#ErrApellido1").removeAttr('hidden');
+		}else{
+			$("#ErrApellido1").attr('hidden','hidden');
+		}
+		if(apellido2 == ""){
+			contError += 1;
+			Identifi = "#apellido2";
+			Errores += "Debe digitar el segundo apellido!\n"
+		}
+		if(numdocumento == ""){
+			contError += 1;
+			Identifi = "#numdocu";
+			Errores += "Debe digitar un numero de documento valido!\n"
+		}
+		
+		var ArrDatos = {
+			"nombre":nombre.trim(),
+			"apellido1":apellido1.trim(),
+			"apellido2":apellido2.trim(),
+			"numdocumento":numdocumento.trim()
+		};
+		if(contError == 0){
+			$.ajax({
+				url: "/incripciones/validarEstudiante",
+				dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: {'ArrDatos':ArrDatos},
+				success: function(data){
+					console.log(data);
+					if(data[0] == 0){
+						swal(data[1], "", "warning");
+					}else if(data[0] == true){
+						swal(data[1], "", "warning");
+						$("#responsable").removeAttr('disabled');
+						$("#acudiente").removeAttr('disabled');
+					}
+					
+				}
+			});
+		}else{
+			swal("", Errores, "error");
+			if(contError == 1){
+				$('.swal-button--confirm').click(function(){
+					$(Identifi).focus();
+				});
+			}			
+		}
 	};		
 </script>
 @endsection

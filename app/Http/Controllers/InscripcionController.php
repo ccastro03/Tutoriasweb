@@ -37,13 +37,14 @@ class InscripcionController extends Controller
 		'aseguradoras' => ($aseguradoras),'barrios' => ($barrios)]);
     }
 
-    public function validarEstudiante()
+    public function validarEstudiante(Request $request)
     {
-		$numdocu = $_GET["numdocumento"];		
+		$ArrDatos = $_GET["ArrDatos"];
 		
-		$VerExist = DB::table('estudiantes')->where('numdocumento', '=', $numdocu)->exists();
+		$VerExist = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['numdocumento'])->exists();
 		if($VerExist == true){
-			return response()->json("El estudiante con numero de documento ".$numdocu.",ya existe");
+			$Respuesta = array("0", "El estudiante con numero de documento ".$ArrDatos['numdocumento'].",ya existe");
+			return response()->json($Respuesta);
 		}else{
 		
 			$codbdEst = DB::table('estudiantes')->select('codigo_est')->orderBy('codigo_est', 'desc')->get();
@@ -53,8 +54,9 @@ class InscripcionController extends Controller
 				$codigoEst = $codbdEst[0]->codigo_est + 1;
 			}
 			
-			$estudiante = DB::table('estudiantes')->insert(['codigo_est' => $codigoEst,'numdocumento' => $numdocu]);
-			return response()->json("Estudiante agregado corectamente");
+			$estudiante = DB::table('estudiantes')->insert(['codigo_est' => $codigoEst,'numdocumento' => $ArrDatos['numdocumento']]);
+			$Respuesta = array($estudiante, "Estudiante agregado corectamente");
+			return response()->json($Respuesta);			
 		}
     }	
 }

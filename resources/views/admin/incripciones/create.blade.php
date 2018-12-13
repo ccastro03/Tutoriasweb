@@ -23,38 +23,23 @@
 
 		<div class="tab-content">
 			<div class="tab-pane content-estudiante">
-				<form class="long-form">
-					@csrf
-					@if(count($errors) > 0)
-					<div class="notification is-danger">
-						<button class="delete"></button>
-						<ul>
-							@foreach($errors->all() as $error)
-								<li>{{ $error }}</li>
-							@endforeach
-						</ul>
-					</div>
-					@endif
-				
+				<form class="long-form">				
 					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Nombre</label>
 							<input type="text" name="name" id="nombre" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" placeholder="Ingrese el nombre">
-							<p class="help is-danger" id="ErrNombre" hidden>*El campo nombre es obligatorio*</p>
+							<p class="help is-danger" id="ErrNombre" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Primer apellido</label>
 							<input type="text" name="apellido1" id="apellido1" class="input {{ $errors->has('apellido1') ? ' is-danger' : '' }}" placeholder="Ingrese el primer apellido">
-							<p class="help is-danger" id="ErrApellido1" hidden>*El campo primer apellido es obligatorio*</p>
+							<p class="help is-danger" id="ErrApellido1" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Segundo apellido</label>
 							<input type="text" name="apellido2" id="apellido2" class="input {{ $errors->has('apellido2') ? ' is-danger' : '' }}" placeholder="Ingrese el segundo apellido">
-							@if ($errors->has('apellido2'))
-								<p class="help is-danger">{{ $errors->first('apellido2') }}</p>
-							@endif
 						</div>
 
 						<div class="column is-one-fifth" style="width: 155px">
@@ -65,7 +50,8 @@
 									<option value="H">Hombre</option>
 									<option value="M">Mujer</option>
 								</select>
-							</div>			
+							</div>
+							<p class="help is-danger" id="ErrGenero" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth" style="width: 205px;">
@@ -78,27 +64,22 @@
 									<option value="CC">Cedula Ciudadania</option>
 									<option value="OT">Otro</option>
 								</select>
-							</div>			
+							</div>
+							<p class="help is-danger" id="ErrTipdocu" hidden>Campo obligatorio *</p>							
 						</div>
 						
 						<div class="column is-one-fifth">
 							<label class="label">Documento</label>
 							<input type="text" name="numdocu" id="numdocu" style="width: 113px;" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" placeholder="Ingrese el numero de documento">
-							@if ($errors->has('numdocu'))
-								<p class="help is-danger">{{ $errors->first('numdocu') }}</p>
-							@endif
+							<p class="help is-danger" id="ErrNumdocu" hidden>Campo obligatorio *</p>
 						</div>						
 					</div>
 
 					<div class="columns">									
-						
-						
 						<div class="column is-one-fifth">
 							<label class="label">Dirección</label>
 							<input type="text" name="direccion" id="direccion" class="input {{ $errors->has('direccion') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección">
-							@if ($errors->has('direccion'))
-								<p class="help is-danger">{{ $errors->first('direccion') }}</p>
-							@endif
+							<p class="help is-danger" id="ErrDirecc" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth" style="width: 155px;">
@@ -111,41 +92,30 @@
 									@endforeach							
 								</select>
 							</div>
-							@if ($errors->has('barrio'))
-								<p class="help is-danger">{{ $errors->first('barrio') }}</p>
-							@endif
+							<p class="help is-danger" id="ErrBarrio" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth" style="width: 157px">
 							<label class="label"># Telefono</label>
 							<input type="text" name="numfijo" id="numfijo" class="input {{ $errors->has('numfijo') ? ' is-danger' : '' }}" placeholder="Ingrese el telefono">
-							@if ($errors->has('numfijo'))
-								<p class="help is-danger">{{ $errors->first('numfijo') }}</p>
-							@endif
+							<p class="help is-danger" id="ErrNumtel" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth" style="width: 157px">
 							<label class="label"># Celular</label>
 							<input type="text" name="numcelular" id="numcelular" class="input {{ $errors->has('numcelular') ? ' is-danger' : '' }}" placeholder="Ingrese el celular">
-							@if ($errors->has('numcelular'))
-								<p class="help is-danger">{{ $errors->first('numcelular') }}</p>
-							@endif
+							<p class="help is-danger" id="ErrNumcel" hidden>Campo obligatorio *</p>
 						</div>	
 
 						<div class="column is-one-quarter">
 							<label class="label">Correo electrónico</label>
-							<input type="email" name="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" placeholder="Ingrese el e-mail">
-							@if ($errors->has('email'))
-								<p class="help is-danger">{{ $errors->first('email') }}</p>
-							@endif
+							<input type="email" id="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" placeholder="Ingrese el e-mail">
 						</div>
 
 						<div class="column is-one-fifth" style="width: 190px">
 							<label class="label">Fecha nacimiento</label>
-							<input type="date" name="facnaci" class="input {{ $errors->has('facnaci') ? ' is-danger' : '' }}" max="<?php echo date('Y-m-d');?>">
-							@if ($errors->has('facnaci'))
-								<p class="help is-danger">{{ $errors->first('facnaci') }}</p>
-							@endif
+							<input type="date" id="fecnaci" class="input {{ $errors->has('fecnaci') ? ' is-danger' : '' }}" max="<?php echo date('Y-m-d');?>">
+							<p class="help is-danger" id="ErrFecnace" hidden>Campo obligatorio *</p>
 						</div>						
 					</div>
 				
@@ -153,33 +123,13 @@
 						<div class="column is-one-fifth" >
 							<label class="label">País nacimiento</label>
 							<input type="text" name="painace" id="painace" attr-value="CO" value="Colombia" class="input {{ $errors->has('painace') ? ' is-danger' : '' }}">
-							<!-- <div class="select">
-								<select name="painace" id="painace">
-									<option value="">Seleccione</option>
-									@foreach($paises->all() as $pais)
-										<option value="{{ $pais->codigo }}">{{ $pais->nombre }}</option>
-									@endforeach							
-								</select>
-							</div> -->
-							@if ($errors->has('painace'))
-								<p class="help is-danger">{{ $errors->first('painace') }}</p>
-							@endif
+							<p class="help is-danger" id="ErrPainace" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth">
 							<label class="label">Ciudad nacimiento</label>
 							<input type="text" name="ciunace" id="ciunace" attr-value="01" value="Cali" class="input {{ $errors->has('ciunace') ? ' is-danger' : '' }}">
-							<!-- <div class="select">
-								<select name="ciunace" id="ciunace">
-									<option value="">Seleccione</option>
-									@foreach($ciudades->all() as $ciudad)
-										<option value="{{ $ciudad->cod_ciudad }}">{{ $ciudad->nombre }}</option>
-									@endforeach							
-								</select>
-							</div> -->
-							@if ($errors->has('ciunace'))
-								<p class="help is-danger">{{ $errors->first('ciunace') }}</p>
-							@endif
+							<p class="help is-danger" id="ErrCiunace" hidden>Campo obligatorio *</p>
 						</div>	
 
 						<div class="column is-one-fifth" style="width: 105px">
@@ -196,7 +146,8 @@
 									<option value="AB+">AB+</option>
 									<option value="AB-">AB-</option>
 								</select>
-							</div>						
+							</div>
+							<p class="help is-danger" id="ErrTiprh" hidden>Obligatorio *</p>
 						</div>
 						
 						<!-- <div class="panel"> 
@@ -214,9 +165,7 @@
 											@endforeach							
 										</select>
 									</div>
-									@if ($errors->has('sede'))
-										<p class="help is-danger">{{ $errors->first('sede') }}</p>
-									@endif
+									<p class="help is-danger" id="ErrSede" hidden>Campo obligatorio *</p>
 								</div>
 
 								<div class="column is-one-fifth" style="width: 105px">
@@ -229,9 +178,7 @@
 											@endforeach							
 										</select>
 									</div>
-									@if ($errors->has('grado'))
-										<p class="help is-danger">{{ $errors->first('grado') }}</p>
-									@endif
+									<p class="help is-danger" id="ErrGrado" hidden>Obligatorio *</p>
 								</div>
 
 								<div class="column is-one-fifth" style="width: 150px">
@@ -244,9 +191,7 @@
 											@endforeach							
 										</select>
 									</div>
-									@if ($errors->has('jornada'))
-										<p class="help is-danger">{{ $errors->first('jornada') }}</p>
-									@endif
+									<p class="help is-danger" id="ErrJornada" hidden>Campo obligatorio *</p>
 								</div>
 							<!--</div>
 						</div> -->
@@ -263,9 +208,7 @@
 									@endforeach							
 								</select>
 							</div>
-							@if ($errors->has('etnia'))
-								<p class="help is-danger">{{ $errors->first('etnia') }}</p>
-							@endif						
+							<p class="help is-danger" id="ErrEtnia" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth" style="width: 70px">
@@ -282,7 +225,8 @@
 									<option value="2">2</option>
 									<option value="3">3</option>
 								</select>
-							</div>							
+							</div>
+							<p class="help is-danger" id="ErrSisnvl" hidden>Obligatorio *</p>
 						</div>
 					
 						<div class="column is-one-fifth" style="width: 150px">
@@ -295,9 +239,7 @@
 									@endforeach							
 								</select>
 							</div>
-							@if ($errors->has('eps'))
-								<p class="help is-danger">{{ $errors->first('eps') }}</p>
-							@endif						
+							<p class="help is-danger" id="ErrEps" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth" style="width: 150px">
@@ -309,10 +251,7 @@
 										<option value="{{ $prepagada->codigo }}">{{ $prepagada->nombre }}</option>
 									@endforeach							
 								</select>
-							</div>
-							@if ($errors->has('prepagada'))
-								<p class="help is-danger">{{ $errors->first('prepagada') }}</p>
-							@endif						
+							</div>						
 						</div>
 
 						<div class="column is-one-fifth" style="width: 128px">
@@ -330,9 +269,7 @@
 									@endforeach
 								</select>
 							</div>
-							@if ($errors->has('aseguradora'))
-								<p class="help is-danger">{{ $errors->first('aseguradora') }}</p>
-							@endif							
+							<p class="help is-danger" id="ErrAsegura" hidden>Campo obligatorio *</p>							
 						</div>
 
 						<div class="column is-one-fifth" style="width: 150px">
@@ -345,9 +282,7 @@
 									@endforeach							
 								</select>
 							</div>
-							@if ($errors->has('religion'))
-								<p class="help is-danger">{{ $errors->first('religion') }}</p>
-							@endif						
+							<p class="help is-danger" id="ErrReligion" hidden>Campo obligatorio *</p>						
 						</div>
 					</div>
 					
@@ -355,25 +290,13 @@
 						<div class="column is-one-fifth">
 							<label class="label">Ciudad procedencia</label>
 							<input type="text" name="ciuproce" id="ciuproce" attr-value="01" value="Cali" class="input {{ $errors->has('ciuproce') ? ' is-danger' : '' }}">
-							<!-- <div class="select">
-								<select name="ciuproce" id="ciuproce">
-									<option value="">Seleccione</option>
-									@foreach($ciudades->all() as $ciudad)
-										<option value="{{ $ciudad->cod_ciudad }}">{{ $ciudad->nombre }}</option>
-									@endforeach							
-								</select>
-							</div> -->
-							@if ($errors->has('ciuproce'))
-								<p class="help is-danger">{{ $errors->first('ciuproce') }}</p>
-							@endif
+							<p class="help is-danger" id="ErrCiuproce" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Colegio procedencia</label>
 							<input type="text" name="colproce" id="colproce" class="input {{ $errors->has('colproce') ? ' is-danger' : '' }}" placeholder="Ingrese la procedencia">
-							@if ($errors->has('colproce'))
-								<p class="help is-danger">{{ $errors->first('colproce') }}</p>
-							@endif
+							<p class="help is-danger" id="ErrColproce" hidden>Campo obligatorio *</p>
 						</div>
 						<div class="column is-one-fifth" style="width: 164px">
 							<label class="label">Tiene cobertura?</label>
@@ -399,9 +322,9 @@
 <script>
 	$(function() {
 		$("#sisnvl").attr('disabled','disabled');
-		$("#aseguradora").attr('disabled','disabled');
+		$("#aseguradora").attr('disabled','disabled');		
 	});
-	
+		
 	function ValidaSisben(){
 		if($("#checksisben").is(':checked') == true){ 
 			$("#sisnvl").removeAttr('disabled');
@@ -476,12 +399,66 @@
 		var contError = 0;
 		var Errores = "";
 		var Identifi = "";
-		var painace = $("#painace").attr("attr-value");
+
 		var nombre = $("#nombre").val();
 		var apellido1 = $("#apellido1").val();
 		var apellido2 = $("#apellido2").val();
+		var genero = $("#tipgenero").val();
+		var tipdocu = $("#tipdocu").val();
 		var numdocumento = $("#numdocu").val();
+		var direccion = $("#direccion").val();
+		var barrio = $("#barrio").val();
+		var numfijo = $("#numfijo").val();
+		var numcelular = $("#numcelular").val();
+		var email = $("#email").val();
 		
+		/* Fecha Nacimiento */
+		var fecnaci = new Date($("#fecnaci").val());
+		var NaceDia = fecnaci.getDate()+1;
+		var NaceMes = fecnaci.getMonth()+1;
+		var NaceYear = fecnaci.getFullYear();
+		var fecha_nace = NaceDia+"/"+NaceMes+"/"+NaceYear;
+		/* **************** */
+		
+		var painace = $("#painace").attr("attr-value");
+		var ciunace = $("#ciunace").attr("attr-value");
+		var tiprh = $("#tiprh").val();
+		var sede = $("#sede").val();
+		var grado = $("#grado").val();
+		var jornada = $("#jornada").val();
+		var etnia = $("#etnia").val();
+		var chsisben = $("#checksisben").is(':checked');
+		var sisnvl = $("#sisnvl").val();
+		var eps = $("#eps").val();
+		var prepagada = $("#prepagada").val();
+		var chsegvida = $("#segvida").is(':checked');
+		var aseguradora = $("#aseguradora").val();
+		var religion = $("#religion").val();
+		var ciuproce = $("#ciuproce").attr("attr-value");
+		var colproce = $("#colproce").val();
+		var chcobertura = $("#cobertura").is(':checked');
+		var chdesplaza = $("#desplaza").is(':checked');
+		
+		if(chsisben == false){
+			var sisben = "N";
+		}else{
+			var sisben = "S";
+		}
+		if(chsegvida == false){
+			var segvida = "N";
+		}else{
+			var segvida = "S";
+		}
+		if(chcobertura == false){
+			var cobertura = "N";
+		}else{
+			var cobertura = "S";
+		}
+		if(chdesplaza == false){
+			var desplaza = "N";
+		}else{
+			var desplaza = "S";
+		}		
 		if(nombre == ""){
 			contError += 1;
 			Identifi = "#nombre";
@@ -498,22 +475,198 @@
 		}else{
 			$("#ErrApellido1").attr('hidden','hidden');
 		}
-		if(apellido2 == ""){
+		if(genero == ""){
 			contError += 1;
-			Identifi = "#apellido2";
-			Errores += "Debe digitar el segundo apellido!\n"
+			Identifi = "#tipgenero";
+			Errores += "Debe seleccionar un genero!\n"
+			$("#ErrGenero").removeAttr('hidden');
+		}else{
+			$("#ErrGenero").attr('hidden','hidden');
+		}
+		if(tipdocu == ""){
+			contError += 1;
+			Identifi = "#tipdocu";
+			Errores += "Debe seleccionar un tipo de documento!\n"
+			$("#ErrTipdocu").removeAttr('hidden');
+		}else{
+			$("#ErrTipdocu").attr('hidden','hidden');
 		}
 		if(numdocumento == ""){
 			contError += 1;
 			Identifi = "#numdocu";
 			Errores += "Debe digitar un numero de documento valido!\n"
+			$("#ErrNumdocu").removeAttr('hidden');
+		}else{
+			$("#ErrNumdocu").attr('hidden','hidden');
 		}
-		
+		if(direccion == ""){
+			contError += 1;
+			Identifi = "#direccion";
+			Errores += "Debe digitar una dirección valida!\n"
+			$("#ErrDirecc").removeAttr('hidden');
+		}else{
+			$("#ErrDirecc").attr('hidden','hidden');
+		}
+		if(barrio == ""){
+			contError += 1;
+			Identifi = "#barrio";
+			Errores += "Debe seleccionar un barrio valido!\n"
+			$("#ErrBarrio").removeAttr('hidden');
+		}else{
+			$("#ErrBarrio").attr('hidden','hidden');
+		}
+		if(numcelular == ""){
+			contError += 1;
+			Identifi = "#numcelular";
+			Errores += "Debe digitar un numero de celular valido!\n"
+			$("#ErrNumcel").removeAttr('hidden');
+		}else{
+			$("#ErrNumcel").attr('hidden','hidden');
+		}
+		if(fecha_nace == "NaN/NaN/NaN"){
+			contError += 1;
+			Identifi = "#fecnaci";
+			Errores += "Debe seleccionar una fecha valida!\n"
+			$("#ErrFecnace").removeAttr('hidden');
+		}else{
+			$("#ErrFecnace").attr('hidden','hidden');
+		}
+		if(painace == ""){
+			contError += 1;
+			Identifi = "#painace";
+			Errores += "Debe seleccionar un pais valido!\n"
+			$("#ErrPainace").removeAttr('hidden');
+		}else{
+			$("#ErrPainace").attr('hidden','hidden');
+		}
+		if(ciunace == ""){
+			contError += 1;
+			Identifi = "#ciunace";
+			Errores += "Debe seleccionar una ciudad valida!\n"
+			$("#ErrCiunace").removeAttr('hidden');
+		}else{
+			$("#ErrCiunace").attr('hidden','hidden');
+		}
+		if(tiprh == ""){
+			contError += 1;
+			Identifi = "#tiprh";
+			Errores += "Debe seleccionar un tipo de RH valido!\n"
+			$("#ErrTiprh").removeAttr('hidden');
+		}else{
+			$("#ErrTiprh").attr('hidden','hidden');
+		}
+		if(sede == ""){
+			contError += 1;
+			Identifi = "#sede";
+			Errores += "Debe seleccionar una sede valida!\n"
+			$("#ErrSede").removeAttr('hidden');
+		}else{
+			$("#ErrSede").attr('hidden','hidden');
+		}
+		if(grado == ""){
+			contError += 1;
+			Identifi = "#grado";
+			Errores += "Debe seleccionar un grado valido!\n"
+			$("#ErrGrado").removeAttr('hidden');
+		}else{
+			$("#ErrGrado").attr('hidden','hidden');
+		}
+		if(jornada == ""){
+			contError += 1;
+			Identifi = "#jornada";
+			Errores += "Debe seleccionar una jornada valida!\n"
+			$("#ErrJornada").removeAttr('hidden');
+		}else{
+			$("#ErrJornada").attr('hidden','hidden');
+		}
+		if(etnia == ""){
+			contError += 1;
+			Identifi = "#etnia";
+			Errores += "Debe seleccionar una etnia valida!\n"
+			$("#ErrEtnia").removeAttr('hidden');
+		}else{
+			$("#ErrEtnia").attr('hidden','hidden');
+		}
+		if(($("#checksisben").is(':checked') == true) && (sisnvl == "")){
+			contError += 1;
+			Identifi = "#sisnvl";
+			Errores += "Debe seleccionar un nivel valido!\n"
+			$("#ErrSisnvl").removeAttr('hidden');
+		}else{
+			$("#ErrSisnvl").attr('hidden','hidden');
+		}
+		if(($("#checksisben").is(':checked') == false) && (eps == "")){
+			contError += 1;
+			Identifi = "#eps";
+			Errores += "Debe seleccionar una eps valida!\n"
+			$("#ErrEps").removeAttr('hidden');
+		}else{
+			$("#ErrEps").attr('hidden','hidden');
+		}
+		if(($("#segvida").is(':checked') == true) && (eps == "")){
+			contError += 1;
+			Identifi = "#aseguradora";
+			Errores += "Debe seleccionar una aseguradora valida!\n"
+			$("#ErrAsegura").removeAttr('hidden');
+		}else{
+			$("#ErrAsegura").attr('hidden','hidden');
+		}
+		if(religion == ""){
+			contError += 1;
+			Identifi = "#religion";
+			Errores += "Debe seleccionar una religion valida!\n"
+			$("#ErrReligion").removeAttr('hidden');
+		}else{
+			$("#ErrReligion").attr('hidden','hidden');
+		}
+		if(ciuproce == ""){
+			contError += 1;
+			Identifi = "#ciuproce";
+			Errores += "Debe seleccionar una ciudad de procedencia valida!\n"
+			$("#ErrCiuproce").removeAttr('hidden');
+		}else{
+			$("#ErrCiuproce").attr('hidden','hidden');
+		}
+		if(colproce == ""){
+			contError += 1;
+			Identifi = "#colproce";
+			Errores += "Debe seleccionar un colegio de procedencia valido!\n"
+			$("#ErrColproce").removeAttr('hidden');
+		}else{
+			$("#ErrColproce").attr('hidden','hidden');
+		}		
+				
 		var ArrDatos = {
 			"nombre":nombre.trim(),
 			"apellido1":apellido1.trim(),
 			"apellido2":apellido2.trim(),
-			"numdocumento":numdocumento.trim()
+			"genero":genero,
+			"tipdocu":tipdocu,
+			"numdocumento":numdocumento,
+			"direccion":direccion,
+			"barrio":barrio,
+			"numfijo":numfijo,
+			"numcelular":numcelular,
+			"email":email,
+			"fecha_nace":fecha_nace,
+			"painace":painace,
+			"ciunace":ciunace,
+			"tiprh":tiprh,
+			"sede":sede,
+			"grado":grado,
+			"jornada":jornada,
+			"etnia":etnia,
+			"sisben":sisben,
+			"sisnvl":sisnvl,
+			"eps":eps,
+			"prepagada":prepagada,
+			"segvida":segvida,
+			"aseguradora":aseguradora,
+			"religion":religion,
+			"ciuproce":ciuproce,
+			"colproce":colproce,
+			"cobertura":cobertura,
+			"desplaza":desplaza,
 		};
 		if(contError == 0){
 			$.ajax({

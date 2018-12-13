@@ -40,23 +40,24 @@ class InscripcionController extends Controller
     public function validarEstudiante(Request $request)
     {
 		$ArrDatos = $_GET["ArrDatos"];
+		echo "<script>console.log(".$ArrDatos.")</script>";
 		
-		$VerExist = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['numdocumento'])->exists();
-		if($VerExist == true){
-			$Respuesta = array("0", "El estudiante con numero de documento ".$ArrDatos['numdocumento'].",ya existe");
-			return response()->json($Respuesta);
-		}else{
+		// $VerExist = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['numdocumento'])->exists();
+		// if($VerExist == true){
+			// $Respuesta = array("0", "El estudiante con numero de documento ".$ArrDatos['numdocumento'].",ya existe");
+			// return response()->json($Respuesta);
+		// }else{
 		
-			$codbdEst = DB::table('estudiantes')->select('codigo_est')->orderBy('codigo_est', 'desc')->get();
-			if(count($codbdEst) == 0){
-				$codigoEst = '20190000';
-			}else{
-				$codigoEst = $codbdEst[0]->codigo_est + 1;
-			}
+			// $codbdEst = DB::table('estudiantes')->select('codigo_est')->orderBy('codigo_est', 'desc')->get();
+			// if(count($codbdEst) == 0){
+				// $codigoEst = '20190000';
+			// }else{
+				// $codigoEst = $codbdEst[0]->codigo_est + 1;
+			// }
 			
-			$estudiante = DB::table('estudiantes')->insert(['codigo_est' => $codigoEst,'numdocumento' => $ArrDatos['numdocumento']]);
-			$Respuesta = array($estudiante, "Estudiante agregado corectamente");
-			return response()->json($Respuesta);			
-		}
+			// $estudiante = DB::table('estudiantes')->insert(['codigo_est' => $codigoEst,'numdocumento' => $ArrDatos['numdocumento']]);
+			// $Respuesta = array($estudiante, "Estudiante agregado corectamente");
+			// return response()->json($Respuesta);			
+		// }
     }	
 }

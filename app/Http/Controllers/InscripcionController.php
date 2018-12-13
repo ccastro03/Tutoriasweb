@@ -37,10 +37,24 @@ class InscripcionController extends Controller
 		'aseguradoras' => ($aseguradoras),'barrios' => ($barrios)]);
     }
 
-    public function validarEstudiante(Request $request)
+    public function validarEstudiante()
     {
-		$data = $request->input("prbcom2");		
-		var_dump("entro - ".$data);
-		//return redirect()->route('incripciones.create');		
+		$numdocu = $_GET["numdocumento"];		
+		
+		$VerExist = DB::table('estudiantes')->where('numdocumento', '=', $numdocu)->exists();
+		if($VerExist == true){
+			return response()->json("El estudiante con numero de documento ".$numdocu.",ya existe");
+		}else{
+		
+			$codbdEst = DB::table('estudiantes')->select('codigo_est')->orderBy('codigo_est', 'desc')->get();
+			if(count($codbdEst) == 0){
+				$codigoEst = '20190000';
+			}else{
+				$codigoEst = $codbdEst[0]->codigo_est + 1;
+			}
+			
+			$estudiante = DB::table('estudiantes')->insert(['codigo_est' => $codigoEst,'numdocumento' => $numdocu]);
+			return response()->json("Estudiante agregado corectamente");
+		}
     }	
 }

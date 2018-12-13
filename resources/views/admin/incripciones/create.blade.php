@@ -390,7 +390,7 @@
 						</div>						
 					</div>
 					<hr>
-					<button class="button is-link is-medium is-outlined" onclick="GuardarDatos()">Guardar</button>
+					<a class="button is-link is-medium is-outlined" onclick="GuardarDatos()">Guardar</a>
 					<a href="" class="button is-medium is-link is-outlined">Salir</a>
 				</form>
 			</div>
@@ -477,8 +477,18 @@
 	});	
 	
 	function GuardarDatos(){
-		var Valprbcom = $("#painace").attr("attr-value");
-		alert(Valprbcom);
+		var painace = $("#painace").attr("attr-value");
+		var numdocumento = $("#numdocu").val();
+		$.ajax({
+			url: "/incripciones/validarEstudiante",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'numdocumento':numdocumento},
+			success: function(data){
+				swal(data, "", "warning");
+				console.log(data);
+			}
+		});
 	};		
 </script>
 @endsection

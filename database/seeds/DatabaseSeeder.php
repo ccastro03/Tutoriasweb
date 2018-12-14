@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Seeder;
@@ -16,5 +17,11 @@ class DatabaseSeeder extends Seeder
 		$this->call(PaisesTableSeeder::class);
 		$this->call(JornadasTableSeeder::class);
 		$this->call(GradosTableSeeder::class);
+		$this->call(EtniaTableSeeder::class);
+		$this->call(EpsTableSeeder::class);
+		$this->call(PrepagadaTableSeeder::class);
+		$this->call(ReligionTableSeeder::class);
+		$this->call(AseguradoraTableSeeder::class);
+		$this->call(SedesTableSeeder::class);
     }
 }

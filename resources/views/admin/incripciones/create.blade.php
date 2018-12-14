@@ -9,13 +9,13 @@
 
 	<div class="tabs is-boxed" style="margin-bottom: 0px;">
 		<ul>
-			<li class="is-active">
+			<li class="is-active" id="liEst">
 				<a><label for="estudiante">Estudiante</label></a>
 			</li>
-			<li>
+			<li id="liRespo">
 				<a><label for="responsable">Responsable</label></a>
 			</li>
-			<li>
+			<li id="liAcu">
 				<a><label for="acudiente">Acudiente</label></a>
 			</li>
 		</ul>
@@ -417,7 +417,8 @@
 		var NaceDia = fecnaci.getDate()+1;
 		var NaceMes = fecnaci.getMonth()+1;
 		var NaceYear = fecnaci.getFullYear();
-		var fecha_nace = NaceDia+"/"+NaceMes+"/"+NaceYear;
+		// var fecha_nace = NaceDia+"/"+NaceMes+"/"+NaceYear;
+		var fecha_nace = NaceYear+"/"+NaceMes+"/"+NaceDia;
 		/* **************** */
 		
 		var painace = $("#painace").attr("attr-value");
@@ -603,7 +604,7 @@
 		}else{
 			$("#ErrEps").attr('hidden','hidden');
 		}
-		if(($("#segvida").is(':checked') == true) && (eps == "")){
+		if(($("#segvida").is(':checked') == true) && (aseguradora == "")){
 			contError += 1;
 			Identifi = "#aseguradora";
 			Errores += "Debe seleccionar una aseguradora valida!\n"
@@ -682,6 +683,43 @@
 						swal(data[1], "", "warning");
 						$("#responsable").removeAttr('disabled');
 						$("#acudiente").removeAttr('disabled');
+						
+						$("#nombre").attr('disabled','disabled');
+						$("#apellido1").attr('disabled','disabled');
+						$("#apellido2").attr('disabled','disabled');
+						$("#tipgenero").attr('disabled','disabled');
+						$("#tipdocu").attr('disabled','disabled');
+						$("#numdocu").attr('disabled','disabled');
+						$("#direccion").attr('disabled','disabled');
+						$("#barrio").attr('disabled','disabled');
+						$("#numfijo").attr('disabled','disabled');
+						$("#numcelular").attr('disabled','disabled');
+						$("#email").attr('disabled','disabled');
+						$("#fecnaci").attr('disabled','disabled');
+						$("#painace").attr('disabled','disabled');
+						$("#ciunace").attr('disabled','disabled');
+						$("#tiprh").attr('disabled','disabled');
+						$("#sede").attr('disabled','disabled');
+						$("#grado").attr('disabled','disabled');
+						$("#jornada").attr('disabled','disabled');
+						$("#etnia").attr('disabled','disabled');
+						$("#checksisben").attr('disabled','disabled');
+						$("#sisnvl").attr('disabled','disabled');
+						$("#eps").attr('disabled','disabled');
+						$("#prepagada").attr('disabled','disabled');
+						$("#segvida").attr('disabled','disabled');
+						$("#aseguradora").attr('disabled','disabled');
+						$("#religion").attr('disabled','disabled');
+						$("#ciuproce").attr('disabled','disabled');
+						$("#colproce").attr('disabled','disabled');
+						$("#cobertura").attr('disabled','disabled');
+						$("#desplaza").attr('disabled','disabled');	
+
+						$("#estudiante").removeAttr('checked');
+						$("#liEst").removeClass("is-active");
+						$("#responsable").removeAttr('disabled');
+						$("#liRespo").addClass("is-active");
+						$("#responsable").attr('checked','checked');					
 					}
 					
 				}

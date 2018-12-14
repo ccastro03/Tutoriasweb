@@ -31,10 +31,10 @@ class CreateEstudiantesTable extends Migration
 			$table->string('cod_pais_nace',3)->nullable();
 			$table->string('tiposangre',3)->nullable();
 			$table->string('sede',3)->nullable();
-			$table->string('grado',1)->nullable();
-			$table->string('jornada',1)->nullable();
+			$table->string('grado',2)->nullable();
+			$table->string('jornada',2)->nullable();
 			$table->string('cobertura',1)->nullable();
-			$table->string('grpetnico',1)->nullable();
+			$table->string('grpetnico',2)->nullable();
 			$table->string('desplazado',1)->nullable();
 			$table->string('sisben',1)->nullable();
 			$table->string('nvlsisben',1)->nullable();
@@ -42,7 +42,7 @@ class CreateEstudiantesTable extends Migration
 			$table->string('cod_prepagada',4)->nullable();
 			$table->string('cod_ciud_proced',8)->nullable();
 			$table->string('cole_proced',200)->nullable();
-			$table->string('cod_religion',1)->nullable();
+			$table->string('cod_religion',2)->nullable();
 			$table->string('segurovida',1)->nullable();
 			$table->string('asegurador',4)->nullable();
 			$table->string('matriculado',1)->nullable();

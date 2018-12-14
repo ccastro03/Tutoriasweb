@@ -1,0 +1,7 @@
+Script Insercion datos
+
+/* TABAL BARRIOS */
+insert into barrios (cod_ciudad,cod_barrio,nombre) values ('01','01','Vipasa');
+insert into barrios (cod_ciudad,cod_barrio,nombre) values ('01','02','Colseguros');
+insert into barrios (cod_ciudad,cod_barrio,nombre) values ('01','03','Obrero');
+insert into barrios (cod_ciudad,cod_barrio,nombre) values ('01','04','Ciudad jardin');

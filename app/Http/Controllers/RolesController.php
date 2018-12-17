@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use DB;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
@@ -25,12 +26,14 @@ class RolesController extends Controller
     public function store(Request $request)
     {
 		$data = request()->validate([
+			'codigo'=>'required',
 			'nombre'=>'required',
 			'descripcion'=>'required',
 		]);
 		
 		$role = new Role($data);
-        $role->name = $data['nombre'];
+        $role->codigo = $data['codigo'];
+		$role->name = $data['nombre'];
         $role->descripcion = $data['descripcion'];		
 		$role->save();
 		return redirect()->route('roles.index');
@@ -38,12 +41,14 @@ class RolesController extends Controller
 
     public function show($id)
     {
-		return view('admin.roles.show', ['roles' => Role::findOrFail($id)]);
+		$roles = DB::table('roles')->where('codigo', '=', $id)->get();		
+		return view('admin.roles.show', ['roles' => ($roles[0])]);
     }
 
     public function edit($id)
     {	
-		return view('admin.roles.edit', ['roles' => Role::findOrFail($id)]);	
+		$roles = DB::table('roles')->where('codigo', '=', $id)->get();
+		return view('admin.roles.edit', ['roles' => ($roles[0])]);
     }
 
     public function update(Request $request, $id)
@@ -53,23 +58,19 @@ class RolesController extends Controller
 			'descripcion'=>'required',
         ]);
  
-		$role = Role::findOrFail($id);
-        $role->name = $data['nombre'];
-        $role->descripcion = $data['descripcion'];
-		$role->save();
+		$role = DB::table('roles')->where('codigo', '=', $id)->update(['name' => $data['nombre'], 'descripcion' => $data['descripcion']]);
         return redirect()->route('roles.index');
     }
 
     public function eliminar()
     {
 		$id = $_GET["id"];
-		$role = Role::findOrFail($id);
-		$role->delete();
+		$role = DB::table('roles')->where('codigo', '=', $id)->delete();
 		return response()->json($role);
     }
 	
     public function obtenerListadoRoles(Request $request){
-        $role = Role::where([
+        $role = DB::table('roles')->where([
             ['name', 'like', '%'.$request->input('name').'%' ],
         ])->get();
         return response()->json($role);

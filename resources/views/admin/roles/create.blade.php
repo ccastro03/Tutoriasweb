@@ -18,13 +18,22 @@
         </div>
         @endif
         <div class="columns">
-			<div class="column is-half">
+			<div class="column">
+				<label for="codigo" class="label">Codigo</label>
+				<input type="text" name="codigo" id="codigo" class="input {{ $errors->has('codigo') ? ' is-danger' : '' }}" value="{{ old('codigo') }}"placeholder="Ingrese el codigo">
+				@if ($errors->has('codigo'))
+					<p class="help is-danger">{{ $errors->first('codigo') }}</p>
+				@endif
+			</div>
+			
+			<div class="column">
 				<label for="nombre" class="label">Nombre</label>
 				<input type="text" name="nombre" id="nombre" class="input {{ $errors->has('nombre') ? ' is-danger' : '' }}" value="{{ old('name') }}"placeholder="Ingrese el nombre">
 				@if ($errors->has('nombre'))
 					<p class="help is-danger">{{ $errors->first('nombre') }}</p>
 				@endif
-			</div>		
+			</div>
+			
 			<div class="column">
 				<div class="field">
 					<label class="label">Descripcion</label>

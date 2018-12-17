@@ -74,6 +74,7 @@ class CreateEstudiantesTable extends Migration
 			$table->string('cod_familia',4)->nullable();
 			$table->string('alerta',250)->nullable();
 			$table->string('cod_usuario',40)->nullable();
+			$table->string('cod_rol',3)->nullable();
 			$table->primary(['codigo_est', 'numdocumento']);
             $table->timestamps();
         });

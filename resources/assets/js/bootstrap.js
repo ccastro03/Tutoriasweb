@@ -40,11 +40,7 @@ window.$(document).on('click', '#BtnDelRol', function (){
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':RolId},
 			success: function(data){
-				var arrayDatos = $.map(data, function(value, index) {
-                    return [value];
-                });
-				
-				if (arrayDatos[0] != "" & arrayDatos[0] != null){				
+				if (data = 1){
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
 						location.href = 'roles';

@@ -3,9 +3,9 @@
 @section('content')
 <div class="column is-12">
   <div class="panel">
-    <p class="panel-heading">Edición de <b>{{ $roles->name }}</b></p>
+    <p class="panel-heading">Edición de <b>{{ $roles->codigo }}</b></p>
     <div class="panel-block">
-      <form class="long-form" action="{{ route('roles.update', $roles->id) }}" method="post">
+      <form class="long-form" action="{{ route('roles.update', $roles->codigo) }}" method="post">
         @method('put')
         @csrf
         @if(count($errors) > 0)

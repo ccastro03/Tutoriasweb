@@ -3,8 +3,8 @@
 @section('content')	
 <div class="column is-12">
 
-	<input type="radio" id="estudiante" name="nav-tab">
-	<input type="radio" id="responsable" name="nav-tab" checked>
+	<input type="radio" id="estudiante" name="nav-tab" checked>
+	<input type="radio" id="responsable" name="nav-tab" disabled>
 	<input type="radio" id="acudiente" name="nav-tab" disabled>
 
 	<div class="tabs is-boxed" style="margin-bottom: 0px;">
@@ -20,7 +20,7 @@
 			</li>
 		</ul>
 	</div>
-
+		<!-- ESTUDIANTE -->
 		<div class="tab-content">
 			<div class="tab-pane content-estudiante">
 				<form class="long-form">				
@@ -310,9 +310,12 @@
 					</div>
 					<hr>
 					<a class="button is-link is-medium is-outlined" onclick="GuardarEstudiante()">Guardar</a>
-					<a href="" class="button is-medium is-link is-outlined">Salir</a>
+					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios">Cancelar</a>
 				</form>
 			</div>
+			
+			<!-- RESPONSABLE -->
+			
 			<div class="tab-pane content-responsable">
 				<form class="long-form">				
 					<div class="columns">
@@ -333,7 +336,7 @@
 							<input type="text" name="apelres2" id="apelres2" class="input {{ $errors->has('apellido2') ? ' is-danger' : '' }}" placeholder="Ingrese el segundo apellido">
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 205px;">
+						<div class="column is-one-fifth">
 							<label class="label">Tipo Documento</label>
 							<div class="select">
 								<select name="tipdocures" id="tipdocures">
@@ -344,12 +347,12 @@
 									<option value="OT">Otro</option>
 								</select>
 							</div>
-							<p class="help is-danger" id="ErrTipdocu" hidden>Campo obligatorio *</p>							
+							<p class="help is-danger" id="ErrTDres" hidden>Campo obligatorio *</p>							
 						</div>
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Documento</label>
-							<input type="text" name="numdocures" id="numdocures" style="width: 125px;" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" placeholder="Ingrese el numero de documento">
+							<input type="text" name="numdocures" id="numdocures" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" placeholder="Ingrese # de documento">
 							<p class="help is-danger" id="ErrNumdocures" hidden>Campo obligatorio *</p>
 						</div>
 					</div>
@@ -368,7 +371,7 @@
 									<option value="OT">Otro</option>
 								</select>
 							</div>
-							<p class="help is-danger" id="ErrTipdocu" hidden>Campo obligatorio *</p>							
+							<p class="help is-danger" id="ErrTPestciv" hidden>Campo obligatorio *</p>							
 						</div>
 						
 						<div class="column is-one-fifth" >
@@ -383,33 +386,32 @@
 							<p class="help is-danger" id="ErrDirecres" hidden>Campo obligatorio *</p>
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 157px">
+						<div class="column is-one-fifth">
 							<label class="label"># Telefono</label>
-							<input type="text" name="fijores" id="fijores" class="input {{ $errors->has('fijores') ? ' is-danger' : '' }}" placeholder="Ingrese el telefono">
-							<p class="help is-danger" id="ErrFijores" hidden>Campo obligatorio *</p>
+							<input type="text" name="fijores" id="fijores" class="input {{ $errors->has('fijores') ? ' is-danger' : '' }}" placeholder="Ingrese # telefono">
 						</div>
 
-						<div class="column is-one-fifth" style="width: 157px">
+						<div class="column is-one-fifth">
 							<label class="label"># Celular</label>
-							<input type="text" name="celures" id="celures" class="input {{ $errors->has('celures') ? ' is-danger' : '' }}" placeholder="Ingrese el celular">
+							<input type="text" name="celures" id="celures" class="input {{ $errors->has('celures') ? ' is-danger' : '' }}" placeholder="Ingrese # celular">
 							<p class="help is-danger" id="ErrCelures" hidden>Campo obligatorio *</p>
 						</div>					
 					</div>
 					
 					<div class="columns">
-						<div class="column is-one-quarter">
+						<div class="column is-one-fifth">
 							<label class="label">Correo electrónico</label>
-							<input type="email" id="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" placeholder="Ingrese el e-mail">
+							<input type="email" id="mailres" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" placeholder="Ingrese el e-mail">
 							<p class="help is-danger" id="ErrMailres" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth">
-							<label class="label">Profesion</label>
+							<label class="label">Profesión</label>
 							<div class="select">
-								<select name="proferes" id="proferes">
+								<select name="proferes" id="proferes" onchange="ValProfeRes();">
 									<option value="">Seleccione</option>
-									<option value="">Otra</option>
-									<option value="">No aplica</option>
+									<option value="OT">Otra</option>
+									<option value="NA">No aplica</option>
 								</select>
 							</div>
 							<p class="help is-danger" id="ErrProferes" hidden>Campo obligatorio *</p>						
@@ -420,8 +422,8 @@
 							<div class="select">
 								<select name="esperes" id="esperes">
 									<option value="">Seleccione</option>
-									<option value="">Otra</option>
-									<option value="">No aplica</option>								
+									<option value="OT">Otra</option>
+									<option value="NA">No aplica</option>								
 								</select>
 							</div>
 							<p class="help is-danger" id="ErrEsperes" hidden>Campo obligatorio *</p>						
@@ -447,31 +449,201 @@
 							<p class="help is-danger" id="ErrDirempres" hidden>Campo obligatorio *</p>
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 157px">
+						<div class="column is-one-fifth">
 							<label class="label"># Telefono</label>
 							<input type="text" name="telempres" id="telempres" class="input {{ $errors->has('telempres') ? ' is-danger' : '' }}" placeholder="Ingrese el telefono empresa">
 							<p class="help is-danger" id="ErrTelempres" hidden>Campo obligatorio *</p>
 						</div>
 
-						<div class="column is-one-fifth" style="width: 164px">
-							<label class="label">Exalumno?</label>
-							<input type="checkbox" id="exalumres" style="margin-left: 45px;">						
+						<div class="column is-one-fifth" style="width: 135px">
+							<label class="label">¿Ex alumno?</label>
+							<input type="checkbox" id="exalumres" style="margin-left: 50px;">						
 						</div>
 						
 						<div class="column is-one-quarter">
+							<label class="label">¿Notificaciones via e-mail?</label>
 							<label class="checkbox">
-								<input type="checkbox" id="notires">
-								Enviar notificacion via e-mail?
-							</label>							
-						</div>						
-					</div>						
+								<input type="checkbox" id="notires" style="margin-left: 100px;">
+								
+							</label>
+						</div>
+						
+						<div class="column is-one-fifth" hidden>
+							<input type="text" id="codest">
+							<input type="text" id="usrest">
+							<input type="text" id="usrres">
+							<input type="text" id="usracu">
+						</div>
+
+						
+					</div>
 				
 					<hr>
 					<a class="button is-link is-medium is-outlined" onclick="GuardarResponsable()">Guardar</a>
-					<a href="" class="button is-medium is-link is-outlined">Salir</a>
-				</form>			
+					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios">Cancelar</a>
+				</form>		
 			</div>
-			<div class="tab-pane content-acudiente">My Videos</div>
+			
+			<!-- ACUDIENTE -->
+			
+			<div class="tab-pane content-acudiente">
+				<form class="long-form">
+					<div class="columns">
+						<div class="column is-one-fifth">
+							<label class="label">Nombre</label>
+							<input type="text" id="nomacu" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" placeholder="Ingrese el nombre">
+							<p class="help is-danger" id="ErrNomacu" hidden>Campo obligatorio *</p>
+						</div>
+
+						<div class="column is-one-fifth">
+							<label class="label">Primer apellido</label>
+							<input type="text" id="apelacu1" class="input {{ $errors->has('apelacu1') ? ' is-danger' : '' }}" placeholder="Ingrese el primer apellido">
+							<p class="help is-danger" id="ErrApelacu1" hidden>Campo obligatorio *</p>
+						</div>
+
+						<div class="column is-one-fifth">
+							<label class="label">Segundo apellido</label>
+							<input type="text" id="apelacu2" class="input {{ $errors->has('apellido2') ? ' is-danger' : '' }}" placeholder="Ingrese el segundo apellido">
+						</div>
+						
+						<div class="column is-one-fifth">
+							<label class="label">Tipo Documento</label>
+							<div class="select">
+								<select name="tipdocuacu" id="tipdocuacu">
+									<option value="">Seleccione</option>
+									<option value="TE">Cedula Extranjeria</option>
+									<option value="CC">Cedula Ciudadania</option>
+									<option value="PO">Pasaporte</option>
+									<option value="OT">Otro</option>
+								</select>
+							</div>
+							<p class="help is-danger" id="ErrTDacu" hidden>Campo obligatorio *</p>							
+						</div>
+						
+						<div class="column is-one-fifth">
+							<label class="label"># Documento</label>
+							<input type="text" name="numdocuacu" id="numdocuacu" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" placeholder="Ingrese # de documento">
+							<p class="help is-danger" id="ErrNumdocuacu" hidden>Campo obligatorio *</p>
+						</div>
+					</div>
+					
+					<div class="columns">
+						<div class="column is-one-fifth">
+							<label class="label">Estado civil</label>
+							<div class="select">
+								<select name="tipestciv" id="tipestciv">
+									<option value="">Seleccione</option>
+									<option value="SO">Soltero(a)</option>
+									<option value="CO">Comprometido(a)</option>
+									<option value="CA">Casado(a)</option>
+									<option value="DI">Divociado(a)</option>
+									<option value="VI">Viudo(a)</option>
+									<option value="OT">Otro</option>
+								</select>
+							</div>
+							<p class="help is-danger" id="ErrTPestciv" hidden>Campo obligatorio *</p>							
+						</div>
+						
+						<div class="column is-one-fifth" >
+							<label class="label">País nacimiento</label>
+							<input type="text" name="painaceacu" id="painaceacu" attr-value="CO" value="Colombia" class="input {{ $errors->has('painaceacu') ? ' is-danger' : '' }}">
+							<p class="help is-danger" id="ErrPainaceacu" hidden>Campo obligatorio *</p>
+						</div>
+						
+						<div class="column is-one-fifth">
+							<label class="label">Dirección</label>
+							<input type="text" name="direcacu" id="direcacu" class="input {{ $errors->has('direcacu') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección">
+							<p class="help is-danger" id="ErrDirecacu" hidden>Campo obligatorio *</p>
+						</div>
+						
+						<div class="column is-one-fifth">
+							<label class="label"># Telefono</label>
+							<input type="text" name="fijoacu" id="fijoacu" class="input {{ $errors->has('fijoacu') ? ' is-danger' : '' }}" placeholder="Ingrese # telefono">
+						</div>
+
+						<div class="column is-one-fifth">
+							<label class="label"># Celular</label>
+							<input type="text" name="celuacu" id="celuacu" class="input {{ $errors->has('celuacu') ? ' is-danger' : '' }}" placeholder="Ingrese # celular">
+							<p class="help is-danger" id="ErrCeluacu" hidden>Campo obligatorio *</p>
+						</div>					
+					</div>
+					
+					<div class="columns">
+						<div class="column is-one-fifth">
+							<label class="label">Correo electrónico</label>
+							<input type="email" id="mailacu" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" placeholder="Ingrese el e-mail">
+							<p class="help is-danger" id="ErrMailacu" hidden>Campo obligatorio *</p>
+						</div>
+						
+						<div class="column is-one-fifth">
+							<label class="label">Profesión</label>
+							<div class="select">
+								<select name="profeacu" id="profeacu" onchange="ValProfeAcu();">
+									<option value="">Seleccione</option>
+									<option value="OT">Otra</option>
+									<option value="NA">No aplica</option>
+								</select>
+							</div>
+							<p class="help is-danger" id="ErrProfeacu" hidden>Campo obligatorio *</p>						
+						</div>
+						
+						<div class="column is-one-fifth">
+							<label class="label">Especialidad</label>
+							<div class="select">
+								<select name="espeacu" id="espeacu">
+									<option value="">Seleccione</option>
+									<option value="OT">Otra</option>
+									<option value="NA">No aplica</option>								
+								</select>
+							</div>
+							<p class="help is-danger" id="Eracupeacu" hidden>Campo obligatorio *</p>						
+						</div>
+						
+						<div class="column is-one-fifth">
+							<label class="label">Empresa</label>
+							<input type="text" name="empreacu" id="empreacu" class="input {{ $errors->has('empreacu') ? ' is-danger' : '' }}" placeholder="Ingrese nombre empresa">
+							<p class="help is-danger" id="ErrEmpreacu" hidden>Campo obligatorio *</p>
+						</div>
+
+						<div class="column is-one-fifth">
+							<label class="label">Cargo</label>
+							<input type="text" name="cargacu" id="cargacu" class="input {{ $errors->has('cargacu') ? ' is-danger' : '' }}" placeholder="Ingrese el cargo">
+							<p class="help is-danger" id="ErrCargacu" hidden>Campo obligatorio *</p>
+						</div>
+					</div>
+					
+					<div class="columns">
+						<div class="column is-one-fifth">
+							<label class="label">Dirección empresa</label>
+							<input type="text" name="dirempacu" id="dirempacu" class="input {{ $errors->has('dirempacu') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección empresa">
+							<p class="help is-danger" id="ErrDirempacu" hidden>Campo obligatorio *</p>
+						</div>
+						
+						<div class="column is-one-fifth">
+							<label class="label"># Telefono</label>
+							<input type="text" name="telempacu" id="telempacu" class="input {{ $errors->has('telempacu') ? ' is-danger' : '' }}" placeholder="Ingrese el telefono empresa">
+							<p class="help is-danger" id="ErrTelempacu" hidden>Campo obligatorio *</p>
+						</div>
+
+						<div class="column is-one-fifth" style="width: 135px">
+							<label class="label">¿Ex alumno?</label>
+							<input type="checkbox" id="exalumacu" style="margin-left: 50px;">						
+						</div>
+						
+						<div class="column is-one-quarter">
+							<label class="label">¿Notificaciones via e-mail?</label>
+							<label class="checkbox">
+								<input type="checkbox" id="notiacu" style="margin-left: 100px;">
+								
+							</label>
+						</div>					
+					</div>
+				
+					<hr>
+					<a class="button is-link is-medium is-outlined" onclick="GuardarAcudiente()">Guardar</a>
+					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios">Cancelar</a>
+				</form>							
+			</div>
 		</div>
     </div>   
   </div>
@@ -502,6 +674,30 @@
 			}
 		}
 	});
+	
+	$("#painaceres").autocomplete({
+		source: paises,
+		select: function (e, ui) {		       
+			var value = ui.item.value;
+			for (var i=0 ; i<paises.length ; i++){		
+				if(value === Arrpaises[i].nombre){
+					$("#painaceres").attr('attr-value',Arrpaises[i].codigo);
+				}
+			}
+		}
+	});
+	
+	$("#painaceacu").autocomplete({
+		source: paises,
+		select: function (e, ui) {		       
+			var value = ui.item.value;
+			for (var i=0 ; i<paises.length ; i++){		
+				if(value === Arrpaises[i].nombre){
+					$("#painaceacu").attr('attr-value',Arrpaises[i].codigo);
+				}
+			}
+		}
+	});	
 	
 	$("#ciunace").autocomplete({
 		source: ciudades,

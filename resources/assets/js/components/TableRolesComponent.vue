@@ -12,12 +12,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="role in roles" :key="role.id">           
-            <td><a :href="'/roles/' + role.id">{{ role.name }}</a></td>
+          <tr v-for="role in roles" :key="role.codigo">           
+            <td><a :href="'/roles/' + role.codigo">{{ role.name }}</a></td>
             <td>{{ role.descripcion }}</td>
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/roles/' + role.id + '/editar'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" id="BtnDelRol" :attr-id="role.id" >Eliminar</a>
+				<a class="button is-link is-rounded is-outlined" :href="'/roles/' + role.codigo + '/editar'">Editar</a>
+				<a class="button is-link is-rounded is-outlined" id="BtnDelRol" :attr-id="role.codigo" >Eliminar</a>
 			</td>
           </tr>
         </tbody>

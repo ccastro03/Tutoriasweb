@@ -251,5 +251,27 @@ class InscripcionController extends Controller
 		$Respuesta = [$estudiante,$responsable,$acudiente,$usrest,$usrest,$usrest];
 		
 		return response()->json($Respuesta);
-	}	
+	}
+	
+    public function obtenerListadoInscripciones(Request $request){
+		// if($request->input('sede') != ""){
+			// $inscripcion = DB::table('inscripciones')->where('sede', 'like', '%'.$request->input('sede').'%')->paginate(10);
+		// }else if($request->input('codigo') != ""){
+			// $inscripcion = DB::table('inscripciones')->where('numdocest', 'like', '%'.$request->input('codigo').'%')->paginate(10);
+		// }else{
+			
+		// }
+		
+		$inscripcion = DB::table('inscripciones')->paginate(10);
+		var_dump($inscripcion);
+		
+        // return response()->json(['inscripcion'=>$inscripcion, 'paginate' => [
+                // 'total'         =>  $inscripcion->total(),
+                // 'current_page'  =>  $inscripcion->currentPage(),
+                // 'per_page'      =>  $inscripcion->perPage(),
+                // 'last_page'     =>  $inscripcion->lastPage(),
+                // 'from '         =>  $inscripcion->firstItem(),
+                // 'to'            =>  $inscripcion->lastPage()],
+				// ]);		
+    }	
 }

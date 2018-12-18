@@ -17,6 +17,10 @@ class CreateInscripcionesTable extends Migration
             $table->string('codigo',50)->nullable();
 			$table->date('fechainscrip')->nullable();
 			$table->string('sede',3)->nullable();
+			$table->string('numdocest',15)->nullable();
+			$table->string('verificada',1)->nullable();
+			$table->string('citacion',1)->nullable();
+			$table->string('aprovada',1)->nullable();
 			$table->primary('codigo');
             $table->timestamps();
         });

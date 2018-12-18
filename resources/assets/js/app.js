@@ -27,7 +27,7 @@ Vue.component('tabla-grados', require('./components/TableGradosComponent.vue'));
 Vue.component('tabla-etnias', require('./components/TableEtniasComponent.vue'));
 Vue.component('tabla-religiones', require('./components/TableReligionComponent.vue'));
 Vue.component('tabla-aseguradoras', require('./components/TableAseguradoraComponent.vue'));
-
+Vue.component('tabla-inscripciones', require('./components/TableInscripcionComponent.vue'));
 
 const app = new Vue({
     el: '#appPrueba'

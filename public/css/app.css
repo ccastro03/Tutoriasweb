@@ -12313,3 +12313,9 @@ input[type="radio"],
   display: block;
 }
 
+.tile.is-ancestor {
+  margin-left: -9.75rem;
+  margin-right: -11.75rem;
+  margin-top: 1.25rem;
+}
+

@@ -12314,8 +12314,8 @@ input[type="radio"],
 }
 
 .tile.is-ancestor {
-  margin-left: -9.75rem;
-  margin-right: -11.75rem;
+  margin-left: -5.75rem;
+  margin-right: 1.25rem;
   margin-top: 1.25rem;
 }
 

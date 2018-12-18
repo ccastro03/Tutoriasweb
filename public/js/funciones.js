@@ -304,11 +304,10 @@ function GuardarEstudiante(){
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'ArrDatos':ArrDatos},
 			success: function(data){
-				console.log(data);
 				if(data[0] == 0){
 					swal(data[1], "", "warning");
 				}else if(data[0] == true){
-					swal(data[1], "", "warning");
+					swal(data[1], "", "success");
 					$("#responsable").removeAttr('disabled');
 					$("#acudiente").removeAttr('disabled');
 					
@@ -408,7 +407,7 @@ function GuardarResponsable(){
 	var chexalumres = $("#exalumres").is(':checked');
 	var chnotires = $("#notires").is(':checked');
 	
-	var codigoest = $("#codest").val();
+	var codigoest = $("#numdocu").val();
 	
 	if(chexalumres == false){
 		var exalumres = "N";
@@ -570,11 +569,10 @@ function GuardarResponsable(){
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'ArrDatos':ArrDatos},
 			success: function(data){
-				console.log(data);
 				if(data[0] == 0){
 					swal(data[1], "", "warning");
 				}else if(data[0] == true){
-					swal(data[1], "", "warning");					
+					swal(data[1], "", "success");					
 					$("#nomres").attr('disabled','disabled');
 					$("#apelres1").attr('disabled','disabled');
 					$("#apelres2").attr('disabled','disabled');
@@ -656,7 +654,8 @@ function GuardarAcudiente(){
 	var chexalumacu = $("#exalumacu").is(':checked');
 	var chnotiacu = $("#notiacu").is(':checked');
 	
-	var codigoest = $("#codest").val();
+	var codigoest = $("#numdocu").val();
+	var guest = $("#guest").val();
 	
 	if(chexalumacu == false){
 		var exalumacu = "N";
@@ -698,11 +697,10 @@ function GuardarAcudiente(){
 		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 		data: {'ArrDatos':ArrDatos},
 		success: function(data){
-			console.log(data);
 			if(data[0] == 0){
 				swal(data[1], "", "warning");
 			}else if(data[0] == true){
-				swal(data[1], "", "warning");					
+				swal(data[1], "", "success");					
 				$("#nomacu").attr('disabled','disabled');
 				$("#apelacu1").attr('disabled','disabled');
 				$("#apelacu2").attr('disabled','disabled');
@@ -724,6 +722,11 @@ function GuardarAcudiente(){
 				$("#notiacu").attr('disabled','disabled');
 				
 				$("#usracu").val(data[2]);
+				if(guest != 1){
+					location.href = '/incripciones';
+				}else{
+					location.href = '/';
+				}				
 			}
 		}
 	});	
@@ -757,7 +760,6 @@ function DevolverCambios(){
 		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 		data: {'ArrDatos':ArrDatos},
 		success: function(data){
-			console.log(data);
 			if(guest != 1){
 				location.href = '/incripciones';
 			}else{

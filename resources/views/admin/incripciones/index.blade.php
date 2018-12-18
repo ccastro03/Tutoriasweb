@@ -16,6 +16,7 @@
 		</div>      
 		@endif
 		<div class="panel-block">
+			<tabla-inscripciones></tabla-inscripciones>		
 		</div>            
 	  
 	</div>

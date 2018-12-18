@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class InscripcionController extends Controller
 {
@@ -116,6 +117,27 @@ class InscripcionController extends Controller
 			'estado' => '0',
 			'cod_rol' => '03' //Rol estudiante
 			]);
+			
+			$codbdIns = DB::table('inscripciones')->select('codigo')->orderBy('codigo', 'desc')->get();
+			if(count($codbdIns) == 0){
+				$codigoIns = '00000000';
+			}else{
+				$codigoIns = $codbdIns[0]->codigo + 1;
+			}
+			
+			$hoy = getdate();
+			$fechaIns = $hoy['year']."/".$hoy['mon']."/".$hoy['mday'];
+			
+			$inscripcion = DB::table('inscripciones')->insert([
+				'codigo' => $codigoIns,
+				'fechainscrip' => $fechaIns,
+				'sede' => $ArrDatos['sede'],
+				'numdocest' => $ArrDatos['numdocumento'],
+				'verificada' => 'N',
+				'citacion' => 'N',
+				'aprovada' => 'N'
+			]);
+			
 			$Respuesta = array($estudiante, "Estudiante agregado corectamente", $codigoEst, $usuario);
 			return response()->json($Respuesta);			
 		}
@@ -156,7 +178,7 @@ class InscripcionController extends Controller
 		'numcelular' => $ArrDatos['celures'],
 		'email' => $ArrDatos['mailres'],
 		'cod_profesion' => $ArrDatos['proferes'],
-		'cod_especialidad' => date($ArrDatos['esperes']),
+		'cod_especialidad' => $ArrDatos['esperes'],
 		'empresa' => $ArrDatos['empreres'],
 		'cargo' => $ArrDatos['cargres'],
 		'dirempresa' => $ArrDatos['dirempres'],
@@ -182,50 +204,50 @@ class InscripcionController extends Controller
     {
 		$ArrDatos = $_GET["ArrDatos"];
 		
-		$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."@tw.com";
+		$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."@tw.com";
 		$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
 		
 		if($ExtUsu == true){
 			$usuario = "";
-			$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."_".strtolower($ArrDatos['apelres2'])."@tw.com";
+			$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
 			$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
 			
 			if($ExtUsu2 == true){
-				$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
+				$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
 				$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
 				
 				if($ExtUsu3 == true){
-					$usuario = strtolower($ArrDatos['nomres'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
+					$usuario = strtolower($ArrDatos['nomacu'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
 				}
 			}
 		}
 		
 		$acudiente = DB::table('responsables')->insert([
-		'tipodocumento' => $ArrDatos['tipdocures'],
-		'numdocumento' => $ArrDatos['numdocures'],
-		'nombre' => $ArrDatos['nomres'],
-		'apellido1' => $ArrDatos['apelres1'],
-		'apellido2' => $ArrDatos['apelres2'],
-		'cod_pais_nace' => $ArrDatos['painaceres'],			
+		'tipodocumento' => $ArrDatos['tipdocuacu'],
+		'numdocumento' => $ArrDatos['numdocuacu'],
+		'nombre' => $ArrDatos['nomacu'],
+		'apellido1' => $ArrDatos['apelacu1'],
+		'apellido2' => $ArrDatos['apelacu2'],
+		'cod_pais_nace' => $ArrDatos['painaceacu'],			
 		'cod_estcivi' => $ArrDatos['tipestciv'],
-		'direccion' => $ArrDatos['direcres'],
-		'numtelefono' => $ArrDatos['fijores'],
-		'numcelular' => $ArrDatos['celures'],
-		'email' => $ArrDatos['mailres'],
-		'cod_profesion' => $ArrDatos['proferes'],
-		'cod_especialidad' => date($ArrDatos['esperes']),
-		'empresa' => $ArrDatos['empreres'],
-		'cargo' => $ArrDatos['cargres'],
-		'dirempresa' => $ArrDatos['dirempres'],
-		'telempresa' => $ArrDatos['telempres'],
-		'exalumno' => $ArrDatos['exalumres'],
-		'notifica' => $ArrDatos['notires'],
+		'direccion' => $ArrDatos['direcacu'],
+		'numtelefono' => $ArrDatos['fijoacu'],
+		'numcelular' => $ArrDatos['celuacu'],
+		'email' => $ArrDatos['mailacu'],
+		'cod_profesion' => $ArrDatos['profeacu'],
+		'cod_especialidad' => $ArrDatos['espeacu'],
+		'empresa' => $ArrDatos['empreacu'],
+		'cargo' => $ArrDatos['cargacu'],
+		'dirempresa' => $ArrDatos['dirempacu'],
+		'telempresa' => $ArrDatos['telempacu'],
+		'exalumno' => $ArrDatos['exalumacu'],
+		'notifica' => $ArrDatos['notiacu'],
 		'cod_rol' => '05', //Rol acudiente
 		'cod_estudiante' => $ArrDatos['codigoest']
 		]);
 		
 		$user = DB::table('users')->insert([
-		'name' => strtolower($ArrDatos['nomres'])." ".strtolower($ArrDatos['apelres1'])." ".strtolower($ArrDatos['apelres2']),
+		'name' => strtolower($ArrDatos['nomacu'])." ".strtolower($ArrDatos['apelacu1'])." ".strtolower($ArrDatos['apelacu2']),
 		'email' => $usuario,
 		'password' => md5("secret"),
 		'estado' => '0',
@@ -254,24 +276,30 @@ class InscripcionController extends Controller
 	}
 	
     public function obtenerListadoInscripciones(Request $request){
-		// if($request->input('sede') != ""){
-			// $inscripcion = DB::table('inscripciones')->where('sede', 'like', '%'.$request->input('sede').'%')->paginate(10);
-		// }else if($request->input('codigo') != ""){
-			// $inscripcion = DB::table('inscripciones')->where('numdocest', 'like', '%'.$request->input('codigo').'%')->paginate(10);
-		// }else{
-			
-		// }
+		if($request->input('sede') != ""){
+			$inscripcion = DB::table('inscripciones')->where('sede', 'like', '%'.$request->input('sede').'%')->paginate(10);
+		}else if($request->input('codigo') != ""){
+			$inscripcion = DB::table('inscripciones')->where('numdocest', 'like', '%'.$request->input('codigo').'%')->paginate(10);
+		}else{
+			$inscripcion = DB::table('inscripciones')->paginate(10);
+		}		
+        return response()->json(['inscripcion'=>$inscripcion, 'paginate' => [
+                'total'         =>  $inscripcion->total(),
+                'current_page'  =>  $inscripcion->currentPage(),
+                'per_page'      =>  $inscripcion->perPage(),
+                'last_page'     =>  $inscripcion->lastPage(),
+                'from '         =>  $inscripcion->firstItem(),
+                'to'            =>  $inscripcion->lastPage()],
+				]);		
+    }
+	
+	public function pdfInscripcion($codest){		
+		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $codest)->get();
+		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $codest)->where('cod_rol', '=', '04')->get();
+		$acudiente = DB::table('responsables')->where('cod_estudiante', '=', $codest)->where('cod_rol', '=', '05')->get();
 		
-		$inscripcion = DB::table('inscripciones')->paginate(10);
-		var_dump($inscripcion);
-		
-        // return response()->json(['inscripcion'=>$inscripcion, 'paginate' => [
-                // 'total'         =>  $inscripcion->total(),
-                // 'current_page'  =>  $inscripcion->currentPage(),
-                // 'per_page'      =>  $inscripcion->perPage(),
-                // 'last_page'     =>  $inscripcion->lastPage(),
-                // 'from '         =>  $inscripcion->firstItem(),
-                // 'to'            =>  $inscripcion->lastPage()],
-				// ]);		
-    }	
+		$pdf = PDF::loadView('admin.reportes.reporte', compact('estudiante','responsable','acudiente'));
+        return $pdf->stream('Reporte Inscripcion'.'.pdf');
+		// return view('admin.reportes.reporte', ['estudiante' => ($estudiante),'responsable' => ($responsable),'acudiente' => ($acudiente)]);
+	}	
 }

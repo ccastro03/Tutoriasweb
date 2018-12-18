@@ -1,7 +1,7 @@
 <template>
   <div id="crud" class="row">
 	<div class="col-md-6">
-		<input type="text" name="codigo" class="input" v-model="codigo" placeholder="Buscar estudiante">
+		<input type="text" name="codest" class="input" v-model="codest" placeholder="Buscar estudiante">
 	</div>
 	<div class="col-md-6">
 		<input type="text" name="sede" class="input" v-model="sede" placeholder="Buscar sede">
@@ -12,12 +12,12 @@
         <thead>
           <tr>
 			<th scope="col">Estudiante</th>
-            <th scope="col">Fecha</th>
+            <th scope="col">Fecha&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 			<th scope="col">Sede</th>
 			<th scope="col">Verificada</th>
 			<th scope="col">Citacion</th>
 			<th scope="col">Aprovada</th>
-            <th scope="col"> &nbsp; </th>
+            <th colspan="2"> &nbsp; </th>
           </tr>
         </thead>
         <tbody>
@@ -25,22 +25,23 @@
             <td>{{ inscripcion.numdocest }}</td>
 			<td>{{ inscripcion.fechainscrip }}</td>
 			<td>{{ inscripcion.sede }}</td>
-			<td>{{ inscripcion.verificada }}</td>
-			<td>{{ inscripcion.citacion }}</td>
-			<td>{{ inscripcion.aprovada }}</td>
+			<td style="text-align: center;">{{ inscripcion.verificada }}</td>
+			<td style="text-align: center;">{{ inscripcion.citacion }}</td>
+			<td style="text-align: center;">{{ inscripcion.aprovada }}</td>
+
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/inscripciones/' + inscripcion.codigo + '/editar'">Editar</a>
+				<a class="button is-link is-rounded is-outlined" target="_blank" :href="'/incripciones/pdfinscripcion/'+ inscripcion.numdocest">PDF</a>
 			</td>
           </tr>
         </tbody>
-      </table> 
-
+      </table>
+	  
       <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.total != 0">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
-        <ul class="pagination-list">
+        <ul class="pagination-list" style="list-style: none; margin: 0; color: #fff;">
           <li v-for="page in pagesNumber" :key="page">
-            <a class="pagination-link" @click.prevent="changePage(page)" aria-label="Goto page 1" v-bind:class="[ page == isActived ? 'is-current' : '']">
+            <a class="pagination-link" style="text-decoration: none;" @click.prevent="changePage(page)" aria-label="Goto page 1" v-bind:class="[ page == isActived ? 'is-current' : '']">
               {{ page }}
             </a>
           </li>          
@@ -64,7 +65,7 @@ export default {
         'last_page': 0,                    
         'total': 0,
       },	  
-      codigo: null,
+      codest: null,
 	  sede: null,
 	  offset: 3,
     }
@@ -73,7 +74,7 @@ export default {
     this.getInscripciones();
   },
   watch: {
-    codigo(after,before) {
+    codest(after,before) {
       this.getInscripciones();				
     },
     sede(after,before) {
@@ -106,8 +107,8 @@ export default {
   },  
   methods: {
     getInscripciones(page) {
-      var url = 'inscripcion/obtenerlistadoinscripciones?page='+page;                
-      axios.get(url, { params: { codigo: this.name, sede: this.sede }}).then(response => {
+      var url = 'incripciones/obtenerlistadoinscripciones?page='+page;                
+      axios.get(url, { params: { codigo: this.codest, sede: this.sede }}).then(response => {
         var array = response.data;
 		this.pagination = array['paginate'];
 		this.inscripciones = array['inscripcion']['data'];

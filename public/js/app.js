@@ -1146,7 +1146,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(79);
+module.exports = __webpack_require__(82);
 
 
 /***/ }),
@@ -1182,7 +1182,7 @@ Vue.component('tabla-grados', __webpack_require__(67));
 Vue.component('tabla-etnias', __webpack_require__(70));
 Vue.component('tabla-religiones', __webpack_require__(73));
 Vue.component('tabla-aseguradoras', __webpack_require__(76));
-Vue.component('tabla-inscripciones', __webpack_require__(84));
+Vue.component('tabla-inscripciones', __webpack_require__(79));
 
 var app = new Vue({
   el: '#appPrueba'
@@ -47443,24 +47443,14 @@ if (false) {
 
 /***/ }),
 /* 79 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(85)
+var __vue_script__ = __webpack_require__(80)
 /* template */
-var __vue_template__ = __webpack_require__(86)
+var __vue_template__ = __webpack_require__(81)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47499,11 +47489,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 85 */
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -47570,7 +47561,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'last_page': 0,
         'total': 0
       },
-      codigo: null,
+      codest: null,
       sede: null,
       offset: 3
     };
@@ -47580,7 +47571,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   watch: {
-    codigo: function codigo(after, before) {
+    codest: function codest(after, before) {
       this.getInscripciones();
     },
     sede: function sede(after, before) {
@@ -47615,8 +47606,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getInscripciones: function getInscripciones(page) {
       var _this = this;
 
-      var url = 'inscripcion/obtenerlistadoinscripciones?page=' + page;
-      axios.get(url, { params: { codigo: this.name, sede: this.sede } }).then(function (response) {
+      var url = 'incripciones/obtenerlistadoinscripciones?page=' + page;
+      axios.get(url, { params: { codigo: this.codest, sede: this.sede } }).then(function (response) {
         var array = response.data;
         _this.pagination = array['paginate'];
         _this.inscripciones = array['inscripcion']['data'];
@@ -47630,7 +47621,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 86 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47644,23 +47635,23 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.codigo,
-            expression: "codigo"
+            value: _vm.codest,
+            expression: "codest"
           }
         ],
         staticClass: "input",
         attrs: {
           type: "text",
-          name: "codigo",
+          name: "codest",
           placeholder: "Buscar estudiante"
         },
-        domProps: { value: _vm.codigo },
+        domProps: { value: _vm.codest },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.codigo = $event.target.value
+            _vm.codest = $event.target.value
           }
         }
       })
@@ -47707,11 +47698,17 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(inscripcion.sede))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(inscripcion.verificada))]),
+                _c("td", { staticStyle: { "text-align": "center" } }, [
+                  _vm._v(_vm._s(inscripcion.verificada))
+                ]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(inscripcion.citacion))]),
+                _c("td", { staticStyle: { "text-align": "center" } }, [
+                  _vm._v(_vm._s(inscripcion.citacion))
+                ]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(inscripcion.aprovada))]),
+                _c("td", { staticStyle: { "text-align": "center" } }, [
+                  _vm._v(_vm._s(inscripcion.aprovada))
+                ]),
                 _vm._v(" "),
                 _c("td", { staticStyle: { "text-align": "right" } }, [
                   _c(
@@ -47719,10 +47716,13 @@ var render = function() {
                     {
                       staticClass: "button is-link is-rounded is-outlined",
                       attrs: {
-                        href: "/inscripciones/" + inscripcion.codigo + "/editar"
+                        target: "_blank",
+                        href:
+                          "/incripciones/pdfinscripcion/" +
+                          inscripcion.numdocest
                       }
                     },
-                    [_vm._v("Editar")]
+                    [_vm._v("PDF")]
                   )
                 ])
               ])
@@ -47773,7 +47773,14 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "ul",
-                { staticClass: "pagination-list" },
+                {
+                  staticClass: "pagination-list",
+                  staticStyle: {
+                    "list-style": "none",
+                    margin: "0",
+                    color: "#fff"
+                  }
+                },
                 _vm._l(_vm.pagesNumber, function(page) {
                   return _c("li", { key: page }, [
                     _c(
@@ -47781,6 +47788,7 @@ var render = function() {
                       {
                         staticClass: "pagination-link",
                         class: [page == _vm.isActived ? "is-current" : ""],
+                        staticStyle: { "text-decoration": "none" },
                         attrs: { "aria-label": "Goto page 1" },
                         on: {
                           click: function($event) {
@@ -47813,7 +47821,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Estudiante")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha          ")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Sede")]),
         _vm._v(" "),
@@ -47823,7 +47831,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprovada")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("   ")])
+        _c("th", { attrs: { colspan: "2" } }, [_vm._v("   ")])
       ])
     ])
   }
@@ -47836,6 +47844,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-70b23f3b", module.exports)
   }
 }
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

@@ -39,6 +39,7 @@
 		</div>
 
 		<div id="navbarPptal" class="navbar-menu">
+		<label id="guest" hidden>{{ auth()->guest() }}</label>
 		@guest
 		  <div class="navbar-end">
 			  <div class="navbar-item">
@@ -55,21 +56,27 @@
 			<div class="navbar-item has-dropdown is-hoverable">
 				<a class="navbar-link" >Maestros</a>
 				<div class="navbar-dropdown is-boxed">
-					<a class="navbar-item" href="{{ url('/roles') }}">Roles</a>
-					<a class="navbar-item" href="{{ url('/funciones') }}">Funciones</a>
-					<a class="navbar-item" href="{{ url('/paises') }}">Paises</a>
-					<a class="navbar-item" href="{{ url('/ciudades') }}">Ciudades</a>
-					<a class="navbar-item" href="{{ url('/prepagada') }}">Prepagadas</a>
-					<a class="navbar-item" href="{{ url('/eps') }}">EPS</a>
-					<a class="navbar-item" href="{{ url('/barrios') }}">Barrios</a>
-					<a class="navbar-item" href="{{ url('/sedes') }}">Sedes</a>
-					<a class="navbar-item" href="{{ url('/jornadas') }}">Jornadas</a>
-					<a class="navbar-item" href="{{ url('/grados') }}">Grados</a>
-					<a class="navbar-item" href="{{ url('/etnias') }}">Etnias</a>
-					<a class="navbar-item" href="{{ url('/aseguradora') }}">Aseguradoras</a>
-					<a class="navbar-item" href="{{ url('/religion') }}">Religiones</a>
-					<hr class="navbar-divider">
-					<a class="navbar-item" href="{{ url('/incripciones') }}">Incripciones</a>
+					@if (Auth::user()->cod_rol == "01")
+						<a class="navbar-item" href="{{ url('/roles') }}">Roles</a>
+						<a class="navbar-item" href="{{ url('/funciones') }}">Funciones</a>
+						<a class="navbar-item" href="{{ url('/paises') }}">Paises</a>
+						<a class="navbar-item" href="{{ url('/ciudades') }}">Ciudades</a>
+						<a class="navbar-item" href="{{ url('/prepagada') }}">Prepagadas</a>
+						<a class="navbar-item" href="{{ url('/eps') }}">EPS</a>
+						<a class="navbar-item" href="{{ url('/barrios') }}">Barrios</a>
+						<a class="navbar-item" href="{{ url('/sedes') }}">Sedes</a>
+						<a class="navbar-item" href="{{ url('/jornadas') }}">Jornadas</a>
+						<a class="navbar-item" href="{{ url('/grados') }}">Grados</a>
+						<a class="navbar-item" href="{{ url('/etnias') }}">Etnias</a>
+						<a class="navbar-item" href="{{ url('/aseguradora') }}">Aseguradoras</a>
+						<a class="navbar-item" href="{{ url('/religion') }}">Religiones</a>
+						<hr class="navbar-divider">
+						<a class="navbar-item" href="{{ url('/incripciones') }}">Incripciones</a>
+					@endif
+					
+					@if (Auth::user()->cod_rol == "02")
+						<a class="navbar-item" href="{{ url('/incripciones') }}">Incripciones</a>
+					@endif
 				</div>
 			</div>
 	  

@@ -730,7 +730,7 @@ function GuardarAcudiente(){
 };
 
 function DevolverCambios(){
-	var numdocest = $("#numdocumento").val();
+	var numdocest = $("#numdocu").val();
 	var numdocres = $("#numdocures").val();
 	var numdocacu = $("#numdocuacu").val();
 	var codigoest = $("#codest").val();
@@ -739,6 +739,8 @@ function DevolverCambios(){
 	var usures = $("#usrres").val();
 	var usuacu = $("#usracu").val();	
 	
+	var guest = $("#guest").val();
+	
 	var ArrDatos = {
 		"numdocest":numdocest,
 		"numdocres":numdocres,
@@ -746,7 +748,7 @@ function DevolverCambios(){
 		"codigoest":codigoest,
 		"usuest":usuest,
 		"usures":usures,
-		"usuacu":usuacu		
+		"usuacu":usuacu,
 	};	
 	
 	$.ajax({
@@ -756,6 +758,11 @@ function DevolverCambios(){
 		data: {'ArrDatos':ArrDatos},
 		success: function(data){
 			console.log(data);
+			if(guest != 1){
+				location.href = '/incripciones';
+			}else{
+				location.href = '/';
+			}
 		}
 	});	
 };	

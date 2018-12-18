@@ -116,11 +116,13 @@ Route::group(array('before' => 'auth'), function()
 	/*********/		
 	
 	/*  INSCRIPCIONES  */
+	Route::get('/nuevaInscripcion', 'InscripcionController@create');
+	
 	Route::get('/incripciones/validarEstudiante', 'InscripcionController@validarEstudiante');
 	Route::get('/incripciones/validarResponsable', 'InscripcionController@validarResponsable');
 	Route::get('/incripciones/validarAcudiente', 'InscripcionController@validarAcudiente');
 	Route::get('/incripciones/devolverCambios', 'InscripcionController@devolverCambios');
 	Route::resource('/incripciones', 'InscripcionController',
-		['except' => ['destroy']])->middleware('auth');
+		['except' => ['destroy','show']])->middleware('auth');
 	/*******************/
 });

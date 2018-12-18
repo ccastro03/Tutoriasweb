@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-  <section class="hero hero.is-success is-fullheight">
-    <div class="hero-body">
+  <section class="hero hero.is-success" >
+    <div class="hero-body" style="margin-top: -50px;">
       <div class="container has-text-centered">
         <div class="column is-4 is-offset-4">
             <h3 class="title has-text-grey">Login</h3>

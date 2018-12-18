@@ -240,12 +240,16 @@ class InscripcionController extends Controller
     {
 		$ArrDatos = $_GET["ArrDatos"];
 		
-		$estudiante = DB::table('estudiantes')->where('codigo_est', '=', $ArrDatos['codest'])->where('numdocumento', '=', $ArrDatos['numdocest'])->delete();
-		$responsable = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocres'])->where('cod_estudiante', '=', $ArrDatos['codest'])->delete();
-		$acudiente = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocuacu'])->where('cod_estudiante', '=', $ArrDatos['codest'])->delete();
+		$estudiante = DB::table('estudiantes')->where('codigo_est', '=', $ArrDatos['codigoest'])->where('numdocumento', '=', $ArrDatos['numdocest'])->delete();
+		$responsable = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocres'])->where('cod_estudiante', '=', $ArrDatos['codigoest'])->delete();
+		$acudiente = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocacu'])->where('cod_estudiante', '=', $ArrDatos['codigoest'])->delete();
 		
-		$usrest = DB::table('user')->where('email', '=', $ArrDatos['usuest'])->delete();
-		$usrest = DB::table('user')->where('email', '=', $ArrDatos['usures'])->delete();
-		$usrest = DB::table('user')->where('email', '=', $ArrDatos['usuacu'])->delete();
+		$usrest = DB::table('users')->where('email', '=', $ArrDatos['usuest'])->delete();
+		$usrest = DB::table('users')->where('email', '=', $ArrDatos['usures'])->delete();
+		$usrest = DB::table('users')->where('email', '=', $ArrDatos['usuacu'])->delete();
+		
+		$Respuesta = [$estudiante,$responsable,$acudiente,$usrest,$usrest,$usrest];
+		
+		return response()->json($Respuesta);
 	}	
 }

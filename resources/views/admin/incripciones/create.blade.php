@@ -310,7 +310,7 @@
 					</div>
 					<hr>
 					<a class="button is-link is-medium is-outlined" onclick="GuardarEstudiante()">Guardar</a>
-					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios">Cancelar</a>
+					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios()">Cancelar</a>
 				</form>
 			</div>
 			
@@ -480,7 +480,7 @@
 				
 					<hr>
 					<a class="button is-link is-medium is-outlined" onclick="GuardarResponsable()">Guardar</a>
-					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios">Cancelar</a>
+					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios()">Cancelar</a>
 				</form>		
 			</div>
 			
@@ -641,7 +641,7 @@
 				
 					<hr>
 					<a class="button is-link is-medium is-outlined" onclick="GuardarAcudiente()">Guardar</a>
-					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios">Cancelar</a>
+					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios()">Cancelar</a>
 				</form>							
 			</div>
 		</div>

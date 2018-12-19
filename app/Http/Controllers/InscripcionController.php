@@ -293,12 +293,39 @@ class InscripcionController extends Controller
 				]);		
     }
 	
-	public function pdfInscripcion($codest){		
+	public function pdfInscripcion($codest){
+		$ciudades = DB::table('ciudades')->get();
+		$barrios = DB::table('barrios')->get();
+		$paises = DB::table('paises')->get();
+		$sedes = DB::table('sedes')->get();
+		$grados = DB::table('grados')->get();
+		$jornadas = DB::table('jornadas')->get();
+		$etnias = DB::table('etnias')->get();
+		$eps = DB::table('eps')->get();
+		$prepagadas = DB::table('prepagada')->get();
+		$religiones = DB::table('religion')->get();
+		$aseguradoras = DB::table('aseguradora')->get();
+		
 		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $codest)->get();
 		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $codest)->where('cod_rol', '=', '04')->get();
 		$acudiente = DB::table('responsables')->where('cod_estudiante', '=', $codest)->where('cod_rol', '=', '05')->get();
 		
-		$pdf = PDF::loadView('admin.reportes.reporte', compact('estudiante','responsable','acudiente'));
+		$pdf = PDF::loadView('admin.reportes.reporte', [
+		'estudiante' => ($estudiante),
+		'responsable' => ($responsable),
+		'acudiente' => ($acudiente),
+		'ciudades' => ($ciudades),
+		'barrios' => ($barrios),
+		'paises' => ($paises),
+		'sedes' => ($sedes),
+		'grados' => ($grados),
+		'jornadas' => ($jornadas),
+		'etnias' => ($etnias),
+		'eps' => ($eps),
+		'prepagadas' => ($prepagadas),
+		'religiones' => ($religiones),
+		'aseguradoras' => ($aseguradoras)
+		]);
         return $pdf->stream('Reporte Inscripcion'.'.pdf');
 		// return view('admin.reportes.reporte', ['estudiante' => ($estudiante),'responsable' => ($responsable),'acudiente' => ($acudiente)]);
 	}	

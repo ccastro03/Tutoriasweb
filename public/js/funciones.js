@@ -699,8 +699,7 @@ function GuardarAcudiente(){
 		success: function(data){
 			if(data[0] == 0){
 				swal(data[1], "", "warning");
-			}else if(data[0] == true){
-				swal(data[1], "", "success");					
+			}else if(data[0] == true){					
 				$("#nomacu").attr('disabled','disabled');
 				$("#apelacu1").attr('disabled','disabled');
 				$("#apelacu2").attr('disabled','disabled');
@@ -722,11 +721,14 @@ function GuardarAcudiente(){
 				$("#notiacu").attr('disabled','disabled');
 				
 				$("#usracu").val(data[2]);
-				if(guest != 1){
-					location.href = '/incripciones';
-				}else{
-					location.href = '/';
-				}				
+				swal(data[1], "", "success")
+				.then((value) => {
+					if(guest != 1){
+						location.href = '/incripciones';
+					}else{
+						location.href = '/';
+					}
+				});								
 			}
 		}
 	});	

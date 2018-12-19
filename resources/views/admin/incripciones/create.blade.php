@@ -341,7 +341,7 @@
 							<div class="select">
 								<select name="tipdocures" id="tipdocures">
 									<option value="">Seleccione</option>
-									<option value="TE">Cedula Extranjeria</option>
+									<option value="CE">Cedula Extranjeria</option>
 									<option value="CC">Cedula Ciudadania</option>
 									<option value="PO">Pasaporte</option>
 									<option value="OT">Otro</option>

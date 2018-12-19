@@ -38,7 +38,7 @@
 			<tr>
 				<td>{{ $estu->nombre }}</td>
 				<td>{{ $estu->apellido1 }}</td>
-				<td>{{ $estu->apellido2 }}</td>
+				<td>{{ $estu->apellido2 }}</td>				
 				<td>{{ $estu->genero }}</td>
 				<td>{{ $estu->tipodocumento }}</td>
 				<td>{{ $estu->numdocumento }}</td>
@@ -60,7 +60,11 @@
 			@foreach($estudiante->all() as $estu)
 			<tr>
 				<td>{{ $estu->direccion }}</td>
-				<td>{{ $estu->barrio }}</td>
+				@foreach($barrios->all() as $barrio)
+					@if ($barrio->cod_barrio === $estu->barrio)
+						<td>{{ $barrio->nombre }}</td>
+					@endif
+				@endforeach
 				<td>{{ $estu->numtelefono }}</td>
 				<td>{{ $estu->numcelular }}</td>
 				<td>{{ $estu->email }}</td>
@@ -82,12 +86,33 @@
 		<tbody>
 			@foreach($estudiante->all() as $estu)
 			<tr>
-				<td>{{ $estu->cod_pais_nace }}</td>
-				<td>{{ $estu->cod_ciu_nace }}</td>
+				@foreach($paises->all() as $pais)
+					@if ($pais->codigo === $estu->cod_pais_nace)
+						<td>{{ $pais->nombre }}</td>
+					@endif
+				@endforeach
+				
+				@foreach($ciudades->all() as $ciudad)
+					@if ($ciudad->cod_ciudad === $estu->cod_ciu_nace)
+						<td>{{ $ciudad->nombre }}</td>
+					@endif
+				@endforeach
+				
 				<td>{{ $estu->tiposangre }}</td>
-				<td>{{ $estu->sede }}</td>
+				
+				@foreach($sedes->all() as $sede)
+					@if ($sede->codigo === $estu->sede)
+						<td>{{ $sede->nombre }}</td>
+					@endif
+				@endforeach
+				
 				<td>{{ $estu->grado }}</td>
-				<td>{{ $estu->jornada }}</td>
+				
+				@foreach($jornadas->all() as $jornada)
+					@if ($jornada->codigo === $estu->jornada)
+						<td>{{ $jornada->nombre }}</td>
+					@endif
+				@endforeach
 			</tr>
 			@endforeach
 		</tbody>
@@ -105,12 +130,32 @@
 		<tbody>
 			@foreach($estudiante->all() as $estu)
 			<tr>
-				<td>{{ $estu->grpetnico }}</td>
+				@foreach($etnias->all() as $etnia)
+					@if ($etnia->codigo === $estu->grpetnico)
+						<td>{{ $etnia->nombre }}</td>
+					@endif
+				@endforeach
+				
 				<td>{{ $estu->sisben }}</td>
 				<td>{{ $estu->nvlsisben }}</td>
-				<td>{{ $estu->cod_eps }}</td>
-				<td>{{ $estu->cod_prepagada }}</td>
-				<td>{{ $estu->cod_religion }}</td>
+				
+				@foreach($eps->all() as $ep)
+					@if ($ep->codigo === $estu->cod_eps)
+						<td>{{ $ep->nombre }}</td>
+					@endif
+				@endforeach
+				
+				@foreach($prepagadas->all() as $prepagada)
+					@if ($prepagada->codigo === $estu->cod_prepagada)
+						<td>{{ $prepagada->nombre }}</td>
+					@endif
+				@endforeach
+
+				@foreach($religiones->all() as $religion)
+					@if ($religion->codigo === $estu->cod_religion)
+						<td>{{ $religion->nombre }}</td>
+					@endif
+				@endforeach
 			</tr>
 			@endforeach
 		</tbody>
@@ -130,7 +175,13 @@
 			<tr>
 				<td>{{ $estu->segurovida }}</td>
 				<td>{{ $estu->asegurador }}</td>
-				<td>{{ $estu->cod_ciud_proced }}</td>
+				
+				@foreach($ciudades->all() as $ciudad)
+					@if ($ciudad->cod_ciudad === $estu->cod_ciud_proced)
+						<td>{{ $ciudad->nombre }}</td>
+					@endif
+				@endforeach
+				
 				<td>{{ $estu->cole_proced }}</td>
 				<td>{{ $estu->cobertura }}</td>
 				<td>{{ $estu->desplazado }}</td>

@@ -70,6 +70,11 @@
 						<a class="navbar-item" href="{{ url('/etnias') }}">Etnias</a>
 						<a class="navbar-item" href="{{ url('/aseguradora') }}">Aseguradoras</a>
 						<a class="navbar-item" href="{{ url('/religion') }}">Religiones</a>
+						
+						<a class="navbar-item" href="{{ url('/tipodocumentos') }}">Tipo Documentos</a>
+						<a class="navbar-item" href="{{ url('/generos') }}">Generos</a>
+						<a class="navbar-item" href="{{ url('/profesiones') }}">Profesiones</a>
+						<a class="navbar-item" href="{{ url('/especialidades') }}">Especialidades</a>
 						<hr class="navbar-divider">
 						<a class="navbar-item" href="{{ url('/incripciones') }}">Incripciones</a>
 					@endif

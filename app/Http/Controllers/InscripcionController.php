@@ -33,9 +33,14 @@ class InscripcionController extends Controller
 		$prepagadas = DB::table('prepagada')->get();
 		$religiones = DB::table('religion')->get();
 		$aseguradoras = DB::table('aseguradora')->get();
+		$generos = DB::table('generos')->get();
+		$tipodocumentos = DB::table('tipodocumentos')->get();
+		$profesiones = DB::table('profesiones')->get();
+		$especialidades = DB::table('especialidades')->get();
 		return view('admin.incripciones.create', ['ciudades' => ($ciudades),'paises' => ($paises),'sedes' => ($sedes),'grados' => ($grados),
 		'jornadas' => ($jornadas),'etnias' => ($etnias),'eps' => ($eps),'prepagadas' => ($prepagadas),'religiones' => ($religiones),
-		'aseguradoras' => ($aseguradoras),'barrios' => ($barrios)]);
+		'aseguradoras' => ($aseguradoras),'barrios' => ($barrios), 'generos' => ($generos),'tipodocumentos' => ($tipodocumentos),'profesiones' => ($profesiones),
+		'especialidades' => ($especialidades)]);
     }
 
     public function validarEstudiante(Request $request)
@@ -305,6 +310,10 @@ class InscripcionController extends Controller
 		$prepagadas = DB::table('prepagada')->get();
 		$religiones = DB::table('religion')->get();
 		$aseguradoras = DB::table('aseguradora')->get();
+		$generos = DB::table('generos')->get();
+		$tipodocumentos = DB::table('tipodocumentos')->get();
+		$profesiones = DB::table('profesiones')->get();
+		$especialidades = DB::table('especialidades')->get();		
 		
 		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $codest)->get();
 		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $codest)->where('cod_rol', '=', '04')->get();
@@ -324,7 +333,11 @@ class InscripcionController extends Controller
 		'eps' => ($eps),
 		'prepagadas' => ($prepagadas),
 		'religiones' => ($religiones),
-		'aseguradoras' => ($aseguradoras)
+		'aseguradoras' => ($aseguradoras),
+		'generos' => ($generos),
+		'tipodocumentos' => ($tipodocumentos),
+		'profesiones' => ($profesiones),
+		'especialidades' => ($especialidades)
 		]);
         return $pdf->stream('Reporte Inscripcion'.'.pdf');
 		// return view('admin.reportes.reporte', ['estudiante' => ($estudiante),'responsable' => ($responsable),'acudiente' => ($acudiente)]);

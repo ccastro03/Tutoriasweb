@@ -431,6 +431,129 @@ window.$(document).on('click', '#BtnDelReli', function (){
 	});	
 });
 
+/* ELIMINAR GENERO */
+window.$(document).on('click', '#BtnDelGen', function (){
+	var GenId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/generos/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':GenId},
+			success: function(data){
+				if (data = 1){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'generos';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
+
+/* ELIMINAR PROFESION */
+window.$(document).on('click', '#BtnDelProfes', function (){
+	var ProfesId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/profesiones/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':ProfesId},
+			success: function(data){
+				if (data = 1){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'profesiones';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
+
+/* ELIMINAR ESPECIALIDAD */
+window.$(document).on('click', '#BtnDelEspeci', function (){
+	var EspeciId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/especialidades/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':EspeciId},
+			success: function(data){
+				if (data = 1){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'especialidades';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
+
+/* ELIMINAR TIPO DOCUMENTO */
+window.$(document).on('click', '#BtnDelTpDocu', function (){
+	var TpDocuId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/tiposdocumentos/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':TpDocuId},
+			success: function(data){
+				if (data = 1){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'tiposdocumentos';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
 /*Hamburger mobile*/
 
 document.addEventListener('DOMContentLoaded', () => {

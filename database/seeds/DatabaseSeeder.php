@@ -24,5 +24,9 @@ class DatabaseSeeder extends Seeder
 		$this->call(ReligionTableSeeder::class);
 		$this->call(AseguradoraTableSeeder::class);
 		$this->call(SedesTableSeeder::class);
+		$this->call(GenerosTableSeeder::class);
+		$this->call(EspecialidadesTableSeeder::class);
+		$this->call(ProfesionesTableSeeder::class);
+		$this->call(TipoDocumentosTableSeeder::class);
     }
 }

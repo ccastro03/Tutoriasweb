@@ -47,8 +47,9 @@
 							<div class="select">
 								<select name="tipgenero" id="tipgenero">
 									<option value="">Seleccione</option>
-									<option value="H">Hombre</option>
-									<option value="M">Mujer</option>
+									@foreach($generos->all() as $genero)
+										<option value="{{ $genero->codigo }}">{{ $genero->nombre }}</option>
+									@endforeach
 								</select>
 							</div>
 							<p class="help is-danger" id="ErrGenero" hidden>Campo obligatorio *</p>
@@ -59,10 +60,9 @@
 							<div class="select">
 								<select name="tipdocu" id="tipdocu">
 									<option value="">Seleccione</option>
-									<option value="TI">Tarjeta Identidad</option>
-									<option value="TE">Tarjeta Extranjeria</option>
-									<option value="CC">Cedula Ciudadania</option>
-									<option value="OT">Otro</option>
+									@foreach($tipodocumentos->all() as $tpdocu)
+										<option value="{{ $tpdocu->codigo }}">{{ $tpdocu->nombre }}</option>
+									@endforeach
 								</select>
 							</div>
 							<p class="help is-danger" id="ErrTipdocu" hidden>Campo obligatorio *</p>							
@@ -340,11 +340,9 @@
 							<label class="label">Tipo Documento</label>
 							<div class="select">
 								<select name="tipdocures" id="tipdocures">
-									<option value="">Seleccione</option>
-									<option value="CE">Cedula Extranjeria</option>
-									<option value="CC">Cedula Ciudadania</option>
-									<option value="PO">Pasaporte</option>
-									<option value="OT">Otro</option>
+									@foreach($tipodocumentos->all() as $tpdocu)
+										<option value="{{ $tpdocu->codigo }}">{{ $tpdocu->nombre }}</option>
+									@endforeach
 								</select>
 							</div>
 							<p class="help is-danger" id="ErrTDres" hidden>Campo obligatorio *</p>							
@@ -410,8 +408,9 @@
 							<div class="select">
 								<select name="proferes" id="proferes" onchange="ValProfeRes();">
 									<option value="">Seleccione</option>
-									<option value="OT">Otra</option>
-									<option value="NA">No aplica</option>
+									@foreach($profesiones->all() as $profesion)
+										<option value="{{ $profesion->codigo }}">{{ $profesion->nombre }}</option>
+									@endforeach
 								</select>
 							</div>
 							<p class="help is-danger" id="ErrProferes" hidden>Campo obligatorio *</p>						
@@ -422,8 +421,9 @@
 							<div class="select">
 								<select name="esperes" id="esperes">
 									<option value="">Seleccione</option>
-									<option value="OT">Otra</option>
-									<option value="NA">No aplica</option>								
+									@foreach($especialidades->all() as $especialidad)
+										<option value="{{ $especialidad->codigo }}">{{ $especialidad->nombre }}</option>
+									@endforeach								
 								</select>
 							</div>
 							<p class="help is-danger" id="ErrEsperes" hidden>Campo obligatorio *</p>						
@@ -511,10 +511,9 @@
 							<div class="select">
 								<select name="tipdocuacu" id="tipdocuacu">
 									<option value="">Seleccione</option>
-									<option value="TE">Cedula Extranjeria</option>
-									<option value="CC">Cedula Ciudadania</option>
-									<option value="PO">Pasaporte</option>
-									<option value="OT">Otro</option>
+									@foreach($tipodocumentos->all() as $tpdocu)
+										<option value="{{ $tpdocu->codigo }}">{{ $tpdocu->nombre }}</option>
+									@endforeach
 								</select>
 							</div>
 							<p class="help is-danger" id="ErrTDacu" hidden>Campo obligatorio *</p>							
@@ -580,8 +579,9 @@
 							<div class="select">
 								<select name="profeacu" id="profeacu" onchange="ValProfeAcu();">
 									<option value="">Seleccione</option>
-									<option value="OT">Otra</option>
-									<option value="NA">No aplica</option>
+									@foreach($profesiones->all() as $profesion)
+										<option value="{{ $profesion->codigo }}">{{ $profesion->nombre }}</option>
+									@endforeach
 								</select>
 							</div>
 							<p class="help is-danger" id="ErrProfeacu" hidden>Campo obligatorio *</p>						
@@ -592,8 +592,9 @@
 							<div class="select">
 								<select name="espeacu" id="espeacu">
 									<option value="">Seleccione</option>
-									<option value="OT">Otra</option>
-									<option value="NA">No aplica</option>								
+									@foreach($especialidades->all() as $especialidad)
+										<option value="{{ $especialidad->codigo }}">{{ $especialidad->nombre }}</option>
+									@endforeach								
 								</select>
 							</div>
 							<p class="help is-danger" id="Eracupeacu" hidden>Campo obligatorio *</p>						

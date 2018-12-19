@@ -3,9 +3,9 @@
 @section('content')
 <div class="column is-12">
   <div class="panel">
-    <p class="panel-heading">Creación de sedes</p>
+    <p class="panel-heading">Creación de tipo de documentos</p>
     <div class="panel-block">
-      <form class="long-form" action="{{ url('sedes') }}" method="post">
+      <form class="long-form" action="{{ url('tipodocumentos') }}" method="post">
         @csrf
         @if(count($errors) > 0)
         <div class="notification is-danger">
@@ -40,7 +40,7 @@
         
         <button type="submit" class="button is-link is-medium is-outlined">Guardar</button>
 
-        <a href="{{ url('sedes') }}" class="button is-medium is-link is-outlined">Salir</a>
+        <a href="{{ url('tipodocumentos') }}" class="button is-medium is-link is-outlined">Salir</a>
       </form>      
     </div>   
   </div>

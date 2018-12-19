@@ -3,9 +3,9 @@
 @section('content')
 <div class="column is-12" id="appPrueba">
 	<div class="panel">
-		<p class="panel-heading">Listado de sedes</p>
+		<p class="panel-heading">Listado de tipo de documentos</p>
 		<div class="panel-block">
-			<a href="{{ url('/sedes/crear') }}" class="button is-medium is-link is-rounded is-outlined">Crear</a>
+			<a href="{{ url('/tipodocumentos/crear') }}" class="button is-medium is-link is-rounded is-outlined">Crear</a>
 		</div>
 		@if (session('status'))
 		<div class="panel-block">
@@ -16,7 +16,7 @@
 		</div>      
 		@endif
 		<div class="panel-block">
-			<tabla-sedes></tabla-sedes>
+			<tabla-tpdocumentos></tabla-tpdocumentos>
 		</div>            
 	  
 	</div>

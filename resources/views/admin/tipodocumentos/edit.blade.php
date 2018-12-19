@@ -3,9 +3,9 @@
 @section('content')
 <div class="column is-12">
   <div class="panel">
-    <p class="panel-heading">Edición de <b>{{ $sedes->codigo }}</b></p>
+    <p class="panel-heading">Edición de <b>{{ $tipodocumentos->codigo }}</b></p>
     <div class="panel-block">
-      <form class="long-form" action="{{ route('sedes.update', $sedes->codigo ) }}" method="post">
+      <form class="long-form" action="{{ route('tipodocumentos.update', $tipodocumentos->codigo ) }}" method="post">
         @method('put')
         @csrf
         @if(count($errors) > 0)
@@ -22,7 +22,7 @@
         <div class="columns">
 			<div class="column is-half">
 				<label for="codigo" class="label">Codigo</label>
-				<input type="text" name="codigo" class="input {{ $errors->has('codigo') ? ' is-danger' : '' }}" value="{{ old('codigo', $sedes->codigo ) }}" disabled>
+				<input type="text" name="codigo" class="input {{ $errors->has('codigo') ? ' is-danger' : '' }}" value="{{ old('codigo', $tipodocumentos->codigo ) }}" disabled>
 				@if ($errors->has('codigo'))
 					<p class="help is-danger">{{ $errors->first('codigo') }}</p>
 				@endif
@@ -31,7 +31,7 @@
 			<div class="column">
 				<div class="field">
 					<label class="label">Nombre</label>
-					<input type="text" name="nombre" class="input {{ $errors->has('nombre') ? ' is-danger' : '' }}" value="{{ old('nombre', $sedes->nombre ) }}">
+					<input type="text" name="nombre" class="input {{ $errors->has('nombre') ? ' is-danger' : '' }}" value="{{ old('nombre', $tipodocumentos->nombre ) }}">
 					@if ($errors->has('nombre'))
 						<p class="help is-danger">{{ $errors->first('nombre') }}</p>
 					@endif
@@ -43,7 +43,7 @@
         
         <button type="submit" class="button is-link is-medium is-outlined">Guardar</button>
 
-        <a href="{{ url('sedes') }}" class="button is-medium is-link is-outlined">Salir</a>
+        <a href="{{ url('tipodocumentos') }}" class="button is-medium is-link is-outlined">Salir</a>
       </form>      
     </div>   
   </div>

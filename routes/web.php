@@ -123,9 +123,9 @@ Route::group(array('before' => 'auth'), function()
 	/*********/
 	
 	/*  TIPOS DOCUMENTOS  */
-	Route::get('/tipodocumentos/obtenerlistadotipodocumentos', 'TiposDocumentos@obtenerListadoTiposDocumentos')->middleware('auth');
-	Route::get('/tipodocumentos/eliminar', 'TiposDocumentosController@eliminar')->middleware('auth');
-	Route::resource('/tipodocumentos', 'TiposDocumentosController',
+	Route::get('/tipodocumentos/obtenerlistadotipodocumentos', 'TipoDocumentosController@obtenerListadoTipoDocumentos')->middleware('auth');
+	Route::get('/tipodocumentos/eliminar', 'TipoDocumentosController@eliminar')->middleware('auth');
+	Route::resource('/tipodocumentos', 'TipoDocumentosController',
 		['except' => ['destroy']])->middleware('auth');
 	/*********************/
 

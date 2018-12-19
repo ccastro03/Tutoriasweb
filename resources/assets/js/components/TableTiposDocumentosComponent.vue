@@ -12,11 +12,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="tpdocumentos in tpdocu" :key="tpdocu.codigo">
-            <td><a :href="'/tiposdocumentos/' + tpdocu.codigo">{{ tpdocu.codigo }}</a></td>
+          <tr v-for="tpdocu in tpdocumentos" :key="tpdocu.codigo">
+            <td><a :href="'/tipodocumentos/' + tpdocu.codigo">{{ tpdocu.codigo }}</a></td>
 			<td>{{ tpdocu.nombre }}</td>
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/tiposdocumentos/' + tpdocu.codigo + '/editar'">Editar</a>
+				<a class="button is-link is-rounded is-outlined" :href="'/tipodocumentos/' + tpdocu.codigo + '/editar'">Editar</a>
 				<a class="button is-link is-rounded is-outlined" id="BtnDelTpDocu" :attr-id="tpdocu.codigo" >Eliminar</a>
 			</td>
           </tr>
@@ -90,11 +90,11 @@ export default {
   },  
   methods: {
     getTpdocumentos(page) {
-      var url = 'tiposdocumentos/obtenerlistadotiposdocumentos?page='+page;                
+      var url = 'tipodocumentos/obtenerlistadotipodocumentos?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
         var array = response.data;
 		this.pagination = array['paginate'];
-		this.tpdocumentos = array['tiposdocumentos']['data'];
+		this.tpdocumentos = array['tipodocumentos']['data'];
       });
     },
     changePage(page) {

@@ -536,7 +536,7 @@ window.$(document).on('click', '#BtnDelTpDocu', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/tiposdocumentos/eliminar",
+			url: "/tipodocumentos/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':TpDocuId},
@@ -544,7 +544,7 @@ window.$(document).on('click', '#BtnDelTpDocu', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'tiposdocumentos';
+						location.href = 'tipodocumentos';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");

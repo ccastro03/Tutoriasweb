@@ -39,13 +39,13 @@ class TipoDocumentosController extends Controller
 
     public function show($id)
     {	
-		$tipodocumentos = DB::table('tipodocumento')->where('codigo', '=', $id)->get();
+		$tipodocumentos = DB::table('tipodocumentos')->where('codigo', '=', $id)->get();
 		return view('admin.tipodocumentos.show', ['tipodocumentos' => ($tipodocumentos[0])]);
     }
 
     public function edit($id)
     {	
-		$tipodocumentos = DB::table('tipodocumento')->where('codigo', '=', $id)->get();
+		$tipodocumentos = DB::table('tipodocumentos')->where('codigo', '=', $id)->get();
 		return view('admin.tipodocumentos.edit', ['tipodocumentos' => ($tipodocumentos[0])]);
     }
 
@@ -64,12 +64,12 @@ class TipoDocumentosController extends Controller
     public function eliminar()
     {
 		$id = $_GET["id"];
-		$tipodocumentos = DB::table('tipodocumento')->where('codigo', '=', $id)->delete();
+		$tipodocumentos = DB::table('tipodocumentos')->where('codigo', '=', $id)->delete();
 		return response()->json($tipodocumentos);
     }
 	
     public function obtenerListadoTipoDocumentos(Request $request){
-		$tipodocumentos = DB::table('tipodocumento')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(10);
+		$tipodocumentos = DB::table('tipodocumentos')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(10);
         return response()->json(['tipodocumentos'=>$tipodocumentos, 'paginate' => [
                 'total'         =>  $tipodocumentos->total(),
                 'current_page'  =>  $tipodocumentos->currentPage(),

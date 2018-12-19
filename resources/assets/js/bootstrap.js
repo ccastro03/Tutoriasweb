@@ -554,6 +554,38 @@ window.$(document).on('click', '#BtnDelTpDocu', function (){
 	}
 	});	
 });
+
+/* ELIMINAR ESTADO CIVIL */
+window.$(document).on('click', '#BtnDelEstCiv', function (){
+	var EstCivId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true,
+	}).then((willDelete) => {
+	if (willDelete) {
+		$.ajax({
+			url: "/estadocivil/eliminar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'id':EstCivId},
+			success: function(data){
+				if (data = 1){				
+					swal("Registro eliminado correctamente!", "", "success")
+					.then((value) => {
+						location.href = 'estadocivil';
+					});	
+				} else {
+					swal("Error al eliminar el registro!", "", "warning");
+				}
+			}
+		});
+	}
+	});	
+});
+
 /*Hamburger mobile*/
 
 document.addEventListener('DOMContentLoaded', () => {

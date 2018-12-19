@@ -120,7 +120,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('/generos/eliminar', 'GenerosController@eliminar')->middleware('auth');
 	Route::resource('/generos', 'GenerosController',
 		['except' => ['destroy']])->middleware('auth');
-	/*********/
+	/*************/
 	
 	/*  TIPOS DOCUMENTOS  */
 	Route::get('/tipodocumentos/obtenerlistadotipodocumentos', 'TipoDocumentosController@obtenerListadoTipoDocumentos')->middleware('auth');
@@ -134,14 +134,21 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('/profesiones/eliminar', 'ProfesionesController@eliminar')->middleware('auth');
 	Route::resource('/profesiones', 'ProfesionesController',
 		['except' => ['destroy']])->middleware('auth');
-	/*********/
+	/*****************/
 
 	/*  ESPECIALIDADES  */
 	Route::get('/especialidades/obtenerlistadoespecialidades', 'EspecialidadesController@obtenerListadoEspecialidades')->middleware('auth');
 	Route::get('/especialidades/eliminar', 'EspecialidadesController@eliminar')->middleware('auth');
 	Route::resource('/especialidades', 'EspecialidadesController',
 		['except' => ['destroy']])->middleware('auth');
-	/*********/	
+	/*******************/	
+	
+	/*  ESTADO CIVIL  */
+	Route::get('/estadocivil/obtenerlistadoestcivil', 'EstadoCivilController@obtenerListadoEstCivil')->middleware('auth');
+	Route::get('/estadocivil/eliminar', 'EstadoCivilController@eliminar')->middleware('auth');
+	Route::resource('/estadocivil', 'EstadoCivilController',
+		['except' => ['destroy']])->middleware('auth');
+	/*****************/	
 	
 	/*  INSCRIPCIONES  */
 	Route::get('/nuevaInscripcion', 'InscripcionController@create');

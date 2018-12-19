@@ -38,9 +38,20 @@
 			<tr>
 				<td>{{ $estu->nombre }}</td>
 				<td>{{ $estu->apellido1 }}</td>
-				<td>{{ $estu->apellido2 }}</td>				
-				<td>{{ $estu->genero }}</td>
-				<td>{{ $estu->tipodocumento }}</td>
+				<td>{{ $estu->apellido2 }}</td>
+
+				@foreach($generos->all() as $genero)
+					@if ($genero->codigo === $estu->genero)
+						<td>{{ $genero->nombre }}</td>
+					@endif
+				@endforeach
+				
+				@foreach($tipodocumentos->all() as $tpdocu)
+					@if ($tpdocu->codigo === $estu->tipodocumento)
+						<td>{{ $tpdocu->nombre }}</td>
+					@endif
+				@endforeach
+		
 				<td>{{ $estu->numdocumento }}</td>
 			</tr>
 			@endforeach
@@ -196,7 +207,7 @@
 			<tr>
 				<td colspan="7" style="text-align: center; font-size: 13px; font-weight: bold;">RESPONSABLE</td>
 			</tr>
-			<tr style="background-color: #3bb1ff; font-weight: bold;">
+			<tr style="background-color: #dddddd; font-weight: bold;">
 				<td>Nombres</td>
 				<td>Primer apellido</td>
 				<td>Segundo apellido</td>
@@ -212,16 +223,32 @@
 				<td>{{ $resp->nombre }}</td>
 				<td>{{ $resp->apellido1 }}</td>
 				<td>{{ $resp->apellido2 }}</td>
-				<td>{{ $resp->tipodocumento }}</td>
+				
+				@foreach($tipodocumentos->all() as $tpresdocu)
+					@if ($tpresdocu->codigo === $resp->tipodocumento)
+						<td>{{ $tpresdocu->nombre }}</td>
+					@endif
+				@endforeach
+				
 				<td>{{ $resp->numdocumento }}</td>
-				<td>{{ $resp->cod_estcivi }}</td>
-				<td>{{ $resp->cod_pais_nace }}</td>
+				
+				@foreach($estcivil->all() as $estciv)
+					@if ($estciv->codigo === $resp->cod_estcivi)
+						<td>{{ $estciv->nombre }}</td>
+					@endif
+				@endforeach
+				
+				@foreach($paises->all() as $paisres)
+					@if ($paisres->codigo === $resp->cod_pais_nace)
+						<td>{{ $paisres->nombre }}</td>
+					@endif
+				@endforeach
 			</tr>
 			@endforeach
 		</tbody>
 		
 		<thead>
-			<tr style="background-color: #3bb1ff; font-weight: bold;">
+			<tr style="background-color: #dddddd; font-weight: bold;">
 				<td>Dirección</td>
 				<td># Telefono</td>
 				<td># Celular</td>
@@ -238,15 +265,26 @@
 				<td>{{ $resp->numtelefono }}</td>
 				<td>{{ $resp->numcelular }}</td>
 				<td>{{ $resp->email }}</td>
-				<td>{{ $resp->cod_profesion }}</td>
-				<td>{{ $resp->cod_especialidad }}</td>
+				
+				@foreach($profesiones->all() as $proferes)
+					@if ($proferes->codigo === $resp->cod_profesion)
+						<td>{{ $proferes->nombre }}</td>
+					@endif
+				@endforeach
+				
+				@foreach($especialidades->all() as $esperes)
+					@if ($esperes->codigo === $resp->cod_especialidad)
+						<td>{{ $esperes->nombre }}</td>
+					@endif
+				@endforeach
+
 				<td>{{ $resp->empresa }}</td>				
 			</tr>
 			@endforeach
 		</tbody>
 
 		<thead>
-			<tr style="background-color: #3bb1ff; font-weight: bold;">
+			<tr style="background-color: #dddddd; font-weight: bold;">
 				<td>Cargo</td>
 				<td>Dirección empresa</td>
 				<td>Telefono empresa</td>
@@ -273,7 +311,7 @@
 			<tr>
 				<td colspan="7" style="text-align: center; font-size: 13px; font-weight: bold;">ACUDIENTE</td>
 			</tr>
-			<tr style="background-color: #3bb1ff; font-weight: bold;">
+			<tr style="background-color: #dddddd; font-weight: bold;">
 				<td>Nombres</td>
 				<td>Primer apellido</td>
 				<td>Segundo apellido</td>
@@ -289,16 +327,32 @@
 				<td>{{ $acu->nombre }}</td>
 				<td>{{ $acu->apellido1 }}</td>
 				<td>{{ $acu->apellido2 }}</td>
-				<td>{{ $acu->tipodocumento }}</td>
+				
+				@foreach($tipodocumentos->all() as $tpacudocu)
+					@if ($tpacudocu->codigo === $acu->tipodocumento)
+						<td>{{ $tpacudocu->nombre }}</td>
+					@endif
+				@endforeach
+				
 				<td>{{ $acu->numdocumento }}</td>
-				<td>{{ $acu->cod_estcivi }}</td>
-				<td>{{ $acu->cod_pais_nace }}</td>
+				
+				@foreach($estcivil->all() as $estcivacu)
+					@if ($estcivacu->codigo === $acu->cod_estcivi)
+						<td>{{ $estcivacu->nombre }}</td>
+					@endif
+				@endforeach
+				
+				@foreach($paises->all() as $paisacu)
+					@if ($paisacu->codigo === $acu->cod_pais_nace)
+						<td>{{ $paisacu->nombre }}</td>
+					@endif
+				@endforeach				
 			</tr>
 			@endforeach
 		</tbody>
 		
 		<thead>
-			<tr style="background-color: #3bb1ff; font-weight: bold;">
+			<tr style="background-color: #dddddd; font-weight: bold;">
 				<td>Dirección</td>
 				<td># Telefono</td>
 				<td># Celular</td>
@@ -315,15 +369,26 @@
 				<td>{{ $acu->numtelefono }}</td>
 				<td>{{ $acu->numcelular }}</td>
 				<td>{{ $acu->email }}</td>
-				<td>{{ $acu->cod_profesion }}</td>
-				<td>{{ $acu->cod_especialidad }}</td>
+				
+				@foreach($profesiones->all() as $profeacu)
+					@if ($profeacu->codigo === $acu->cod_profesion)
+						<td>{{ $profeacu->nombre }}</td>
+					@endif
+				@endforeach
+				
+				@foreach($especialidades->all() as $espeacu)
+					@if ($espeacu->codigo === $acu->cod_especialidad)
+						<td>{{ $espeacu->nombre }}</td>
+					@endif
+				@endforeach
+
 				<td>{{ $acu->empresa }}</td>				
 			</tr>
 			@endforeach
 		</tbody>
 
 		<thead>
-			<tr style="background-color: #3bb1ff; font-weight: bold;">
+			<tr style="background-color: #dddddd; font-weight: bold;">
 				<td>Cargo</td>
 				<td>Dirección empresa</td>
 				<td>Telefono empresa</td>

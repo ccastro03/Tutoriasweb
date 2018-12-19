@@ -361,12 +361,9 @@
 							<div class="select">
 								<select name="tipestciv" id="tipestciv">
 									<option value="">Seleccione</option>
-									<option value="SO">Soltero(a)</option>
-									<option value="CO">Comprometido(a)</option>
-									<option value="CA">Casado(a)</option>
-									<option value="DI">Divociado(a)</option>
-									<option value="VI">Viudo(a)</option>
-									<option value="OT">Otro</option>
+									@foreach($estcivil->all() as $estciv)
+										<option value="{{ $estciv->codigo }}">{{ $estciv->nombre }}</option>
+									@endforeach
 								</select>
 							</div>
 							<p class="help is-danger" id="ErrTPestciv" hidden>Campo obligatorio *</p>							

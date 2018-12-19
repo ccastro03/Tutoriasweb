@@ -32,6 +32,7 @@ Vue.component('tabla-tpdocumentos', require('./components/TableTiposDocumentosCo
 Vue.component('tabla-generos', require('./components/TableGenerosComponent.vue'));
 Vue.component('tabla-profesiones', require('./components/TableProfesionesComponent.vue'));
 Vue.component('tabla-especialidades', require('./components/TableEspecialidadesComponent.vue'));
+Vue.component('tabla-estcivil', require('./components/TableEstCivilComponent.vue'));
 
 const app = new Vue({
     el: '#appPrueba'

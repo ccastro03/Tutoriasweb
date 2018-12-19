@@ -1146,7 +1146,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(82);
+module.exports = __webpack_require__(94);
 
 
 /***/ }),
@@ -1183,10 +1183,11 @@ Vue.component('tabla-etnias', __webpack_require__(70));
 Vue.component('tabla-religiones', __webpack_require__(73));
 Vue.component('tabla-aseguradoras', __webpack_require__(76));
 Vue.component('tabla-inscripciones', __webpack_require__(79));
-Vue.component('tabla-tpdocumentos', __webpack_require__(87));
-Vue.component('tabla-generos', __webpack_require__(90));
-Vue.component('tabla-profesiones', __webpack_require__(93));
-Vue.component('tabla-especialidades', __webpack_require__(96));
+Vue.component('tabla-tpdocumentos', __webpack_require__(82));
+Vue.component('tabla-generos', __webpack_require__(85));
+Vue.component('tabla-profesiones', __webpack_require__(88));
+Vue.component('tabla-especialidades', __webpack_require__(91));
+Vue.component('tabla-estcivil', __webpack_require__(99));
 
 var app = new Vue({
   el: '#appPrueba'
@@ -1735,6 +1736,37 @@ window.$(document).on('click', '#BtnDelTpDocu', function () {
 		}
 	});
 });
+
+/* ELIMINAR ESTADO CIVIL */
+window.$(document).on('click', '#BtnDelEstCiv', function () {
+	var EstCivId = $(this).attr("attr-id");
+	swal({
+		title: "¿Está seguro de eliminar el registro?",
+		text: 'Después de eliminado, no se podrá recuperar la información',
+		icon: "warning",
+		buttons: ["Cancelar", "Aceptar"],
+		dangerMode: true
+	}).then(function (willDelete) {
+		if (willDelete) {
+			$.ajax({
+				url: "/estadocivil/eliminar",
+				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: { 'id': EstCivId },
+				success: function success(data) {
+					if (data = 1) {
+						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
+							location.href = 'estadocivil';
+						});
+					} else {
+						swal("Error al eliminar el registro!", "", "warning");
+					}
+				}
+			});
+		}
+	});
+});
+
 /*Hamburger mobile*/
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -47952,7 +47984,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Citacion")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprovada")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprobada")]),
         _vm._v(" "),
         _c("th", { attrs: { colspan: "2" } }, [_vm._v("   ")])
       ])
@@ -47970,24 +48002,14 @@ if (false) {
 
 /***/ }),
 /* 82 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(88)
+var __vue_script__ = __webpack_require__(83)
 /* template */
-var __vue_template__ = __webpack_require__(89)
+var __vue_template__ = __webpack_require__(84)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48026,7 +48048,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 88 */
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48141,7 +48163,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 89 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -48324,15 +48346,15 @@ if (false) {
 }
 
 /***/ }),
-/* 90 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(91)
+var __vue_script__ = __webpack_require__(86)
 /* template */
-var __vue_template__ = __webpack_require__(92)
+var __vue_template__ = __webpack_require__(87)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48371,7 +48393,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 91 */
+/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48486,7 +48508,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 92 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -48665,15 +48687,15 @@ if (false) {
 }
 
 /***/ }),
-/* 93 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(94)
+var __vue_script__ = __webpack_require__(89)
 /* template */
-var __vue_template__ = __webpack_require__(95)
+var __vue_template__ = __webpack_require__(90)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48712,7 +48734,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 94 */
+/* 89 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48827,7 +48849,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 95 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49010,15 +49032,15 @@ if (false) {
 }
 
 /***/ }),
-/* 96 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(97)
+var __vue_script__ = __webpack_require__(92)
 /* template */
-var __vue_template__ = __webpack_require__(98)
+var __vue_template__ = __webpack_require__(93)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49057,7 +49079,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 97 */
+/* 92 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49172,7 +49194,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 98 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49357,6 +49379,361 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-0f119ff4", module.exports)
+  }
+}
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(100)
+/* template */
+var __vue_template__ = __webpack_require__(101)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TableEstCivilComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-28653739", Component.options)
+  } else {
+    hotAPI.reload("data-v-28653739", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 100 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      estcivil: [],
+      pagination: {
+        'current_page': 0,
+        'per_page': 0,
+        'first_item': 0,
+        'last_item': 0,
+        'last_page': 0,
+        'total': 0
+      },
+      name: null,
+      offset: 3
+    };
+  },
+  created: function created() {
+    this.getEstadoCiv();
+  },
+
+  watch: {
+    name: function name(after, before) {
+      this.getEstadoCiv();
+    }
+  },
+  computed: {
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    }
+  },
+  methods: {
+    getEstadoCiv: function getEstadoCiv(page) {
+      var _this = this;
+
+      var url = 'estadocivil/obtenerlistadoestcivil?page=' + page;
+      axios.get(url, { params: { name: this.name } }).then(function (response) {
+        var array = response.data;
+        _this.pagination = array['paginate'];
+        _this.estcivil = array['estcivil']['data'];
+      });
+    },
+    changePage: function changePage(page) {
+      this.pagination.current_page = page;
+      this.getEstadoCiv(page);
+    }
+  }
+});
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row", attrs: { id: "crud" } }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.name,
+          expression: "name"
+        }
+      ],
+      staticClass: "input",
+      attrs: {
+        type: "text",
+        name: "name",
+        placeholder: "Buscar nombre estado civil"
+      },
+      domProps: { value: _vm.name },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.name = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-striped table is-fullwidth" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.estcivil, function(estciv) {
+              return _c("tr", { key: estciv.codigo }, [
+                _c("td", [
+                  _c(
+                    "a",
+                    { attrs: { href: "/estadocivil/" + estciv.codigo } },
+                    [_vm._v(_vm._s(estciv.codigo))]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(estciv.nombre))]),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "right" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: {
+                        href: "/estadocivil/" + estciv.codigo + "/editar"
+                      }
+                    },
+                    [_vm._v("Editar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: { id: "BtnDelEstCiv", "attr-id": estciv.codigo }
+                    },
+                    [_vm._v("Eliminar")]
+                  )
+                ])
+              ])
+            })
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _vm.pagination.total != 0
+        ? _c(
+            "nav",
+            {
+              staticClass: "pagination",
+              attrs: { role: "navigation", "aria-label": "pagination" }
+            },
+            [
+              _vm.pagination.current_page > 1
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-previous",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page - 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Anterior")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.pagination.current_page < _vm.pagination.last_page
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-next",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "pagination-list" },
+                _vm._l(_vm.pagesNumber, function(page) {
+                  return _c("li", { key: page }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "pagination-link",
+                        class: [page == _vm.isActived ? "is-current" : ""],
+                        attrs: { "aria-label": "Goto page 1" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.changePage(page)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              " + _vm._s(page) + "\n            "
+                        )
+                      ]
+                    )
+                  ])
+                })
+              )
+            ]
+          )
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codigo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { colspan: "2" } }, [_vm._v("   ")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-28653739", module.exports)
   }
 }
 

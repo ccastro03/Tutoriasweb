@@ -1,47 +1,34 @@
 <template>
   <div id="crud" class="row">
-	<div class="col-md-6">
-		<input type="text" name="codest" class="input" v-model="codest" placeholder="Buscar estudiante">
-	</div>
-	<div class="col-md-6">
-		<input type="text" name="sede" class="input" v-model="sede" placeholder="Buscar sede">
-	</div>
-
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre estado civil">
+    <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-			<th scope="col">Estudiante</th>
-            <th scope="col">Fecha&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-			<th scope="col">Sede</th>
-			<th scope="col">Verificada</th>
-			<th scope="col">Citacion</th>
-			<th scope="col">Aprobada</th>
+			<th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="inscripcion in inscripciones" :key="inscripcion.codigo">
-            <td>{{ inscripcion.numdocest }}</td>
-			<td>{{ inscripcion.fechainscrip }}</td>
-			<td>{{ inscripcion.sede }}</td>
-			<td style="text-align: center;">{{ inscripcion.verificada }}</td>
-			<td style="text-align: center;">{{ inscripcion.citacion }}</td>
-			<td style="text-align: center;">{{ inscripcion.aprovada }}</td>
-
+          <tr v-for="estciv in estcivil" :key="estciv.codigo">
+            <td><a :href="'/estadocivil/' + estciv.codigo">{{ estciv.codigo }}</a></td>
+			<td>{{ estciv.nombre }}</td>
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" target="_blank" :href="'/incripciones/pdfinscripcion/'+ inscripcion.numdocest">PDF</a>
+				<a class="button is-link is-rounded is-outlined" :href="'/estadocivil/' + estciv.codigo + '/editar'">Editar</a>
+				<a class="button is-link is-rounded is-outlined" id="BtnDelEstCiv" :attr-id="estciv.codigo" >Eliminar</a>
 			</td>
           </tr>
         </tbody>
-      </table>
-	  
+      </table> 
+
       <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.total != 0">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
-        <ul class="pagination-list" style="list-style: none; margin: 0; color: #fff;">
+        <ul class="pagination-list">
           <li v-for="page in pagesNumber" :key="page">
-            <a class="pagination-link" style="text-decoration: none;" @click.prevent="changePage(page)" aria-label="Goto page 1" v-bind:class="[ page == isActived ? 'is-current' : '']">
+            <a class="pagination-link" @click.prevent="changePage(page)" aria-label="Goto page 1" v-bind:class="[ page == isActived ? 'is-current' : '']">
               {{ page }}
             </a>
           </li>          
@@ -56,7 +43,7 @@
 export default {
   data() {
     return {
-      inscripciones: [],
+      estcivil: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -65,21 +52,17 @@ export default {
         'last_page': 0,                    
         'total': 0,
       },	  
-      codest: null,
-	  sede: null,
+      name: null,
 	  offset: 3,
     }
   },
   created() {
-    this.getInscripciones();
+    this.getEstadoCiv();
   },
   watch: {
-    codest(after,before) {
-      this.getInscripciones();				
-    },
-    sede(after,before) {
-      this.getInscripciones();				
-    }	
+    name(after,before) {
+      this.getEstadoCiv();				
+    }
   },
 	computed:  {
     isActived: function() {
@@ -106,17 +89,17 @@ export default {
     },
   },  
   methods: {
-    getInscripciones(page) {
-      var url = 'incripciones/obtenerlistadoinscripciones?page='+page;                
-      axios.get(url, { params: { codigo: this.codest, sede: this.sede }}).then(response => {
+    getEstadoCiv(page) {
+      var url = 'estadocivil/obtenerlistadoestcivil?page='+page;                
+      axios.get(url, { params: { name: this.name }}).then(response => {
         var array = response.data;
 		this.pagination = array['paginate'];
-		this.inscripciones = array['inscripcion']['data'];
+		this.estcivil = array['estcivil']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getInscripciones(page);
+      this.getEstadoCiv(page);
     }
   }
 }

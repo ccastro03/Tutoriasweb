@@ -28,5 +28,7 @@ class DatabaseSeeder extends Seeder
 		$this->call(EspecialidadesTableSeeder::class);
 		$this->call(ProfesionesTableSeeder::class);
 		$this->call(TipoDocumentosTableSeeder::class);
+		$this->call(EstCivilTableSeeder::class);
+		$this->call(CiudadesTableSeeder::class);
     }
 }

@@ -37,10 +37,12 @@ class InscripcionController extends Controller
 		$tipodocumentos = DB::table('tipodocumentos')->get();
 		$profesiones = DB::table('profesiones')->get();
 		$especialidades = DB::table('especialidades')->get();
+		$estcivil = DB::table('estcivil')->get();
+		
 		return view('admin.incripciones.create', ['ciudades' => ($ciudades),'paises' => ($paises),'sedes' => ($sedes),'grados' => ($grados),
 		'jornadas' => ($jornadas),'etnias' => ($etnias),'eps' => ($eps),'prepagadas' => ($prepagadas),'religiones' => ($religiones),
-		'aseguradoras' => ($aseguradoras),'barrios' => ($barrios), 'generos' => ($generos),'tipodocumentos' => ($tipodocumentos),'profesiones' => ($profesiones),
-		'especialidades' => ($especialidades)]);
+		'aseguradoras' => ($aseguradoras),'barrios' => ($barrios), 'generos' => ($generos),'tipodocumentos' => ($tipodocumentos),
+		'profesiones' => ($profesiones),'especialidades' => ($especialidades),'estcivil' => ($estcivil)]);
     }
 
     public function validarEstudiante(Request $request)
@@ -313,7 +315,8 @@ class InscripcionController extends Controller
 		$generos = DB::table('generos')->get();
 		$tipodocumentos = DB::table('tipodocumentos')->get();
 		$profesiones = DB::table('profesiones')->get();
-		$especialidades = DB::table('especialidades')->get();		
+		$especialidades = DB::table('especialidades')->get();
+		$estcivil = DB::table('estcivil')->get();		
 		
 		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $codest)->get();
 		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $codest)->where('cod_rol', '=', '04')->get();
@@ -337,7 +340,8 @@ class InscripcionController extends Controller
 		'generos' => ($generos),
 		'tipodocumentos' => ($tipodocumentos),
 		'profesiones' => ($profesiones),
-		'especialidades' => ($especialidades)
+		'especialidades' => ($especialidades),
+		'estcivil' => ($estcivil)
 		]);
         return $pdf->stream('Reporte Inscripcion'.'.pdf');
 		// return view('admin.reportes.reporte', ['estudiante' => ($estudiante),'responsable' => ($responsable),'acudiente' => ($acudiente)]);

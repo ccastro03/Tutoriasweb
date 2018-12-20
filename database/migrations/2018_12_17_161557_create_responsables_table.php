@@ -26,7 +26,9 @@ class CreateResponsablesTable extends Migration
 			$table->string('numcelular',10)->nullable();
 			$table->string('email')->nullable();
 			$table->string('cod_profesion',4)->nullable();
+			$table->string('otra_profesion')->nullable();
 			$table->string('cod_especialidad',4)->nullable();
+			$table->string('otra_especialidad')->nullable();
 			$table->string('empresa',40)->nullable();
 			$table->string('cargo',40)->nullable();
 			$table->string('dirempresa',40)->nullable();

@@ -96,8 +96,8 @@
 						</div>
 
 						<div class="column is-one-fifth" style="width: 157px">
-							<label class="label"># Telefono</label>
-							<input type="text" name="numfijo" id="numfijo" class="input {{ $errors->has('numfijo') ? ' is-danger' : '' }}" placeholder="Ingrese el telefono">
+							<label class="label"># Teléfono</label>
+							<input type="text" name="numfijo" id="numfijo" class="input {{ $errors->has('numfijo') ? ' is-danger' : '' }}" placeholder="Ingrese el teléfono">
 							<p class="help is-danger" id="ErrNumtel" hidden>Campo obligatorio *</p>
 						</div>
 
@@ -150,51 +150,44 @@
 							<p class="help is-danger" id="ErrTiprh" hidden>Obligatorio *</p>
 						</div>
 						
-						<!-- <div class="panel"> 
-							<header class="panel-header">
-								<p class="panel-heading">Información Colegio</p>
-							</header>	
-							<div class="panel-block"> -->
-								<div class="column is-one-fifth" style="width: 240px">
-									<label class="label">Sede</label>
-									<div class="select">
-										<select name="sede" id="sede">
-											<option value="">Seleccione</option>
-											@foreach($sedes->all() as $sede)
-												<option value="{{ $sede->codigo }}">{{ $sede->nombre }}</option>
-											@endforeach							
-										</select>
-									</div>
-									<p class="help is-danger" id="ErrSede" hidden>Campo obligatorio *</p>
-								</div>
+						<div class="column is-one-fifth" style="width: 240px">
+							<label class="label">Sede</label>
+							<div class="select">
+								<select name="sede" id="sede">
+									<option value="">Seleccione</option>
+									@foreach($sedes->all() as $sede)
+										<option value="{{ $sede->codigo }}">{{ $sede->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
+							<p class="help is-danger" id="ErrSede" hidden>Campo obligatorio *</p>
+						</div>
 
-								<div class="column is-one-fifth" style="width: 150px">
-									<label class="label">Grado</label>
-									<div class="select">
-										<select name="grado" id="grado">
-											<option value="">Sel</option>
-											@foreach($grados->all() as $grado)
-												<option value="{{ $grado->codigo }}">{{ $grado->nombre }}</option>
-											@endforeach							
-										</select>
-									</div>
-									<p class="help is-danger" id="ErrGrado" hidden>Obligatorio *</p>
-								</div>
+						<div class="column is-one-fifth" style="width: 150px">
+							<label class="label">Grado</label>
+							<div class="select">
+								<select name="grado" id="grado">
+									<option value="">Sel</option>
+									@foreach($grados->all() as $grado)
+										<option value="{{ $grado->codigo }}">{{ $grado->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
+							<p class="help is-danger" id="ErrGrado" hidden>Obligatorio *</p>
+						</div>
 
-								<div class="column is-one-fifth" style="width: 150px">
-									<label class="label">Jornada</label>
-									<div class="select">
-										<select name="jornada" id="jornada">
-											<option value="">Seleccione</option>
-											@foreach($jornadas->all() as $jornada)
-												<option value="{{ $jornada->codigo }}">{{ $jornada->nombre }}</option>
-											@endforeach							
-										</select>
-									</div>
-									<p class="help is-danger" id="ErrJornada" hidden>Campo obligatorio *</p>
-								</div>
-							<!--</div>
-						</div> -->
+						<div class="column is-one-fifth" style="width: 150px">
+							<label class="label">Jornada</label>
+							<div class="select">
+								<select name="jornada" id="jornada">
+									<option value="">Seleccione</option>
+									@foreach($jornadas->all() as $jornada)
+										<option value="{{ $jornada->codigo }}">{{ $jornada->nombre }}</option>
+									@endforeach							
+								</select>
+							</div>
+							<p class="help is-danger" id="ErrJornada" hidden>Campo obligatorio *</p>
+						</div>
 					</div>
 					
 					<div class="columns">
@@ -220,7 +213,7 @@
 							<label class="label">Nivel</label>
 							<div class="select">
 								<select name="sisnvl" id="sisnvl">
-									<option value="">Otro</option>							
+									<option value="">Sel</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -409,8 +402,8 @@
 						</div>
 						
 						<div class="column is-one-fifth">
-							<label class="label"># Telefono</label>
-							<input type="text" name="fijores" id="fijores" class="input {{ $errors->has('fijores') ? ' is-danger' : '' }}" placeholder="Ingrese # telefono">
+							<label class="label"># Teléfono</label>
+							<input type="text" name="fijores" id="fijores" class="input {{ $errors->has('fijores') ? ' is-danger' : '' }}" placeholder="Ingrese # teléfono">
 						</div>
 
 						<div class="column is-one-fifth">
@@ -474,8 +467,8 @@
 						</div>
 						
 						<div class="column is-one-fifth">
-							<label class="label"># Telefono</label>
-							<input type="text" name="telempres" id="telempres" class="input {{ $errors->has('telempres') ? ' is-danger' : '' }}" placeholder="Ingrese el telefono empresa">
+							<label class="label"># Teléfono</label>
+							<input type="text" name="telempres" id="telempres" class="input {{ $errors->has('telempres') ? ' is-danger' : '' }}" placeholder="Ingrese el teléfono empresa">
 							<p class="help is-danger" id="ErrTelempres" hidden>Campo obligatorio *</p>
 						</div>
 
@@ -580,8 +573,8 @@
 						</div>
 						
 						<div class="column is-one-fifth">
-							<label class="label"># Telefono</label>
-							<input type="text" name="fijoacu" id="fijoacu" class="input {{ $errors->has('fijoacu') ? ' is-danger' : '' }}" placeholder="Ingrese # telefono">
+							<label class="label"># Teléfono</label>
+							<input type="text" name="fijoacu" id="fijoacu" class="input {{ $errors->has('fijoacu') ? ' is-danger' : '' }}" placeholder="Ingrese # teléfono">
 						</div>
 
 						<div class="column is-one-fifth">
@@ -645,8 +638,8 @@
 						</div>
 						
 						<div class="column is-one-fifth">
-							<label class="label"># Telefono</label>
-							<input type="text" name="telempacu" id="telempacu" class="input {{ $errors->has('telempacu') ? ' is-danger' : '' }}" placeholder="Ingrese el telefono empresa">
+							<label class="label"># Teléfono</label>
+							<input type="text" name="telempacu" id="telempacu" class="input {{ $errors->has('telempacu') ? ' is-danger' : '' }}" placeholder="Ingrese el teléfono empresa">
 							<p class="help is-danger" id="ErrTelempacu" hidden>Campo obligatorio *</p>
 						</div>
 

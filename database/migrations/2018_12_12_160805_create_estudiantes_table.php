@@ -20,6 +20,7 @@ class CreateEstudiantesTable extends Migration
 			$table->string('nombre',40)->nullable();
 			$table->string('apellido1',20)->nullable();
 			$table->string('apellido2',20)->nullable();
+			$table->string('cod_ciu_vive',8)->nullable();
 			$table->string('direccion',200)->nullable();
 			$table->string('barrio',10)->nullable();
 			$table->string('numtelefono',7)->nullable();
@@ -77,6 +78,7 @@ class CreateEstudiantesTable extends Migration
 			$table->string('cod_niif',20)->nullable();
 			$table->string('cod_familia',4)->nullable();
 			$table->string('alerta',250)->nullable();
+			$table->string('observacion',600)->nullable();
 			$table->string('cod_usuario',40)->nullable();
 			$table->string('cod_rol',3)->nullable();
 			$table->primary(['codigo_est', 'numdocumento']);

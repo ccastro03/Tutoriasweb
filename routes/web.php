@@ -160,6 +160,6 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('/incripciones/obtenerlistadoinscripciones', 'InscripcionController@obtenerListadoInscripciones')->middleware('auth');
 	Route::get('/incripciones/pdfinscripcion/{codest}', 'InscripcionController@pdfInscripcion')->middleware('auth');
 	Route::resource('/incripciones', 'InscripcionController',
-		['except' => ['destroy','show']])->middleware('auth');
+		['except' => ['destroy']])->middleware('auth');
 	/*******************/
 });

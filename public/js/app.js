@@ -47703,6 +47703,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -47862,10 +47864,30 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _vm._v(_vm._s(inscripcion.aprovada))
+                  _vm._v(_vm._s(inscripcion.aprobada))
                 ]),
                 _vm._v(" "),
                 _c("td", { staticStyle: { "text-align": "right" } }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: { href: "/incripciones/" + inscripcion.codigo }
+                    },
+                    [_vm._v("Ver")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: {
+                        href: "/incripciones/" + inscripcion.codigo + "/editar"
+                      }
+                    },
+                    [_vm._v("Editar")]
+                  ),
+                  _vm._v(" "),
                   _c(
                     "a",
                     {
@@ -47986,7 +48008,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprobada")]),
         _vm._v(" "),
-        _c("th", { attrs: { colspan: "2" } }, [_vm._v("   ")])
+        _c("th", { attrs: { colspan: "3" } }, [_vm._v("   ")])
       ])
     ])
   }

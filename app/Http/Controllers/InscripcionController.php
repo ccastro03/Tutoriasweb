@@ -20,6 +20,22 @@ class InscripcionController extends Controller
     {
         return view('admin.incripciones.index');
     }
+	
+    public function show($id)
+    {	
+		$inscripciones = DB::table('inscripciones')->where('codigo', '=', $id)->get();
+		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $inscripciones[0]->numdocest)->get();
+		$sedes = DB::table('sedes')->where('codigo', '=', $inscripciones[0]->sede)->get();
+		return view('admin.incripciones.show', ['inscripciones' => $inscripciones[0], 'estudiante' => $estudiante[0], 'sedes' => $sedes[0]]);
+    }
+	
+    public function edit($id)
+    {	
+		$inscripciones = DB::table('inscripciones')->where('codigo', '=', $id)->get();
+		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $inscripciones[0]->numdocest)->get();
+		$sedes = DB::table('sedes')->get();
+		return view('admin.incripciones.edit', ['inscripciones' => $inscripciones[0], 'estudiante' => $estudiante[0], 'sedes' => $sedes]);
+    }	
 
     public function create()
     {

@@ -17,7 +17,7 @@
 			<th scope="col">Verificada</th>
 			<th scope="col">Citacion</th>
 			<th scope="col">Aprobada</th>
-            <th colspan="2"> &nbsp; </th>
+            <th colspan="3"> &nbsp; </th>
           </tr>
         </thead>
         <tbody>
@@ -27,9 +27,11 @@
 			<td>{{ inscripcion.sede }}</td>
 			<td style="text-align: center;">{{ inscripcion.verificada }}</td>
 			<td style="text-align: center;">{{ inscripcion.citacion }}</td>
-			<td style="text-align: center;">{{ inscripcion.aprovada }}</td>
+			<td style="text-align: center;">{{ inscripcion.aprobada }}</td>
 
             <td style="text-align: right;">
+				<a class="button is-link is-rounded is-outlined" :href="'/incripciones/'+ inscripcion.codigo">Ver</a>
+				<a class="button is-link is-rounded is-outlined" :href="'/incripciones/'+ inscripcion.codigo+'/editar'">Editar</a>
 				<a class="button is-link is-rounded is-outlined" target="_blank" :href="'/incripciones/pdfinscripcion/'+ inscripcion.numdocest">PDF</a>
 			</td>
           </tr>

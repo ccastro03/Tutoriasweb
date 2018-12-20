@@ -6,6 +6,21 @@ $(function() {
 	$("#otprepagada").attr('disabled','disabled');
 	$("#otaseguradora").attr('disabled','disabled');
 	$("#otreligion").attr('disabled','disabled');
+	
+	$("#chcita").attr('disabled','disabled');
+	$("#obscitacion").attr('disabled','disabled');
+	$("#chaprob").attr('disabled','disabled');
+	$("#obsaprobada").attr('disabled','disabled');
+	
+	if($("#chverif").is(':checked') == true){ 
+		$("#chcita").removeAttr('disabled');
+		$("#chverif").attr('disabled','disabled');
+		$("#sede").attr('disabled','disabled');
+	}
+	
+	if($("#chcita").is(':checked') == true){ 
+		$("#chaprob").removeAttr('disabled');
+	}		
 });
 	
 function ValidaSisben(){
@@ -879,4 +894,25 @@ function DevolverCambios(){
 			}
 		}
 	});	
-};	
+};
+
+function ValChVerificado(){
+	if($("#chverif").is(':checked') == true){ 
+		$("#chcita").removeAttr('disabled');
+		$("#sede").attr('disabled','disabled');
+	}else{
+		$("#chcita").attr('disabled','disabled');
+		$("#obscitacion").attr('disabled','disabled');
+		$("#sede").removeAttr('disabled');
+		$("#obscitacion").val("");
+	}			
+};
+
+function ValChCitacion(){
+	if($("#chcita").is(':checked') == true){ 
+		$("#obscitacion").removeAttr('disabled');
+	}else{
+		$("#obscitacion").attr('disabled','disabled');
+		$("#obscitacion").val("");
+	}			
+};

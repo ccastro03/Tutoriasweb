@@ -20,7 +20,9 @@ class CreateInscripcionesTable extends Migration
 			$table->string('numdocest',15)->nullable();
 			$table->string('verificada',1)->nullable();
 			$table->string('citacion',1)->nullable();
-			$table->string('aprovada',1)->nullable();
+			$table->string('obs_cita',500)->nullable();
+			$table->string('aprobada',1)->nullable();
+			$table->string('obs_aprueba',500)->nullable();
 			$table->primary('codigo');
             $table->timestamps();
         });

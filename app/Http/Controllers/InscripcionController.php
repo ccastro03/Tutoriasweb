@@ -35,6 +35,11 @@ class InscripcionController extends Controller
 		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $inscripciones[0]->numdocest)->get();
 		$sedes = DB::table('sedes')->get();
 		return view('admin.incripciones.edit', ['inscripciones' => $inscripciones[0], 'estudiante' => $estudiante[0], 'sedes' => $sedes]);
+    }
+	
+    public function update()
+    {
+        return redirect()->route('admin.incripciones.index');
     }	
 
     public function create()

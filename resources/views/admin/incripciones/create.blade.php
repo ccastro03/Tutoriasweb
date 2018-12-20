@@ -10,13 +10,13 @@
 	<div class="tabs is-boxed" style="margin-bottom: 0px;">
 		<ul>
 			<li class="is-active" id="liEst">
-				<a><label for="estudiante">Estudiante</label></a>
+				<a><label for="estudiante" onclick="ChEstudiante()">Estudiante</label></a>
 			</li>
 			<li id="liRespo">
-				<a><label for="responsable">Responsable</label></a>
+				<a><label for="responsable" onclick="ChResponsable()">Responsable</label></a>
 			</li>
 			<li id="liAcu">
-				<a><label for="acudiente">Acudiente</label></a>
+				<a><label for="acudiente" onclick="ChAcudiente()">Acudiente</label></a>
 			</li>
 		</ul>
 	</div>

@@ -436,35 +436,35 @@ function GuardarEstudiante(){
 					$("#responsable").removeAttr('disabled');
 					$("#acudiente").removeAttr('disabled');
 					
-					$("#nombre").attr('disabled','disabled');
-					$("#apellido1").attr('disabled','disabled');
-					$("#apellido2").attr('disabled','disabled');
-					$("#tipgenero").attr('disabled','disabled');
-					$("#tipdocu").attr('disabled','disabled');
+					// $("#nombre").attr('disabled','disabled');
+					// $("#apellido1").attr('disabled','disabled');
+					// $("#apellido2").attr('disabled','disabled');
+					// $("#tipgenero").attr('disabled','disabled');
+					// $("#tipdocu").attr('disabled','disabled');
 					$("#numdocu").attr('disabled','disabled');
-					$("#direccion").attr('disabled','disabled');
-					$("#barrio").attr('disabled','disabled');
-					$("#numfijo").attr('disabled','disabled');
-					$("#numcelular").attr('disabled','disabled');
-					$("#email").attr('disabled','disabled');
-					$("#fecnaci").attr('disabled','disabled');
-					$("#painace").attr('disabled','disabled');
-					$("#ciunace").attr('disabled','disabled');
-					$("#tiprh").attr('disabled','disabled');
-					$("#sede").attr('disabled','disabled');
-					$("#grado").attr('disabled','disabled');
-					$("#jornada").attr('disabled','disabled');
-					$("#etnia").attr('disabled','disabled');
-					$("#checksisben").attr('disabled','disabled');
-					$("#sisnvl").attr('disabled','disabled');
-					$("#eps").attr('disabled','disabled');
-					$("#prepagada").attr('disabled','disabled');
-					$("#segvida").attr('disabled','disabled');
-					$("#aseguradora").attr('disabled','disabled');
-					$("#religion").attr('disabled','disabled');
-					$("#ciuproce").attr('disabled','disabled');
-					$("#colproce").attr('disabled','disabled');
-					$("#cobertura").attr('disabled','disabled');
+					// $("#direccion").attr('disabled','disabled');
+					// $("#barrio").attr('disabled','disabled');
+					// $("#numfijo").attr('disabled','disabled');
+					// $("#numcelular").attr('disabled','disabled');
+					// $("#email").attr('disabled','disabled');
+					// $("#fecnaci").attr('disabled','disabled');
+					// $("#painace").attr('disabled','disabled');
+					// $("#ciunace").attr('disabled','disabled');
+					// $("#tiprh").attr('disabled','disabled');
+					// $("#sede").attr('disabled','disabled');
+					// $("#grado").attr('disabled','disabled');
+					// $("#jornada").attr('disabled','disabled');
+					// $("#etnia").attr('disabled','disabled');
+					// $("#checksisben").attr('disabled','disabled');
+					// $("#sisnvl").attr('disabled','disabled');
+					// $("#eps").attr('disabled','disabled');
+					// $("#prepagada").attr('disabled','disabled');
+					// $("#segvida").attr('disabled','disabled');
+					// $("#aseguradora").attr('disabled','disabled');
+					// $("#religion").attr('disabled','disabled');
+					// $("#ciuproce").attr('disabled','disabled');
+					// $("#colproce").attr('disabled','disabled');
+					// $("#cobertura").attr('disabled','disabled');
 					$("#desplaza").attr('disabled','disabled');
 					
 					$("#codest").val(data[2]);
@@ -698,25 +698,25 @@ function GuardarResponsable(){
 					swal(data[1], "", "warning");
 				}else if(data[0] == true){
 					swal(data[1], "", "success");					
-					$("#nomres").attr('disabled','disabled');
-					$("#apelres1").attr('disabled','disabled');
-					$("#apelres2").attr('disabled','disabled');
-					$("#tipdocures").attr('disabled','disabled');
+					// $("#nomres").attr('disabled','disabled');
+					// $("#apelres1").attr('disabled','disabled');
+					// $("#apelres2").attr('disabled','disabled');
+					// $("#tipdocures").attr('disabled','disabled');
 					$("#numdocures").attr('disabled','disabled');
-					$("#tipestciv").attr('disabled','disabled');
-					$("#painaceres").attr('disabled','disabled');
-					$("#direcres").attr('disabled','disabled');
-					$("#fijores").attr('disabled','disabled');
-					$("#celures").attr('disabled','disabled');
-					$("#mailres").attr('disabled','disabled');
-					$("#proferes").attr('disabled','disabled');
-					$("#esperes").attr('disabled','disabled');
-					$("#empreres").attr('disabled','disabled');
-					$("#cargres").attr('disabled','disabled');
-					$("#dirempres").attr('disabled','disabled');
-					$("#telempres").attr('disabled','disabled');
-					$("#exalumres").attr('disabled','disabled');
-					$("#notires").attr('disabled','disabled');
+					// $("#tipestciv").attr('disabled','disabled');
+					// $("#painaceres").attr('disabled','disabled');
+					// $("#direcres").attr('disabled','disabled');
+					// $("#fijores").attr('disabled','disabled');
+					// $("#celures").attr('disabled','disabled');
+					// $("#mailres").attr('disabled','disabled');
+					// $("#proferes").attr('disabled','disabled');
+					// $("#esperes").attr('disabled','disabled');
+					// $("#empreres").attr('disabled','disabled');
+					// $("#cargres").attr('disabled','disabled');
+					// $("#dirempres").attr('disabled','disabled');
+					// $("#telempres").attr('disabled','disabled');
+					// $("#exalumres").attr('disabled','disabled');
+					// $("#notires").attr('disabled','disabled');
 					
 					$("#usrres").val(data[2]);
 					
@@ -825,25 +825,25 @@ function GuardarAcudiente(){
 			if(data[0] == 0){
 				swal(data[1], "", "warning");
 			}else if(data[0] == true){					
-				$("#nomacu").attr('disabled','disabled');
-				$("#apelacu1").attr('disabled','disabled');
-				$("#apelacu2").attr('disabled','disabled');
-				$("#tipdocuacu").attr('disabled','disabled');
+				// $("#nomacu").attr('disabled','disabled');
+				// $("#apelacu1").attr('disabled','disabled');
+				// $("#apelacu2").attr('disabled','disabled');
+				// $("#tipdocuacu").attr('disabled','disabled');
 				$("#numdocuacu").attr('disabled','disabled');
-				$("#tipestciv").attr('disabled','disabled');
-				$("#painaceacu").attr('disabled','disabled');
-				$("#direcacu").attr('disabled','disabled');
-				$("#fijoacu").attr('disabled','disabled');
-				$("#celuacu").attr('disabled','disabled');
-				$("#mailacu").attr('disabled','disabled');
-				$("#profeacu").attr('disabled','disabled');
-				$("#espeacu").attr('disabled','disabled');
-				$("#empreacu").attr('disabled','disabled');
-				$("#cargacu").attr('disabled','disabled');
-				$("#dirempacu").attr('disabled','disabled');
-				$("#telempacu").attr('disabled','disabled');
-				$("#exalumacu").attr('disabled','disabled');
-				$("#notiacu").attr('disabled','disabled');
+				// $("#tipestciv").attr('disabled','disabled');
+				// $("#painaceacu").attr('disabled','disabled');
+				// $("#direcacu").attr('disabled','disabled');
+				// $("#fijoacu").attr('disabled','disabled');
+				// $("#celuacu").attr('disabled','disabled');
+				// $("#mailacu").attr('disabled','disabled');
+				// $("#profeacu").attr('disabled','disabled');
+				// $("#espeacu").attr('disabled','disabled');
+				// $("#empreacu").attr('disabled','disabled');
+				// $("#cargacu").attr('disabled','disabled');
+				// $("#dirempacu").attr('disabled','disabled');
+				// $("#telempacu").attr('disabled','disabled');
+				// $("#exalumacu").attr('disabled','disabled');
+				// $("#notiacu").attr('disabled','disabled');
 				
 				$("#usracu").val(data[2]);
 				swal(data[1], "", "success")
@@ -915,4 +915,37 @@ function ValChCitacion(){
 		$("#obscitacion").attr('disabled','disabled');
 		$("#obscitacion").val("");
 	}			
+};
+
+function ChEstudiante(){
+	$("#responsable").removeAttr('checked');
+	$("#acudiente").removeAttr('checked');
+	
+	$("#liRespo").removeClass("is-active");
+	$("#liAcu").removeClass("is-active");
+	
+	$("#liEst").addClass("is-active");
+	$("#estudiante").attr('checked','checked');
+};
+
+function ChResponsable(){
+	$("#estudiante").removeAttr('checked');
+	$("#acudiente").removeAttr('checked');
+	
+	$("#liEst").removeClass("is-active");
+	$("#liAcu").removeClass("is-active");
+	
+	$("#liRespo").addClass("is-active");
+	$("#responsable").attr('checked','checked');
+};
+
+function ChAcudiente(){
+	$("#responsable").removeAttr('checked');
+	$("#estudiante").removeAttr('checked');
+	
+	$("#liRespo").removeClass("is-active");
+	$("#liEst").removeClass("is-active");
+	
+	$("#liAcu").addClass("is-active");
+	$("#acudiente").attr('checked','checked');
 };

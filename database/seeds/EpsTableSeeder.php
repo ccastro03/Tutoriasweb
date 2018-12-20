@@ -31,7 +31,7 @@ class EpsTableSeeder extends Seeder
 		
         $eps = new Eps();
         $eps->codigo = '04';
-        $eps->nombre = 'Confenalco';
+        $eps->nombre = 'Comfenalco';
         $eps->save();
 		
         $eps = new Eps();

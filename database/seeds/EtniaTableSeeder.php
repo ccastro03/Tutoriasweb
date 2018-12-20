@@ -37,11 +37,6 @@ class EtniaTableSeeder extends Seeder
         $etnia = new Etnias();
         $etnia->codigo = '05';
         $etnia->nombre = 'Indígena';
-        $etnia->save();	
-
-        $etnia = new Etnias();
-        $etnia->codigo = '06';
-        $etnia->nombre = 'Otra';
         $etnia->save();		
     }
 }

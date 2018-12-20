@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
+use PHPMailer\PHPMailer;
 
 class InscripcionController extends Controller
 {
@@ -112,6 +113,10 @@ class InscripcionController extends Controller
 			'cod_religion' => $ArrDatos['religion'],
 			'segurovida' => $ArrDatos['segvida'],
 			'asegurador' => $ArrDatos['aseguradora'],
+			'otra_eps' => $ArrDatos['otra_eps'],
+			'otra_prepagada' => $ArrDatos['aseguradora'],
+			'otra_asegurador' => $ArrDatos['aseguradora'],
+			'otra_religion' => $ArrDatos['aseguradora'],
 			'nuevo' => 'S',
 			'cod_usuario' => $usuario,
 			'cod_rol' => '03' //Rol estudiante
@@ -346,4 +351,27 @@ class InscripcionController extends Controller
         return $pdf->stream('Reporte Inscripcion'.'.pdf');
 		// return view('admin.reportes.reporte', ['estudiante' => ($estudiante),'responsable' => ($responsable),'acudiente' => ($acudiente)]);
 	}	
+	
+	// public function enviarCorreo(){
+        // $text = 'Hello Mail';
+		// $mail = new PHPMailer\PHPMailer(); // create a n
+		
+        // $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+        // $mail->SMTPAuth = true; // authentication enabled
+        // $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+        // $mail->Host = "smtp.gmail.com";
+        // $mail->Port  = 587; // or 587
+        // $mail->IsHTML(true);
+        // $mail->Username = "carlitosa03@gmail.com";
+        // $mail->Password = "hptasperros95*";
+        // $mail->SetFrom("carlitosa03@gmail.com", 'Prueba TW');
+        // $mail->Subject = "Test Subject";
+        // $mail->Body    = $text;
+        // $mail->AddAddress("castroagudeloc@gmail.com", "Carlos Castro Agudelo");
+        // if ($mail->Send()) {
+            // return 'Email Sended Successfully \n'.$mail->Send();
+        // } else {
+            // return 'Failed to Send Email';
+        // }
+    // }	
 }

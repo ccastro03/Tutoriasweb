@@ -39,12 +39,16 @@ class CreateEstudiantesTable extends Migration
 			$table->string('sisben',1)->nullable();
 			$table->string('nvlsisben',1)->nullable();
 			$table->string('cod_eps',3)->nullable();
+			$table->string('otra_eps')->nullable();
 			$table->string('cod_prepagada',4)->nullable();
+			$table->string('otra_prepagada')->nullable();
 			$table->string('cod_ciud_proced',8)->nullable();
 			$table->string('cole_proced',200)->nullable();
 			$table->string('cod_religion',2)->nullable();
+			$table->string('otra_religion')->nullable();
 			$table->string('segurovida',1)->nullable();
 			$table->string('asegurador',4)->nullable();
+			$table->string('otra_asegurador')->nullable();
 			$table->string('matriculado',1)->nullable();
 			$table->date('fechamatri')->nullable();
 			$table->string('foliomatri',6)->nullable();

@@ -1,6 +1,11 @@
 $(function() {
 	$("#sisnvl").attr('disabled','disabled');
-	$("#aseguradora").attr('disabled','disabled');		
+	$("#aseguradora").attr('disabled','disabled');
+	
+	$("#oteps").attr('disabled','disabled');
+	$("#otprepagada").attr('disabled','disabled');
+	$("#otaseguradora").attr('disabled','disabled');
+	$("#otreligion").attr('disabled','disabled');
 });
 	
 function ValidaSisben(){
@@ -8,10 +13,17 @@ function ValidaSisben(){
 		$("#sisnvl").removeAttr('disabled');
 		$("#eps").attr('disabled','disabled');
 		$("#prepagada").attr('disabled','disabled');
+		$("#eps").val('');
+		$("#prepagada").val('');
+		$("#oteps").attr('disabled','disabled');
+		$("#oteps").val('');
+		$("#otprepagada").attr('disabled','disabled');
+		$("#otprepagada").val('');		
 	}else{
 		$("#sisnvl").attr('disabled','disabled');
 		$("#eps").removeAttr('disabled');
 		$("#prepagada").removeAttr('disabled');
+		$("#sisnvl").val('');
 	}			
 };
 
@@ -20,8 +32,59 @@ function ValidaSegVida(){
 		$("#aseguradora").removeAttr('disabled');
 	}else{
 		$("#aseguradora").attr('disabled','disabled');
+		$("#aseguradora").val('');
+		$("#otaseguradora").attr('disabled','disabled');
+		$("#otaseguradora").val('');		
 	}			
 };	
+
+function ValidaOtEps(){
+	var eps = $("#eps").val();
+	
+	if(eps == "01"){ 
+		$("#oteps").removeAttr('disabled');
+		$("#oteps").focus();
+	}else{
+		$("#oteps").attr('disabled','disabled');
+		$("#oteps").val('');
+	}			
+};
+
+function ValidaOtPrepagada(){
+	var prepagada = $("#prepagada").val();
+	
+	if(prepagada == "01"){ 
+		$("#otprepagada").removeAttr('disabled');
+		$("#otprepagada").focus();
+	}else{
+		$("#otprepagada").attr('disabled','disabled');
+		$("#otprepagada").val('');
+	}			
+};
+
+function ValidaOtAsegura(){
+	var aseguradora = $("#aseguradora").val();
+	
+	if(aseguradora == "16"){ 
+		$("#otaseguradora").removeAttr('disabled');
+		$("#otaseguradora").focus();
+	}else{
+		$("#otaseguradora").attr('disabled','disabled');
+		$("#otaseguradora").val('');
+	}			
+};
+
+function ValidaOtReli(){
+	var religion = $("#religion").val();
+	
+	if(religion == "04"){ 
+		$("#otreligion").removeAttr('disabled');
+		$("#otreligion").focus();
+	}else{
+		$("#otreligion").attr('disabled','disabled');
+		$("#otreligion").val('');
+	}			
+};
 
 function GuardarEstudiante(){
 	var contError = 0;
@@ -48,8 +111,8 @@ function GuardarEstudiante(){
 	var fecha_nace = NaceYear+"/"+NaceMes+"/"+NaceDia;
 	/* **************** */
 	
-	var painace = $("#painace").attr("attr-value");
-	var ciunace = $("#ciunace").attr("attr-value");
+	var vlpainace = $("#painace").val();
+	var vlciunace = $("#ciunace").val();
 	var tiprh = $("#tiprh").val();
 	var sede = $("#sede").val();
 	var grado = $("#grado").val();
@@ -66,6 +129,11 @@ function GuardarEstudiante(){
 	var colproce = $("#colproce").val();
 	var chcobertura = $("#cobertura").is(':checked');
 	var chdesplaza = $("#desplaza").is(':checked');
+	
+	var otra_eps = $("#oteps").val();
+	var otra_prepagada = $("#otprepagada").val();
+	var otra_asegurador = $("#otaseguradora").val();
+	var otra_religion = $("#otreligion").val();	
 	
 	if(chsisben == false){
 		var sisben = "N";
@@ -159,21 +227,23 @@ function GuardarEstudiante(){
 	}else{
 		$("#ErrFecnace").attr('hidden','hidden');
 	}
-	if(painace == ""){
+	if(vlpainace == ""){
 		contError += 1;
 		Identifi = "#painace";
 		Errores += "Debe seleccionar un pais valido!\n"
 		$("#ErrPainace").removeAttr('hidden');
 	}else{
 		$("#ErrPainace").attr('hidden','hidden');
+		var painace = $("#painace").attr("attr-value");
 	}
-	if(ciunace == ""){
+	if(vlciunace == ""){
 		contError += 1;
 		Identifi = "#ciunace";
 		Errores += "Debe seleccionar una ciudad valida!\n"
 		$("#ErrCiunace").removeAttr('hidden');
 	}else{
 		$("#ErrCiunace").attr('hidden','hidden');
+		var ciunace = $("#ciunace").attr("attr-value");
 	}
 	if(tiprh == ""){
 		contError += 1;
@@ -262,6 +332,42 @@ function GuardarEstudiante(){
 		$("#ErrColproce").removeAttr('hidden');
 	}else{
 		$("#ErrColproce").attr('hidden','hidden');
+	}
+	
+	if((eps == "01") && (otra_eps == "")){
+		contError += 1;
+		Identifi = "#oteps";
+		Errores += "Debe digitar una eps valida!\n"
+		$("#Erroteps").removeAttr('hidden');
+	}else{
+		$("#Erroteps").attr('hidden','hidden');
+	}
+	
+	if((prepagada == "01") && (otra_prepagada == "")){
+		contError += 1;
+		Identifi = "#otprepagada";
+		Errores += "Debe digitar una prepagada valida!\n"
+		$("#Errotprepagada").removeAttr('hidden');
+	}else{
+		$("#Errotprepagada").attr('hidden','hidden');
+	}	
+	
+	if((aseguradora == "16") && (otra_asegurador == "")){ 
+		contError += 1;
+		Identifi = "#otaseguradora";
+		Errores += "Debe digitar una aseguradora valida!\n"
+		$("#Errotaseguradora").removeAttr('hidden');
+	}else{
+		$("#Errotaseguradora").attr('hidden','hidden');
+	}
+
+	if((religion == "04") && (otra_religion == "")){ 
+		contError += 1;
+		Identifi = "#otreligion";
+		Errores += "Debe digitar una religion valida!\n"
+		$("#Errotreligion").removeAttr('hidden');
+	}else{
+		$("#Errotreligion").attr('hidden','hidden');
 	}		
 			
 	var ArrDatos = {
@@ -295,7 +401,11 @@ function GuardarEstudiante(){
 		"colproce":colproce,
 		"cobertura":cobertura,
 		"desplaza":desplaza,
-	};
+		"otra_eps":otra_eps,
+		"otra_prepagada":otra_prepagada,
+		"otra_asegurador":otra_asegurador,
+		"otra_religion":otra_religion,
+	};	
 	
 	if(contError == 0){
 		$.ajax({

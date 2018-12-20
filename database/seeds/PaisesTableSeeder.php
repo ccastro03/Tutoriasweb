@@ -42,6 +42,11 @@ class PaisesTableSeeder extends Seeder
         $pais = new Paises();
         $pais->codigo = 'AL';
         $pais->nombre = 'Albania';
+        $pais->save();
+
+        $pais = new Paises();
+        $pais->codigo = 'VE';
+        $pais->nombre = 'Venezuela';
         $pais->save();		
     }
 }

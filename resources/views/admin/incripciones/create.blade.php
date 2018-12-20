@@ -43,7 +43,7 @@
 						</div>
 
 						<div class="column is-one-fifth" style="width: 155px">
-							<label class="label">Genero</label>
+							<label class="label">Género</label>
 							<div class="select">
 								<select name="tipgenero" id="tipgenero">
 									<option value="">Seleccione</option>
@@ -168,7 +168,7 @@
 									<p class="help is-danger" id="ErrSede" hidden>Campo obligatorio *</p>
 								</div>
 
-								<div class="column is-one-fifth" style="width: 105px">
+								<div class="column is-one-fifth" style="width: 150px">
 									<label class="label">Grado</label>
 									<div class="select">
 										<select name="grado" id="grado">
@@ -198,7 +198,7 @@
 					</div>
 					
 					<div class="columns">
-						<div class="column is-one-fifth" style="width: 150px">
+						<div class="column is-one-fifth" style="width: 190px">
 							<label class="label">Etnia</label>
 							<div class="select">
 								<select name="etnia" id="etnia">
@@ -232,7 +232,7 @@
 						<div class="column is-one-fifth" style="width: 150px">
 							<label class="label">EPS</label>
 							<div class="select">
-								<select name="eps" id="eps">
+								<select name="eps" id="eps" onchange="ValidaOtEps();">
 									<option value="">Seleccione</option>
 									@foreach($eps->all() as $ep)
 										<option value="{{ $ep->codigo }}">{{ $ep->nombre }}</option>
@@ -242,10 +242,16 @@
 							<p class="help is-danger" id="ErrEps" hidden>Campo obligatorio *</p>
 						</div>
 						
+						<div class="column is-one-fifth">
+							<label class="label">&nbsp;</label>
+							<input type="text" name="oteps" id="oteps" class="input {{ $errors->has('ciunace') ? ' is-danger' : '' }}">
+							<p class="help is-danger" id="Erroteps" hidden>Campo obligatorio *</p>
+						</div>						
+						
 						<div class="column is-one-fifth" style="width: 150px">
 							<label class="label">Prepagada</label>
 							<div class="select">
-								<select name="prepagada" id="prepagada">
+								<select name="prepagada" id="prepagada" onchange="ValidaOtPrepagada();">
 									<option value="">Ninguna</option>
 									@foreach($prepagadas->all() as $prepagada)
 										<option value="{{ $prepagada->codigo }}">{{ $prepagada->nombre }}</option>
@@ -253,7 +259,15 @@
 								</select>
 							</div>						
 						</div>
-
+						
+						<div class="column is-one-fifth">
+							<label class="label">&nbsp;</label>
+							<input type="text" name="otprepagada" id="otprepagada" class="input {{ $errors->has('ciunace') ? ' is-danger' : '' }}">
+							<p class="help is-danger" id="Errotprepagada" hidden>Campo obligatorio *</p>
+						</div>						
+					</div>
+					
+					<div class="columns">
 						<div class="column is-one-fifth" style="width: 128px">
 							<label class="label">Seguro vida</label>
 							<input type="checkbox" id="segvida" style="margin-left: 53px;" onclick="ValidaSegVida()">
@@ -262,7 +276,7 @@
 						<div class="column is-one-fifth" style="width: 240px">
 							<label class="label">Aseguradora</label>
 							<div class="select">
-								<select name="aseguradora" id="aseguradora">
+								<select name="aseguradora" id="aseguradora" onchange="ValidaOtAsegura();">
 									<option value="">Ninguno</option>
 									@foreach($aseguradoras->all() as $aseguradora)
 										<option value="{{ $aseguradora->codigo }}">{{ $aseguradora->nombre }}</option>
@@ -271,11 +285,17 @@
 							</div>
 							<p class="help is-danger" id="ErrAsegura" hidden>Campo obligatorio *</p>							
 						</div>
-
-						<div class="column is-one-fifth" style="width: 150px">
+						
+						<div class="column is-one-fifth">
+							<label class="label">&nbsp;</label>
+							<input type="text" name="otaseguradora" id="otaseguradora" class="input {{ $errors->has('ciunace') ? ' is-danger' : '' }}">
+							<p class="help is-danger" id="Errotaseguradora" hidden>Campo obligatorio *</p>
+						</div>						
+						
+						<div class="column is-one-fifth" style="width: 165px">
 							<label class="label">Religion</label>
 							<div class="select">
-								<select name="religion" id="religion">
+								<select name="religion" id="religion" onchange="ValidaOtReli();">
 									<option value="">Ninguna</option>
 									@foreach($religiones->all() as $religion)
 										<option value="{{ $religion->codigo }}">{{ $religion->nombre }}</option>
@@ -284,6 +304,12 @@
 							</div>
 							<p class="help is-danger" id="ErrReligion" hidden>Campo obligatorio *</p>						
 						</div>
+						
+						<div class="column is-one-fifth">
+							<label class="label">&nbsp;</label>
+							<input type="text" name="otreligion" id="otreligion" class="input {{ $errors->has('ciunace') ? ' is-danger' : '' }}">
+							<p class="help is-danger" id="Errotreligion" hidden>Campo obligatorio *</p>
+						</div>						
 					</div>
 					
 					<div class="columns">						
@@ -297,7 +323,8 @@
 							<label class="label">Colegio procedencia</label>
 							<input type="text" name="colproce" id="colproce" class="input {{ $errors->has('colproce') ? ' is-danger' : '' }}" placeholder="Ingrese la procedencia">
 							<p class="help is-danger" id="ErrColproce" hidden>Campo obligatorio *</p>
-						</div>
+						</div>						
+
 						<div class="column is-one-fifth" style="width: 164px">
 							<label class="label">Tiene cobertura?</label>
 							<input type="checkbox" id="cobertura" style="margin-left: 65px;">						
@@ -306,7 +333,7 @@
 						<div class="column is-one-fifth" style="width: 164px">
 							<label class="label">Es desplazado?</label>
 							<input type="checkbox" id="desplaza" style="margin-left: 65px;">						
-						</div>						
+						</div>
 					</div>
 					<hr>
 					<a class="button is-link is-medium is-outlined" onclick="GuardarEstudiante()">Guardar</a>

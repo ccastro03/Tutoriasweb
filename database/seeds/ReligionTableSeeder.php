@@ -16,7 +16,7 @@ class ReligionTableSeeder extends Seeder
     {	
         $religion = new Religion();
         $religion->codigo = '01';
-        $religion->nombre = 'Catolica';
+        $religion->nombre = 'Católica';
         $religion->save();
 		
         $religion = new Religion();

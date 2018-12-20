@@ -1146,7 +1146,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(94);
+module.exports = __webpack_require__(97);
 
 
 /***/ }),
@@ -1187,7 +1187,7 @@ Vue.component('tabla-tpdocumentos', __webpack_require__(82));
 Vue.component('tabla-generos', __webpack_require__(85));
 Vue.component('tabla-profesiones', __webpack_require__(88));
 Vue.component('tabla-especialidades', __webpack_require__(91));
-Vue.component('tabla-estcivil', __webpack_require__(99));
+Vue.component('tabla-estcivil', __webpack_require__(94));
 
 var app = new Vue({
   el: '#appPrueba'
@@ -49384,24 +49384,14 @@ if (false) {
 
 /***/ }),
 /* 94 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(100)
+var __vue_script__ = __webpack_require__(95)
 /* template */
-var __vue_template__ = __webpack_require__(101)
+var __vue_template__ = __webpack_require__(96)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49440,7 +49430,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 100 */
+/* 95 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49555,7 +49545,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 101 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49736,6 +49726,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-28653739", module.exports)
   }
 }
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

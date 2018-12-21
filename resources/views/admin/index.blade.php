@@ -37,7 +37,7 @@
 			<div class="tile is-child notification">
 				<p class="title">Información Inscripciones</p>
 				<div class="content" id="appPrueba">
-					<tabla-inscripciones></tabla-inscripciones>
+					<tabla-inscripindex></tabla-inscripindex>
 				</div>
 			</div>
 		</div>

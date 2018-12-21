@@ -28,6 +28,7 @@ Vue.component('tabla-etnias', require('./components/TableEtniasComponent.vue'));
 Vue.component('tabla-religiones', require('./components/TableReligionComponent.vue'));
 Vue.component('tabla-aseguradoras', require('./components/TableAseguradoraComponent.vue'));
 Vue.component('tabla-inscripciones', require('./components/TableInscripcionComponent.vue'));
+Vue.component('tabla-inscripindex', require('./components/TableInscripIndexComponent.vue'));
 Vue.component('tabla-tpdocumentos', require('./components/TableTiposDocumentosComponent.vue'));
 Vue.component('tabla-generos', require('./components/TableGenerosComponent.vue'));
 Vue.component('tabla-profesiones', require('./components/TableProfesionesComponent.vue'));

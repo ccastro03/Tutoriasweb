@@ -40,6 +40,10 @@ class InscripcionController extends Controller
     public function actualizar(Request $request)
     {		
 		$ArrDatos = $_GET["ArrDatos"];
+		$estadocitares = "";
+		$estadocitaacu = "";
+		$estadoaprores = "";
+		$estadoaproacu = "";
 		
 		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $ArrDatos['codEstud'])->where('cod_rol', '=', '04')->get();
 		$acudiente = DB::table('responsables')->where('cod_estudiante', '=', $ArrDatos['codEstud'])->where('cod_rol', '=', '05')->get();
@@ -69,17 +73,17 @@ class InscripcionController extends Controller
 					$correo->Port = 25;
 
 					$correo->From = $responsable[0]->email; // Desde donde enviamos (Para mostrar)
-					$correo->SetFrom("castroagudeloc@gmail.com", "ccastro03");
-					$correo->AddAddress("carlitosa03@gmail.com", "Hola"); 
+					$correo->SetFrom("castroagudeloc@gmail.com", "Colegio XYZ");
+					$correo->AddAddress($responsable[0]->nombre, $responsable[0]->nombre." ".$responsable[0]->apellido1." ".$responsable[0]->apellido2);
 					$correo->IsHTML(true);
-					$correo->Subject = $responsable[0]->nombre." ".$responsable[0]->apellido1." ".$responsable[0]->apellido2; //Asunto
+					$correo->Subject = "Citacion entrevista colegio por la inscripción del estudiante"; //Asunto
 					//Cuerpo del Mensaje
 					$correo->MsgHTML($ArrDatos['obscitacion']);
 					
 					// $correo->SMTPDebug = 4;
 					
 					if(!$correo->Send()) {
-						$estadocitares = "Hubo un error";
+						$estadocitares = "Hubo un error en el responsable";
 					} else {
 						$estadocitares = "Notificacion enviada correctamente al responsable";
 					};
@@ -99,17 +103,17 @@ class InscripcionController extends Controller
 					$correo->Port = 25;
 
 					$correo->From = $acudiente[0]->email; // Desde donde enviamos (Para mostrar)
-					$correo->SetFrom("castroagudeloc@gmail.com", "ccastro03");
-					$correo->AddAddress("carlitosa03@gmail.com", "Hola"); 
+					$correo->SetFrom("castroagudeloc@gmail.com", "Colegio XYZ");
+					$correo->AddAddress($acudiente[0]->email, $acudiente[0]->nombre." ".$acudiente[0]->apellido1." ".$acudiente[0]->apellido2);
 					$correo->IsHTML(true);
-					$correo->Subject = $acudiente[0]->nombre." ".$acudiente[0]->apellido1." ".$acudiente[0]->apellido2; //Asunto
+					$correo->Subject = "Citacion entrevista colegio por la inscripción del estudiante "; //Asunto
 					//Cuerpo del Mensaje
 					$correo->MsgHTML($ArrDatos['obscitacion']);
 					
 					// $correo->SMTPDebug = 4;
 					
 					if(!$correo->Send()) {
-						$estadocitaacu = "Hubo un error";
+						$estadocitaacu = "Hubo un error en el acudiente";
 					} else {
 						$estadocitaacu = "Notificacion enviada correctamente al acudiente";
 					};
@@ -118,9 +122,76 @@ class InscripcionController extends Controller
 				$estadocitaacu = "";
 			}				
 		};
+		
+		'aprobada' => $ArrDatos['chaprob'],
+		'obs_aprueba' => $ArrDatos['obsaprobada'],
+		
+		if($ArrDatos['aprobada'] == "S" && $ArrDatos['obsaprobada'] != ""){
+			if(count($responsable) != 0){
+				if($responsable[0]->notifica == "S"){
+					$correo = new PHPMailer\PHPMailer();
+
+					$correo->IsSMTP();
+					$correo->SMTPAuth = true;
+					$correo->SMTPSecure = 'tls';
+					$correo->Host = "smtp.gmail.com";
+					$correo->Username = "carlitosa03@gmail.com";
+					$correo->Password = "hptasperros95*";
+					$correo->Port = 25;
+
+					$correo->From = $responsable[0]->email; // Desde donde enviamos (Para mostrar)
+					$correo->SetFrom("castroagudeloc@gmail.com", "Colegio XYZ");
+					$correo->AddAddress($responsable[0]->nombre, $responsable[0]->nombre." ".$responsable[0]->apellido1." ".$responsable[0]->apellido2);
+					$correo->IsHTML(true);
+					$correo->Subject = "Aprobacion de la inscripción del estudiante "; //Asunto
+					//Cuerpo del Mensaje
+					$correo->MsgHTML($ArrDatos['obsaprobada']);
+					
+					// $correo->SMTPDebug = 4;
+					
+					if(!$correo->Send()) {
+						$estadoaprores = "Hubo un error en el responsable";
+					} else {
+						$estadoaprores = "Notificacion enviada correctamente al responsable";
+					};
+				};
+			}
+			
+			if(count($acudiente) != 0){
+				if($acudiente[0]->notifica == "S"){
+					$correo = new PHPMailer\PHPMailer();
+
+					$correo->IsSMTP();
+					$correo->SMTPAuth = true;
+					$correo->SMTPSecure = 'tls';
+					$correo->Host = "smtp.gmail.com";
+					$correo->Username = "carlitosa03@gmail.com";
+					$correo->Password = "hptasperros95*";
+					$correo->Port = 25;
+
+					$correo->From = $acudiente[0]->email; // Desde donde enviamos (Para mostrar)
+					$correo->SetFrom("castroagudeloc@gmail.com", "Colegio XYZ");
+					$correo->AddAddress($acudiente[0]->email, $acudiente[0]->nombre." ".$acudiente[0]->apellido1." ".$acudiente[0]->apellido2);
+					$correo->IsHTML(true);
+					$correo->Subject = "Aprobacion de la inscripción del estudiante "; //Asunto
+					//Cuerpo del Mensaje
+					$correo->MsgHTML($ArrDatos['obscitacion']."Los datos para el acceso del estudiante son: ");
+					
+					// $correo->SMTPDebug = 4;
+					
+					if(!$correo->Send()) {
+						$estadoaproacu = "Hubo un error en el acudiente";
+					} else {
+						$estadoaproacu = "Notificacion enviada correctamente al acudiente";
+					};
+				};
+			}else{
+				$estadocitaacu = "";
+			}				
+		};		
 		/* ************************ */
 		
-		$Respuesta = array($inscrip, $estadocitares, $estadocitaacu);
+		$Respuesta = array($inscrip, $estadocitares, $estadocitaacu, $estadoaprores, $estadoaproacu);
 		return response()->json($Respuesta);
     }	
 

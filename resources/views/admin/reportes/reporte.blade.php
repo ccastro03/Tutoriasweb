@@ -1,7 +1,7 @@
 <html>
 <head>
 	@foreach($estudiante->all() as $estu)
-		<title>Reporte Inscripcion {{ $estu->nombre }} {{ $estu->apellido1 }}</title>
+		<title>Reporte Inscripcion {{ strtoupper($estu->nombre) }} {{ strtoupper($estu->apellido1) }}</title>
 	@endforeach
 	
 	<style>
@@ -36,23 +36,23 @@
 		<tbody>
 			@foreach($estudiante->all() as $estu)
 			<tr>
-				<td>{{ $estu->nombre }}</td>
-				<td>{{ $estu->apellido1 }}</td>
-				<td>{{ $estu->apellido2 }}</td>
+				<td>{{ strtoupper($estu->nombre) }}</td>
+				<td>{{ strtoupper($estu->apellido1) }}</td>
+				<td>{{ strtoupper($estu->apellido2) }}</td>
 
 				@foreach($generos->all() as $genero)
 					@if ($genero->codigo === $estu->genero)
-						<td>{{ $genero->nombre }}</td>
+						<td>{{ strtoupper($genero->nombre) }}</td>
 					@endif
 				@endforeach
 				
 				@foreach($tipodocumentos->all() as $tpdocu)
 					@if ($tpdocu->codigo === $estu->tipodocumento)
-						<td>{{ $tpdocu->nombre }}</td>
+						<td>{{ strtoupper($tpdocu->nombre) }}</td>
 					@endif
 				@endforeach
 		
-				<td>{{ $estu->numdocumento }}</td>
+				<td>{{ strtoupper($estu->numdocumento) }}</td>
 			</tr>
 			@endforeach
 		</tbody>
@@ -70,16 +70,16 @@
 		<tbody>
 			@foreach($estudiante->all() as $estu)
 			<tr>
-				<td>{{ $estu->direccion }}</td>
+				<td>{{ strtoupper($estu->direccion) }}</td>
 				@foreach($barrios->all() as $barrio)
 					@if ($barrio->cod_barrio === $estu->barrio)
-						<td>{{ $barrio->nombre }}</td>
+						<td>{{ strtoupper($barrio->nombre) }}</td>
 					@endif
 				@endforeach
-				<td>{{ $estu->numtelefono }}</td>
-				<td>{{ $estu->numcelular }}</td>
-				<td>{{ $estu->email }}</td>
-				<td>{{ $estu->fechanace }}</td>
+				<td>{{ strtoupper($estu->numtelefono) }}</td>
+				<td>{{ strtoupper($estu->numcelular) }}</td>
+				<td>{{ ($estu->email) }}</td>
+				<td>{{ strtoupper($estu->fechanace) }}</td>
 			</tr>
 			@endforeach
 		</tbody>
@@ -99,13 +99,13 @@
 			<tr>
 				@foreach($paises->all() as $pais)
 					@if ($pais->codigo === $estu->cod_pais_nace)
-						<td>{{ $pais->nombre }}</td>
+						<td>{{ strtoupper($pais->nombre) }}</td>
 					@endif
 				@endforeach
 				
 				@foreach($ciudades->all() as $ciudad)
 					@if ($ciudad->cod_ciudad === $estu->cod_ciu_nace)
-						<td>{{ $ciudad->nombre }}</td>
+						<td>{{ strtoupper($ciudad->nombre) }}</td>
 					@endif
 				@endforeach
 				
@@ -113,7 +113,7 @@
 				
 				@foreach($sedes->all() as $sede)
 					@if ($sede->codigo === $estu->sede)
-						<td>{{ $sede->nombre }}</td>
+						<td>{{ strtoupper($sede->nombre) }}</td>
 					@endif
 				@endforeach
 				
@@ -121,7 +121,7 @@
 				
 				@foreach($jornadas->all() as $jornada)
 					@if ($jornada->codigo === $estu->jornada)
-						<td>{{ $jornada->nombre }}</td>
+						<td>{{ ($jornada->nombre) }}</td>
 					@endif
 				@endforeach
 			</tr>
@@ -408,5 +408,14 @@
 			@endforeach
 		</tbody>		
 	</table>
+	
+	<br>
+	<div style="font-family: arial, sans-serif; font-size: 12px;">
+		<label>Texto expresando el porque sale del colegio <b>{{ $estu->cole_proced }}</b> y desea ingresar a nuestra institución</label>
+		@foreach($estudiante->all() as $estu)
+			<p><b>{{ $estu->observacion }}</b></p>
+		@endforeach
+	</div>
+	
 </body>
 </html>

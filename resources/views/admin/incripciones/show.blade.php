@@ -3,7 +3,7 @@
 @section('content')
 <div class="column is-12">
   <div class="panel">
-    <p class="panel-heading">Inscripción de <b>{{ $estudiante->nombre }} {{ $estudiante->apellido1 }} {{ $estudiante->apellido2 }}</b></p>
+    <p class="panel-heading">Inscripción de <b>{{ strtoupper($estudiante->nombre) }} {{ strtoupper($estudiante->apellido1) }} {{ strtoupper($estudiante->apellido2) }}</b></p>
     <div class="panel-block">
 		<div class="columns">
 			<div class="column is-one-quarter">
@@ -37,7 +37,7 @@
 			
 			<div class="column is-one-third">
 				<label class="label">Observacion citacion</label>
-				<textarea class="textarea has-fixed-size" id="obscitacion" disabled>{{ $inscripciones->citacion }}</textarea>
+				<textarea class="textarea has-fixed-size" id="obscitacion" disabled>{{ $inscripciones->obs_cita }}</textarea>
 			</div>			
 			
 			<div class="column is-one-fifth" style="width: 165px">
@@ -47,7 +47,7 @@
 			
 			<div class="column is-one-third">
 				<label class="label">Observacion aprobada</label>
-				<textarea class="textarea has-fixed-size" id="obsaprobada" disabled>{{ $inscripciones->aprobada }}</textarea>
+				<textarea class="textarea has-fixed-size" id="obsaprobada" disabled>{{ $inscripciones->obs_aprueba }}</textarea>
 			</div>			
 		</div>
 	</div>

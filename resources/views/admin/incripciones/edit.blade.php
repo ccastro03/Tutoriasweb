@@ -5,10 +5,12 @@
 	<div class="panel">
 		<p class="panel-heading">Editar Inscripción de <b>{{ $estudiante->nombre }} {{ $estudiante->apellido1 }} {{ $estudiante->apellido2 }}</b></p>
 		<div class="panel-block">
-			<form class="long-form" action="{{ route('incripciones.update', $inscripciones->codigo) }}" method="post">
+			<form class="long-form">
 				<div class="columns">
 					<div class="column is-one-quarter">
 						<label class="label">Estudiante</label>
+						<input type="text" id="codInscrip" value="{{ $inscripciones->codigo }}" hidden>
+						<input type="text" id="codEstud" value="{{ $inscripciones->numdocest }}" hidden>
 						<input type="text" id="estudiante" value="{{ $estudiante->nombre }} {{ $estudiante->apellido1 }} {{ $estudiante->apellido2 }}" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" disabled>
 					</div>
 					
@@ -48,7 +50,7 @@
 					
 					<div class="column is-one-third">
 						<label class="label">Observación citación</label>
-						<textarea class="textarea has-fixed-size" id="obscitacion">{{ $inscripciones->citacion }}</textarea>
+						<textarea class="textarea has-fixed-size" id="obscitacion">{{ $inscripciones->obs_cita }}</textarea>
 					</div>					
 					
 					<div class="column is-one-fifth" style="width: 115px">
@@ -58,13 +60,13 @@
 
 					<div class="column is-one-third">
 						<label class="label">Observación aprobada</label>
-						<textarea class="textarea has-fixed-size" id="obsaprobada">{{ $inscripciones->aprobada }}</textarea>
+						<textarea class="textarea has-fixed-size" id="obsaprobada">{{ $inscripciones->obs_aprueba }}</textarea>
 					</div>					
 				</div>
 
 				<hr>
         
-				<button type="submit" class="button is-link is-medium is-outlined">Guardar</button>
+				<a class="button is-link is-medium is-outlined" onclick="UpdInscripcion()">Guardar</a>
 				<a href="{{ url('incripciones') }}" class="button is-medium is-link is-outlined">Salir</a>
 			</form>      
 		</div>   

@@ -97,7 +97,7 @@
 
 						<div class="column is-one-fifth" style="width: 157px">
 							<label class="label"># Teléfono</label>
-							<input type="text" name="numfijo" id="numfijo" class="input {{ $errors->has('numfijo') ? ' is-danger' : '' }}" placeholder="Ingrese el teléfono">
+							<input type="number" name="numfijo" id="numfijo" class="input {{ $errors->has('numfijo') ? ' is-danger' : '' }}" placeholder="Ingrese el teléfono">
 							<p class="help is-danger" id="ErrNumtel" hidden>Campo obligatorio *</p>
 						</div>
 
@@ -327,7 +327,13 @@
 							<label class="label">Es desplazado?</label>
 							<input type="checkbox" id="desplaza" style="margin-left: 65px;">						
 						</div>
-					</div>
+						
+						<div class="column is-one-third">
+							<p align="left" class="help is-info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Explica brevemente porque el estudiante sale del colegio &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;anterior y desea ingresar a nuestra institución. *</p>						
+							<textarea class="textarea has-fixed-size" id="obsporque"></textarea>
+							<p class="help is-danger" id="Errobsporque" hidden>Campo obligatorio *</p>
+						</div>						
+					</div>					
 					<hr>
 					<a class="button is-link is-medium is-outlined" onclick="GuardarEstudiante()">Guardar</a>
 					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios()">Cancelar</a>
@@ -360,6 +366,7 @@
 							<label class="label">Tipo Documento</label>
 							<div class="select">
 								<select name="tipdocures" id="tipdocures">
+									<option value="">Seleccione</option>
 									@foreach($tipodocumentos->all() as $tpdocu)
 										<option value="{{ $tpdocu->codigo }}">{{ $tpdocu->nombre }}</option>
 									@endforeach
@@ -434,9 +441,15 @@
 						</div>
 						
 						<div class="column is-one-fifth">
+							<label class="label">&nbsp;</label>
+							<input type="text" name="otproferes" id="otproferes" class="input {{ $errors->has('otproferes') ? ' is-danger' : '' }}">
+							<p class="help is-danger" id="Errotproferes" hidden>Campo obligatorio *</p>
+						</div>						
+						
+						<div class="column is-one-fifth">
 							<label class="label">Especialidad</label>
 							<div class="select">
-								<select name="esperes" id="esperes">
+								<select name="esperes" id="esperes" onchange="ValidaOtEsperes();">
 									<option value="">Seleccione</option>
 									@foreach($especialidades->all() as $especialidad)
 										<option value="{{ $especialidad->codigo }}">{{ $especialidad->nombre }}</option>
@@ -446,6 +459,14 @@
 							<p class="help is-danger" id="ErrEsperes" hidden>Campo obligatorio *</p>						
 						</div>
 						
+						<div class="column is-one-fifth">
+							<label class="label">&nbsp;</label>
+							<input type="text" name="otesperes" id="otesperes" class="input {{ $errors->has('otesperes') ? ' is-danger' : '' }}">
+							<p class="help is-danger" id="Errotesperes" hidden>Campo obligatorio *</p>
+						</div>
+					</div>
+					
+					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Empresa</label>
 							<input type="text" name="empreres" id="empreres" class="input {{ $errors->has('empreres') ? ' is-danger' : '' }}" placeholder="Ingrese la empresa">
@@ -457,9 +478,7 @@
 							<input type="text" name="cargres" id="cargres" class="input {{ $errors->has('cargres') ? ' is-danger' : '' }}" placeholder="Ingrese el cargo">
 							<p class="help is-danger" id="ErrCargres" hidden>Campo obligatorio *</p>
 						</div>
-					</div>
-					
-					<div class="columns">
+						
 						<div class="column is-one-fifth">
 							<label class="label">Dirección empresa</label>
 							<input type="text" name="dirempres" id="dirempres" class="input {{ $errors->has('dirempres') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección empresa">
@@ -471,19 +490,11 @@
 							<input type="text" name="telempres" id="telempres" class="input {{ $errors->has('telempres') ? ' is-danger' : '' }}" placeholder="Ingrese el teléfono empresa">
 							<p class="help is-danger" id="ErrTelempres" hidden>Campo obligatorio *</p>
 						</div>
-
+						
 						<div class="column is-one-fifth" style="width: 135px">
 							<label class="label">¿Ex alumno?</label>
 							<input type="checkbox" id="exalumres" style="margin-left: 50px;">						
-						</div>
-						
-						<div class="column is-one-quarter">
-							<label class="label">¿Notificaciones via e-mail?</label>
-							<label class="checkbox">
-								<input type="checkbox" id="notires" style="margin-left: 100px;">
-								
-							</label>
-						</div>
+						</div>						
 						
 						<div class="column is-one-fifth" hidden>
 							<input type="text" id="codest">
@@ -491,8 +502,15 @@
 							<input type="text" id="usrres">
 							<input type="text" id="usracu">
 						</div>
-
-						
+					</div>
+					
+					<div class="columns">
+						<div class="column is-one-quarter">
+							<label class="checkbox">
+								<input type="checkbox" id="notires">
+								<b>¿Notificaciones via e-mail?</b>
+							</label>
+						</div>					
 					</div>
 				
 					<hr>
@@ -605,9 +623,15 @@
 						</div>
 						
 						<div class="column is-one-fifth">
+							<label class="label">&nbsp;</label>
+							<input type="text" name="otprofeacu" id="otprofeacu" class="input {{ $errors->has('otprofeacu') ? ' is-danger' : '' }}">
+							<p class="help is-danger" id="Errotprofeacu" hidden>Campo obligatorio *</p>
+						</div>						
+						
+						<div class="column is-one-fifth">
 							<label class="label">Especialidad</label>
 							<div class="select">
-								<select name="espeacu" id="espeacu">
+								<select name="espeacu" id="espeacu" onchange="ValidaOtEspeacu();">
 									<option value="">Seleccione</option>
 									@foreach($especialidades->all() as $especialidad)
 										<option value="{{ $especialidad->codigo }}">{{ $especialidad->nombre }}</option>
@@ -617,6 +641,14 @@
 							<p class="help is-danger" id="Eracupeacu" hidden>Campo obligatorio *</p>						
 						</div>
 						
+						<div class="column is-one-fifth">
+							<label class="label">&nbsp;</label>
+							<input type="text" name="otespeacu" id="otespeacu" class="input {{ $errors->has('otespeacu') ? ' is-danger' : '' }}">
+							<p class="help is-danger" id="Errotespeacu" hidden>Campo obligatorio *</p>
+						</div>						
+					</div>
+					
+					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Empresa</label>
 							<input type="text" name="empreacu" id="empreacu" class="input {{ $errors->has('empreacu') ? ' is-danger' : '' }}" placeholder="Ingrese nombre empresa">
@@ -628,9 +660,7 @@
 							<input type="text" name="cargacu" id="cargacu" class="input {{ $errors->has('cargacu') ? ' is-danger' : '' }}" placeholder="Ingrese el cargo">
 							<p class="help is-danger" id="ErrCargacu" hidden>Campo obligatorio *</p>
 						</div>
-					</div>
-					
-					<div class="columns">
+						
 						<div class="column is-one-fifth">
 							<label class="label">Dirección empresa</label>
 							<input type="text" name="dirempacu" id="dirempacu" class="input {{ $errors->has('dirempacu') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección empresa">
@@ -647,16 +677,17 @@
 							<label class="label">¿Ex alumno?</label>
 							<input type="checkbox" id="exalumacu" style="margin-left: 50px;">						
 						</div>
-						
+					</div>
+					
+					<div class="columns">
 						<div class="column is-one-quarter">
-							<label class="label">¿Notificaciones via e-mail?</label>
 							<label class="checkbox">
-								<input type="checkbox" id="notiacu" style="margin-left: 100px;">
-								
+								<input type="checkbox" id="notiacu">
+								<b>¿Notificaciones via e-mail?</b>
 							</label>
 						</div>					
 					</div>
-				
+					
 					<hr>
 					<a class="button is-link is-medium is-outlined" onclick="GuardarAcudiente()">Guardar</a>
 					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios()">Cancelar</a>

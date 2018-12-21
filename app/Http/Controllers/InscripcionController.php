@@ -37,9 +37,91 @@ class InscripcionController extends Controller
 		return view('admin.incripciones.edit', ['inscripciones' => $inscripciones[0], 'estudiante' => $estudiante[0], 'sedes' => $sedes]);
     }
 	
-    public function update()
-    {
-        return redirect()->route('admin.incripciones.index');
+    public function actualizar(Request $request)
+    {		
+		$ArrDatos = $_GET["ArrDatos"];
+		
+		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $ArrDatos['codEstud'])->where('cod_rol', '=', '04')->get();
+		$acudiente = DB::table('responsables')->where('cod_estudiante', '=', $ArrDatos['codEstud'])->where('cod_rol', '=', '05')->get();
+		
+		$inscrip = DB::table('inscripciones')->where('codigo', '=', $ArrDatos['codInscrip'])->update([
+		'sede' => $ArrDatos['codsede'],
+		'verificada' => $ArrDatos['chverif'],
+		'citacion' => $ArrDatos['chcita'],
+		'obs_cita' => $ArrDatos['obscitacion'],
+		'aprobada' => $ArrDatos['chaprob'],
+		'obs_aprueba' => $ArrDatos['obsaprobada'],
+		]);
+		
+		/* CORREO PARA LA CITACION */
+		
+		if($ArrDatos['chcita'] == "S" && $ArrDatos['obscitacion'] != ""){
+			if(count($responsable) != 0){
+				if($responsable[0]->notifica == "S"){
+					$correo = new PHPMailer\PHPMailer();
+
+					$correo->IsSMTP();
+					$correo->SMTPAuth = true;
+					$correo->SMTPSecure = 'tls';
+					$correo->Host = "smtp.gmail.com";
+					$correo->Username = "carlitosa03@gmail.com";
+					$correo->Password = "hptasperros95*";
+					$correo->Port = 25;
+
+					$correo->From = $responsable[0]->email; // Desde donde enviamos (Para mostrar)
+					$correo->SetFrom("castroagudeloc@gmail.com", "ccastro03");
+					$correo->AddAddress("carlitosa03@gmail.com", "Hola"); 
+					$correo->IsHTML(true);
+					$correo->Subject = $responsable[0]->nombre." ".$responsable[0]->apellido1." ".$responsable[0]->apellido2; //Asunto
+					//Cuerpo del Mensaje
+					$correo->MsgHTML($ArrDatos['obscitacion']);
+					
+					// $correo->SMTPDebug = 4;
+					
+					if(!$correo->Send()) {
+						$estadocitares = "Hubo un error";
+					} else {
+						$estadocitares = "Notificacion enviada correctamente al responsable";
+					};
+				};
+			}
+			
+			if(count($acudiente) != 0){
+				if($acudiente[0]->notifica == "S"){
+					$correo = new PHPMailer\PHPMailer();
+
+					$correo->IsSMTP();
+					$correo->SMTPAuth = true;
+					$correo->SMTPSecure = 'tls';
+					$correo->Host = "smtp.gmail.com";
+					$correo->Username = "carlitosa03@gmail.com";
+					$correo->Password = "hptasperros95*";
+					$correo->Port = 25;
+
+					$correo->From = $acudiente[0]->email; // Desde donde enviamos (Para mostrar)
+					$correo->SetFrom("castroagudeloc@gmail.com", "ccastro03");
+					$correo->AddAddress("carlitosa03@gmail.com", "Hola"); 
+					$correo->IsHTML(true);
+					$correo->Subject = $acudiente[0]->nombre." ".$acudiente[0]->apellido1." ".$acudiente[0]->apellido2; //Asunto
+					//Cuerpo del Mensaje
+					$correo->MsgHTML($ArrDatos['obscitacion']);
+					
+					// $correo->SMTPDebug = 4;
+					
+					if(!$correo->Send()) {
+						$estadocitaacu = "Hubo un error";
+					} else {
+						$estadocitaacu = "Notificacion enviada correctamente al acudiente";
+					};
+				};
+			}else{
+				$estadocitaacu = "";
+			}				
+		};
+		/* ************************ */
+		
+		$Respuesta = array($inscrip, $estadocitares, $estadocitaacu);
+		return response()->json($Respuesta);
     }	
 
     public function create()
@@ -135,9 +217,10 @@ class InscripcionController extends Controller
 			'segurovida' => $ArrDatos['segvida'],
 			'asegurador' => $ArrDatos['aseguradora'],
 			'otra_eps' => $ArrDatos['otra_eps'],
-			'otra_prepagada' => $ArrDatos['aseguradora'],
-			'otra_asegurador' => $ArrDatos['aseguradora'],
-			'otra_religion' => $ArrDatos['aseguradora'],
+			'otra_prepagada' => $ArrDatos['otra_prepagada'],
+			'otra_asegurador' => $ArrDatos['otra_asegurador'],
+			'otra_religion' => $ArrDatos['otra_religion'],
+			'observacion' => $ArrDatos['obsporque'],
 			'nuevo' => 'S',
 			'cod_usuario' => $usuario,
 			'cod_rol' => '03' //Rol estudiante
@@ -146,7 +229,7 @@ class InscripcionController extends Controller
 			$user = DB::table('users')->insert([
 			'name' => strtolower($ArrDatos['nombre'])." ".strtolower($ArrDatos['apellido1'])." ".strtolower($ArrDatos['apellido2']),
 			'email' => $usuario,
-			'password' => md5("secret"),
+			'password' => bcrypt('secret'),
 			'estado' => '0',
 			'cod_rol' => '03' //Rol estudiante
 			]);
@@ -168,7 +251,7 @@ class InscripcionController extends Controller
 				'numdocest' => $ArrDatos['numdocumento'],
 				'verificada' => 'N',
 				'citacion' => 'N',
-				'aprovada' => 'N'
+				'aprobada' => 'N'
 			]);
 			
 			$Respuesta = array($estudiante, "Estudiante agregado corectamente", $codigoEst, $usuario);
@@ -218,6 +301,8 @@ class InscripcionController extends Controller
 		'telempresa' => $ArrDatos['telempres'],
 		'exalumno' => $ArrDatos['exalumres'],
 		'notifica' => $ArrDatos['notires'],
+		'otra_profesion' => $ArrDatos['otproferes'],
+		'otra_especialidad' => $ArrDatos['otesperes'],
 		'cod_rol' => '04', //Rol responsable
 		'cod_estudiante' => $ArrDatos['codigoest']
 		]);
@@ -225,7 +310,7 @@ class InscripcionController extends Controller
 		$user = DB::table('users')->insert([
 		'name' => strtolower($ArrDatos['nomres'])." ".strtolower($ArrDatos['apelres1'])." ".strtolower($ArrDatos['apelres2']),
 		'email' => $usuario,
-		'password' => md5("secret"),
+		'password' => bcrypt('secret'),
 		'estado' => '0',
 		'cod_rol' => '04'  //Rol responsable
 		]);
@@ -275,6 +360,8 @@ class InscripcionController extends Controller
 		'telempresa' => $ArrDatos['telempacu'],
 		'exalumno' => $ArrDatos['exalumacu'],
 		'notifica' => $ArrDatos['notiacu'],
+		'otra_profesion' => $ArrDatos['otprofeacu'],
+		'otra_especialidad' => $ArrDatos['otespeacu'],		
 		'cod_rol' => '05', //Rol acudiente
 		'cod_estudiante' => $ArrDatos['codigoest']
 		]);
@@ -282,7 +369,7 @@ class InscripcionController extends Controller
 		$user = DB::table('users')->insert([
 		'name' => strtolower($ArrDatos['nomacu'])." ".strtolower($ArrDatos['apelacu1'])." ".strtolower($ArrDatos['apelacu2']),
 		'email' => $usuario,
-		'password' => md5("secret"),
+		'password' => bcrypt('secret'),
 		'estado' => '0',
 		'cod_rol' => '05'  //Rol acudiente
 		]);
@@ -369,30 +456,7 @@ class InscripcionController extends Controller
 		'especialidades' => ($especialidades),
 		'estcivil' => ($estcivil)
 		]);
-        return $pdf->stream('Reporte Inscripcion'.'.pdf');
+        return $pdf->stream('Reporte Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
 		// return view('admin.reportes.reporte', ['estudiante' => ($estudiante),'responsable' => ($responsable),'acudiente' => ($acudiente)]);
 	}	
-	
-	// public function enviarCorreo(){
-        // $text = 'Hello Mail';
-		// $mail = new PHPMailer\PHPMailer(); // create a n
-		
-        // $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
-        // $mail->SMTPAuth = true; // authentication enabled
-        // $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
-        // $mail->Host = "smtp.gmail.com";
-        // $mail->Port  = 587; // or 587
-        // $mail->IsHTML(true);
-        // $mail->Username = "carlitosa03@gmail.com";
-        // $mail->Password = "hptasperros95*";
-        // $mail->SetFrom("carlitosa03@gmail.com", 'Prueba TW');
-        // $mail->Subject = "Test Subject";
-        // $mail->Body    = $text;
-        // $mail->AddAddress("castroagudeloc@gmail.com", "Carlos Castro Agudelo");
-        // if ($mail->Send()) {
-            // return 'Email Sended Successfully \n'.$mail->Send();
-        // } else {
-            // return 'Failed to Send Email';
-        // }
-    // }	
 }

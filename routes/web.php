@@ -157,9 +157,10 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('/incripciones/validarResponsable', 'InscripcionController@validarResponsable');
 	Route::get('/incripciones/validarAcudiente', 'InscripcionController@validarAcudiente');
 	Route::get('/incripciones/devolverCambios', 'InscripcionController@devolverCambios');
+	Route::get('/incripciones/actualizar', 'InscripcionController@actualizar');
 	Route::get('/incripciones/obtenerlistadoinscripciones', 'InscripcionController@obtenerListadoInscripciones')->middleware('auth');
 	Route::get('/incripciones/pdfinscripcion/{codest}', 'InscripcionController@pdfInscripcion')->middleware('auth');
 	Route::resource('/incripciones', 'InscripcionController',
-		['except' => ['destroy']])->middleware('auth');
+		['except' => ['destroy','update']])->middleware('auth');
 	/*******************/
 });

@@ -93,10 +93,15 @@
 					{{ Auth::user()->name }} <span class="caret"></span>
 				</label>              
 				
-				<a class="button is-primary is-inverted is-outlined is-rounded" href="{{ route('logout') }}" onclick="event.preventDefault();
-				  document.getElementById('logout-form').submit();">
+				<a class="button is-primary is-inverted is-outlined is-rounded" onclick="CerrarSession();">
 				  {{ __('Logout') }}
 				</a>
+				
+				<a class="button is-primary is-inverted is-outlined is-rounded" onclick="event.preventDefault();
+				  document.getElementById('logout-form').submit();" id="logout" style="display: none;">
+				  {{ __('Logout') }}
+				</a>
+				
 				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 					@csrf
 				</form>
@@ -114,5 +119,20 @@
 	</main>      
 	<script src="{{ asset('js/app.js') }}"></script>
 	<script src="{{ asset('js/funciones.js') }}"></script>
+	<script>
+		function CerrarSession(){
+			swal({
+			  title: "¿Está seguro de cerrar la session?",
+			  text: "",
+			  icon: "warning",
+			  buttons: true,
+			})
+			.then((willDelete) => {
+				if (willDelete) {
+					$("#logout").click();
+				}
+			});	
+		};
+	</script>
 </body>
 </html>

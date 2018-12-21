@@ -21,7 +21,7 @@ class GradosTableSeeder extends Seeder
 
         $grado = new Grados();
         $grado->codigo = '11';
-        $grado->nombre = 'Pre jardín ';
+        $grado->nombre = 'Prejardín ';
         $grado->save();
 
         $grado = new Grados();

@@ -12,6 +12,11 @@ $(function() {
 	$("#chaprob").attr('disabled','disabled');
 	$("#obsaprobada").attr('disabled','disabled');
 	
+	$("#otproferes").attr('disabled','disabled');
+	$("#otesperes").attr('disabled','disabled');
+	$("#otprofeacu").attr('disabled','disabled');
+	$("#otespeacu").attr('disabled','disabled');
+	
 	if($("#chverif").is(':checked') == true){ 
 		$("#chcita").removeAttr('disabled');
 		$("#chverif").attr('disabled','disabled');
@@ -20,7 +25,89 @@ $(function() {
 	
 	if($("#chcita").is(':checked') == true){ 
 		$("#chaprob").removeAttr('disabled');
-	}		
+	}
+
+	/* ESTUDIANTE */
+	var numdocu = document.getElementById("numdocu");
+	numdocu.addEventListener('input',function(){
+		if (this.value.length > 16){
+			this.value = this.value.slice(0,16);
+		}
+	});
+	
+	var numfijo = document.getElementById("numfijo");
+	numfijo.addEventListener('input',function(){
+		if (this.value.length > 7){
+			this.value = this.value.slice(0,7);
+		}
+	});
+	
+	var numcelular = document.getElementById("numcelular");
+	numcelular.addEventListener('input',function(){
+		if (this.value.length > 10){
+			this.value = this.value.slice(0,10);
+		}
+	});
+	
+	/* RESPONSABLE */
+	var numdocures = document.getElementById("numdocures");
+	numdocures.addEventListener('input',function(){
+		if (this.value.length > 16){
+			this.value = this.value.slice(0,16);
+		}
+	});
+	
+	var fijores = document.getElementById("fijores");
+	fijores.addEventListener('input',function(){
+		if (this.value.length > 7){
+			this.value = this.value.slice(0,7);
+		}
+	});
+	
+	var celures = document.getElementById("celures");
+	celures.addEventListener('input',function(){
+		if (this.value.length > 10){
+			this.value = this.value.slice(0,10);
+		}
+	});
+	
+	var telempres = document.getElementById("telempres");
+	telempres.addEventListener('input',function(){
+		if (this.value.length > 10){
+			this.value = this.value.slice(0,10);
+		}
+	});
+	
+	/* ACUDIENTE */
+	var numdocuacu = document.getElementById("numdocuacu");
+	numdocuacu.addEventListener('input',function(){
+		if (this.value.length > 16){
+			this.value = this.value.slice(0,16);
+		}
+	});
+	
+	var fijoacu = document.getElementById("fijoacu");
+	fijoacu.addEventListener('input',function(){
+		if (this.value.length > 7){
+			this.value = this.value.slice(0,7);
+		}
+	});
+	
+	var celuacu = document.getElementById("celuacu");
+	celuacu.addEventListener('input',function(){
+		if (this.value.length > 10){
+			this.value = this.value.slice(0,10);
+		}
+	});
+	
+	var telempacu = document.getElementById("telempacu");
+	telempacu.addEventListener('input',function(){
+		if (this.value.length > 10){
+			this.value = this.value.slice(0,10);
+		}
+	});	
+	
+	
 });
 	
 function ValidaSisben(){
@@ -100,7 +187,7 @@ function ValidaOtReli(){
 		$("#otreligion").val('');
 	}			
 };
-
+	
 function GuardarEstudiante(){
 	var contError = 0;
 	var Errores = "";
@@ -144,11 +231,11 @@ function GuardarEstudiante(){
 	var colproce = $("#colproce").val();
 	var chcobertura = $("#cobertura").is(':checked');
 	var chdesplaza = $("#desplaza").is(':checked');
-	
 	var otra_eps = $("#oteps").val();
 	var otra_prepagada = $("#otprepagada").val();
 	var otra_asegurador = $("#otaseguradora").val();
 	var otra_religion = $("#otreligion").val();	
+	var obsporque = $("#obsporque").val();
 	
 	if(chsisben == false){
 		var sisben = "N";
@@ -348,7 +435,6 @@ function GuardarEstudiante(){
 	}else{
 		$("#ErrColproce").attr('hidden','hidden');
 	}
-	
 	if((eps == "01") && (otra_eps == "")){
 		contError += 1;
 		Identifi = "#oteps";
@@ -357,7 +443,6 @@ function GuardarEstudiante(){
 	}else{
 		$("#Erroteps").attr('hidden','hidden');
 	}
-	
 	if((prepagada == "01") && (otra_prepagada == "")){
 		contError += 1;
 		Identifi = "#otprepagada";
@@ -366,7 +451,6 @@ function GuardarEstudiante(){
 	}else{
 		$("#Errotprepagada").attr('hidden','hidden');
 	}	
-	
 	if((aseguradora == "16") && (otra_asegurador == "")){ 
 		contError += 1;
 		Identifi = "#otaseguradora";
@@ -375,7 +459,6 @@ function GuardarEstudiante(){
 	}else{
 		$("#Errotaseguradora").attr('hidden','hidden');
 	}
-
 	if((religion == "04") && (otra_religion == "")){ 
 		contError += 1;
 		Identifi = "#otreligion";
@@ -383,7 +466,15 @@ function GuardarEstudiante(){
 		$("#Errotreligion").removeAttr('hidden');
 	}else{
 		$("#Errotreligion").attr('hidden','hidden');
-	}		
+	}
+	if(obsporque == ""){
+		contError += 1;
+		Identifi = "#obsporque";
+		Errores += "Debe digitar un porque valido!\n"
+		$("#Errobsporque").removeAttr('hidden');
+	}else{
+		$("#Errobsporque").attr('hidden','hidden');
+	}	
 			
 	var ArrDatos = {
 		"nombre":nombre.trim(),
@@ -420,6 +511,7 @@ function GuardarEstudiante(){
 		"otra_prepagada":otra_prepagada,
 		"otra_asegurador":otra_asegurador,
 		"otra_religion":otra_religion,
+		"obsporque":obsporque,
 	};	
 	
 	if(contError == 0){
@@ -490,7 +582,9 @@ function GuardarEstudiante(){
 };
 
 function ValProfeRes(){
-	if($("#proferes").val() == "NA"){ 
+	var proferes = $("#proferes").val();
+	
+	if(proferes == "NA"){ 
 		$("#esperes").attr('disabled','disabled');
 		$("#empreres").attr('disabled','disabled');
 		$("#cargres").attr('disabled','disabled');
@@ -504,6 +598,26 @@ function ValProfeRes(){
 		$("#esperes").removeAttr('disabled');
 		$("#dirempres").removeAttr('disabled');
 		$("#telempres").removeAttr('disabled');
+	}
+	
+	if(proferes == "OT"){ 
+		$("#otproferes").removeAttr('disabled');
+		$("#otproferes").focus();
+	}else{
+		$("#otproferes").attr('disabled','disabled');
+		$("#otproferes").val('');
+	}	
+};
+
+function ValidaOtEsperes(){
+	var esperes = $("#esperes").val();
+	
+	if(esperes == "OT"){ 
+		$("#otesperes").removeAttr('disabled');
+		$("#otesperes").focus();
+	}else{
+		$("#otesperes").attr('disabled','disabled');
+		$("#otesperes").val('');
 	}			
 };
 
@@ -531,6 +645,8 @@ function GuardarResponsable(){
 	var telempres = $("#telempres").val();
 	var chexalumres = $("#exalumres").is(':checked');
 	var chnotires = $("#notires").is(':checked');
+	var otproferes = $("#otproferes").val();
+	var otesperes = $("#otesperes").val();
 	
 	var codigoest = $("#numdocu").val();
 	
@@ -685,8 +801,11 @@ function GuardarResponsable(){
 		"telempres":telempres,
 		"exalumres":exalumres,
 		"notires":notires,
+		"otproferes":otproferes,
+		"otesperes":otesperes,
 		"codigoest":codigoest
 	};
+	
 	if(contError == 0){
 		$.ajax({
 			url: "/incripciones/validarResponsable",
@@ -739,7 +858,6 @@ function GuardarResponsable(){
 	}	
 };
 
-
 function ValProfeAcu(){
 	if($("#profeacu").val() == "NA"){ 
 		$("#espeacu").attr('disabled','disabled');
@@ -755,7 +873,25 @@ function ValProfeAcu(){
 		$("#espeacu").removeAttr('disabled');
 		$("#dirempacu").removeAttr('disabled');
 		$("#telempacu").removeAttr('disabled');
-	}			
+	}
+	
+	if($("#profeacu").val() == "OT"){ 
+		$("#otprofeacu").removeAttr('disabled');
+		$("#otprofeacu").focus();
+	}else{
+		$("#otprofeacu").attr('disabled','disabled');
+		$("#otprofeacu").val('');
+	}	
+};
+
+function ValidaOtEspeacu(){	
+	if($("#espeacu").val() == "OT"){ 
+		$("#otespeacu").removeAttr('disabled');
+		$("#otespeacu").focus();
+	}else{
+		$("#otespeacu").attr('disabled','disabled');
+		$("#otespeacu").val('');
+	}	
 };
 
 function GuardarAcudiente(){
@@ -778,6 +914,8 @@ function GuardarAcudiente(){
 	var telempacu = $("#telempacu").val();
 	var chexalumacu = $("#exalumacu").is(':checked');
 	var chnotiacu = $("#notiacu").is(':checked');
+	var otprofeacu = $("#otprofeacu").val();
+	var otespeacu = $("#otespeacu").val();	
 	
 	var codigoest = $("#numdocu").val();
 	var guest = $("#guest").val();
@@ -813,6 +951,8 @@ function GuardarAcudiente(){
 		"telempacu":telempacu,
 		"exalumacu":exalumacu,
 		"notiacu":notiacu,
+		"otprofeacu":otprofeacu,
+		"otespeacu":otespeacu,		
 		"codigoest":codigoest
 	};
 	
@@ -848,11 +988,14 @@ function GuardarAcudiente(){
 				$("#usracu").val(data[2]);
 				swal(data[1], "", "success")
 				.then((value) => {
-					if(guest != 1){
-						location.href = '/incripciones';
-					}else{
-						location.href = '/';
-					}
+					swal("La inscripcion fue enviada corectamente al colegio", "", "success")
+					.then((value) => {
+						if(guest != 1){
+							location.href = '/incripciones';
+						}else{
+							location.href = '/';
+						}
+					});	
 				});								
 			}
 		}
@@ -948,4 +1091,56 @@ function ChAcudiente(){
 	
 	$("#liAcu").addClass("is-active");
 	$("#acudiente").attr('checked','checked');
+};
+
+
+
+function UpdInscripcion(){
+	var codInscrip = $("#codInscrip").val();
+	var codsede = $("#sede").val();
+	var obscitacion = $("#obscitacion").val();
+	var obsaprobada = $("#obsaprobada").val();
+	var codEstud = $("#codEstud").val();
+	
+	if($("#chverif").is(':checked') == true){
+		var chverif = "S";
+	}else{
+		var chverif = "N";
+	};
+	
+	if($("#chcita").is(':checked') == true){
+		var chcita = "S";
+	}else{
+		var chcita = "N";
+	};
+	
+	if($("#chaprob").is(':checked') == true){
+		var chaprob = "S";
+	}else{
+		var chaprob = "N";
+	};
+	
+	var ArrDatos = {
+		"codInscrip":codInscrip,
+		"codsede":codsede,
+		"obscitacion":obscitacion,
+		"obsaprobada":obsaprobada,
+		"chverif":chverif,
+		"chcita":chcita,
+		"chaprob":chaprob,
+		"codEstud":codEstud,
+	};	
+	
+	$.ajax({
+		url: "/incripciones/actualizar",
+		dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+		data: {'ArrDatos':ArrDatos},
+		success: function(data){
+			swal(data[1], data[2], "success")
+			.then((value) => {
+				location.href = '/incripciones';
+			});
+		}
+	});	
 };

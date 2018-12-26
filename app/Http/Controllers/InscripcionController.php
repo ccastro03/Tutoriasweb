@@ -123,9 +123,6 @@ class InscripcionController extends Controller
 			}				
 		};
 		
-		'aprobada' => $ArrDatos['chaprob'],
-		'obs_aprueba' => $ArrDatos['obsaprobada'],
-		
 		if($ArrDatos['aprobada'] == "S" && $ArrDatos['obsaprobada'] != ""){
 			if(count($responsable) != 0){
 				if($responsable[0]->notifica == "S"){

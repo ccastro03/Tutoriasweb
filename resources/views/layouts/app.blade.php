@@ -19,6 +19,9 @@
 	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
 	
+	<link href="{{ asset('css/open-iconic.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/open-iconic-bootstrap.min.css') }}" rel="stylesheet">	
+	
     <!-- Scripts -->
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('js/jquery-ui.min.js') }}"></script>

@@ -45288,6 +45288,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -45428,10 +45432,23 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", { staticStyle: { "text-align": "right" } }, [
+                    _c("a", {
+                      staticClass: "button is-link is-rounded is-outlined",
+                      attrs: {
+                        href:
+                          "/barrios/" +
+                          barrio.cod_ciudad +
+                          "/" +
+                          barrio.cod_barrio +
+                          "/edit",
+                        hidden: ""
+                      }
+                    }),
+                    _vm._v(" "),
                     _c(
                       "a",
                       {
-                        staticClass: "button is-link is-rounded is-outlined",
+                        staticStyle: { color: "#000" },
                         attrs: {
                           href:
                             "/barrios/" +
@@ -45441,21 +45458,26 @@ var render = function() {
                             "/edit"
                         }
                       },
-                      [_vm._v("Editar")]
+                      [
+                        _c("span", {
+                          staticClass: "oi oi-pencil",
+                          attrs: { title: "Editar", "aria-hidden": "true" }
+                        })
+                      ]
                     ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "button is-link is-rounded is-outlined",
+                    _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                    _c("a", { staticStyle: { color: "#000" } }, [
+                      _c("span", {
+                        staticClass: "oi oi-trash",
                         attrs: {
+                          title: "Eliminar",
+                          "aria-hidden": "true",
                           id: "BtnDelBar",
                           "attr-id": barrio.cod_ciudad,
                           "attr-id2": barrio.cod_barrio
                         }
-                      },
-                      [_vm._v("Eliminar")]
-                    )
+                      })
+                    ])
                   ])
                 ],
                 2
@@ -45465,70 +45487,76 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c(
-        "nav",
-        {
-          staticClass: "pagination",
-          attrs: { role: "navigation", "aria-label": "pagination" }
-        },
-        [
-          _vm.pagination.current_page > 1
-            ? _c(
-                "a",
-                {
-                  staticClass: "pagination-previous",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.changePage(_vm.pagination.current_page - 1)
-                    }
-                  }
-                },
-                [_vm._v("Anterior")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.pagination.current_page < _vm.pagination.last_page
-            ? _c(
-                "a",
-                {
-                  staticClass: "pagination-next",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.changePage(_vm.pagination.current_page + 1)
-                    }
-                  }
-                },
-                [_vm._v("Siguiente")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "ul",
-            { staticClass: "pagination-list" },
-            _vm._l(_vm.pagesNumber, function(page) {
-              return _c("li", { key: page }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "pagination-link",
-                    class: [page == _vm.isActived ? "is-current" : ""],
-                    attrs: { "aria-label": "Goto page 1" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.changePage(page)
+      _vm.pagination.last_page > 1
+        ? _c(
+            "nav",
+            {
+              staticClass: "pagination",
+              attrs: { role: "navigation", "aria-label": "pagination" }
+            },
+            [
+              _vm.pagination.current_page > 1
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-previous",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page - 1)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("\n              " + _vm._s(page) + "\n            ")]
-                )
-              ])
-            })
+                    },
+                    [_vm._v("Anterior")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.pagination.current_page < _vm.pagination.last_page
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-next",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "pagination-list" },
+                _vm._l(_vm.pagesNumber, function(page) {
+                  return _c("li", { key: page }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "pagination-link",
+                        class: [page == _vm.isActived ? "is-current" : ""],
+                        attrs: { "aria-label": "Goto page 1" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.changePage(page)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              " + _vm._s(page) + "\n            "
+                        )
+                      ]
+                    )
+                  ])
+                })
+              )
+            ]
           )
-        ]
-      )
+        : _vm._e()
     ])
   ])
 }
@@ -45539,7 +45567,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codigo")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ciudad")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
         _vm._v(" "),

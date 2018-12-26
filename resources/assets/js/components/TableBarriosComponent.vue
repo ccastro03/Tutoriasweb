@@ -6,24 +6,28 @@
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-			<th scope="col">Codigo</th>
+			<th scope="col">Ciudad</th>
             <th scope="col">Nombre</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="barrio in barrios" :key="barrio.cod_barrio">
+          <tr v-for="barrio in barrios" :key="barrio.cod_barrio" >
             <td v-for="ciudad in ciudades" v-if="ciudad.cod_ciudad === barrio.cod_ciudad">{{ ciudad.nombre }}</td>
             <td><a :href="'/barrios/' + barrio.cod_ciudad + '/' + barrio.cod_barrio + '/show'">{{ barrio.nombre }}</a></td>
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/barrios/' + barrio.cod_ciudad + '/' + barrio.cod_barrio + '/edit'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" id="BtnDelBar" :attr-id="barrio.cod_ciudad" :attr-id2="barrio.cod_barrio" >Eliminar</a>
+				<a class="button is-link is-rounded is-outlined" :href="'/barrios/' + barrio.cod_ciudad + '/' + barrio.cod_barrio + '/edit'" hidden></a>
+				<a :href="'/barrios/' + barrio.cod_ciudad + '/' + barrio.cod_barrio + '/edit'" style="color: #000;">
+				<span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
+				</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelBar" :attr-id="barrio.cod_ciudad" :attr-id2="barrio.cod_barrio" ></span></a>
 			</td>
           </tr>
         </tbody>
       </table> 
 	  
-      <nav class="pagination" role="navigation" aria-label="pagination">
+      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
         <ul class="pagination-list">

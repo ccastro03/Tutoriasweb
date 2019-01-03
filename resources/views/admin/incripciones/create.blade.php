@@ -27,19 +27,19 @@
 					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Nombre</label>
-							<input type="text" name="name" id="nombre" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" placeholder="Ingrese el nombre">
+							<input type="text" name="name" id="nombre" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNombre" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Primer apellido</label>
-							<input type="text" name="apellido1" id="apellido1" class="input {{ $errors->has('apellido1') ? ' is-danger' : '' }}" placeholder="Ingrese el primer apellido">
+							<input type="text" name="apellido1" id="apellido1" class="input {{ $errors->has('apellido1') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrApellido1" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Segundo apellido</label>
-							<input type="text" name="apellido2" id="apellido2" class="input {{ $errors->has('apellido2') ? ' is-danger' : '' }}" placeholder="Ingrese el segundo apellido">
+							<input type="text" name="apellido2" id="apellido2" class="input {{ $errors->has('apellido2') ? ' is-danger' : '' }}" >
 						</div>
 
 						<div class="column is-one-fifth" style="width: 155px">
@@ -70,7 +70,7 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label">Documento</label>
-							<input type="text" name="numdocu" id="numdocu" style="width: 113px;" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" placeholder="Ingrese el numero de documento">
+							<input type="text" name="numdocu" id="numdocu" style="width: 113px;" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNumdocu" hidden>Campo obligatorio *</p>
 						</div>						
 					</div>
@@ -78,7 +78,7 @@
 					<div class="columns">									
 						<div class="column is-one-fifth">
 							<label class="label">Dirección</label>
-							<input type="text" name="direccion" id="direccion" class="input {{ $errors->has('direccion') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección">
+							<input type="text" name="direccion" id="direccion" class="input {{ $errors->has('direccion') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrDirecc" hidden>Campo obligatorio *</p>
 						</div>
 						
@@ -97,19 +97,19 @@
 
 						<div class="column is-one-fifth" style="width: 157px">
 							<label class="label"># Teléfono</label>
-							<input type="number" name="numfijo" id="numfijo" class="input {{ $errors->has('numfijo') ? ' is-danger' : '' }}" placeholder="Ingrese el teléfono">
+							<input type="number" name="numfijo" id="numfijo" class="input {{ $errors->has('numfijo') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNumtel" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth" style="width: 157px">
 							<label class="label"># Celular</label>
-							<input type="text" name="numcelular" id="numcelular" class="input {{ $errors->has('numcelular') ? ' is-danger' : '' }}" placeholder="Ingrese el celular">
+							<input type="text" name="numcelular" id="numcelular" class="input {{ $errors->has('numcelular') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNumcel" hidden>Campo obligatorio *</p>
 						</div>	
 
 						<div class="column is-one-quarter">
 							<label class="label">Correo electrónico</label>
-							<input type="email" id="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" placeholder="Ingrese el e-mail">
+							<input type="email" id="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" >
 						</div>
 
 						<div class="column is-one-fifth" style="width: 190px">
@@ -132,7 +132,7 @@
 							<p class="help is-danger" id="ErrCiunace" hidden>Campo obligatorio *</p>
 						</div>	
 
-						<div class="column is-one-fifth" style="width: 105px">
+						<div class="column is-one-fifth" style="margin-right: 25px; width: 125px">
 							<label class="label">RH</label>
 							<div class="select">
 								<select name="tiprh" id="tiprh">
@@ -150,7 +150,7 @@
 							<p class="help is-danger" id="ErrTiprh" hidden>Obligatorio *</p>
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 240px">
+						<div class="column is-one-fifth" style="width: 216px">
 							<label class="label">Sede</label>
 							<div class="select">
 								<select name="sede" id="sede">
@@ -163,7 +163,7 @@
 							<p class="help is-danger" id="ErrSede" hidden>Campo obligatorio *</p>
 						</div>
 
-						<div class="column is-one-fifth" style="width: 150px">
+						<div class="column is-one-fifth" style="width: 154px">
 							<label class="label">Grado</label>
 							<div class="select">
 								<select name="grado" id="grado">
@@ -176,10 +176,10 @@
 							<p class="help is-danger" id="ErrGrado" hidden>Obligatorio *</p>
 						</div>
 
-						<div class="column is-one-fifth" style="width: 150px">
+						<div class="column is-one-fifth">
 							<label class="label">Jornada</label>
 							<div class="select">
-								<select name="jornada" id="jornada">
+								<select name="jornada" id="jornada" style="width: 170px">
 									<option value="">Seleccione</option>
 									@foreach($jornadas->all() as $jornada)
 										<option value="{{ $jornada->codigo }}">{{ $jornada->nombre }}</option>
@@ -191,7 +191,7 @@
 					</div>
 					
 					<div class="columns">
-						<div class="column is-one-fifth" style="width: 190px">
+						<div class="column is-one-fifth">
 							<label class="label">Etnia</label>
 							<div class="select">
 								<select name="etnia" id="etnia">
@@ -204,12 +204,12 @@
 							<p class="help is-danger" id="ErrEtnia" hidden>Campo obligatorio *</p>
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 70px">
+						<div class="column is-one-fifth" style="margin-left: 24px; width: 80px">
 							<label class="label">Sisben</label>
 							<input type="checkbox" id="checksisben" style="margin-left: 28px;" onclick="ValidaSisben()">
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 110px">
+						<div class="column is-one-fifth" style="width: 112px">
 							<label class="label">Nivel</label>
 							<div class="select">
 								<select name="sisnvl" id="sisnvl">
@@ -253,7 +253,7 @@
 							</div>						
 						</div>
 						
-						<div class="column is-one-fifth">
+						<div class="column is-one-fifth" style="width: 200px">
 							<label class="label">&nbsp;</label>
 							<input type="text" name="otprepagada" id="otprepagada" class="input {{ $errors->has('ciunace') ? ' is-danger' : '' }}">
 							<p class="help is-danger" id="Errotprepagada" hidden>Campo obligatorio *</p>
@@ -261,12 +261,12 @@
 					</div>
 					
 					<div class="columns">
-						<div class="column is-one-fifth" style="width: 128px">
+						<div class="column is-one-fifth">
 							<label class="label">Seguro vida</label>
-							<input type="checkbox" id="segvida" style="margin-left: 53px;" onclick="ValidaSegVida()">
+							<input type="checkbox" id="segvida" style="margin-left: 43px;" onclick="ValidaSegVida()">
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 240px">
+						<div class="column is-one-fifth" style="width: 215px">
 							<label class="label">Aseguradora</label>
 							<div class="select">
 								<select name="aseguradora" id="aseguradora" onchange="ValidaOtAsegura();">
@@ -285,7 +285,7 @@
 							<p class="help is-danger" id="Errotaseguradora" hidden>Campo obligatorio *</p>
 						</div>						
 						
-						<div class="column is-one-fifth" style="width: 165px">
+						<div class="column is-one-fifth" style="width: 150px">
 							<label class="label">Religion</label>
 							<div class="select">
 								<select name="religion" id="religion" onchange="ValidaOtReli();">
@@ -302,7 +302,12 @@
 							<label class="label">&nbsp;</label>
 							<input type="text" name="otreligion" id="otreligion" class="input {{ $errors->has('ciunace') ? ' is-danger' : '' }}">
 							<p class="help is-danger" id="Errotreligion" hidden>Campo obligatorio *</p>
-						</div>						
+						</div>
+
+						<div class="column is-one-fifth">
+							<label class="label">Tiene cobertura?</label>
+							<input type="checkbox" id="cobertura" style="margin-left: 65px;">						
+						</div>
 					</div>
 					
 					<div class="columns">						
@@ -314,22 +319,17 @@
 
 						<div class="column is-one-fifth">
 							<label class="label">Colegio procedencia</label>
-							<input type="text" name="colproce" id="colproce" class="input {{ $errors->has('colproce') ? ' is-danger' : '' }}" placeholder="Ingrese la procedencia">
+							<input type="text" name="colproce" id="colproce" class="input {{ $errors->has('colproce') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrColproce" hidden>Campo obligatorio *</p>
-						</div>						
-
-						<div class="column is-one-fifth" style="width: 164px">
-							<label class="label">Tiene cobertura?</label>
-							<input type="checkbox" id="cobertura" style="margin-left: 65px;">						
 						</div>
 						
-						<div class="column is-one-fifth" style="width: 164px">
+						<div class="column is-one-fifth" style="margin-left: 47px; width: 168px">
 							<label class="label">Es desplazado?</label>
-							<input type="checkbox" id="desplaza" style="margin-left: 65px;">						
-						</div>
+							<input type="checkbox" id="desplaza" style="margin-left: 52px;">						
+						</div>						
 						
-						<div class="column is-one-third">
-							<p align="left" class="help is-info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Explica brevemente porque el estudiante sale del colegio &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;anterior y desea ingresar a nuestra institución. *</p>						
+						<div class="column is-two-thirds" style="width: 502px">
+							<p align="left" class="help is-info">&nbsp;&nbsp;&nbsp;&nbsp;Explica brevemente porque el estudiante sale del colegio anterior y desea ingresar a &nbsp;&nbsp;&nbsp;&nbsp;nuestra institución. *</p>
 							<textarea class="textarea has-fixed-size" id="obsporque"></textarea>
 							<p class="help is-danger" id="Errobsporque" hidden>Campo obligatorio *</p>
 						</div>						
@@ -347,19 +347,19 @@
 					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Nombre</label>
-							<input type="text" name="name" id="nomres" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" placeholder="Ingrese el nombre">
+							<input type="text" name="name" id="nomres" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNomres" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Primer apellido</label>
-							<input type="text" name="apelres1" id="apelres1" class="input {{ $errors->has('apelres1') ? ' is-danger' : '' }}" placeholder="Ingrese el primer apellido">
+							<input type="text" name="apelres1" id="apelres1" class="input {{ $errors->has('apelres1') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrApelres1" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Segundo apellido</label>
-							<input type="text" name="apelres2" id="apelres2" class="input {{ $errors->has('apellido2') ? ' is-danger' : '' }}" placeholder="Ingrese el segundo apellido">
+							<input type="text" name="apelres2" id="apelres2" class="input {{ $errors->has('apellido2') ? ' is-danger' : '' }}" >
 						</div>
 						
 						<div class="column is-one-fifth">
@@ -377,7 +377,7 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Documento</label>
-							<input type="text" name="numdocures" id="numdocures" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" placeholder="Ingrese # de documento">
+							<input type="text" name="numdocures" id="numdocures" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNumdocures" hidden>Campo obligatorio *</p>
 						</div>
 					</div>
@@ -404,18 +404,18 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label">Dirección</label>
-							<input type="text" name="direcres" id="direcres" class="input {{ $errors->has('direcres') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección">
+							<input type="text" name="direcres" id="direcres" class="input {{ $errors->has('direcres') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrDirecres" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Teléfono</label>
-							<input type="text" name="fijores" id="fijores" class="input {{ $errors->has('fijores') ? ' is-danger' : '' }}" placeholder="Ingrese # teléfono">
+							<input type="text" name="fijores" id="fijores" class="input {{ $errors->has('fijores') ? ' is-danger' : '' }}" >
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label"># Celular</label>
-							<input type="text" name="celures" id="celures" class="input {{ $errors->has('celures') ? ' is-danger' : '' }}" placeholder="Ingrese # celular">
+							<input type="text" name="celures" id="celures" class="input {{ $errors->has('celures') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrCelures" hidden>Campo obligatorio *</p>
 						</div>					
 					</div>
@@ -423,7 +423,7 @@
 					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Correo electrónico</label>
-							<input type="email" id="mailres" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" placeholder="Ingrese el e-mail">
+							<input type="email" id="mailres" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrMailres" hidden>Campo obligatorio *</p>
 						</div>
 						
@@ -469,25 +469,25 @@
 					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Empresa</label>
-							<input type="text" name="empreres" id="empreres" class="input {{ $errors->has('empreres') ? ' is-danger' : '' }}" placeholder="Ingrese la empresa">
+							<input type="text" name="empreres" id="empreres" class="input {{ $errors->has('empreres') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrEmpreres" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Cargo</label>
-							<input type="text" name="cargres" id="cargres" class="input {{ $errors->has('cargres') ? ' is-danger' : '' }}" placeholder="Ingrese el cargo">
+							<input type="text" name="cargres" id="cargres" class="input {{ $errors->has('cargres') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrCargres" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth">
 							<label class="label">Dirección empresa</label>
-							<input type="text" name="dirempres" id="dirempres" class="input {{ $errors->has('dirempres') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección empresa">
+							<input type="text" name="dirempres" id="dirempres" class="input {{ $errors->has('dirempres') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrDirempres" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Teléfono</label>
-							<input type="text" name="telempres" id="telempres" class="input {{ $errors->has('telempres') ? ' is-danger' : '' }}" placeholder="Ingrese el teléfono empresa">
+							<input type="text" name="telempres" id="telempres" class="input {{ $errors->has('telempres') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrTelempres" hidden>Campo obligatorio *</p>
 						</div>
 						
@@ -508,7 +508,7 @@
 						<div class="column is-one-quarter">
 							<label class="checkbox">
 								<input type="checkbox" id="notires">
-								<b>¿Notificaciones via e-mail?</b>
+								¿Notificaciones via e-mail?
 							</label>
 						</div>					
 					</div>
@@ -526,19 +526,19 @@
 					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Nombre</label>
-							<input type="text" id="nomacu" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" placeholder="Ingrese el nombre">
+							<input type="text" id="nomacu" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNomacu" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Primer apellido</label>
-							<input type="text" id="apelacu1" class="input {{ $errors->has('apelacu1') ? ' is-danger' : '' }}" placeholder="Ingrese el primer apellido">
+							<input type="text" id="apelacu1" class="input {{ $errors->has('apelacu1') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrApelacu1" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Segundo apellido</label>
-							<input type="text" id="apelacu2" class="input {{ $errors->has('apellido2') ? ' is-danger' : '' }}" placeholder="Ingrese el segundo apellido">
+							<input type="text" id="apelacu2" class="input {{ $errors->has('apellido2') ? ' is-danger' : '' }}" >
 						</div>
 						
 						<div class="column is-one-fifth">
@@ -556,7 +556,7 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Documento</label>
-							<input type="text" name="numdocuacu" id="numdocuacu" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" placeholder="Ingrese # de documento">
+							<input type="text" name="numdocuacu" id="numdocuacu" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNumdocuacu" hidden>Campo obligatorio *</p>
 						</div>
 					</div>
@@ -586,18 +586,18 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label">Dirección</label>
-							<input type="text" name="direcacu" id="direcacu" class="input {{ $errors->has('direcacu') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección">
+							<input type="text" name="direcacu" id="direcacu" class="input {{ $errors->has('direcacu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrDirecacu" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Teléfono</label>
-							<input type="text" name="fijoacu" id="fijoacu" class="input {{ $errors->has('fijoacu') ? ' is-danger' : '' }}" placeholder="Ingrese # teléfono">
+							<input type="text" name="fijoacu" id="fijoacu" class="input {{ $errors->has('fijoacu') ? ' is-danger' : '' }}" >
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label"># Celular</label>
-							<input type="text" name="celuacu" id="celuacu" class="input {{ $errors->has('celuacu') ? ' is-danger' : '' }}" placeholder="Ingrese # celular">
+							<input type="text" name="celuacu" id="celuacu" class="input {{ $errors->has('celuacu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrCeluacu" hidden>Campo obligatorio *</p>
 						</div>					
 					</div>
@@ -605,7 +605,7 @@
 					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Correo electrónico</label>
-							<input type="email" id="mailacu" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" placeholder="Ingrese el e-mail">
+							<input type="email" id="mailacu" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrMailacu" hidden>Campo obligatorio *</p>
 						</div>
 						
@@ -651,25 +651,25 @@
 					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Empresa</label>
-							<input type="text" name="empreacu" id="empreacu" class="input {{ $errors->has('empreacu') ? ' is-danger' : '' }}" placeholder="Ingrese nombre empresa">
+							<input type="text" name="empreacu" id="empreacu" class="input {{ $errors->has('empreacu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrEmpreacu" hidden>Campo obligatorio *</p>
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label">Cargo</label>
-							<input type="text" name="cargacu" id="cargacu" class="input {{ $errors->has('cargacu') ? ' is-danger' : '' }}" placeholder="Ingrese el cargo">
+							<input type="text" name="cargacu" id="cargacu" class="input {{ $errors->has('cargacu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrCargacu" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth">
 							<label class="label">Dirección empresa</label>
-							<input type="text" name="dirempacu" id="dirempacu" class="input {{ $errors->has('dirempacu') ? ' is-danger' : '' }}" placeholder="Ingrese la dirección empresa">
+							<input type="text" name="dirempacu" id="dirempacu" class="input {{ $errors->has('dirempacu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrDirempacu" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Teléfono</label>
-							<input type="text" name="telempacu" id="telempacu" class="input {{ $errors->has('telempacu') ? ' is-danger' : '' }}" placeholder="Ingrese el teléfono empresa">
+							<input type="text" name="telempacu" id="telempacu" class="input {{ $errors->has('telempacu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrTelempacu" hidden>Campo obligatorio *</p>
 						</div>
 
@@ -683,7 +683,7 @@
 						<div class="column is-one-quarter">
 							<label class="checkbox">
 								<input type="checkbox" id="notiacu">
-								<b>¿Notificaciones via e-mail?</b>
+								¿Notificaciones via e-mail?
 							</label>
 						</div>					
 					</div>

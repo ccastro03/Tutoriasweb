@@ -12319,3 +12319,10 @@ input[type="radio"],
   margin-top: 1.25rem;
 }
 
+.label {
+  color: #363636;
+  display: block;
+  font-size: 0.93rem;
+  font-weight: 100;
+}
+

@@ -44060,7 +44060,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     changePage: function changePage(page) {
       this.pagination.current_page = page;
-      this.getBarrios(page);
+      this.getRoles(page);
     }
   }
 });
@@ -44341,12 +44341,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       funciones: [],
-      name: null
+      pagination: {
+        'current_page': 0,
+        'per_page': 0,
+        'first_item': 0,
+        'last_item': 0,
+        'last_page': 0,
+        'total': 0
+      },
+      name: null,
+      offset: 3
     };
   },
   created: function created() {
@@ -44358,15 +44384,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getFunciones();
     }
   },
+  computed: {
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    }
+  },
   methods: {
-    getFunciones: function getFunciones() {
+    getFunciones: function getFunciones(page) {
       var _this = this;
 
-      var url = 'funciones/obtenerlistadofunciones';
+      var url = 'funciones/obtenerlistadofunciones?page=' + page;
       axios.get(url, { params: { name: this.name } }).then(function (response) {
-        _this.funciones = response.data;
-        var array = _this.funciones;
+        var array = response.data;
+        _this.pagination = array['paginate'];
+        _this.funciones = array['funciones']['data'];
       });
+    },
+    changePage: function changePage(page) {
+      this.pagination.current_page = page;
+      this.getFunciones(page);
     }
   }
 });
@@ -44428,7 +44483,10 @@ var render = function() {
                     "a",
                     {
                       staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { href: "/funciones/" + funcion.id + "/editar" }
+                      attrs: {
+                        href: "/funciones/" + funcion.id + "/editar",
+                        hidden: ""
+                      }
                     },
                     [_vm._v("Editar")]
                   ),
@@ -44436,17 +44494,105 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelFunc", "attr-id": funcion.id }
+                      staticStyle: { color: "#000" },
+                      attrs: { href: "/funciones/" + funcion.id + "/editar" }
                     },
-                    [_vm._v("Eliminar")]
-                  )
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
+                  ),
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelFunc",
+                        "attr-id": funcion.id
+                      }
+                    })
+                  ])
                 ])
               ])
             })
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _vm.pagination.last_page > 1
+        ? _c(
+            "nav",
+            {
+              staticClass: "pagination",
+              attrs: { role: "navigation", "aria-label": "pagination" }
+            },
+            [
+              _vm.pagination.current_page > 1
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-previous",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page - 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Anterior")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.pagination.current_page < _vm.pagination.last_page
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-next",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "pagination-list" },
+                _vm._l(_vm.pagesNumber, function(page) {
+                  return _c("li", { key: page }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "pagination-link",
+                        class: [page == _vm.isActived ? "is-current" : ""],
+                        attrs: { "aria-label": "Goto page 1" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.changePage(page)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              " + _vm._s(page) + "\n            "
+                        )
+                      ]
+                    )
+                  ])
+                })
+              )
+            ]
+          )
+        : _vm._e()
     ])
   ])
 }
@@ -44556,12 +44702,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       paises: [],
-      name: null
+      pagination: {
+        'current_page': 0,
+        'per_page': 0,
+        'first_item': 0,
+        'last_item': 0,
+        'last_page': 0,
+        'total': 0
+      },
+      name: null,
+      offset: 3
     };
   },
   created: function created() {
@@ -44573,16 +44744,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getPaises();
     }
   },
+  computed: {
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    }
+  },
   methods: {
-    getPaises: function getPaises() {
+    getPaises: function getPaises(page) {
       var _this = this;
 
-      var url = 'paises/obtenerlistadopaises';
+      var url = 'paises/obtenerlistadopaises?page=' + page;
       axios.get(url, { params: { name: this.name } }).then(function (response) {
-        _this.paises = response.data;
-        var array = _this.paises;
-        console.log(array);
+        var array = response.data;
+        _this.pagination = array['paginate'];
+        _this.paises = array['paises']['data'];
       });
+    },
+    changePage: function changePage(page) {
+      this.pagination.current_page = page;
+      this.getPaises(page);
     }
   }
 });
@@ -44643,26 +44842,105 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: { href: "/paises/" + pais.codigo + "/editar" }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelPais", "attr-id": pais.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelPais",
+                        "attr-id": pais.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _vm.pagination.last_page > 1
+        ? _c(
+            "nav",
+            {
+              staticClass: "pagination",
+              attrs: { role: "navigation", "aria-label": "pagination" }
+            },
+            [
+              _vm.pagination.current_page > 1
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-previous",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page - 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Anterior")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.pagination.current_page < _vm.pagination.last_page
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-next",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "pagination-list" },
+                _vm._l(_vm.pagesNumber, function(page) {
+                  return _c("li", { key: page }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "pagination-link",
+                        class: [page == _vm.isActived ? "is-current" : ""],
+                        attrs: { "aria-label": "Goto page 1" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.changePage(page)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              " + _vm._s(page) + "\n            "
+                        )
+                      ]
+                    )
+                  ])
+                })
+              )
+            ]
+          )
+        : _vm._e()
     ])
   ])
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Funciones;
+use DB;
 use Illuminate\Http\Request;
 
 class FuncionesController extends Controller
@@ -69,10 +70,15 @@ class FuncionesController extends Controller
 		return response()->json($funciones);
     }
 	
-    public function obtenerListadoFunciones(Request $request){
-        $funciones = Funciones::where([
-            ['nombre', 'like', '%'.$request->input('name').'%' ],
-        ])->get();
-        return response()->json($funciones);
+    public function obtenerListadoFunciones(Request $request){		
+		$funciones = DB::table('funciones')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);		
+		return response()->json(['funciones'=>$funciones, 'paginate' => [
+                'total'         =>  $funciones->total(),
+                'current_page'  =>  $funciones->currentPage(),
+                'per_page'      =>  $funciones->perPage(),
+                'last_page'     =>  $funciones->lastPage(),
+                'from '         =>  $funciones->firstItem(),
+                'to'            =>  $funciones->lastPage()],
+				]);			
     }		
 }

@@ -95,7 +95,7 @@ export default {
   },  
   methods: {
     getRoles(page) {
-      var url = 'roles/obtenerlistadoroles?page='+page;               
+      var url = 'roles/obtenerlistadoroles?page='+page;
       axios.get(url, { params: { name: this.name }}).then(response => {
 		var array = response.data;
 		this.pagination = array['paginate'];
@@ -104,7 +104,7 @@ export default {
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getBarrios(page);
+      this.getRoles(page);
     }
   }
 }

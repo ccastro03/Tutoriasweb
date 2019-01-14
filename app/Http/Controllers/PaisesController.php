@@ -26,7 +26,7 @@ class PaisesController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:paises',
 			'nombre'=>'required',
 		]);
 		
@@ -69,7 +69,14 @@ class PaisesController extends Controller
     }
 	
     public function obtenerListadoPaises(Request $request){
-		$paises = DB::table('paises')->where('nombre', 'like', '%'.$request->input('name').'%')->get();
-        return response()->json($paises);
+		$paises = DB::table('paises')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);
+		return response()->json(['paises'=>$paises, 'paginate' => [
+                'total'         =>  $paises->total(),
+                'current_page'  =>  $paises->currentPage(),
+                'per_page'      =>  $paises->perPage(),
+                'last_page'     =>  $paises->lastPage(),
+                'from '         =>  $paises->firstItem(),
+                'to'            =>  $paises->lastPage()],
+				]);			
     }		
 }

@@ -109,7 +109,7 @@ return [
     ],
     'string'               => 'El campo :attribute debe ser una cadena de caracteres.',
     'timezone'             => 'El campo :attribute debe ser una zona horaria válida.',
-    'unique'               => 'El valor del campo :attribute ya está en uso.',
+    'unique'               => 'El valor del campo :attribute ya existe.',
     'uploaded'             => 'El campo :attribute no se pudo subir.',
     'url'                  => 'El formato del campo :attribute es inválido.',
     'phone'                 => 'El :attribute field es invalido.',

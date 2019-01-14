@@ -20,17 +20,17 @@
         <div class="columns">
 			<div class="column">
 				<label for="codigo" class="label">Codigo</label>
-				<input type="text" name="codigo" id="codigo" class="input {{ $errors->has('codigo') ? ' is-danger' : '' }}" value="{{ old('codigo') }}"placeholder="Ingrese el codigo">
+				<input type="text" name="codigo" id="codigo" class="input {{ $errors->has('codigo') ? ' is-danger' : '' }}" value="{{ old('codigo') }}" placeholder="Ingrese el codigo">
 				@if ($errors->has('codigo'))
 					<p class="help is-danger">{{ $errors->first('codigo') }}</p>
 				@endif
 			</div>
 			
 			<div class="column">
-				<label for="nombre" class="label">Nombre</label>
-				<input type="text" name="nombre" id="nombre" class="input {{ $errors->has('nombre') ? ' is-danger' : '' }}" value="{{ old('name') }}"placeholder="Ingrese el nombre">
-				@if ($errors->has('nombre'))
-					<p class="help is-danger">{{ $errors->first('nombre') }}</p>
+				<label for="name" class="label">Nombre</label>
+				<input type="text" name="name" id="name" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" value="{{ old('name') }}" placeholder="Ingrese el nombre">
+				@if ($errors->has('name'))
+					<p class="help is-danger">{{ $errors->first(name) }}</p>
 				@endif
 			</div>
 			

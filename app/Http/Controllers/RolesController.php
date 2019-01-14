@@ -26,15 +26,15 @@ class RolesController extends Controller
     public function store(Request $request)
     {
 		$data = request()->validate([
-			'codigo'=>'required',
-			'nombre'=>'required',
+			'codigo'=>'required|unique:roles',
+			'name'=>'required',
 			'descripcion'=>'required',
 		]);
 		
 		$role = new Role($data);
-        $role->codigo = $data['codigo'];
-		$role->name = $data['nombre'];
-        $role->descripcion = $data['descripcion'];		
+		$role->codigo = $data['codigo'];
+		$role->name = $data['name'];
+		$role->descripcion = $data['descripcion'];		
 		$role->save();
 		return redirect()->route('roles.index');
     }
@@ -70,9 +70,14 @@ class RolesController extends Controller
     }
 	
     public function obtenerListadoRoles(Request $request){
-        $role = DB::table('roles')->where([
-            ['name', 'like', '%'.$request->input('name').'%' ],
-        ])->get();
-        return response()->json($role);
+		$role = DB::table('roles')->where('name', 'like', '%'.$request->input('name').'%')->paginate(15);		
+		return response()->json(['role'=>$role, 'paginate' => [
+                'total'         =>  $role->total(),
+                'current_page'  =>  $role->currentPage(),
+                'per_page'      =>  $role->perPage(),
+                'last_page'     =>  $role->lastPage(),
+                'from '         =>  $role->firstItem(),
+                'to'            =>  $role->lastPage()],
+				]);		
     }		
 }

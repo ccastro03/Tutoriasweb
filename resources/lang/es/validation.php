@@ -130,13 +130,6 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
-
-    'beneficiarios' => [
-        'error' => [
-            'unique'    => 'Un beneficiario con estos datos ya se encuentra registrado',
-        ]
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -149,7 +142,7 @@ return [
     */
 
     'attributes' => [
-		'cod_ciudad'=>'ciudad',
+		'cod_ciudad'=>'codigo ciudad',
 		'cod_barrio'=>'codigo barrio'
 	],
 

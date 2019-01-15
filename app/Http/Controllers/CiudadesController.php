@@ -26,7 +26,7 @@ class CiudadesController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'cod_ciudad'=>'required',
+			'cod_ciudad'=>'required|unique:ciudades',
 			'nombre'=>'required',
 		]);
 		
@@ -64,12 +64,19 @@ class CiudadesController extends Controller
     public function eliminar()
     {
 		$cod_ciudad = $_GET["id"];
-		$ciudad = DB::table('ciudades')->where('codigo', '=', $id)->delete();
+		$ciudad = DB::table('ciudades')->where('cod_ciudad', '=', $cod_ciudad)->delete();
 		return response()->json($ciudad);
     }
 	
     public function obtenerListadoCiudades(Request $request){
-		$ciudades = DB::table('ciudades')->where('nombre', 'like', '%'.$request->input('name').'%')->get();
-        return response()->json($ciudades);
+		$ciudades = DB::table('ciudades')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);	
+		return response()->json(['ciudades'=>$ciudades, 'paginate' => [
+                'total'         =>  $ciudades->total(),
+                'current_page'  =>  $ciudades->currentPage(),
+                'per_page'      =>  $ciudades->perPage(),
+                'last_page'     =>  $ciudades->lastPage(),
+                'from '         =>  $ciudades->firstItem(),
+                'to'            =>  $ciudades->lastPage()],
+				]);		
     }		
 }

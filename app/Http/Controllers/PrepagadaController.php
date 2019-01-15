@@ -26,7 +26,7 @@ class PrepagadaController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:prepagada',
 			'nombre'=>'required',
 		]);
 		
@@ -69,7 +69,14 @@ class PrepagadaController extends Controller
     }
 	
     public function obtenerListadoPrepagada(Request $request){
-		$prepagada = DB::table('prepagada')->where('nombre', 'like', '%'.$request->input('name').'%')->get();
-        return response()->json($prepagada);
+		$prepagada = DB::table('prepagada')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);			
+		return response()->json(['prepagada'=>$prepagada, 'paginate' => [
+                'total'         =>  $prepagada->total(),
+                'current_page'  =>  $prepagada->currentPage(),
+                'per_page'      =>  $prepagada->perPage(),
+                'last_page'     =>  $prepagada->lastPage(),
+                'from '         =>  $prepagada->firstItem(),
+                'to'            =>  $prepagada->lastPage()],
+				]);		
     }		
 }

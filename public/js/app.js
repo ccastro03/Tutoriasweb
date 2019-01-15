@@ -43993,10 +43993,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -44118,18 +44114,6 @@ var render = function() {
                 _c("td", [_vm._v(_vm._s(role.descripcion))]),
                 _vm._v(" "),
                 _c("td", { staticStyle: { "text-align": "right" } }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: {
-                        href: "/roles/" + role.codigo + "/editar",
-                        hidden: ""
-                      }
-                    },
-                    [_vm._v("Editar")]
-                  ),
-                  _vm._v(" "),
                   _c(
                     "a",
                     {
@@ -45402,12 +45386,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       prepagada: [],
-      name: null
+      pagination: {
+        'current_page': 0,
+        'per_page': 0,
+        'first_item': 0,
+        'last_item': 0,
+        'last_page': 0,
+        'total': 0
+      },
+      name: null,
+      offset: 3
     };
   },
   created: function created() {
@@ -45419,15 +45428,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getPrepagada();
     }
   },
+  computed: {
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    }
+  },
   methods: {
-    getPrepagada: function getPrepagada() {
+    getPrepagada: function getPrepagada(page) {
       var _this = this;
 
-      var url = 'prepagada/obtenerlistadoprepagada';
+      var url = 'prepagada/obtenerlistadoprepagada?page=' + page;
       axios.get(url, { params: { name: this.name } }).then(function (response) {
-        _this.prepagada = response.data;
-        var array = _this.prepagada;
+        var array = response.data;
+        _this.pagination = array['paginate'];
+        _this.prepagada = array['prepagada']['data'];
       });
+    },
+    changePage: function changePage(page) {
+      this.pagination.current_page = page;
+      this.getPrepagada(page);
     }
   }
 });
@@ -45488,26 +45526,105 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: { href: "/prepagada/" + prepa.codigo + "/editar" }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelPrepa", "attr-id": prepa.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelPrepa",
+                        "attr-id": prepa.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _vm.pagination.last_page > 1
+        ? _c(
+            "nav",
+            {
+              staticClass: "pagination",
+              attrs: { role: "navigation", "aria-label": "pagination" }
+            },
+            [
+              _vm.pagination.current_page > 1
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-previous",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page - 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Anterior")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.pagination.current_page < _vm.pagination.last_page
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-next",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "pagination-list" },
+                _vm._l(_vm.pagesNumber, function(page) {
+                  return _c("li", { key: page }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "pagination-link",
+                        class: [page == _vm.isActived ? "is-current" : ""],
+                        attrs: { "aria-label": "Goto page 1" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.changePage(page)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              " + _vm._s(page) + "\n            "
+                        )
+                      ]
+                    )
+                  ])
+                })
+              )
+            ]
+          )
+        : _vm._e()
     ])
   ])
 }
@@ -45617,12 +45734,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       eps: [],
-      name: null
+      pagination: {
+        'current_page': 0,
+        'per_page': 0,
+        'first_item': 0,
+        'last_item': 0,
+        'last_page': 0,
+        'total': 0
+      },
+      name: null,
+      offset: 3
     };
   },
   created: function created() {
@@ -45634,16 +45774,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getEps();
     }
   },
+  computed: {
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    }
+  },
   methods: {
-    getEps: function getEps() {
+    getEps: function getEps(page) {
       var _this = this;
 
-      var url = 'eps/obtenerlistadoeps';
+      var url = 'eps/obtenerlistadoeps?page=' + page;
       axios.get(url, { params: { name: this.name } }).then(function (response) {
-        _this.eps = response.data;
-        var array = _this.eps;
-        console.log(array);
+        var array = response.data;
+        _this.pagination = array['paginate'];
+        _this.eps = array['eps']['data'];
       });
+    },
+    changePage: function changePage(page) {
+      this.pagination.current_page = page;
+      this.getEps(page);
     }
   }
 });
@@ -45704,26 +45872,105 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: { href: "/eps/" + ep.codigo + "/editar" }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelEps", "attr-id": ep.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelEps",
+                        "attr-id": ep.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _vm.pagination.last_page > 1
+        ? _c(
+            "nav",
+            {
+              staticClass: "pagination",
+              attrs: { role: "navigation", "aria-label": "pagination" }
+            },
+            [
+              _vm.pagination.current_page > 1
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-previous",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page - 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Anterior")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.pagination.current_page < _vm.pagination.last_page
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "pagination-next",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changePage(_vm.pagination.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "pagination-list" },
+                _vm._l(_vm.pagesNumber, function(page) {
+                  return _c("li", { key: page }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "pagination-link",
+                        class: [page == _vm.isActived ? "is-current" : ""],
+                        attrs: { "aria-label": "Goto page 1" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.changePage(page)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              " + _vm._s(page) + "\n            "
+                        )
+                      ]
+                    )
+                  ])
+                })
+              )
+            ]
+          )
+        : _vm._e()
     ])
   ])
 }

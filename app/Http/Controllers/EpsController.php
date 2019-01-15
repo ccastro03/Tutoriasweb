@@ -26,7 +26,7 @@ class EpsController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:eps',
 			'nombre'=>'required',
 		]);
 		
@@ -69,7 +69,14 @@ class EpsController extends Controller
     }
 	
     public function obtenerListadoEps(Request $request){
-		$eps = DB::table('eps')->where('nombre', 'like', '%'.$request->input('name').'%')->get();
-        return response()->json($eps);
+		$eps = DB::table('eps')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);
+		return response()->json(['eps'=>$eps, 'paginate' => [
+                'total'         =>  $eps->total(),
+                'current_page'  =>  $eps->currentPage(),
+                'per_page'      =>  $eps->perPage(),
+                'last_page'     =>  $eps->lastPage(),
+                'from '         =>  $eps->firstItem(),
+                'to'            =>  $eps->lastPage()],
+				]);
     }		
 }

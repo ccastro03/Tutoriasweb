@@ -28,7 +28,7 @@ class BarriosController extends Controller
     {	
 		$data = request()->validate([
 			'cod_ciudad'=>'required',
-			'cod_barrio'=>'required',
+			'cod_barrio'=>'required|unique:barrios',
 			'nombre'=>'required',
 		]);
 

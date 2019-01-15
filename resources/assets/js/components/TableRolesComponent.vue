@@ -16,12 +16,8 @@
             <td><a :href="'/roles/' + role.codigo">{{ role.name }}</a></td>
             <td>{{ role.descripcion }}</td>
 			
-            <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/roles/' + role.codigo + '/editar'" hidden>Editar</a>
-				
-				<a :href="'/roles/' + role.codigo + '/editar'" style="color: #000;">
-				<span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
-				</a>
+            <td style="text-align: right;">				
+				<a :href="'/roles/' + role.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelRol" :attr-id="role.codigo"></span></a>				
 			</td>

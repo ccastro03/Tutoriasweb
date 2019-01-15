@@ -15,13 +15,27 @@
           <tr v-for="ep in eps" :key="ep.codigo">           
             <td><a :href="'/eps/' + ep.codigo">{{ ep.codigo }}</a></td>
             <td>{{ ep.nombre }}</td>
-            <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/eps/' + ep.codigo + '/editar'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" id="BtnDelEps" :attr-id="ep.codigo" >Eliminar</a>
+            <td style="text-align: right;">				
+				<a :href="'/eps/' + ep.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelEps" :attr-id="ep.codigo"></span></a>				
 			</td>
           </tr>
         </tbody>
       </table>
+	  
+      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
+        <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
+        <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
+        <ul class="pagination-list">
+          <li v-for="page in pagesNumber" :key="page">
+            <a class="pagination-link" @click.prevent="changePage(page)" aria-label="Goto page 1" v-bind:class="[ page == isActived ? 'is-current' : '']">
+              {{ page }}
+            </a>
+          </li>          
+        </ul>
+      </nav>
+	  
     </div>
   </div>
 </template>
@@ -31,7 +45,16 @@ export default {
   data() {
     return {
       eps: [],
+      pagination: {
+        'current_page' : 0,
+        'per_page' : 0,
+        'first_item':  0,
+        'last_item': 0,
+        'last_page': 0,                    
+        'total': 0,
+      },	  
       name: null,
+	  offset: 3,
     }
   },
   created() {
@@ -42,14 +65,42 @@ export default {
       this.getEps();				
     }
   },
+	computed:  {
+    isActived: function() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function() {
+      if(!this.pagination.to){
+        return [];
+      }
+      var from = this.pagination.current_page - this.offset;
+      if( from < 1){
+        from = 1;
+      }
+      var to = from + (this.offset * 2);
+      if(to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+      var pagesArray = [];
+      while( from <= to ){
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    },
+  },
   methods: {
-    getEps() {
-      var url = 'eps/obtenerlistadoeps';                
+    getEps(page) {
+      var url = 'eps/obtenerlistadoeps?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
-        this.eps = response.data;
-        var array = this.eps;
-		console.log(array);
+		var array = response.data;
+		this.pagination = array['paginate'];
+		this.eps = array['eps']['data'];
       });
+    },
+    changePage(page) {
+      this.pagination.current_page = page;
+      this.getEps(page);
     }
   }
 }

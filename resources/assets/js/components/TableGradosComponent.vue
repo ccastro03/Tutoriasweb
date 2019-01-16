@@ -15,15 +15,16 @@
           <tr v-for="grado in grados" :key="grado.codigo">
             <td><a :href="'/grados/' + grado.codigo">{{ grado.codigo }}</a></td>
 			<td>{{ grado.nombre }}</td>
-            <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/grados/' + grado.codigo + '/editar'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" id="BtnDelGrad" :attr-id="grado.codigo" >Eliminar</a>
+            <td style="text-align: right;">				
+				<a :href="'/grados/' + grado.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelGrad" :attr-id="grado.codigo"></span></a>				
 			</td>
           </tr>
         </tbody>
       </table> 
 
-      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.total != 0">
+      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
         <ul class="pagination-list">

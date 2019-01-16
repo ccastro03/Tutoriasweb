@@ -26,7 +26,7 @@ class AseguradoraController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:aseguradora',
 			'nombre'=>'required',
 		]);
 		
@@ -69,7 +69,7 @@ class AseguradoraController extends Controller
     }
 	
     public function obtenerListadoAseguradoras(Request $request){
-		$aseguradora = DB::table('aseguradora')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(10);
+		$aseguradora = DB::table('aseguradora')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);
         return response()->json(['aseguradora'=>$aseguradora, 'paginate' => [
                 'total'         =>  $aseguradora->total(),
                 'current_page'  =>  $aseguradora->currentPage(),

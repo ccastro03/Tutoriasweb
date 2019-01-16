@@ -26,7 +26,7 @@ class EspecialidadesController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:especialidades',
 			'nombre'=>'required',
 		]);
 		

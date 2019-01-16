@@ -16,14 +16,15 @@
             <td><a :href="'/generos/' + genero.codigo">{{ genero.codigo }}</a></td>
 			<td>{{ genero.nombre }}</td>
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/generos/' + genero.codigo + '/editar'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" id="BtnDelGen" :attr-id="genero.codigo" >Eliminar</a>
+				<a :href="'/generos/' + genero.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelGen" :attr-id="genero.codigo"></span></a>
 			</td>
           </tr>
         </tbody>
-      </table> 
-
-      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.total != 0">
+      </table>
+	  
+      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
         <ul class="pagination-list">

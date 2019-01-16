@@ -15,15 +15,16 @@
           <tr v-for="etnia in etnias" :key="etnia.codigo">
             <td><a :href="'/etnias/' + etnia.codigo">{{ etnia.codigo }}</a></td>
 			<td>{{ etnia.nombre }}</td>
-            <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/etnias/' + etnia.codigo + '/editar'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" id="BtnDelEtni" :attr-id="etnia.codigo" >Eliminar</a>
+            <td style="text-align: right;">				
+				<a :href="'/etnias/' + etnia.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelEtni" :attr-id="etnia.codigo"></span></a>
 			</td>
           </tr>
         </tbody>
-      </table> 
-
-      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.total != 0">
+      </table>
+	  
+      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
         <ul class="pagination-list">

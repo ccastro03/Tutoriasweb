@@ -26,7 +26,7 @@ class SedesController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:sedes',
 			'nombre'=>'required',
 		]);
 		

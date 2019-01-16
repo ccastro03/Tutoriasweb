@@ -26,7 +26,7 @@ class EtniasController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:etnias',
 			'nombre'=>'required',
 		]);
 		

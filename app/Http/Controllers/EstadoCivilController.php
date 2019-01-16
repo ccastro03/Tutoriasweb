@@ -26,7 +26,7 @@ class EstadoCivilController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:estadocivil',
 			'nombre'=>'required',
 		]);
 		

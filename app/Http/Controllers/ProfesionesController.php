@@ -26,7 +26,7 @@ class ProfesionesController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:profesiones',
 			'nombre'=>'required',
 		]);
 		
@@ -69,7 +69,7 @@ class ProfesionesController extends Controller
     }
 	
     public function obtenerListadoProfesiones(Request $request){
-		$profesiones = DB::table('profesiones')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(10);
+		$profesiones = DB::table('profesiones')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);
         return response()->json(['profesiones'=>$profesiones, 'paginate' => [
                 'total'         =>  $profesiones->total(),
                 'current_page'  =>  $profesiones->currentPage(),

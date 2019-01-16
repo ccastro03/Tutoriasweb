@@ -26,7 +26,7 @@ class GenerosController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:generos',
 			'nombre'=>'required',
 		]);
 		
@@ -69,7 +69,7 @@ class GenerosController extends Controller
     }
 	
     public function obtenerListadoGeneros(Request $request){
-		$generos = DB::table('generos')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(10);
+		$generos = DB::table('generos')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);
         return response()->json(['generos'=>$generos, 'paginate' => [
                 'total'         =>  $generos->total(),
                 'current_page'  =>  $generos->currentPage(),

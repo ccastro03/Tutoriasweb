@@ -26,7 +26,7 @@ class TipoDocumentosController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:tipodocumentos',
 			'nombre'=>'required',
 		]);
 		
@@ -69,7 +69,7 @@ class TipoDocumentosController extends Controller
     }
 	
     public function obtenerListadoTipoDocumentos(Request $request){
-		$tipodocumentos = DB::table('tipodocumentos')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(10);
+		$tipodocumentos = DB::table('tipodocumentos')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);
         return response()->json(['tipodocumentos'=>$tipodocumentos, 'paginate' => [
                 'total'         =>  $tipodocumentos->total(),
                 'current_page'  =>  $tipodocumentos->currentPage(),

@@ -26,7 +26,7 @@ class GradosController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:grados',
 			'nombre'=>'required',
 		]);
 		
@@ -69,7 +69,7 @@ class GradosController extends Controller
     }
 	
     public function obtenerListadoGrados(Request $request){
-		$grados = DB::table('grados')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(10);
+		$grados = DB::table('grados')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);
         return response()->json(['grados'=>$grados, 'paginate' => [
                 'total'         =>  $grados->total(),
                 'current_page'  =>  $grados->currentPage(),

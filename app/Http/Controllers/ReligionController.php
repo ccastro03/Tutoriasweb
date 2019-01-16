@@ -26,7 +26,7 @@ class ReligionController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:religion',
 			'nombre'=>'required',
 		]);
 		
@@ -69,7 +69,7 @@ class ReligionController extends Controller
     }
 	
     public function obtenerListadoReligiones(Request $request){
-		$religion = DB::table('religion')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(10);
+		$religion = DB::table('religion')->where('nombre', 'like', '%'.$request->input('name').'%')->paginate(15);
         return response()->json(['religion'=>$religion, 'paginate' => [
                 'total'         =>  $religion->total(),
                 'current_page'  =>  $religion->currentPage(),

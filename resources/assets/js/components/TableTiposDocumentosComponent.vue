@@ -16,14 +16,15 @@
             <td><a :href="'/tipodocumentos/' + tpdocu.codigo">{{ tpdocu.codigo }}</a></td>
 			<td>{{ tpdocu.nombre }}</td>
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/tipodocumentos/' + tpdocu.codigo + '/editar'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" id="BtnDelTpDocu" :attr-id="tpdocu.codigo" >Eliminar</a>
+				<a :href="'/tipodocumentos/' + tpdocu.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelTpDocu" :attr-id="tpdocu.codigo"></span></a>
 			</td>
           </tr>
         </tbody>
-      </table> 
-
-      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.total != 0">
+      </table>
+	  
+      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
         <ul class="pagination-list">

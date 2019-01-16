@@ -26,7 +26,7 @@ class JornadasController extends Controller
     public function store(Request $request)
     {	
 		$data = request()->validate([
-			'codigo'=>'required',
+			'codigo'=>'required|unique:jornadas',
 			'nombre'=>'required',
 		]);
 		

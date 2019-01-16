@@ -16,14 +16,15 @@
             <td><a :href="'/profesiones/' + profesion.codigo">{{ profesion.codigo }}</a></td>
 			<td>{{ profesion.nombre }}</td>
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/profesiones/' + profesion.codigo + '/editar'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" id="BtnDelProfes" :attr-id="profesion.codigo" >Eliminar</a>
+				<a :href="'/profesiones/' + profesion.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelProfes" :attr-id="profesion.codigo"></span></a>
 			</td>
           </tr>
         </tbody>
-      </table> 
-
-      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.total != 0">
+      </table>
+	  
+      <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
         <ul class="pagination-list">

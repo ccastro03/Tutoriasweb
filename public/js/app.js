@@ -46484,6 +46484,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -46608,20 +46609,28 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: { href: "/sedes/" + sede.codigo + "/editar" }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelSed", "attr-id": sede.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelSed",
+                        "attr-id": sede.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
@@ -46629,7 +46638,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.pagination.total != 0
+      _vm.pagination.last_page > 1
         ? _c(
             "nav",
             {
@@ -46821,6 +46830,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -46949,20 +46959,28 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: { href: "/jornadas/" + jornada.codigo + "/editar" }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelJor", "attr-id": jornada.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelJor",
+                        "attr-id": jornada.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
@@ -46970,7 +46988,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.pagination.total != 0
+      _vm.pagination.last_page > 1
         ? _c(
             "nav",
             {
@@ -47162,6 +47180,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -47286,20 +47305,28 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: { href: "/grados/" + grado.codigo + "/editar" }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelGrad", "attr-id": grado.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelGrad",
+                        "attr-id": grado.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
@@ -47307,7 +47334,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.pagination.total != 0
+      _vm.pagination.last_page > 1
         ? _c(
             "nav",
             {
@@ -47499,6 +47526,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -47623,20 +47651,28 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: { href: "/etnias/" + etnia.codigo + "/editar" }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelEtni", "attr-id": etnia.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelEtni",
+                        "attr-id": etnia.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
@@ -47644,7 +47680,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.pagination.total != 0
+      _vm.pagination.last_page > 1
         ? _c(
             "nav",
             {
@@ -47836,6 +47872,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -47964,22 +48001,30 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: {
                         href: "/religion/" + religion.codigo + "/editar"
                       }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelReli", "attr-id": religion.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelReli",
+                        "attr-id": religion.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
@@ -47987,7 +48032,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.pagination.total != 0
+      _vm.pagination.last_page > 1
         ? _c(
             "nav",
             {
@@ -48179,6 +48224,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -48309,22 +48355,30 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: {
                         href: "/aseguradora/" + aseguradora.codigo + "/editar"
                       }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelAseg", "attr-id": aseguradora.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelAseg",
+                        "attr-id": aseguradora.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
@@ -48332,7 +48386,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.pagination.total != 0
+      _vm.pagination.last_page > 1
         ? _c(
             "nav",
             {
@@ -49354,6 +49408,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -49484,22 +49539,30 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: {
                         href: "/tipodocumentos/" + tpdocu.codigo + "/editar"
                       }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelTpDocu", "attr-id": tpdocu.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelTpDocu",
+                        "attr-id": tpdocu.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
@@ -49507,7 +49570,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.pagination.total != 0
+      _vm.pagination.last_page > 1
         ? _c(
             "nav",
             {
@@ -49699,6 +49762,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -49827,20 +49891,28 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: { href: "/generos/" + genero.codigo + "/editar" }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelGen", "attr-id": genero.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelGen",
+                        "attr-id": genero.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
@@ -49848,7 +49920,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.pagination.total != 0
+      _vm.pagination.last_page > 1
         ? _c(
             "nav",
             {
@@ -50040,6 +50112,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -50170,22 +50243,30 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: {
                         href: "/profesiones/" + profesion.codigo + "/editar"
                       }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelProfes", "attr-id": profesion.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelProfes",
+                        "attr-id": profesion.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
@@ -50193,7 +50274,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.pagination.total != 0
+      _vm.pagination.last_page > 1
         ? _c(
             "nav",
             {
@@ -50385,6 +50466,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -50517,26 +50599,31 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: {
                         href:
                           "/especialidades/" + especialidad.codigo + "/editar"
                       }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
                       attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
                         id: "BtnDelEspe",
                         "attr-id": especialidad.codigo
                       }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                    })
+                  ])
                 ])
               ])
             })
@@ -50544,7 +50631,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.pagination.total != 0
+      _vm.pagination.last_page > 1
         ? _c(
             "nav",
             {
@@ -50736,6 +50823,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -50866,22 +50954,30 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "button is-link is-rounded is-outlined",
+                      staticStyle: { color: "#000" },
                       attrs: {
                         href: "/estadocivil/" + estciv.codigo + "/editar"
                       }
                     },
-                    [_vm._v("Editar")]
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-pencil",
+                        attrs: { title: "Editar", "aria-hidden": "true" }
+                      })
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { id: "BtnDelEstCiv", "attr-id": estciv.codigo }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                  _vm._v("\n\t\t\t\t    \n\t\t\t\t"),
+                  _c("a", { staticStyle: { color: "#000" } }, [
+                    _c("span", {
+                      staticClass: "oi oi-trash",
+                      attrs: {
+                        title: "Eliminar",
+                        "aria-hidden": "true",
+                        id: "BtnDelEstCiv",
+                        "attr-id": estciv.codigo
+                      }
+                    })
+                  ])
                 ])
               ])
             })
@@ -50889,7 +50985,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.pagination.total != 0
+      _vm.pagination.last_page > 1
         ? _c(
             "nav",
             {

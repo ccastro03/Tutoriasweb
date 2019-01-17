@@ -109,7 +109,8 @@
 
 						<div class="column is-one-quarter">
 							<label class="label">Correo electrónico</label>
-							<input type="email" id="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" >
+							<input type="email" id="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" onchange="ValEmail();">
+							<p class="help is-danger" id="ErrMailEstu" hidden>Debe digitar un e-mail valido *</p>
 						</div>
 
 						<div class="column is-one-fifth" style="width: 190px">
@@ -423,8 +424,9 @@
 					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Correo electrónico</label>
-							<input type="email" id="mailres" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" >
+							<input type="email" id="mailres" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" onchange="ValEmailRes();">
 							<p class="help is-danger" id="ErrMailres" hidden>Campo obligatorio *</p>
+							<p class="help is-danger" id="ErrMailRes" hidden>Debe digitar un e-mail valido *</p>							
 						</div>
 						
 						<div class="column is-one-fifth">
@@ -605,8 +607,9 @@
 					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Correo electrónico</label>
-							<input type="email" id="mailacu" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" >
+							<input type="email" id="mailacu" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" onchange="ValEmailAcu();">
 							<p class="help is-danger" id="ErrMailacu" hidden>Campo obligatorio *</p>
+							<p class="help is-danger" id="ErrMailAcu" hidden>Debe digitar un e-mail valido *</p>
 						</div>
 						
 						<div class="column is-one-fifth">
@@ -771,5 +774,59 @@
 			}
 		}
 	});	
+	
+	function ValEmail(){
+		var mailestu = $("#email").val();
+		var ext = mailestu.search("@");
+		if(ext == -1){
+			$("#ErrMailEstu").removeAttr('hidden');
+			$("#email").focus();
+		}else{
+			$("#ErrMailEstu").attr('hidden','hidden');
+			var ext = mailestu.search(".com");
+			if(ext == -1){
+				$("#ErrMailEstu").removeAttr('hidden');
+				$("#email").focus();
+			}else{
+				$("#ErrMailEstu").attr('hidden','hidden');
+		}			
+		}
+	}
+
+	function ValEmailRes(){
+		var mailestu = $("#mailres").val();
+		var ext = mailestu.search("@");
+		if(ext == -1){
+			$("#ErrMailRes").removeAttr('hidden');
+			$("#mailres").focus();
+		}else{
+			$("#ErrMailRes").attr('hidden','hidden');
+			var ext = mailestu.search(".com");
+			if(ext == -1){
+				$("#ErrMailRes").removeAttr('hidden');
+				$("#mailres").focus();
+			}else{
+				$("#ErrMailRes").attr('hidden','hidden');
+		}			
+		}
+	}
+
+	function ValEmailAcu(){
+		var mailestu = $("#mailacu").val();
+		var ext = mailestu.search("@");
+		if(ext == -1){
+			$("#ErrMailAcu").removeAttr('hidden');
+			$("#mailacu").focus();
+		}else{
+			$("#ErrMailAcu").attr('hidden','hidden');
+			var ext = mailestu.search(".com");
+			if(ext == -1){
+				$("#ErrMailAcu").removeAttr('hidden');
+				$("#mailacu").focus();
+			}else{
+				$("#ErrMailAcu").attr('hidden','hidden');
+		}			
+		}
+	}	
 </script>
 @endsection

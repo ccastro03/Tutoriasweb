@@ -700,7 +700,7 @@ class InscripcionController extends Controller
 		$tipodocumentos = DB::table('tipodocumentos')->get();
 		$profesiones = DB::table('profesiones')->get();
 		$especialidades = DB::table('especialidades')->get();
-		$estcivil = DB::table('estcivil')->get();		
+		$estcivil = DB::table('estcivil')->get();
 		
 		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $codest)->get();
 		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $codest)->where('cod_rol', '=', '04')->get();
@@ -728,6 +728,6 @@ class InscripcionController extends Controller
 		'estcivil' => ($estcivil)
 		]);
         return $pdf->stream('Reporte Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
-		// return view('admin.reportes.reporte', ['estudiante' => ($estudiante),'responsable' => ($responsable),'acudiente' => ($acudiente)]);
+		//return view('admin.reportes.reporte', ['estudiante' => ($estudiante),'responsable' => ($responsable),'acudiente' => ($acudiente)]);
 	}	
 }

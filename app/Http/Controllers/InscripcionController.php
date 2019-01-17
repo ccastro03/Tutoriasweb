@@ -223,10 +223,9 @@ class InscripcionController extends Controller
 		
 		$VerExist = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['numdocumento'])->exists();
 		if($VerExist == true){
-			$Respuesta = array("0", "El estudiante con numero de documento ".$ArrDatos['numdocumento'].",ya existe");
+			$Respuesta = array("0", "El estudiante con numero de documento ".$ArrDatos['numdocumento'].",ya existe, ¿Desea actualizar la informaciòn?");			
 			return response()->json($Respuesta);
 		}else{
-		
 			$codbdEst = DB::table('estudiantes')->select('codigo_est')->orderBy('codigo_est', 'desc')->get();
 			if(count($codbdEst) == 0){
 				$codigoEst = '20190000';
@@ -326,125 +325,329 @@ class InscripcionController extends Controller
 			return response()->json($Respuesta);			
 		}
     }
+	
+	public function actualizarEstudiante(Request $request)
+    {
+		$ArrDatos = $_GET["ArrDatos"];
+		$Exist = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['numdocumento'])->exists();
+		if($Exist == true){
+			$usuario = strtolower($ArrDatos['nombre'])."_".strtolower($ArrDatos['apellido1'])."@tw.com";
+			$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
+			
+			if($ExtUsu == true){
+				$usuario = "";
+				$usuario = strtolower($ArrDatos['nombre'])."_".strtolower($ArrDatos['apellido1'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
+				$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
+				
+				if($ExtUsu2 == true){
+					$usuario = strtolower($ArrDatos['nombre'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
+					$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
+					
+					if($ExtUsu3 == true){
+						$usuario = strtolower($ArrDatos['nombre'])."_".substr(str_shuffle("0123456789"), 0, 4);
+					}
+				}
+			}
+			
+			$nom1 = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['numdocumento'])->get();
+			
+			$UdpEstu = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['numdocumento'])->update([
+			'tipodocumento' => $ArrDatos['tipdocu'],
+			'nombre' => $ArrDatos['nombre'],
+			'apellido1' => $ArrDatos['apellido1'],
+			'apellido2' => $ArrDatos['apellido2'],
+			'direccion' => $ArrDatos['direccion'],
+			'barrio' => $ArrDatos['barrio'],
+			'numtelefono' => $ArrDatos['numfijo'],
+			'numcelular' => $ArrDatos['numcelular'],
+			'genero' => $ArrDatos['genero'],
+			'email' => $ArrDatos['email'],
+			'fechanace' => date($ArrDatos['fecha_nace']),
+			'cod_ciu_nace' => $ArrDatos['ciunace'],
+			'cod_pais_nace' => $ArrDatos['painace'],
+			'tiposangre' => $ArrDatos['tiprh'],
+			'sede' => $ArrDatos['sede'],
+			'grado' => $ArrDatos['grado'],
+			'jornada' => $ArrDatos['jornada'],
+			'cobertura' => $ArrDatos['cobertura'],
+			'grpetnico' => $ArrDatos['etnia'],
+			'desplazado' => $ArrDatos['desplaza'],
+			'sisben' => $ArrDatos['sisben'],
+			'nvlsisben' => $ArrDatos['sisnvl'],
+			'cod_eps' => $ArrDatos['eps'],
+			'cod_prepagada' => $ArrDatos['prepagada'],
+			'cod_ciud_proced' => $ArrDatos['ciuproce'],
+			'cole_proced' => $ArrDatos['colproce'],
+			'cod_religion' => $ArrDatos['religion'],
+			'segurovida' => $ArrDatos['segvida'],
+			'asegurador' => $ArrDatos['aseguradora'],
+			'otra_eps' => $ArrDatos['otra_eps'],
+			'otra_prepagada' => $ArrDatos['otra_prepagada'],
+			'otra_asegurador' => $ArrDatos['otra_asegurador'],
+			'otra_religion' => $ArrDatos['otra_religion'],
+			'observacion' => $ArrDatos['obsporque'],
+			'cod_usuario' => $usuario,
+			]);
+			
+			$nombre = strtolower($nom1[0]->nombre)." ".strtolower($nom1[0]->apellido1)." ".strtolower($nom1[0]->apellido2);
+			$udpUser = DB::table('users')->where('name', '=', $nombre)->update([
+				'name' => strtolower($ArrDatos['nombre'])." ".strtolower($ArrDatos['apellido1'])." ".strtolower($ArrDatos['apellido2']),
+				'email' => $usuario,
+			]);			
+			
+			$Respuesta = array($UdpEstu, "Estudiante actualizado correctamente.",$nombre);			
+			return response()->json($Respuesta);
+		}		
+	}
 
     public function validarResponsable(Request $request)
     {
 		$ArrDatos = $_GET["ArrDatos"];
+		$VerExist = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocures'])->exists();
+		if($VerExist == true){
+			$Respuesta = array("0", "El responsable con numero de documento ".$ArrDatos['numdocures'].",ya existe, ¿Desea actualizar la informaciòn?");			
+			return response()->json($Respuesta);
+		}else{		
 		
-		$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."@tw.com";
-		$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
-		
-		if($ExtUsu == true){
-			$usuario = "";
-			$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."_".strtolower($ArrDatos['apelres2'])."@tw.com";
-			$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
+			$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."@tw.com";
+			$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
 			
-			if($ExtUsu2 == true){
-				$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
-				$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
+			if($ExtUsu == true){
+				$usuario = "";
+				$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."_".strtolower($ArrDatos['apelres2'])."@tw.com";
+				$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
 				
-				if($ExtUsu3 == true){
-					$usuario = strtolower($ArrDatos['nomres'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
+				if($ExtUsu2 == true){
+					$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
+					$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
+					
+					if($ExtUsu3 == true){
+						$usuario = strtolower($ArrDatos['nomres'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
+					}
 				}
 			}
+			
+			$responsable = DB::table('responsables')->insert([
+			'tipodocumento' => $ArrDatos['tipdocures'],
+			'numdocumento' => $ArrDatos['numdocures'],
+			'nombre' => $ArrDatos['nomres'],
+			'apellido1' => $ArrDatos['apelres1'],
+			'apellido2' => $ArrDatos['apelres2'],
+			'cod_pais_nace' => $ArrDatos['painaceres'],			
+			'cod_estcivi' => $ArrDatos['tipestciv'],
+			'direccion' => $ArrDatos['direcres'],
+			'numtelefono' => $ArrDatos['fijores'],
+			'numcelular' => $ArrDatos['celures'],
+			'email' => $ArrDatos['mailres'],
+			'cod_profesion' => $ArrDatos['proferes'],
+			'cod_especialidad' => $ArrDatos['esperes'],
+			'empresa' => $ArrDatos['empreres'],
+			'cargo' => $ArrDatos['cargres'],
+			'dirempresa' => $ArrDatos['dirempres'],
+			'telempresa' => $ArrDatos['telempres'],
+			'exalumno' => $ArrDatos['exalumres'],
+			'notifica' => $ArrDatos['notires'],
+			'otra_profesion' => $ArrDatos['otproferes'],
+			'otra_especialidad' => $ArrDatos['otesperes'],
+			'cod_rol' => '04', //Rol responsable
+			'cod_estudiante' => $ArrDatos['codigoest']
+			]);
+			
+			$user = DB::table('users')->insert([
+			'name' => strtolower($ArrDatos['nomres'])." ".strtolower($ArrDatos['apelres1'])." ".strtolower($ArrDatos['apelres2']),
+			'email' => $usuario,
+			'password' => bcrypt('secret'),
+			'estado' => '0',
+			'cod_rol' => '04'  //Rol responsable
+			]);
+			$Respuesta = array($responsable, "Responsable agregado corectamente", $usuario);
+			return response()->json($Respuesta);
 		}
-		
-		$responsable = DB::table('responsables')->insert([
-		'tipodocumento' => $ArrDatos['tipdocures'],
-		'numdocumento' => $ArrDatos['numdocures'],
-		'nombre' => $ArrDatos['nomres'],
-		'apellido1' => $ArrDatos['apelres1'],
-		'apellido2' => $ArrDatos['apelres2'],
-		'cod_pais_nace' => $ArrDatos['painaceres'],			
-		'cod_estcivi' => $ArrDatos['tipestciv'],
-		'direccion' => $ArrDatos['direcres'],
-		'numtelefono' => $ArrDatos['fijores'],
-		'numcelular' => $ArrDatos['celures'],
-		'email' => $ArrDatos['mailres'],
-		'cod_profesion' => $ArrDatos['proferes'],
-		'cod_especialidad' => $ArrDatos['esperes'],
-		'empresa' => $ArrDatos['empreres'],
-		'cargo' => $ArrDatos['cargres'],
-		'dirempresa' => $ArrDatos['dirempres'],
-		'telempresa' => $ArrDatos['telempres'],
-		'exalumno' => $ArrDatos['exalumres'],
-		'notifica' => $ArrDatos['notires'],
-		'otra_profesion' => $ArrDatos['otproferes'],
-		'otra_especialidad' => $ArrDatos['otesperes'],
-		'cod_rol' => '04', //Rol responsable
-		'cod_estudiante' => $ArrDatos['codigoest']
-		]);
-		
-		$user = DB::table('users')->insert([
-		'name' => strtolower($ArrDatos['nomres'])." ".strtolower($ArrDatos['apelres1'])." ".strtolower($ArrDatos['apelres2']),
-		'email' => $usuario,
-		'password' => bcrypt('secret'),
-		'estado' => '0',
-		'cod_rol' => '04'  //Rol responsable
-		]);
-		$Respuesta = array($responsable, "Responsable agregado corectamente", $usuario);
-		return response()->json($Respuesta);
     }
+	
+	public function actualizarResponsable(Request $request)
+    {
+		$ArrDatos = $_GET["ArrDatos"];
+		$Exist = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocures'])->exists();
+		if($Exist == true){
+			$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."@tw.com";
+			$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
+			
+			if($ExtUsu == true){
+				$usuario = "";
+				$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."_".strtolower($ArrDatos['apelres2'])."@tw.com";
+				$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
+				
+				if($ExtUsu2 == true){
+					$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
+					$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
+					
+					if($ExtUsu3 == true){
+						$usuario = strtolower($ArrDatos['nomres'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
+					}
+				}
+			}
+			
+			$nom1 = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocures'])->get();
+			
+			$UdpEstu = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocures'])->update([
+				'tipodocumento' => $ArrDatos['tipdocures'],
+				'nombre' => $ArrDatos['nomres'],
+				'apellido1' => $ArrDatos['apelres1'],
+				'apellido2' => $ArrDatos['apelres2'],
+				'cod_pais_nace' => $ArrDatos['painaceres'],			
+				'cod_estcivi' => $ArrDatos['tipestciv'],
+				'direccion' => $ArrDatos['direcres'],
+				'numtelefono' => $ArrDatos['fijores'],
+				'numcelular' => $ArrDatos['celures'],
+				'email' => $ArrDatos['mailres'],
+				'cod_profesion' => $ArrDatos['proferes'],
+				'cod_especialidad' => $ArrDatos['esperes'],
+				'empresa' => $ArrDatos['empreres'],
+				'cargo' => $ArrDatos['cargres'],
+				'dirempresa' => $ArrDatos['dirempres'],
+				'telempresa' => $ArrDatos['telempres'],
+				'exalumno' => $ArrDatos['exalumres'],
+				'notifica' => $ArrDatos['notires'],
+				'otra_profesion' => $ArrDatos['otproferes'],
+				'otra_especialidad' => $ArrDatos['otesperes']
+			]);
+			
+			$nombre = strtolower($nom1[0]->nombre)." ".strtolower($nom1[0]->apellido1)." ".strtolower($nom1[0]->apellido2);
+			$udpUser = DB::table('users')->where('name', '=', $nombre)->update([
+				'name' => strtolower($ArrDatos['nomres'])." ".strtolower($ArrDatos['apelres1'])." ".strtolower($ArrDatos['apelres2']),
+				'email' => $usuario,
+			]);			
+			
+			$Respuesta = array($UdpEstu, "Responsable actualizado correctamente.",$nombre);			
+			return response()->json($Respuesta);
+		}		
+	}
 
     public function validarAcudiente(Request $request)
     {
 		$ArrDatos = $_GET["ArrDatos"];
 		
-		$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."@tw.com";
-		$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
-		
-		if($ExtUsu == true){
-			$usuario = "";
-			$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
-			$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
+		$VerExist = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocuacu'])->exists();
+		if($VerExist == true){
+			$Respuesta = array("0", "El acudiente con numero de documento ".$ArrDatos['numdocuacu'].",ya existe, ¿Desea actualizar la informaciòn?");			
+			return response()->json($Respuesta);
+		}else{		
+			$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."@tw.com";
+			$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
 			
-			if($ExtUsu2 == true){
-				$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
-				$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
+			if($ExtUsu == true){
+				$usuario = "";
+				$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
+				$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
 				
-				if($ExtUsu3 == true){
-					$usuario = strtolower($ArrDatos['nomacu'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
+				if($ExtUsu2 == true){
+					$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
+					$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
+					
+					if($ExtUsu3 == true){
+						$usuario = strtolower($ArrDatos['nomacu'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
+					}
 				}
 			}
+			
+			$acudiente = DB::table('responsables')->insert([
+			'tipodocumento' => $ArrDatos['tipdocuacu'],
+			'numdocumento' => $ArrDatos['numdocuacu'],
+			'nombre' => $ArrDatos['nomacu'],
+			'apellido1' => $ArrDatos['apelacu1'],
+			'apellido2' => $ArrDatos['apelacu2'],
+			'cod_pais_nace' => $ArrDatos['painaceacu'],			
+			'cod_estcivi' => $ArrDatos['tipestciv'],
+			'direccion' => $ArrDatos['direcacu'],
+			'numtelefono' => $ArrDatos['fijoacu'],
+			'numcelular' => $ArrDatos['celuacu'],
+			'email' => $ArrDatos['mailacu'],
+			'cod_profesion' => $ArrDatos['profeacu'],
+			'cod_especialidad' => $ArrDatos['espeacu'],
+			'empresa' => $ArrDatos['empreacu'],
+			'cargo' => $ArrDatos['cargacu'],
+			'dirempresa' => $ArrDatos['dirempacu'],
+			'telempresa' => $ArrDatos['telempacu'],
+			'exalumno' => $ArrDatos['exalumacu'],
+			'notifica' => $ArrDatos['notiacu'],
+			'otra_profesion' => $ArrDatos['otprofeacu'],
+			'otra_especialidad' => $ArrDatos['otespeacu'],		
+			'cod_rol' => '05', //Rol acudiente
+			'cod_estudiante' => $ArrDatos['codigoest']
+			]);
+			
+			$user = DB::table('users')->insert([
+			'name' => strtolower($ArrDatos['nomacu'])." ".strtolower($ArrDatos['apelacu1'])." ".strtolower($ArrDatos['apelacu2']),
+			'email' => $usuario,
+			'password' => bcrypt('secret'),
+			'estado' => '0',
+			'cod_rol' => '05'  //Rol acudiente
+			]);
+			
+			$Respuesta = array($acudiente, "Acudiente agregado corectamente", $usuario);
+			return response()->json($Respuesta);
 		}
-		
-		$acudiente = DB::table('responsables')->insert([
-		'tipodocumento' => $ArrDatos['tipdocuacu'],
-		'numdocumento' => $ArrDatos['numdocuacu'],
-		'nombre' => $ArrDatos['nomacu'],
-		'apellido1' => $ArrDatos['apelacu1'],
-		'apellido2' => $ArrDatos['apelacu2'],
-		'cod_pais_nace' => $ArrDatos['painaceacu'],			
-		'cod_estcivi' => $ArrDatos['tipestciv'],
-		'direccion' => $ArrDatos['direcacu'],
-		'numtelefono' => $ArrDatos['fijoacu'],
-		'numcelular' => $ArrDatos['celuacu'],
-		'email' => $ArrDatos['mailacu'],
-		'cod_profesion' => $ArrDatos['profeacu'],
-		'cod_especialidad' => $ArrDatos['espeacu'],
-		'empresa' => $ArrDatos['empreacu'],
-		'cargo' => $ArrDatos['cargacu'],
-		'dirempresa' => $ArrDatos['dirempacu'],
-		'telempresa' => $ArrDatos['telempacu'],
-		'exalumno' => $ArrDatos['exalumacu'],
-		'notifica' => $ArrDatos['notiacu'],
-		'otra_profesion' => $ArrDatos['otprofeacu'],
-		'otra_especialidad' => $ArrDatos['otespeacu'],		
-		'cod_rol' => '05', //Rol acudiente
-		'cod_estudiante' => $ArrDatos['codigoest']
-		]);
-		
-		$user = DB::table('users')->insert([
-		'name' => strtolower($ArrDatos['nomacu'])." ".strtolower($ArrDatos['apelacu1'])." ".strtolower($ArrDatos['apelacu2']),
-		'email' => $usuario,
-		'password' => bcrypt('secret'),
-		'estado' => '0',
-		'cod_rol' => '05'  //Rol acudiente
-		]);
-		
-		$Respuesta = array($acudiente, "Acudiente agregado corectamente", $usuario);
-		return response()->json($Respuesta);
-    }	
+    }
+	
+	public function actualizarAcudiente(Request $request)
+    {
+		$ArrDatos = $_GET["ArrDatos"];
+		$Exist = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocuacu'])->exists();
+		if($Exist == true){
+			$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."@tw.com";
+			$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
+			
+			if($ExtUsu == true){
+				$usuario = "";
+				$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
+				$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
+				
+				if($ExtUsu2 == true){
+					$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
+					$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
+					
+					if($ExtUsu3 == true){
+						$usuario = strtolower($ArrDatos['nomacu'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
+					}
+				}
+			}
+			
+			$nom1 = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocuacu'])->get();
+			
+			$UdpEstu = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocuacu'])->update([
+				'tipodocumento' => $ArrDatos['tipdocuacu'],
+				'nombre' => $ArrDatos['nomacu'],
+				'apellido1' => $ArrDatos['apelacu1'],
+				'apellido2' => $ArrDatos['apelacu2'],
+				'cod_pais_nace' => $ArrDatos['painaceacu'],			
+				'cod_estcivi' => $ArrDatos['tipestciv'],
+				'direccion' => $ArrDatos['direcacu'],
+				'numtelefono' => $ArrDatos['fijoacu'],
+				'numcelular' => $ArrDatos['celuacu'],
+				'email' => $ArrDatos['mailacu'],
+				'cod_profesion' => $ArrDatos['profeacu'],
+				'cod_especialidad' => $ArrDatos['espeacu'],
+				'empresa' => $ArrDatos['empreacu'],
+				'cargo' => $ArrDatos['cargacu'],
+				'dirempresa' => $ArrDatos['dirempacu'],
+				'telempresa' => $ArrDatos['telempacu'],
+				'exalumno' => $ArrDatos['exalumacu'],
+				'notifica' => $ArrDatos['notiacu'],
+				'otra_profesion' => $ArrDatos['otprofeacu'],
+				'otra_especialidad' => $ArrDatos['otespeacu']
+			]);
+			
+			$nombre = strtolower($nom1[0]->nombre)." ".strtolower($nom1[0]->apellido1)." ".strtolower($nom1[0]->apellido2);
+			$udpUser = DB::table('users')->where('name', '=', $nombre)->update([
+				'name' => strtolower($ArrDatos['nomacu'])." ".strtolower($ArrDatos['apelacu1'])." ".strtolower($ArrDatos['apelacu2']),
+				'email' => $usuario,
+			]);			
+			
+			$Respuesta = array($UdpEstu, "Acudiente actualizado correctamente.",$nombre);			
+			return response()->json($Respuesta);
+		}		
+	}	
 	
     public function devolverCambios()
     {

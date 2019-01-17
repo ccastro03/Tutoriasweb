@@ -3,20 +3,20 @@
 @section('content')	
 <div class="column is-12">
 
-	<input type="radio" id="estudiante" name="nav-tab" checked>
-	<input type="radio" id="responsable" name="nav-tab" disabled>
-	<input type="radio" id="acudiente" name="nav-tab" disabled>
+	<input type="radio" id="estudiante" name="nav-tab" onclick="ChEstudiante()" checked>
+	<input type="radio" id="responsable" name="nav-tab" onclick="ChResponsable()" disabled>
+	<input type="radio" id="acudiente" name="nav-tab" onclick="ChAcudiente()" disabled>
 
 	<div class="tabs is-boxed" style="margin-bottom: 0px;">
 		<ul>
 			<li class="is-active" id="liEst">
-				<a><label for="estudiante" onclick="ChEstudiante()">Estudiante</label></a>
+				<a><label for="estudiante" >Estudiante</label></a>
 			</li>
 			<li id="liRespo">
-				<a><label for="responsable" onclick="ChResponsable()">Responsable</label></a>
+				<a><label for="responsable" >Responsable</label></a>
 			</li>
 			<li id="liAcu">
-				<a><label for="acudiente" onclick="ChAcudiente()">Acudiente</label></a>
+				<a><label for="acudiente" >Acudiente</label></a>
 			</li>
 		</ul>
 	</div>
@@ -70,7 +70,7 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label">Documento</label>
-							<input type="text" name="numdocu" id="numdocu" style="width: 113px;" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" >
+							<input type="number" name="numdocu" id="numdocu" style="width: 113px;" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNumdocu" hidden>Campo obligatorio *</p>
 						</div>						
 					</div>
@@ -103,7 +103,7 @@
 
 						<div class="column is-one-fifth" style="width: 157px">
 							<label class="label"># Celular</label>
-							<input type="text" name="numcelular" id="numcelular" class="input {{ $errors->has('numcelular') ? ' is-danger' : '' }}" >
+							<input type="number" name="numcelular" id="numcelular" class="input {{ $errors->has('numcelular') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNumcel" hidden>Campo obligatorio *</p>
 						</div>	
 
@@ -377,7 +377,7 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Documento</label>
-							<input type="text" name="numdocures" id="numdocures" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" >
+							<input type="number" name="numdocures" id="numdocures" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNumdocures" hidden>Campo obligatorio *</p>
 						</div>
 					</div>
@@ -410,12 +410,12 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Teléfono</label>
-							<input type="text" name="fijores" id="fijores" class="input {{ $errors->has('fijores') ? ' is-danger' : '' }}" >
+							<input type="number" name="fijores" id="fijores" class="input {{ $errors->has('fijores') ? ' is-danger' : '' }}" >
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label"># Celular</label>
-							<input type="text" name="celures" id="celures" class="input {{ $errors->has('celures') ? ' is-danger' : '' }}" >
+							<input type="number" name="celures" id="celures" class="input {{ $errors->has('celures') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrCelures" hidden>Campo obligatorio *</p>
 						</div>					
 					</div>
@@ -487,7 +487,7 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Teléfono</label>
-							<input type="text" name="telempres" id="telempres" class="input {{ $errors->has('telempres') ? ' is-danger' : '' }}" >
+							<input type="number" name="telempres" id="telempres" class="input {{ $errors->has('telempres') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrTelempres" hidden>Campo obligatorio *</p>
 						</div>
 						
@@ -556,7 +556,7 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Documento</label>
-							<input type="text" name="numdocuacu" id="numdocuacu" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" >
+							<input type="number" name="numdocuacu" id="numdocuacu" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNumdocuacu" hidden>Campo obligatorio *</p>
 						</div>
 					</div>
@@ -592,12 +592,12 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Teléfono</label>
-							<input type="text" name="fijoacu" id="fijoacu" class="input {{ $errors->has('fijoacu') ? ' is-danger' : '' }}" >
+							<input type="number" name="fijoacu" id="fijoacu" class="input {{ $errors->has('fijoacu') ? ' is-danger' : '' }}" >
 						</div>
 
 						<div class="column is-one-fifth">
 							<label class="label"># Celular</label>
-							<input type="text" name="celuacu" id="celuacu" class="input {{ $errors->has('celuacu') ? ' is-danger' : '' }}" >
+							<input type="number" name="celuacu" id="celuacu" class="input {{ $errors->has('celuacu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrCeluacu" hidden>Campo obligatorio *</p>
 						</div>					
 					</div>
@@ -669,7 +669,7 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label"># Teléfono</label>
-							<input type="text" name="telempacu" id="telempacu" class="input {{ $errors->has('telempacu') ? ' is-danger' : '' }}" >
+							<input type="number" name="telempacu" id="telempacu" class="input {{ $errors->has('telempacu') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrTelempacu" hidden>Campo obligatorio *</p>
 						</div>
 
@@ -716,7 +716,7 @@
 		source: paises,
 		select: function (e, ui) {		       
 			var value = ui.item.value;
-			for (var i=0 ; i<paises.length ; i++){		
+			for (var i=0; i<paises.length ; i++){		
 				if(value === Arrpaises[i].nombre){
 					$("#painace").attr('attr-value',Arrpaises[i].codigo);
 				}

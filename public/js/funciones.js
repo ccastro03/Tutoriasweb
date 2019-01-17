@@ -523,45 +523,34 @@ function GuardarEstudiante(){
 			success: function(data){
 				if(data[0] == 0){
 					swal(data[1], "", "warning");
+					$('.swal-button--confirm').click(function(){
+						$.ajax({
+							url: "/incripciones/actualizarEstudiante",
+							dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+							method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+							data: {'ArrDatos':ArrDatos},
+							success: function(data){
+								swal(data[1], "", "success");
+								$("#responsable").removeAttr('disabled');
+								$("#acudiente").removeAttr('disabled');
+								$("#numdocu").attr('disabled','disabled');
+								$("#codest").val(data[2]);
+								$("#usrest").val(data[3]);
+								$("#estudiante").removeAttr('checked');
+								$("#liEst").removeClass("is-active");
+								$("#responsable").removeAttr('disabled');
+								$("#liRespo").addClass("is-active");
+								$("#responsable").attr('checked','checked');								
+							}
+						});
+					});
 				}else if(data[0] == true){
 					swal(data[1], "", "success");
 					$("#responsable").removeAttr('disabled');
 					$("#acudiente").removeAttr('disabled');
-					
-					// $("#nombre").attr('disabled','disabled');
-					// $("#apellido1").attr('disabled','disabled');
-					// $("#apellido2").attr('disabled','disabled');
-					// $("#tipgenero").attr('disabled','disabled');
-					// $("#tipdocu").attr('disabled','disabled');
 					$("#numdocu").attr('disabled','disabled');
-					// $("#direccion").attr('disabled','disabled');
-					// $("#barrio").attr('disabled','disabled');
-					// $("#numfijo").attr('disabled','disabled');
-					// $("#numcelular").attr('disabled','disabled');
-					// $("#email").attr('disabled','disabled');
-					// $("#fecnaci").attr('disabled','disabled');
-					// $("#painace").attr('disabled','disabled');
-					// $("#ciunace").attr('disabled','disabled');
-					// $("#tiprh").attr('disabled','disabled');
-					// $("#sede").attr('disabled','disabled');
-					// $("#grado").attr('disabled','disabled');
-					// $("#jornada").attr('disabled','disabled');
-					// $("#etnia").attr('disabled','disabled');
-					// $("#checksisben").attr('disabled','disabled');
-					// $("#sisnvl").attr('disabled','disabled');
-					// $("#eps").attr('disabled','disabled');
-					// $("#prepagada").attr('disabled','disabled');
-					// $("#segvida").attr('disabled','disabled');
-					// $("#aseguradora").attr('disabled','disabled');
-					// $("#religion").attr('disabled','disabled');
-					// $("#ciuproce").attr('disabled','disabled');
-					// $("#colproce").attr('disabled','disabled');
-					// $("#cobertura").attr('disabled','disabled');
-					$("#desplaza").attr('disabled','disabled');
-					
 					$("#codest").val(data[2]);
 					$("#usrest").val(data[3]);
-
 					$("#estudiante").removeAttr('checked');
 					$("#liEst").removeClass("is-active");
 					$("#responsable").removeAttr('disabled');
@@ -815,30 +804,28 @@ function GuardarResponsable(){
 			success: function(data){
 				if(data[0] == 0){
 					swal(data[1], "", "warning");
+					$('.swal-button--confirm').click(function(){
+						$.ajax({
+							url: "/incripciones/actualizarResponsable",
+							dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+							method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+							data: {'ArrDatos':ArrDatos},
+							success: function(data){
+								swal(data[1], "", "success");
+								$("#numdocures").attr('disabled','disabled');
+								$("#usrres").val(data[2]);
+								$("#responsable").removeAttr('checked');
+								$("#liRespo").removeClass("is-active");
+								$("#acudiente").removeAttr('disabled');
+								$("#liAcu").addClass("is-active");
+								$("#acudiente").attr('checked','checked');								
+							}
+						});
+					});					
 				}else if(data[0] == true){
 					swal(data[1], "", "success");					
-					// $("#nomres").attr('disabled','disabled');
-					// $("#apelres1").attr('disabled','disabled');
-					// $("#apelres2").attr('disabled','disabled');
-					// $("#tipdocures").attr('disabled','disabled');
 					$("#numdocures").attr('disabled','disabled');
-					// $("#tipestciv").attr('disabled','disabled');
-					// $("#painaceres").attr('disabled','disabled');
-					// $("#direcres").attr('disabled','disabled');
-					// $("#fijores").attr('disabled','disabled');
-					// $("#celures").attr('disabled','disabled');
-					// $("#mailres").attr('disabled','disabled');
-					// $("#proferes").attr('disabled','disabled');
-					// $("#esperes").attr('disabled','disabled');
-					// $("#empreres").attr('disabled','disabled');
-					// $("#cargres").attr('disabled','disabled');
-					// $("#dirempres").attr('disabled','disabled');
-					// $("#telempres").attr('disabled','disabled');
-					// $("#exalumres").attr('disabled','disabled');
-					// $("#notires").attr('disabled','disabled');
-					
 					$("#usrres").val(data[2]);
-					
 					$("#responsable").removeAttr('checked');
 					$("#liRespo").removeClass("is-active");
 					$("#acudiente").removeAttr('disabled');
@@ -964,39 +951,54 @@ function GuardarAcudiente(){
 		success: function(data){
 			if(data[0] == 0){
 				swal(data[1], "", "warning");
-			}else if(data[0] == true){					
-				// $("#nomacu").attr('disabled','disabled');
-				// $("#apelacu1").attr('disabled','disabled');
-				// $("#apelacu2").attr('disabled','disabled');
-				// $("#tipdocuacu").attr('disabled','disabled');
-				$("#numdocuacu").attr('disabled','disabled');
-				// $("#tipestciv").attr('disabled','disabled');
-				// $("#painaceacu").attr('disabled','disabled');
-				// $("#direcacu").attr('disabled','disabled');
-				// $("#fijoacu").attr('disabled','disabled');
-				// $("#celuacu").attr('disabled','disabled');
-				// $("#mailacu").attr('disabled','disabled');
-				// $("#profeacu").attr('disabled','disabled');
-				// $("#espeacu").attr('disabled','disabled');
-				// $("#empreacu").attr('disabled','disabled');
-				// $("#cargacu").attr('disabled','disabled');
-				// $("#dirempacu").attr('disabled','disabled');
-				// $("#telempacu").attr('disabled','disabled');
-				// $("#exalumacu").attr('disabled','disabled');
-				// $("#notiacu").attr('disabled','disabled');
-				
-				$("#usracu").val(data[2]);
-				swal(data[1], "", "success")
-				.then((value) => {
-					swal("La inscripcion fue enviada corectamente al colegio", "", "success")
-					.then((value) => {
-						if(guest != 1){
-							location.href = '/incripciones';
-						}else{
-							location.href = '/';
+				$('.swal-button--confirm').click(function(){
+					$.ajax({
+						url: "/incripciones/actualizarAcudiente",
+						dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+						method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+						data: {'ArrDatos':ArrDatos},
+						success: function(data){
+							$("#numdocuacu").attr('disabled','disabled');
+							$("#usracu").val(data[2]);
+							
+							swal(data[1], "", "success");
+							$('.swal-button--confirm').click(function(){
+								swal("¿Desea terminar y enviar la inscripciòn al colegio?", "", "success", {
+									buttons: ["Cancelar", "Aceptar"],
+								});
+								$('.swal-button--confirm').click(function(){
+									swal("La inscripcion fue enviada corectamente al colegio", "", "success")
+									.then((value) => {
+										if(guest != 1){
+											location.href = '/incripciones';
+										}else{
+											location.href = '/';
+										}
+									});	
+								});
+							});
 						}
-					});	
-				});								
+					});
+				});				
+			}else if(data[0] == true){					
+				$("#numdocuacu").attr('disabled','disabled');
+				$("#usracu").val(data[2]);
+				swal(data[1], "", "success");
+				$('.swal-button--confirm').click(function(){
+					swal("¿Desea terminar y enviar la inscripciòn al colegio?", "", "success", {
+						buttons: ["Cancelar", "Aceptar"],
+					});
+					$('.swal-button--confirm').click(function(){
+						swal("La inscripcion fue enviada corectamente al colegio", "", "success")
+						.then((value) => {
+							if(guest != 1){
+								location.href = '/incripciones';
+							}else{
+								location.href = '/';
+							}
+						});	
+					});
+				});
 			}
 		}
 	});	

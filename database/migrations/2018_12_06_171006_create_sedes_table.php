@@ -14,8 +14,8 @@ class CreateSedesTable extends Migration
     public function up()
     {
         Schema::create('sedes', function (Blueprint $table) {
-			$table->string('codigo')->unique();
-			$table->string('nombre');
+			$table->string('codigo',5)->unique();
+			$table->string('nombre',60);
             $table->timestamps();
         });
     }

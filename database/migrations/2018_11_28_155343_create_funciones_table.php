@@ -15,8 +15,8 @@ class CreateFuncionesTable extends Migration
     {
         Schema::create('funciones', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('nombre');
-			$table->string('descripcion');
+			$table->string('nombre',10);
+			$table->string('descripcion',120);
             $table->timestamps();
         });
     }

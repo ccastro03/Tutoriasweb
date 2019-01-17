@@ -14,8 +14,8 @@ class CreatePrepagadaTable extends Migration
     public function up()
     {
         Schema::create('prepagada', function (Blueprint $table) {
-			$table->string('codigo')->unique();
-			$table->string('nombre');
+			$table->string('codigo',10)->unique();
+			$table->string('nombre',120);
             $table->timestamps();
         });
     }

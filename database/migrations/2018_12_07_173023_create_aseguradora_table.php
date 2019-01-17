@@ -14,8 +14,8 @@ class CreateAseguradoraTable extends Migration
     public function up()
     {
         Schema::create('aseguradora', function (Blueprint $table) {
-			$table->string('codigo')->unique();
-			$table->string('nombre');
+			$table->string('codigo',10)->unique();
+			$table->string('nombre',100);
             $table->timestamps();
         });
     }

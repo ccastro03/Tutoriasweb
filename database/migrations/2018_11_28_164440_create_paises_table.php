@@ -14,8 +14,8 @@ class CreatePaisesTable extends Migration
     public function up()
     {
         Schema::create('paises', function (Blueprint $table) {
-			$table->string('codigo')->unique();
-			$table->string('nombre');
+			$table->string('codigo',5)->unique();
+			$table->string('nombre',70);
             $table->timestamps();
         });
     }

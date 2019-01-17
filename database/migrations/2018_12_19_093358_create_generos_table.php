@@ -14,8 +14,8 @@ class CreateGenerosTable extends Migration
     public function up()
     {
         Schema::create('generos', function (Blueprint $table) {
-			$table->string('codigo')->unique();
-			$table->string('nombre');
+			$table->string('codigo',5)->unique();
+			$table->string('nombre',50);
             $table->timestamps();
         });
     }

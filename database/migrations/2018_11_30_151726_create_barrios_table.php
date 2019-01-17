@@ -14,9 +14,9 @@ class CreateBarriosTable extends Migration
     public function up()
     {
         Schema::create('barrios', function (Blueprint $table) {
-			$table->string('cod_barrio')->unique();
-			$table->string('cod_ciudad');
-			$table->string('nombre');
+			$table->string('cod_barrio',10)->unique();
+			$table->string('cod_ciudad',10);
+			$table->string('nombre',60);
 			$table->primary(['cod_barrio', 'cod_ciudad']);
             $table->timestamps();
         });

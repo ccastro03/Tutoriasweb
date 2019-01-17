@@ -14,8 +14,8 @@ class CreateEstcivilTable extends Migration
     public function up()
     {
         Schema::create('estcivil', function (Blueprint $table) {
-			$table->string('codigo')->unique();
-			$table->string('nombre');
+			$table->string('codigo',3)->unique();
+			$table->string('nombre',30);
             $table->timestamps();
         });
     }

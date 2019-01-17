@@ -14,8 +14,8 @@ class CreateCiudadesTable extends Migration
     public function up()
     {
         Schema::create('ciudades', function (Blueprint $table) {
-			$table->string('cod_ciudad')->unique();
-			$table->string('nombre');
+			$table->string('cod_ciudad',10)->unique();
+			$table->string('nombre',70);
             $table->timestamps();
         });
     }

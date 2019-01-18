@@ -1,6 +1,6 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar eps">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar ciudad">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
@@ -12,13 +12,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="ep in eps" :key="ep.codigo">           
-            <td><a :href="'/eps/' + ep.codigo">{{ ep.codigo }}</a></td>
-            <td>{{ ep.nombre }}</td>
+          <tr v-for="ciudad in ciudades" :key="ciudad.cod_ciudad">           
+            <td><a :href="'/tutoriaweb/public/ciudades/' + ciudad.cod_ciudad">{{ ciudad.cod_ciudad }}</a></td>
+            <td>{{ ciudad.nombre }}</td>
             <td style="text-align: right;">				
-				<a :href="'/eps/' + ep.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				<a :href="'/tutoriaweb/public/ciudades/' + ciudad.cod_ciudad + '/editar'" style="color: #000;">
+				<span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
+				</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelEps" :attr-id="ep.codigo"></span></a>				
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelCiu" :attr-id="ciudad.cod_ciudad"></span></a>					
 			</td>
           </tr>
         </tbody>
@@ -34,7 +36,7 @@
             </a>
           </li>          
         </ul>
-      </nav>
+      </nav>	  
 	  
     </div>
   </div>
@@ -44,8 +46,8 @@
 export default {
   data() {
     return {
-      eps: [],
-      pagination: {
+      ciudades: [],
+	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
         'first_item':  0,
@@ -58,11 +60,11 @@ export default {
     }
   },
   created() {
-    this.getEps();
+    this.getCiudades();
   },
   watch: {
     name(after,before) {
-      this.getEps();				
+      this.getCiudades();				
     }
   },
 	computed:  {
@@ -88,19 +90,19 @@ export default {
       }
       return pagesArray;
     },
-  },
+  },  
   methods: {
-    getEps(page) {
-      var url = 'eps/obtenerlistadoeps?page='+page;                
+    getCiudades(page) {
+      var url = 'ciudades/obtenerlistadociudades?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
 		var array = response.data;
 		this.pagination = array['paginate'];
-		this.eps = array['eps']['data'];
+		this.ciudades = array['ciudades']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getEps(page);
+      this.getCiudades(page);
     }
   }
 }

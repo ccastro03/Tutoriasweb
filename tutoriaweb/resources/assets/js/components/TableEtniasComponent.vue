@@ -1,6 +1,6 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre grado">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre etnia">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
@@ -12,18 +12,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="grado in grados" :key="grado.codigo">
-            <td><a :href="'/grados/' + grado.codigo">{{ grado.codigo }}</a></td>
-			<td>{{ grado.nombre }}</td>
+          <tr v-for="etnia in etnias" :key="etnia.codigo">
+            <td><a :href="'/tutoriaweb/public/etnias/' + etnia.codigo">{{ etnia.codigo }}</a></td>
+			<td>{{ etnia.nombre }}</td>
             <td style="text-align: right;">				
-				<a :href="'/grados/' + grado.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				<a :href="'/tutoriaweb/public/etnias/' + etnia.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelGrad" :attr-id="grado.codigo"></span></a>				
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelEtni" :attr-id="etnia.codigo"></span></a>
 			</td>
           </tr>
         </tbody>
-      </table> 
-
+      </table>
+	  
       <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
@@ -44,7 +44,7 @@
 export default {
   data() {
     return {
-      grados: [],
+      etnias: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -58,11 +58,11 @@ export default {
     }
   },
   created() {
-    this.getGrados();
+    this.getEtnias();
   },
   watch: {
     name(after,before) {
-      this.getGrados();				
+      this.getEtnias();				
     }
   },
 	computed:  {
@@ -90,17 +90,17 @@ export default {
     },
   },  
   methods: {
-    getGrados(page) {
-      var url = 'grados/obtenerlistadogrados?page='+page;                
+    getEtnias(page) {
+      var url = 'etnias/obtenerlistadoetnias?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
         var array = response.data;
 		this.pagination = array['paginate'];
-		this.grados = array['grados']['data'];
+		this.etnias = array['etnias']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getGrados(page);
+      this.getEtnias(page);
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre jornada">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre aseguradora">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
@@ -12,18 +12,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="jornada in jornadas" :key="jornada.codigo">
-            <td><a :href="'/jornadas/' + jornada.codigo">{{ jornada.codigo }}</a></td>
-			<td>{{ jornada.nombre }}</td>
-            <td style="text-align: right;">				
-				<a :href="'/jornadas/' + jornada.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+          <tr v-for="aseguradora in aseguradoras" :key="aseguradora.codigo">
+            <td><a :href="'/tutoriaweb/public/aseguradora/' + aseguradora.codigo">{{ aseguradora.codigo }}</a></td>
+			<td>{{ aseguradora.nombre }}</td>
+            <td style="text-align: right;">
+				<a :href="'/tutoriaweb/public/aseguradora/' + aseguradora.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelJor" :attr-id="jornada.codigo"></span></a>				
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelAseg" :attr-id="aseguradora.codigo"></span></a>
 			</td>
           </tr>
         </tbody>
-      </table> 
-
+      </table>
+	  
       <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
@@ -44,7 +44,7 @@
 export default {
   data() {
     return {
-      jornadas: [],
+      aseguradoras: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -58,11 +58,11 @@ export default {
     }
   },
   created() {
-    this.getJornadas();
+    this.getAseguradora();
   },
   watch: {
     name(after,before) {
-      this.getJornadas();				
+      this.getAseguradora();				
     }
   },
 	computed:  {
@@ -90,17 +90,17 @@ export default {
     },
   },  
   methods: {
-    getJornadas(page) {
-      var url = 'jornadas/obtenerlistadojornadas?page='+page;                
+    getAseguradora(page) {
+      var url = 'aseguradora/obtenerlistadoaseguradoras?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
         var array = response.data;
 		this.pagination = array['paginate'];
-		this.jornadas = array['jornadas']['data'];
+		this.aseguradoras = array['aseguradora']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getJornadas(page);
+      this.getAseguradora(page);
     }
   }
 }

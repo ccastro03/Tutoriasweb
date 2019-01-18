@@ -1235,14 +1235,14 @@ window.$(document).on('click', '#BtnDelRol', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/roles/eliminar",
+				url: "/tutoriaweb/public/roles/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': RolId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'roles';
+							location.href = '/tutoriaweb/public/roles';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1265,7 +1265,7 @@ window.$(document).on('click', '#BtnDelFunc', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/funciones/eliminar",
+				url: "/tutoriaweb/public/funciones/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': FuncId },
@@ -1276,7 +1276,7 @@ window.$(document).on('click', '#BtnDelFunc', function () {
 
 					if (arrayDatos[0] != "" & arrayDatos[0] != null) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'funciones';
+							location.href = '/tutoriaweb/public/funciones';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1299,14 +1299,14 @@ window.$(document).on('click', '#BtnDelPais', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/paises/eliminar",
+				url: "/tutoriaweb/public/paises/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': PaisId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'paises';
+							location.href = '/tutoriaweb/public/paises';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1329,14 +1329,14 @@ window.$(document).on('click', '#BtnDelCiu', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/ciudades/eliminar",
+				url: "/tutoriaweb/public/ciudades/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': CiuId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'ciudades';
+							location.href = '/tutoriaweb/public/ciudades';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1359,14 +1359,14 @@ window.$(document).on('click', '#BtnDelPrepa', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/prepagada/eliminar",
+				url: "/tutoriaweb/public/prepagada/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': PrepaId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'prepagada';
+							location.href = '/tutoriaweb/public/prepagada';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1389,14 +1389,14 @@ window.$(document).on('click', '#BtnDelEps', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/eps/eliminar",
+				url: "/tutoriaweb/public/eps/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': EpsId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'eps';
+							location.href = '/tutoriaweb/public/eps';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1420,14 +1420,14 @@ window.$(document).on('click', '#BtnDelBar', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/barrios/eliminar",
+				url: "/tutoriaweb/public/barrios/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'cod_ciudad': CiuId, 'cod_barrio': BarId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'barrios';
+							location.href = '/tutoriaweb/public/barrios';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1450,14 +1450,14 @@ window.$(document).on('click', '#BtnDelSed', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/sedes/eliminar",
+				url: "/tutoriaweb/public/sedes/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': SedeId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'sedes';
+							location.href = '/tutoriaweb/public/sedes';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1480,14 +1480,14 @@ window.$(document).on('click', '#BtnDelJor', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/jornadas/eliminar",
+				url: "/tutoriaweb/public/jornadas/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': JorId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'jornadas';
+							location.href = '/tutoriaweb/public/jornadas';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1510,14 +1510,14 @@ window.$(document).on('click', '#BtnDelGrad', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/grados/eliminar",
+				url: "/tutoriaweb/public/grados/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': GradId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'grados';
+							location.href = '/tutoriaweb/public/grados';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1540,14 +1540,14 @@ window.$(document).on('click', '#BtnDelEtni', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/etnias/eliminar",
+				url: "/tutoriaweb/public/etnias/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': EtniId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'etnias';
+							location.href = '/tutoriaweb/public/etnias';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1570,14 +1570,14 @@ window.$(document).on('click', '#BtnDelAseg', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/aseguradora/eliminar",
+				url: "/tutoriaweb/public/aseguradora/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': AsegId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'aseguradora';
+							location.href = '/tutoriaweb/public/aseguradora';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1600,14 +1600,14 @@ window.$(document).on('click', '#BtnDelReli', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/religion/eliminar",
+				url: "/tutoriaweb/public/religion/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': ReliId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'religion';
+							location.href = '/tutoriaweb/public/religion';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1630,14 +1630,14 @@ window.$(document).on('click', '#BtnDelGen', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/generos/eliminar",
+				url: "/tutoriaweb/public/generos/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': GenId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'generos';
+							location.href = '/tutoriaweb/public/generos';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1660,14 +1660,14 @@ window.$(document).on('click', '#BtnDelProfes', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/profesiones/eliminar",
+				url: "/tutoriaweb/public/profesiones/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': ProfesId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'profesiones';
+							location.href = '/tutoriaweb/public/profesiones';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1690,14 +1690,14 @@ window.$(document).on('click', '#BtnDelEspeci', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/especialidades/eliminar",
+				url: "/tutoriaweb/public/especialidades/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': EspeciId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'especialidades';
+							location.href = '/tutoriaweb/public/especialidades';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1720,14 +1720,14 @@ window.$(document).on('click', '#BtnDelTpDocu', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/tipodocumentos/eliminar",
+				url: "/tutoriaweb/public/tipodocumentos/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': TpDocuId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'tipodocumentos';
+							location.href = '/tutoriaweb/public/tipodocumentos';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -1750,14 +1750,14 @@ window.$(document).on('click', '#BtnDelEstCiv', function () {
 	}).then(function (willDelete) {
 		if (willDelete) {
 			$.ajax({
-				url: "/estadocivil/eliminar",
+				url: "/tutoriaweb/public/estadocivil/eliminar",
 				dataType: 'json', // tipo de datos que te envia el archivo que se ejecuto                              
 				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 				data: { 'id': EstCivId },
 				success: function success(data) {
 					if (data = 1) {
 						swal("Registro eliminado correctamente!", "", "success").then(function (value) {
-							location.href = 'estadocivil';
+							location.href = '/tutoriaweb/public/estadocivil';
 						});
 					} else {
 						swal("Error al eliminar el registro!", "", "warning");
@@ -44106,9 +44106,13 @@ var render = function() {
             _vm._l(_vm.roles, function(role) {
               return _c("tr", { key: role.codigo }, [
                 _c("td", [
-                  _c("a", { attrs: { href: "/roles/" + role.codigo } }, [
-                    _vm._v(_vm._s(role.name))
-                  ])
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "/tutoriaweb/public/roles/" + role.codigo }
+                    },
+                    [_vm._v(_vm._s(role.name))]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(role.descripcion))]),
@@ -44118,7 +44122,10 @@ var render = function() {
                     "a",
                     {
                       staticStyle: { color: "#000" },
-                      attrs: { href: "/roles/" + role.codigo + "/editar" }
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/roles/" + role.codigo + "/editar"
+                      }
                     },
                     [
                       _c("span", {
@@ -44455,9 +44462,15 @@ var render = function() {
             _vm._l(_vm.funciones, function(funcion) {
               return _c("tr", { key: funcion.id }, [
                 _c("td", [
-                  _c("a", { attrs: { href: "/funciones/" + funcion.id } }, [
-                    _vm._v(_vm._s(funcion.nombre))
-                  ])
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/tutoriaweb/public/funciones/" + funcion.id
+                      }
+                    },
+                    [_vm._v(_vm._s(funcion.nombre))]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(funcion.descripcion))]),
@@ -44479,7 +44492,12 @@ var render = function() {
                     "a",
                     {
                       staticStyle: { color: "#000" },
-                      attrs: { href: "/funciones/" + funcion.id + "/editar" }
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/funciones/" +
+                          funcion.id +
+                          "/editar"
+                      }
                     },
                     [
                       _c("span", {
@@ -44815,9 +44833,15 @@ var render = function() {
             _vm._l(_vm.paises, function(pais) {
               return _c("tr", { key: pais.codigo }, [
                 _c("td", [
-                  _c("a", { attrs: { href: "/paises/" + pais.codigo } }, [
-                    _vm._v(_vm._s(pais.codigo))
-                  ])
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/tutoriaweb/public/paises/" + pais.codigo
+                      }
+                    },
+                    [_vm._v(_vm._s(pais.codigo))]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(pais.nombre))]),
@@ -44827,7 +44851,10 @@ var render = function() {
                     "a",
                     {
                       staticStyle: { color: "#000" },
-                      attrs: { href: "/paises/" + pais.codigo + "/editar" }
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/paises/" + pais.codigo + "/editar"
+                      }
                     },
                     [
                       _c("span", {
@@ -45165,7 +45192,11 @@ var render = function() {
                 _c("td", [
                   _c(
                     "a",
-                    { attrs: { href: "/ciudades/" + ciudad.cod_ciudad } },
+                    {
+                      attrs: {
+                        href: "/tutoriaweb/public/ciudades/" + ciudad.cod_ciudad
+                      }
+                    },
                     [_vm._v(_vm._s(ciudad.cod_ciudad))]
                   )
                 ]),
@@ -45178,7 +45209,10 @@ var render = function() {
                     {
                       staticStyle: { color: "#000" },
                       attrs: {
-                        href: "/ciudades/" + ciudad.cod_ciudad + "/editar"
+                        href:
+                          "/tutoriaweb/public/ciudades/" +
+                          ciudad.cod_ciudad +
+                          "/editar"
                       }
                     },
                     [
@@ -45515,9 +45549,15 @@ var render = function() {
             _vm._l(_vm.prepagada, function(prepa) {
               return _c("tr", { key: prepa.codigo }, [
                 _c("td", [
-                  _c("a", { attrs: { href: "/prepagada/" + prepa.codigo } }, [
-                    _vm._v(_vm._s(prepa.codigo))
-                  ])
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/tutoriaweb/public/prepagada/" + prepa.codigo
+                      }
+                    },
+                    [_vm._v(_vm._s(prepa.codigo))]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(prepa.nombre))]),
@@ -45527,7 +45567,12 @@ var render = function() {
                     "a",
                     {
                       staticStyle: { color: "#000" },
-                      attrs: { href: "/prepagada/" + prepa.codigo + "/editar" }
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/prepagada/" +
+                          prepa.codigo +
+                          "/editar"
+                      }
                     },
                     [
                       _c("span", {
@@ -45861,9 +45906,11 @@ var render = function() {
             _vm._l(_vm.eps, function(ep) {
               return _c("tr", { key: ep.codigo }, [
                 _c("td", [
-                  _c("a", { attrs: { href: "/eps/" + ep.codigo } }, [
-                    _vm._v(_vm._s(ep.codigo))
-                  ])
+                  _c(
+                    "a",
+                    { attrs: { href: "/tutoriaweb/public/eps/" + ep.codigo } },
+                    [_vm._v(_vm._s(ep.codigo))]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(ep.nombre))]),
@@ -45873,7 +45920,9 @@ var render = function() {
                     "a",
                     {
                       staticStyle: { color: "#000" },
-                      attrs: { href: "/eps/" + ep.codigo + "/editar" }
+                      attrs: {
+                        href: "/tutoriaweb/public/eps/" + ep.codigo + "/editar"
+                      }
                     },
                     [
                       _c("span", {
@@ -46225,7 +46274,7 @@ var render = function() {
                       {
                         attrs: {
                           href:
-                            "/barrios/" +
+                            "/tutoriaweb/public/barrios/" +
                             barrio.cod_ciudad +
                             "/" +
                             barrio.cod_barrio +
@@ -46256,7 +46305,7 @@ var render = function() {
                         staticStyle: { color: "#000" },
                         attrs: {
                           href:
-                            "/barrios/" +
+                            "/tutoriaweb/public/barrios/" +
                             barrio.cod_ciudad +
                             "/" +
                             barrio.cod_barrio +
@@ -46598,9 +46647,13 @@ var render = function() {
             _vm._l(_vm.sedes, function(sede) {
               return _c("tr", { key: sede.codigo }, [
                 _c("td", [
-                  _c("a", { attrs: { href: "/sedes/" + sede.codigo } }, [
-                    _vm._v(_vm._s(sede.codigo))
-                  ])
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "/tutoriaweb/public/sedes/" + sede.codigo }
+                    },
+                    [_vm._v(_vm._s(sede.codigo))]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(sede.nombre))]),
@@ -46610,7 +46663,10 @@ var render = function() {
                     "a",
                     {
                       staticStyle: { color: "#000" },
-                      attrs: { href: "/sedes/" + sede.codigo + "/editar" }
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/sedes/" + sede.codigo + "/editar"
+                      }
                     },
                     [
                       _c("span", {
@@ -46948,9 +47004,15 @@ var render = function() {
             _vm._l(_vm.jornadas, function(jornada) {
               return _c("tr", { key: jornada.codigo }, [
                 _c("td", [
-                  _c("a", { attrs: { href: "/jornadas/" + jornada.codigo } }, [
-                    _vm._v(_vm._s(jornada.codigo))
-                  ])
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/tutoriaweb/public/jornadas/" + jornada.codigo
+                      }
+                    },
+                    [_vm._v(_vm._s(jornada.codigo))]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(jornada.nombre))]),
@@ -46960,7 +47022,12 @@ var render = function() {
                     "a",
                     {
                       staticStyle: { color: "#000" },
-                      attrs: { href: "/jornadas/" + jornada.codigo + "/editar" }
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/jornadas/" +
+                          jornada.codigo +
+                          "/editar"
+                      }
                     },
                     [
                       _c("span", {
@@ -47294,9 +47361,15 @@ var render = function() {
             _vm._l(_vm.grados, function(grado) {
               return _c("tr", { key: grado.codigo }, [
                 _c("td", [
-                  _c("a", { attrs: { href: "/grados/" + grado.codigo } }, [
-                    _vm._v(_vm._s(grado.codigo))
-                  ])
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/tutoriaweb/public/grados/" + grado.codigo
+                      }
+                    },
+                    [_vm._v(_vm._s(grado.codigo))]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(grado.nombre))]),
@@ -47306,7 +47379,12 @@ var render = function() {
                     "a",
                     {
                       staticStyle: { color: "#000" },
-                      attrs: { href: "/grados/" + grado.codigo + "/editar" }
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/grados/" +
+                          grado.codigo +
+                          "/editar"
+                      }
                     },
                     [
                       _c("span", {
@@ -47640,9 +47718,15 @@ var render = function() {
             _vm._l(_vm.etnias, function(etnia) {
               return _c("tr", { key: etnia.codigo }, [
                 _c("td", [
-                  _c("a", { attrs: { href: "/etnias/" + etnia.codigo } }, [
-                    _vm._v(_vm._s(etnia.codigo))
-                  ])
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/tutoriaweb/public/etnias/" + etnia.codigo
+                      }
+                    },
+                    [_vm._v(_vm._s(etnia.codigo))]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(etnia.nombre))]),
@@ -47652,7 +47736,12 @@ var render = function() {
                     "a",
                     {
                       staticStyle: { color: "#000" },
-                      attrs: { href: "/etnias/" + etnia.codigo + "/editar" }
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/etnias/" +
+                          etnia.codigo +
+                          "/editar"
+                      }
                     },
                     [
                       _c("span", {
@@ -47990,9 +48079,15 @@ var render = function() {
             _vm._l(_vm.religiones, function(religion) {
               return _c("tr", { key: religion.codigo }, [
                 _c("td", [
-                  _c("a", { attrs: { href: "/religion/" + religion.codigo } }, [
-                    _vm._v(_vm._s(religion.codigo))
-                  ])
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/tutoriaweb/public/religion/" + religion.codigo
+                      }
+                    },
+                    [_vm._v(_vm._s(religion.codigo))]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(religion.nombre))]),
@@ -48003,7 +48098,10 @@ var render = function() {
                     {
                       staticStyle: { color: "#000" },
                       attrs: {
-                        href: "/religion/" + religion.codigo + "/editar"
+                        href:
+                          "/tutoriaweb/public/religion/" +
+                          religion.codigo +
+                          "/editar"
                       }
                     },
                     [
@@ -48344,7 +48442,12 @@ var render = function() {
                 _c("td", [
                   _c(
                     "a",
-                    { attrs: { href: "/aseguradora/" + aseguradora.codigo } },
+                    {
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/aseguradora/" + aseguradora.codigo
+                      }
+                    },
                     [_vm._v(_vm._s(aseguradora.codigo))]
                   )
                 ]),
@@ -48357,7 +48460,10 @@ var render = function() {
                     {
                       staticStyle: { color: "#000" },
                       attrs: {
-                        href: "/aseguradora/" + aseguradora.codigo + "/editar"
+                        href:
+                          "/tutoriaweb/public/aseguradora/" +
+                          aseguradora.codigo +
+                          "/editar"
                       }
                     },
                     [
@@ -48760,7 +48866,11 @@ var render = function() {
                     "a",
                     {
                       staticClass: "button is-link is-rounded is-outlined",
-                      attrs: { href: "/incripciones/" + inscripcion.codigo }
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/incripciones/" +
+                          inscripcion.codigo
+                      }
                     },
                     [_vm._v("Ver")]
                   ),
@@ -48770,7 +48880,10 @@ var render = function() {
                     {
                       staticClass: "button is-link is-rounded is-outlined",
                       attrs: {
-                        href: "/incripciones/" + inscripcion.codigo + "/editar"
+                        href:
+                          "/tutoriaweb/public/incripciones/" +
+                          inscripcion.codigo +
+                          "/editar"
                       }
                     },
                     [_vm._v("Editar")]
@@ -48783,7 +48896,7 @@ var render = function() {
                       attrs: {
                         target: "_blank",
                         href:
-                          "/incripciones/pdfinscripcion/" +
+                          "/tutoriaweb/public/incripciones/pdfinscripcion/" +
                           inscripcion.numdocest
                       }
                     },
@@ -49187,7 +49300,7 @@ var render = function() {
                       attrs: {
                         target: "_blank",
                         href:
-                          "/incripciones/pdfinscripcion/" +
+                          "/tutoriaweb/public/incripciones/pdfinscripcion/" +
                           inscripcion.numdocest
                       }
                     },
@@ -49528,7 +49641,12 @@ var render = function() {
                 _c("td", [
                   _c(
                     "a",
-                    { attrs: { href: "/tipodocumentos/" + tpdocu.codigo } },
+                    {
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/tipodocumentos/" + tpdocu.codigo
+                      }
+                    },
                     [_vm._v(_vm._s(tpdocu.codigo))]
                   )
                 ]),
@@ -49541,7 +49659,10 @@ var render = function() {
                     {
                       staticStyle: { color: "#000" },
                       attrs: {
-                        href: "/tipodocumentos/" + tpdocu.codigo + "/editar"
+                        href:
+                          "/tutoriaweb/public/tipodocumentos/" +
+                          tpdocu.codigo +
+                          "/editar"
                       }
                     },
                     [
@@ -49880,9 +50001,15 @@ var render = function() {
             _vm._l(_vm.generos, function(genero) {
               return _c("tr", { key: genero.codigo }, [
                 _c("td", [
-                  _c("a", { attrs: { href: "/generos/" + genero.codigo } }, [
-                    _vm._v(_vm._s(genero.codigo))
-                  ])
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/tutoriaweb/public/generos/" + genero.codigo
+                      }
+                    },
+                    [_vm._v(_vm._s(genero.codigo))]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(genero.nombre))]),
@@ -49892,7 +50019,12 @@ var render = function() {
                     "a",
                     {
                       staticStyle: { color: "#000" },
-                      attrs: { href: "/generos/" + genero.codigo + "/editar" }
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/generos/" +
+                          genero.codigo +
+                          "/editar"
+                      }
                     },
                     [
                       _c("span", {
@@ -50232,7 +50364,12 @@ var render = function() {
                 _c("td", [
                   _c(
                     "a",
-                    { attrs: { href: "/profesiones/" + profesion.codigo } },
+                    {
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/profesiones/" + profesion.codigo
+                      }
+                    },
                     [_vm._v(_vm._s(profesion.codigo))]
                   )
                 ]),
@@ -50245,7 +50382,10 @@ var render = function() {
                     {
                       staticStyle: { color: "#000" },
                       attrs: {
-                        href: "/profesiones/" + profesion.codigo + "/editar"
+                        href:
+                          "/tutoriaweb/public/profesiones/" +
+                          profesion.codigo +
+                          "/editar"
                       }
                     },
                     [
@@ -50587,7 +50727,11 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      attrs: { href: "/especialidades/" + especialidad.codigo }
+                      attrs: {
+                        href:
+                          "/tutoriaweb/public/especialidades/" +
+                          especialidad.codigo
+                      }
                     },
                     [_vm._v(_vm._s(especialidad.codigo))]
                   )
@@ -50602,7 +50746,9 @@ var render = function() {
                       staticStyle: { color: "#000" },
                       attrs: {
                         href:
-                          "/especialidades/" + especialidad.codigo + "/editar"
+                          "/tutoriaweb/public/especialidades/" +
+                          especialidad.codigo +
+                          "/editar"
                       }
                     },
                     [
@@ -50943,7 +51089,11 @@ var render = function() {
                 _c("td", [
                   _c(
                     "a",
-                    { attrs: { href: "/estadocivil/" + estciv.codigo } },
+                    {
+                      attrs: {
+                        href: "/tutoriaweb/public/estadocivil/" + estciv.codigo
+                      }
+                    },
                     [_vm._v(_vm._s(estciv.codigo))]
                   )
                 ]),
@@ -50956,7 +51106,10 @@ var render = function() {
                     {
                       staticStyle: { color: "#000" },
                       attrs: {
-                        href: "/estadocivil/" + estciv.codigo + "/editar"
+                        href:
+                          "/tutoriaweb/public/estadocivil/" +
+                          estciv.codigo +
+                          "/editar"
                       }
                     },
                     [

@@ -1,25 +1,26 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar rol">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar prepagada">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Descripcion</th>  
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="role in roles" :key="role.codigo">           
-            <td><a :href="'/roles/' + role.codigo">{{ role.name }}</a></td>
-            <td>{{ role.descripcion }}</td>
-			
-            <td style="text-align: right;">				
-				<a :href="'/roles/' + role.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+          <tr v-for="prepa in prepagada" :key="prepa.codigo">           
+            <td><a :href="'/tutoriaweb/public/prepagada/' + prepa.codigo">{{ prepa.codigo }}</a></td>
+            <td>{{ prepa.nombre }}</td>
+            <td style="text-align: right;">
+				<a :href="'/tutoriaweb/public/prepagada/' + prepa.codigo + '/editar'" style="color: #000;">
+				<span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
+				</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelRol" :attr-id="role.codigo"></span></a>
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelPrepa" :attr-id="prepa.codigo"></span></a>	
 			</td>
           </tr>
         </tbody>
@@ -36,6 +37,7 @@
           </li>          
         </ul>
       </nav>	  
+	  
     </div>
   </div>
 </template>
@@ -44,8 +46,8 @@
 export default {
   data() {
     return {
-      roles: [],
-	  pagination: {
+      prepagada: [],
+      pagination: {
         'current_page' : 0,
         'per_page' : 0,
         'first_item':  0,
@@ -58,11 +60,11 @@ export default {
     }
   },
   created() {
-    this.getRoles();
+    this.getPrepagada();
   },
   watch: {
     name(after,before) {
-      this.getRoles();				
+      this.getPrepagada();				
     }
   },
 	computed:  {
@@ -90,17 +92,17 @@ export default {
     },
   },  
   methods: {
-    getRoles(page) {
-      var url = 'roles/obtenerlistadoroles?page='+page;
-      axios.get(url, { params: { name: this.name }}).then(response => {
+    getPrepagada(page) {
+      var url = 'prepagada/obtenerlistadoprepagada?page='+page;                
+      axios.get(url, { params: { name: this.name }}).then(response => {		
 		var array = response.data;
 		this.pagination = array['paginate'];
-		this.roles = array['role']['data'];
+		this.prepagada = array['prepagada']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getRoles(page);
+      this.getPrepagada(page);
     }
   }
 }

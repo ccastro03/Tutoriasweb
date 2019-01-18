@@ -30,9 +30,7 @@
 			<td style="text-align: center;">{{ inscripcion.aprobada }}</td>
 
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/incripciones/'+ inscripcion.codigo">Ver</a>
-				<a class="button is-link is-rounded is-outlined" :href="'/incripciones/'+ inscripcion.codigo+'/editar'">Editar</a>
-				<a class="button is-link is-rounded is-outlined" target="_blank" :href="'/incripciones/pdfinscripcion/'+ inscripcion.numdocest">PDF</a>
+				<a class="button is-link is-rounded is-outlined" target="_blank" :href="'/tutoriaweb/public/incripciones/pdfinscripcion/'+ inscripcion.numdocest">PDF</a>
 			</td>
           </tr>
         </tbody>

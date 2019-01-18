@@ -1,6 +1,6 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre profesion">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre religion">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
@@ -12,13 +12,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="profesion in profesiones" :key="profesion.codigo">
-            <td><a :href="'/profesiones/' + profesion.codigo">{{ profesion.codigo }}</a></td>
-			<td>{{ profesion.nombre }}</td>
+          <tr v-for="religion in religiones" :key="religion.codigo">
+            <td><a :href="'/tutoriaweb/public/religion/' + religion.codigo">{{ religion.codigo }}</a></td>
+			<td>{{ religion.nombre }}</td>
             <td style="text-align: right;">
-				<a :href="'/profesiones/' + profesion.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				<a :href="'/tutoriaweb/public/religion/' + religion.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelProfes" :attr-id="profesion.codigo"></span></a>
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelReli" :attr-id="religion.codigo"></span></a>
 			</td>
           </tr>
         </tbody>
@@ -44,7 +44,7 @@
 export default {
   data() {
     return {
-      profesiones: [],
+      religiones: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -58,11 +58,11 @@ export default {
     }
   },
   created() {
-    this.getProfesiones();
+    this.getReligion();
   },
   watch: {
     name(after,before) {
-      this.getProfesiones();				
+      this.getReligion();				
     }
   },
 	computed:  {
@@ -90,17 +90,17 @@ export default {
     },
   },  
   methods: {
-    getProfesiones(page) {
-      var url = 'profesiones/obtenerlistadoprofesiones?page='+page;                
+    getReligion(page) {
+      var url = 'religion/obtenerlistadoreligiones?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
         var array = response.data;
 		this.pagination = array['paginate'];
-		this.profesiones = array['profesiones']['data'];
+		this.religiones = array['religion']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getProfesiones(page);
+      this.getReligion(page);
     }
   }
 }

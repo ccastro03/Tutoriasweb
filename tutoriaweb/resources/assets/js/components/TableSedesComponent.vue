@@ -1,6 +1,6 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre religion">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre sede">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
@@ -12,18 +12,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="religion in religiones" :key="religion.codigo">
-            <td><a :href="'/religion/' + religion.codigo">{{ religion.codigo }}</a></td>
-			<td>{{ religion.nombre }}</td>
+          <tr v-for="sede in sedes" :key="sede.codigo">
+            <td><a :href="'/tutoriaweb/public/sedes/' + sede.codigo">{{ sede.codigo }}</a></td>
+			<td>{{ sede.nombre }}</td>
             <td style="text-align: right;">
-				<a :href="'/religion/' + religion.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				<a :href="'/tutoriaweb/public/sedes/' + sede.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelReli" :attr-id="religion.codigo"></span></a>
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelSed" :attr-id="sede.codigo"></span></a>								
 			</td>
           </tr>
         </tbody>
-      </table>
-	  
+      </table> 
+
       <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
@@ -44,7 +44,7 @@
 export default {
   data() {
     return {
-      religiones: [],
+      sedes: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -58,11 +58,11 @@ export default {
     }
   },
   created() {
-    this.getReligion();
+    this.getSedes();
   },
   watch: {
     name(after,before) {
-      this.getReligion();				
+      this.getSedes();				
     }
   },
 	computed:  {
@@ -90,17 +90,17 @@ export default {
     },
   },  
   methods: {
-    getReligion(page) {
-      var url = 'religion/obtenerlistadoreligiones?page='+page;                
+    getSedes(page) {
+      var url = 'sedes/obtenerlistadosedes?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
         var array = response.data;
 		this.pagination = array['paginate'];
-		this.religiones = array['religion']['data'];
+		this.sedes = array['sedes']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getReligion(page);
+      this.getSedes(page);
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre aseguradora">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre especialidad">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
@@ -12,13 +12,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="aseguradora in aseguradoras" :key="aseguradora.codigo">
-            <td><a :href="'/aseguradora/' + aseguradora.codigo">{{ aseguradora.codigo }}</a></td>
-			<td>{{ aseguradora.nombre }}</td>
+          <tr v-for="especialidad in especialidades" :key="especialidad.codigo">
+            <td><a :href="'/tutoriaweb/public/especialidades/' + especialidad.codigo">{{ especialidad.codigo }}</a></td>
+			<td>{{ especialidad.nombre }}</td>
             <td style="text-align: right;">
-				<a :href="'/aseguradora/' + aseguradora.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				<a :href="'/tutoriaweb/public/especialidades/' + especialidad.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelAseg" :attr-id="aseguradora.codigo"></span></a>
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelEspe" :attr-id="especialidad.codigo"></span></a>
 			</td>
           </tr>
         </tbody>
@@ -44,7 +44,7 @@
 export default {
   data() {
     return {
-      aseguradoras: [],
+      especialidades: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -58,11 +58,11 @@ export default {
     }
   },
   created() {
-    this.getAseguradora();
+    this.getEspecialidades();
   },
   watch: {
     name(after,before) {
-      this.getAseguradora();				
+      this.getEspecialidades();				
     }
   },
 	computed:  {
@@ -90,17 +90,17 @@ export default {
     },
   },  
   methods: {
-    getAseguradora(page) {
-      var url = 'aseguradora/obtenerlistadoaseguradoras?page='+page;                
+    getEspecialidades(page) {
+      var url = 'especialidades/obtenerlistadoespecialidades?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
         var array = response.data;
 		this.pagination = array['paginate'];
-		this.aseguradoras = array['aseguradora']['data'];
+		this.especialidades = array['especialidades']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getAseguradora(page);
+      this.getEspecialidades(page);
     }
   }
 }

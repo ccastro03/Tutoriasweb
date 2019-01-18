@@ -1,24 +1,26 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre etnia">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar pais">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-			<th scope="col">Codigo</th>
+            <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="etnia in etnias" :key="etnia.codigo">
-            <td><a :href="'/etnias/' + etnia.codigo">{{ etnia.codigo }}</a></td>
-			<td>{{ etnia.nombre }}</td>
+          <tr v-for="pais in paises" :key="pais.codigo">           
+            <td><a :href="'/tutoriaweb/public/paises/' + pais.codigo">{{ pais.codigo }}</a></td>
+            <td>{{ pais.nombre }}</td>
             <td style="text-align: right;">				
-				<a :href="'/etnias/' + etnia.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				<a :href="'/tutoriaweb/public/paises/' + pais.codigo + '/editar'" style="color: #000;">
+				<span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
+				</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelEtni" :attr-id="etnia.codigo"></span></a>
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelPais" :attr-id="pais.codigo"></span></a>					
 			</td>
           </tr>
         </tbody>
@@ -34,7 +36,7 @@
             </a>
           </li>          
         </ul>
-      </nav>
+      </nav>	  
 	  
     </div>
   </div>
@@ -44,7 +46,7 @@
 export default {
   data() {
     return {
-      etnias: [],
+      paises: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -58,11 +60,11 @@ export default {
     }
   },
   created() {
-    this.getEtnias();
+    this.getPaises();
   },
   watch: {
     name(after,before) {
-      this.getEtnias();				
+      this.getPaises();				
     }
   },
 	computed:  {
@@ -88,20 +90,21 @@ export default {
       }
       return pagesArray;
     },
-  },  
+  }, 
   methods: {
-    getEtnias(page) {
-      var url = 'etnias/obtenerlistadoetnias?page='+page;                
-      axios.get(url, { params: { name: this.name }}).then(response => {
-        var array = response.data;
+    getPaises(page) {
+      var url = 'paises/obtenerlistadopaises?page='+page;
+      axios.get(url, { params: { name: this.name }}).then(response => {		
+		var array = response.data;
 		this.pagination = array['paginate'];
-		this.etnias = array['etnias']['data'];
+		this.paises = array['paises']['data'];		
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getEtnias(page);
+      this.getPaises(page);
     }
   }
 }
 </script>
+

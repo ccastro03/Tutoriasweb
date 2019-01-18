@@ -1,26 +1,24 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar ciudad">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre estado civil">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-            <th scope="col">Codigo</th>
+			<th scope="col">Codigo</th>
             <th scope="col">Nombre</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="ciudad in ciudades" :key="ciudad.cod_ciudad">           
-            <td><a :href="'/ciudades/' + ciudad.cod_ciudad">{{ ciudad.cod_ciudad }}</a></td>
-            <td>{{ ciudad.nombre }}</td>
-            <td style="text-align: right;">				
-				<a :href="'/ciudades/' + ciudad.cod_ciudad + '/editar'" style="color: #000;">
-				<span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
-				</a>
+          <tr v-for="estciv in estcivil" :key="estciv.codigo">
+            <td><a :href="'/tutoriaweb/public/estadocivil/' + estciv.codigo">{{ estciv.codigo }}</a></td>
+			<td>{{ estciv.nombre }}</td>
+            <td style="text-align: right;">
+				<a :href="'/tutoriaweb/public/estadocivil/' + estciv.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelCiu" :attr-id="ciudad.cod_ciudad"></span></a>					
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelEstCiv" :attr-id="estciv.codigo"></span></a>
 			</td>
           </tr>
         </tbody>
@@ -36,7 +34,7 @@
             </a>
           </li>          
         </ul>
-      </nav>	  
+      </nav>
 	  
     </div>
   </div>
@@ -46,7 +44,7 @@
 export default {
   data() {
     return {
-      ciudades: [],
+      estcivil: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -60,11 +58,11 @@ export default {
     }
   },
   created() {
-    this.getCiudades();
+    this.getEstadoCiv();
   },
   watch: {
     name(after,before) {
-      this.getCiudades();				
+      this.getEstadoCiv();				
     }
   },
 	computed:  {
@@ -92,19 +90,18 @@ export default {
     },
   },  
   methods: {
-    getCiudades(page) {
-      var url = 'ciudades/obtenerlistadociudades?page='+page;                
+    getEstadoCiv(page) {
+      var url = 'estadocivil/obtenerlistadoestcivil?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
-		var array = response.data;
+        var array = response.data;
 		this.pagination = array['paginate'];
-		this.ciudades = array['ciudades']['data'];
+		this.estcivil = array['estcivil']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getCiudades(page);
+      this.getEstadoCiv(page);
     }
   }
 }
 </script>
-

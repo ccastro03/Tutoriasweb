@@ -516,7 +516,7 @@ function GuardarEstudiante(){
 	
 	if(contError == 0){
 		$.ajax({
-			url: "/incripciones/validarEstudiante",
+			url: "/tutoriaweb/public/incripciones/validarEstudiante",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'ArrDatos':ArrDatos},
@@ -525,7 +525,7 @@ function GuardarEstudiante(){
 					swal(data[1], "", "warning");
 					$('.swal-button--confirm').click(function(){
 						$.ajax({
-							url: "/incripciones/actualizarEstudiante",
+							url: "/tutoriaweb/public/incripciones/actualizarEstudiante",
 							dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 							method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 							data: {'ArrDatos':ArrDatos},
@@ -797,7 +797,7 @@ function GuardarResponsable(){
 	
 	if(contError == 0){
 		$.ajax({
-			url: "/incripciones/validarResponsable",
+			url: "/tutoriaweb/public/incripciones/validarResponsable",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'ArrDatos':ArrDatos},
@@ -806,7 +806,7 @@ function GuardarResponsable(){
 					swal(data[1], "", "warning");
 					$('.swal-button--confirm').click(function(){
 						$.ajax({
-							url: "/incripciones/actualizarResponsable",
+							url: "/tutoriaweb/public/incripciones/actualizarResponsable",
 							dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 							method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 							data: {'ArrDatos':ArrDatos},
@@ -944,7 +944,7 @@ function GuardarAcudiente(){
 	};
 	
 	$.ajax({
-		url: "/incripciones/validarAcudiente",
+		url: "/tutoriaweb/public/incripciones/validarAcudiente",
 		dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 		data: {'ArrDatos':ArrDatos},
@@ -953,7 +953,7 @@ function GuardarAcudiente(){
 				swal(data[1], "", "warning");
 				$('.swal-button--confirm').click(function(){
 					$.ajax({
-						url: "/incripciones/actualizarAcudiente",
+						url: "/tutoriaweb/public/incripciones/actualizarAcudiente",
 						dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 						method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 						data: {'ArrDatos':ArrDatos},
@@ -970,9 +970,9 @@ function GuardarAcudiente(){
 									swal("La inscripcion fue enviada corectamente al colegio", "", "success")
 									.then((value) => {
 										if(guest != 1){
-											location.href = '/incripciones';
+											location.href = '/tutoriaweb/public/incripciones';
 										}else{
-											location.href = '/';
+											location.href = '/tutoriaweb/public/';
 										}
 									});	
 								});
@@ -992,9 +992,9 @@ function GuardarAcudiente(){
 						swal("La inscripcion fue enviada corectamente al colegio", "", "success")
 						.then((value) => {
 							if(guest != 1){
-								location.href = '/incripciones';
+								location.href = '/tutoriaweb/public/incripciones';
 							}else{
-								location.href = '/';
+								location.href = '/tutoriaweb/public/';
 							}
 						});	
 					});
@@ -1027,15 +1027,15 @@ function DevolverCambios(){
 	};	
 	
 	$.ajax({
-		url: "/incripciones/devolverCambios",
+		url: "/tutoriaweb/public/incripciones/devolverCambios",
 		dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 		data: {'ArrDatos':ArrDatos},
 		success: function(data){
 			if(guest != 1){
-				location.href = '/incripciones';
+				location.href = '/tutoriaweb/public/incripciones';
 			}else{
-				location.href = '/';
+				location.href = '/tutoriaweb/public/';
 			}
 		}
 	});	
@@ -1134,14 +1134,14 @@ function UpdInscripcion(){
 	};	
 	
 	$.ajax({
-		url: "/incripciones/actualizar",
+		url: "/tutoriaweb/public/incripciones/actualizar",
 		dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 		data: {'ArrDatos':ArrDatos},
 		success: function(data){
 			swal(data[1], data[2], "success")
 			.then((value) => {
-				location.href = '/incripciones';
+				location.href = '/tutoriaweb/public/incripciones';
 			});
 		}
 	});	

@@ -1,24 +1,28 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre especialidad">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar funcion">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-			<th scope="col">Codigo</th>
-            <th scope="col">Nombre</th>  
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="especialidad in especialidades" :key="especialidad.codigo">
-            <td><a :href="'/especialidades/' + especialidad.codigo">{{ especialidad.codigo }}</a></td>
-			<td>{{ especialidad.nombre }}</td>
+          <tr v-for="funcion in funciones" :key="funcion.id">           
+            <td><a :href="'/tutoriaweb/public/funciones/' + funcion.id">{{ funcion.nombre }}</a></td>
+            <td>{{ funcion.descripcion }}</td>
             <td style="text-align: right;">
-				<a :href="'/especialidades/' + especialidad.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				<a class="button is-link is-rounded is-outlined" :href="'/funciones/' + funcion.id + '/editar'" hidden>Editar</a>
+				
+				<a :href="'/tutoriaweb/public/funciones/' + funcion.id + '/editar'" style="color: #000;">
+				<span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
+				</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelEspe" :attr-id="especialidad.codigo"></span></a>
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelFunc" :attr-id="funcion.id"></span></a>				
 			</td>
           </tr>
         </tbody>
@@ -34,8 +38,7 @@
             </a>
           </li>          
         </ul>
-      </nav>
-	  
+      </nav>	  
     </div>
   </div>
 </template>
@@ -44,7 +47,7 @@
 export default {
   data() {
     return {
-      especialidades: [],
+      funciones: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -58,11 +61,11 @@ export default {
     }
   },
   created() {
-    this.getEspecialidades();
+    this.getFunciones();
   },
   watch: {
     name(after,before) {
-      this.getEspecialidades();				
+      this.getFunciones();				
     }
   },
 	computed:  {
@@ -90,18 +93,19 @@ export default {
     },
   },  
   methods: {
-    getEspecialidades(page) {
-      var url = 'especialidades/obtenerlistadoespecialidades?page='+page;                
-      axios.get(url, { params: { name: this.name }}).then(response => {
-        var array = response.data;
+    getFunciones(page) {
+      var url = 'funciones/obtenerlistadofunciones?page='+page;                
+      axios.get(url, { params: { name: this.name }}).then(response => {	  
+		var array = response.data;
 		this.pagination = array['paginate'];
-		this.especialidades = array['especialidades']['data'];
+		this.funciones = array['funciones']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getEspecialidades(page);
+      this.getFunciones(page);
     }
   }
 }
 </script>
+

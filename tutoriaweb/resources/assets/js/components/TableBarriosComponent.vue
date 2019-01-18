@@ -1,28 +1,31 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre genero">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar barrio">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-			<th scope="col">Codigo</th>
+			<th scope="col">Ciudad</th>
             <th scope="col">Nombre</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="genero in generos" :key="genero.codigo">
-            <td><a :href="'/generos/' + genero.codigo">{{ genero.codigo }}</a></td>
-			<td>{{ genero.nombre }}</td>
+          <tr v-for="barrio in barrios" :key="barrio.cod_barrio" >
+            <td v-for="ciudad in ciudades" v-if="ciudad.cod_ciudad === barrio.cod_ciudad">{{ ciudad.nombre }}</td>
+            <td><a :href="'/tutoriaweb/public/barrios/' + barrio.cod_ciudad + '/' + barrio.cod_barrio + '/show'">{{ barrio.nombre }}</a></td>
             <td style="text-align: right;">
-				<a :href="'/generos/' + genero.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				<a class="button is-link is-rounded is-outlined" :href="'/barrios/' + barrio.cod_ciudad + '/' + barrio.cod_barrio + '/edit'" hidden></a>
+				<a :href="'/tutoriaweb/public/barrios/' + barrio.cod_ciudad + '/' + barrio.cod_barrio + '/edit'" style="color: #000;">
+				<span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
+				</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelGen" :attr-id="genero.codigo"></span></a>
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelBar" :attr-id="barrio.cod_ciudad" :attr-id2="barrio.cod_barrio" ></span></a>
 			</td>
           </tr>
         </tbody>
-      </table>
+      </table> 
 	  
       <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
@@ -44,7 +47,7 @@
 export default {
   data() {
     return {
-      generos: [],
+      barrios: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -58,11 +61,11 @@ export default {
     }
   },
   created() {
-    this.getGeneros();
+    this.getBarrios();
   },
   watch: {
     name(after,before) {
-      this.getGeneros();				
+      this.getBarrios();				
     }
   },
 	computed:  {
@@ -90,17 +93,18 @@ export default {
     },
   },  
   methods: {
-    getGeneros(page) {
-      var url = 'generos/obtenerlistadogeneros?page='+page;                
+    getBarrios(page) {
+      var url = 'barrios/obtenerlistadobarrios?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
         var array = response.data;
 		this.pagination = array['paginate'];
-		this.generos = array['generos']['data'];
+		this.barrios = array['barrios']['data'];
+		this.ciudades = array['ciudades'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getGeneros(page);
+      this.getBarrios(page);
     }
   }
 }

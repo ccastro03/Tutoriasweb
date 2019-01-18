@@ -35,7 +35,7 @@ window.$(document).on('click', '#BtnDelRol', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/roles/eliminar",
+			url: "/tutoriaweb/public/roles/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':RolId},
@@ -43,7 +43,7 @@ window.$(document).on('click', '#BtnDelRol', function (){
 				if (data = 1){
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'roles';
+						location.href = '/tutoriaweb/public/roles';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -66,7 +66,7 @@ window.$(document).on('click', '#BtnDelFunc', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/funciones/eliminar",
+			url: "/tutoriaweb/public/funciones/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':FuncId},
@@ -78,7 +78,7 @@ window.$(document).on('click', '#BtnDelFunc', function (){
 				if (arrayDatos[0] != "" & arrayDatos[0] != null){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'funciones';
+						location.href = '/tutoriaweb/public/funciones';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -101,7 +101,7 @@ window.$(document).on('click', '#BtnDelPais', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/paises/eliminar",
+			url: "/tutoriaweb/public/paises/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':PaisId},
@@ -109,7 +109,7 @@ window.$(document).on('click', '#BtnDelPais', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'paises';
+						location.href = '/tutoriaweb/public/paises';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -132,7 +132,7 @@ window.$(document).on('click', '#BtnDelCiu', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/ciudades/eliminar",
+			url: "/tutoriaweb/public/ciudades/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':CiuId},
@@ -140,7 +140,7 @@ window.$(document).on('click', '#BtnDelCiu', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'ciudades';
+						location.href = '/tutoriaweb/public/ciudades';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -163,7 +163,7 @@ window.$(document).on('click', '#BtnDelPrepa', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/prepagada/eliminar",
+			url: "/tutoriaweb/public/prepagada/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':PrepaId},
@@ -171,7 +171,7 @@ window.$(document).on('click', '#BtnDelPrepa', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'prepagada';
+						location.href = '/tutoriaweb/public/prepagada';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -194,7 +194,7 @@ window.$(document).on('click', '#BtnDelEps', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/eps/eliminar",
+			url: "/tutoriaweb/public/eps/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':EpsId},
@@ -202,7 +202,7 @@ window.$(document).on('click', '#BtnDelEps', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'eps';
+						location.href = '/tutoriaweb/public/eps';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -226,7 +226,7 @@ window.$(document).on('click', '#BtnDelBar', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/barrios/eliminar",
+			url: "/tutoriaweb/public/barrios/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'cod_ciudad':CiuId,'cod_barrio':BarId},
@@ -234,7 +234,7 @@ window.$(document).on('click', '#BtnDelBar', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'barrios';
+						location.href = '/tutoriaweb/public/barrios';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -257,7 +257,7 @@ window.$(document).on('click', '#BtnDelSed', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/sedes/eliminar",
+			url: "/tutoriaweb/public/sedes/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':SedeId},
@@ -265,7 +265,7 @@ window.$(document).on('click', '#BtnDelSed', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'sedes';
+						location.href = '/tutoriaweb/public/sedes';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -288,7 +288,7 @@ window.$(document).on('click', '#BtnDelJor', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/jornadas/eliminar",
+			url: "/tutoriaweb/public/jornadas/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':JorId},
@@ -296,7 +296,7 @@ window.$(document).on('click', '#BtnDelJor', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'jornadas';
+						location.href = '/tutoriaweb/public/jornadas';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -319,7 +319,7 @@ window.$(document).on('click', '#BtnDelGrad', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/grados/eliminar",
+			url: "/tutoriaweb/public/grados/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':GradId},
@@ -327,7 +327,7 @@ window.$(document).on('click', '#BtnDelGrad', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'grados';
+						location.href = '/tutoriaweb/public/grados';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -350,7 +350,7 @@ window.$(document).on('click', '#BtnDelEtni', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/etnias/eliminar",
+			url: "/tutoriaweb/public/etnias/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':EtniId},
@@ -358,7 +358,7 @@ window.$(document).on('click', '#BtnDelEtni', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'etnias';
+						location.href = '/tutoriaweb/public/etnias';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -381,7 +381,7 @@ window.$(document).on('click', '#BtnDelAseg', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/aseguradora/eliminar",
+			url: "/tutoriaweb/public/aseguradora/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':AsegId},
@@ -389,7 +389,7 @@ window.$(document).on('click', '#BtnDelAseg', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'aseguradora';
+						location.href = '/tutoriaweb/public/aseguradora';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -412,7 +412,7 @@ window.$(document).on('click', '#BtnDelReli', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/religion/eliminar",
+			url: "/tutoriaweb/public/religion/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':ReliId},
@@ -420,7 +420,7 @@ window.$(document).on('click', '#BtnDelReli', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'religion';
+						location.href = '/tutoriaweb/public/religion';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -443,7 +443,7 @@ window.$(document).on('click', '#BtnDelGen', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/generos/eliminar",
+			url: "/tutoriaweb/public/generos/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':GenId},
@@ -451,7 +451,7 @@ window.$(document).on('click', '#BtnDelGen', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'generos';
+						location.href = '/tutoriaweb/public/generos';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -474,7 +474,7 @@ window.$(document).on('click', '#BtnDelProfes', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/profesiones/eliminar",
+			url: "/tutoriaweb/public/profesiones/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':ProfesId},
@@ -482,7 +482,7 @@ window.$(document).on('click', '#BtnDelProfes', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'profesiones';
+						location.href = '/tutoriaweb/public/profesiones';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -505,7 +505,7 @@ window.$(document).on('click', '#BtnDelEspeci', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/especialidades/eliminar",
+			url: "/tutoriaweb/public/especialidades/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':EspeciId},
@@ -513,7 +513,7 @@ window.$(document).on('click', '#BtnDelEspeci', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'especialidades';
+						location.href = '/tutoriaweb/public/especialidades';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -536,7 +536,7 @@ window.$(document).on('click', '#BtnDelTpDocu', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/tipodocumentos/eliminar",
+			url: "/tutoriaweb/public/tipodocumentos/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':TpDocuId},
@@ -544,7 +544,7 @@ window.$(document).on('click', '#BtnDelTpDocu', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'tipodocumentos';
+						location.href = '/tutoriaweb/public/tipodocumentos';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");
@@ -567,7 +567,7 @@ window.$(document).on('click', '#BtnDelEstCiv', function (){
 	}).then((willDelete) => {
 	if (willDelete) {
 		$.ajax({
-			url: "/estadocivil/eliminar",
+			url: "/tutoriaweb/public/estadocivil/eliminar",
 			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'id':EstCivId},
@@ -575,7 +575,7 @@ window.$(document).on('click', '#BtnDelEstCiv', function (){
 				if (data = 1){				
 					swal("Registro eliminado correctamente!", "", "success")
 					.then((value) => {
-						location.href = 'estadocivil';
+						location.href = '/tutoriaweb/public/estadocivil';
 					});	
 				} else {
 					swal("Error al eliminar el registro!", "", "warning");

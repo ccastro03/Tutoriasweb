@@ -1,6 +1,6 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre estado civil">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre documento">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
@@ -12,13 +12,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="estciv in estcivil" :key="estciv.codigo">
-            <td><a :href="'/estadocivil/' + estciv.codigo">{{ estciv.codigo }}</a></td>
-			<td>{{ estciv.nombre }}</td>
+          <tr v-for="tpdocu in tpdocumentos" :key="tpdocu.codigo">
+            <td><a :href="'/tutoriaweb/public/tipodocumentos/' + tpdocu.codigo">{{ tpdocu.codigo }}</a></td>
+			<td>{{ tpdocu.nombre }}</td>
             <td style="text-align: right;">
-				<a :href="'/estadocivil/' + estciv.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
+				<a :href="'/tutoriaweb/public/tipodocumentos/' + tpdocu.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelEstCiv" :attr-id="estciv.codigo"></span></a>
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelTpDocu" :attr-id="tpdocu.codigo"></span></a>
 			</td>
           </tr>
         </tbody>
@@ -44,7 +44,7 @@
 export default {
   data() {
     return {
-      estcivil: [],
+      tpdocumentos: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -58,11 +58,11 @@ export default {
     }
   },
   created() {
-    this.getEstadoCiv();
+    this.getTpdocumentos();
   },
   watch: {
     name(after,before) {
-      this.getEstadoCiv();				
+      this.getTpdocumentos();				
     }
   },
 	computed:  {
@@ -90,17 +90,17 @@ export default {
     },
   },  
   methods: {
-    getEstadoCiv(page) {
-      var url = 'estadocivil/obtenerlistadoestcivil?page='+page;                
+    getTpdocumentos(page) {
+      var url = 'tipodocumentos/obtenerlistadotipodocumentos?page='+page;                
       axios.get(url, { params: { name: this.name }}).then(response => {
         var array = response.data;
 		this.pagination = array['paginate'];
-		this.estcivil = array['estcivil']['data'];
+		this.tpdocumentos = array['tipodocumentos']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getEstadoCiv(page);
+      this.getTpdocumentos(page);
     }
   }
 }

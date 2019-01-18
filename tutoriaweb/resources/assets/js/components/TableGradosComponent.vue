@@ -1,31 +1,29 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar pais">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre grado">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-            <th scope="col">Codigo</th>
+			<th scope="col">Codigo</th>
             <th scope="col">Nombre</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="pais in paises" :key="pais.codigo">           
-            <td><a :href="'/paises/' + pais.codigo">{{ pais.codigo }}</a></td>
-            <td>{{ pais.nombre }}</td>
+          <tr v-for="grado in grados" :key="grado.codigo">
+            <td><a :href="'/tutoriaweb/public/grados/' + grado.codigo">{{ grado.codigo }}</a></td>
+			<td>{{ grado.nombre }}</td>
             <td style="text-align: right;">				
-				<a :href="'/paises/' + pais.codigo + '/editar'" style="color: #000;">
-				<span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
-				</a>
+				<a :href="'/tutoriaweb/public/grados/' + grado.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelPais" :attr-id="pais.codigo"></span></a>					
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelGrad" :attr-id="grado.codigo"></span></a>				
 			</td>
           </tr>
         </tbody>
-      </table>
-	  
+      </table> 
+
       <nav class="pagination" role="navigation" aria-label="pagination" v-if="pagination.last_page > 1">
         <a class="pagination-previous" v-if="pagination.current_page > 1" @click.prevent="changePage(pagination.current_page - 1)" >Anterior</a>
         <a class="pagination-next" v-if="pagination.current_page < pagination.last_page" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
@@ -36,7 +34,7 @@
             </a>
           </li>          
         </ul>
-      </nav>	  
+      </nav>
 	  
     </div>
   </div>
@@ -46,7 +44,7 @@
 export default {
   data() {
     return {
-      paises: [],
+      grados: [],
 	  pagination: {
         'current_page' : 0,
         'per_page' : 0,
@@ -60,11 +58,11 @@ export default {
     }
   },
   created() {
-    this.getPaises();
+    this.getGrados();
   },
   watch: {
     name(after,before) {
-      this.getPaises();				
+      this.getGrados();				
     }
   },
 	computed:  {
@@ -90,21 +88,20 @@ export default {
       }
       return pagesArray;
     },
-  }, 
+  },  
   methods: {
-    getPaises(page) {
-      var url = 'paises/obtenerlistadopaises?page='+page;
-      axios.get(url, { params: { name: this.name }}).then(response => {		
-		var array = response.data;
+    getGrados(page) {
+      var url = 'grados/obtenerlistadogrados?page='+page;                
+      axios.get(url, { params: { name: this.name }}).then(response => {
+        var array = response.data;
 		this.pagination = array['paginate'];
-		this.paises = array['paises']['data'];		
+		this.grados = array['grados']['data'];
       });
     },
     changePage(page) {
       this.pagination.current_page = page;
-      this.getPaises(page);
+      this.getGrados(page);
     }
   }
 }
 </script>
-

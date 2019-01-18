@@ -16,3 +16,24 @@ el hosting actual esta por 3 meses
 clave Cpanel
 sigkke2ef2tp
 Infor5335*
+
+
+cedula
+e en los campos numéricos
+extensiones gmail
+llenar todas las tablas con los datos reales
+porque -> porqué
+al cancelar falta borrar la tabla inscripción
+en el boton cancelar avisar que se pierde todo el proceso
+session -> sesión (botones "Si","No")
+citacion -> citación
+Pais
+Genero
+Religion
+Numero
+Telefono
+Profesion
+Notificacion
+Ex alumuno -> Exalumno
+icono de pdf
+quitar el nombre laravel y vulva

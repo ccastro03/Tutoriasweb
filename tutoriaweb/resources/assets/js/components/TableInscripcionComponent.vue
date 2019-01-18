@@ -73,7 +73,7 @@ export default {
     }
   },
   created() {
-    this.getInscripciones();
+    setInterval(() => { this.getInscripciones() }, 1000);
   },
   watch: {
     codest(after,before) {
@@ -116,6 +116,9 @@ export default {
 		this.inscripciones = array['inscripcion']['data'];
       });
     },
+	beforeDestroy () {
+		clearInterval(this.getInscripciones)
+	},
     changePage(page) {
       this.pagination.current_page = page;
       this.getInscripciones(page);

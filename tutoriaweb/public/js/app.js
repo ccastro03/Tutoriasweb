@@ -44011,7 +44011,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   created: function created() {
-    this.getRoles();
+    var _this = this;
+
+    setInterval(function () {
+      _this.getRoles();
+    }, 1000);
   },
 
   watch: {
@@ -44045,14 +44049,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     getRoles: function getRoles(page) {
-      var _this = this;
+      var _this2 = this;
 
       var url = 'roles/obtenerlistadoroles?page=' + page;
       axios.get(url, { params: { name: this.name } }).then(function (response) {
         var array = response.data;
-        _this.pagination = array['paginate'];
-        _this.roles = array['role']['data'];
+        _this2.pagination = array['paginate'];
+        _this2.roles = array['role']['data'];
       });
+    },
+    beforeDestroy: function beforeDestroy() {
+      clearInterval(this.roles);
     },
     changePage: function changePage(page) {
       this.pagination.current_page = page;
@@ -48718,7 +48725,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   created: function created() {
-    this.getInscripciones();
+    var _this = this;
+
+    setInterval(function () {
+      _this.getInscripciones();
+    }, 1000);
   },
 
   watch: {
@@ -48755,14 +48766,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     getInscripciones: function getInscripciones(page) {
-      var _this = this;
+      var _this2 = this;
 
       var url = 'incripciones/obtenerlistadoinscripciones?page=' + page;
       axios.get(url, { params: { codigo: this.codest, sede: this.sede } }).then(function (response) {
         var array = response.data;
-        _this.pagination = array['paginate'];
-        _this.inscripciones = array['inscripcion']['data'];
+        _this2.pagination = array['paginate'];
+        _this2.inscripciones = array['inscripcion']['data'];
       });
+    },
+    beforeDestroy: function beforeDestroy() {
+      clearInterval(this.getInscripciones);
     },
     changePage: function changePage(page) {
       this.pagination.current_page = page;
@@ -49149,7 +49163,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   created: function created() {
-    this.getInscripciones();
+    var _this = this;
+
+    setInterval(function () {
+      _this.getInscripciones();
+    }, 1000);
   },
 
   watch: {
@@ -49186,14 +49204,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     getInscripciones: function getInscripciones(page) {
-      var _this = this;
+      var _this2 = this;
 
       var url = 'incripciones/obtenerlistadoinscripciones?page=' + page;
       axios.get(url, { params: { codigo: this.codest, sede: this.sede } }).then(function (response) {
         var array = response.data;
-        _this.pagination = array['paginate'];
-        _this.inscripciones = array['inscripcion']['data'];
+        _this2.pagination = array['paginate'];
+        _this2.inscripciones = array['inscripcion']['data'];
       });
+    },
+    beforeDestroy: function beforeDestroy() {
+      clearInterval(this.getInscripciones);
     },
     changePage: function changePage(page) {
       this.pagination.current_page = page;

@@ -58,7 +58,7 @@ export default {
     }
   },
   created() {
-    this.getRoles();
+	setInterval(() => { this.getRoles() }, 1000);
   },
   watch: {
     name(after,before) {
@@ -95,9 +95,12 @@ export default {
       axios.get(url, { params: { name: this.name }}).then(response => {
 		var array = response.data;
 		this.pagination = array['paginate'];
-		this.roles = array['role']['data'];
+		this.roles = array['role']['data'];		
       });
     },
+	beforeDestroy () {
+		clearInterval(this.roles)
+	},	
     changePage(page) {
       this.pagination.current_page = page;
       this.getRoles(page);

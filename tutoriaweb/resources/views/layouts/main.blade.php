@@ -25,7 +25,7 @@
     <!-- Scripts -->
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-	<script src="{{ asset('js/bootstrap.min.js') }}"></script>	
+	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 </head>
 <body>
 	  <!-- Navbar start -->
@@ -34,7 +34,7 @@
 		  <a href="/" class="navbar-item">
 			<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
 		  </a>
-		  <a class="navbar-burger burger" aria-label="menu" role="button" aria-expanded="false" data-target="navbarpptal">
+		  <a class="navbar-burger burger" aria-label="menu" role="button" aria-expanded="false" data-target="navbarPptal">
 			<span aria-hidden="true"></span>
 			<span aria-hidden="true"></span>
 			<span aria-hidden="true"></span>
@@ -47,7 +47,7 @@
 		  <div class="navbar-end">
 			  <div class="navbar-item">
 				  <div class="buttons">
-					  <a class="button is-primary is-inverted is-outlined is-rounded" href="{{ route('login') }}">Iniciar sesion</a>                      
+					  <a class="button is-primary is-inverted is-outlined is-rounded" href="{{ route('login') }}">Iniciar sesión</a>                      
 				  </div>
 			  </div>
 		  </div>
@@ -62,7 +62,7 @@
 					@if (Auth::user()->cod_rol == "01")
 						<a class="navbar-item" href="{{ url('/roles') }}">Roles</a>
 						<a class="navbar-item" href="{{ url('/funciones') }}">Funciones</a>
-						<a class="navbar-item" href="{{ url('/paises') }}">Paises</a>
+						<a class="navbar-item" href="{{ url('/paises') }}">Países</a>
 						<a class="navbar-item" href="{{ url('/ciudades') }}">Ciudades</a>
 						<a class="navbar-item" href="{{ url('/prepagada') }}">Prepagadas</a>
 						<a class="navbar-item" href="{{ url('/eps') }}">EPS</a>
@@ -74,7 +74,7 @@
 						<a class="navbar-item" href="{{ url('/aseguradora') }}">Aseguradoras</a>
 						<a class="navbar-item" href="{{ url('/religion') }}">Religiones</a>
 						<a class="navbar-item" href="{{ url('/tipodocumentos') }}">Tipo Documentos</a>
-						<a class="navbar-item" href="{{ url('/generos') }}">Generos</a>
+						<a class="navbar-item" href="{{ url('/generos') }}">Géneros</a>
 						<a class="navbar-item" href="{{ url('/profesiones') }}">Profesiones</a>
 						<a class="navbar-item" href="{{ url('/especialidades') }}">Especialidades</a>
 						<a class="navbar-item" href="{{ url('/estadocivil') }}">Estado Civil</a>
@@ -125,10 +125,10 @@
 	<script>
 		function CerrarSession(){
 			swal({
-			  title: "¿Está seguro de cerrar la session?",
+			  title: "¿Está seguro de cerrar la sesión?",
 			  text: "",
 			  icon: "warning",
-			  buttons: true,
+			  buttons: ["No", "Si"]
 			})
 			.then((willDelete) => {
 				if (willDelete) {

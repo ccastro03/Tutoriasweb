@@ -32,14 +32,14 @@
 	<nav class="navbar is-info" role="navigation" aria-label="main navigation">
 		<div class="navbar-brand">
 			<a href="/" class="navbar-item"><img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"></a>
-			<a class="navbar-burger burger" aria-label="menu" role="button" aria-expanded="false" data-target="navbarpptal">
+			<a class="navbar-burger burger" aria-label="menu" role="button" aria-expanded="false" data-target="Pptal">
 				<span aria-hidden="true"></span>
 				<span aria-hidden="true"></span>
 				<span aria-hidden="true"></span>
 			</a>
 		</div>
 		
-		<div id="navbarPptal" class="navbar-menu">
+		<div id="Pptal" class="navbar-menu">
 			<div class="navbar-start">              
 				<a href="{{ url('/nuevaInscripcion') }}" class="navbar-item">Inscripciones</a>
 				<label id="guest" hidden>{{ auth()->guest() }}</label>

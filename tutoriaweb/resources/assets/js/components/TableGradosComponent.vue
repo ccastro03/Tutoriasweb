@@ -6,7 +6,7 @@
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-			<th scope="col">Codigo</th>
+			<th scope="col">Código</th>
             <th scope="col">Nombre</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>
@@ -18,7 +18,7 @@
             <td style="text-align: right;">				
 				<a :href="'/tutoriaweb/public/grados/' + grado.codigo + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelGrad" :attr-id="grado.codigo"></span></a>				
+				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelGrad" :attr-id="grado.codigo"></span></a>
 			</td>
           </tr>
         </tbody>

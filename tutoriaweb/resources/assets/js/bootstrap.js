@@ -1,12 +1,32 @@
-window._ = require('lodash');
-window.Popper = require('popper.js').default;
-window.swal = require('sweetalert');
 
-window.$ = window.jQuery = require('jquery');
+window._ = require('lodash');
+
+/**
+ * We'll load jQuery and the Bootstrap jQuery plugin which provides support
+ * for JavaScript based Bootstrap features such as modals and tabs. This
+ * code may be modified to fit the specific needs of your application.
+ */
+
+try {
+    window.$ = window.jQuery = require('jquery');
+
+} catch (e) {}
+
+/**
+ * We'll load the axios HTTP library which allows us to easily issue requests
+ * to our Laravel back-end. This library automatically handles sending the
+ * CSRF token as a header based on the value of the "XSRF" token cookie.
+ */
 
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+/**
+ * Next we will register the CSRF Token as a common header with Axios so that
+ * all outgoing HTTP requests automatically have it attached. This is just
+ * a simple convenience so we don't have to attach every token manually.
+ */
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
 
@@ -15,6 +35,8 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+window.swal = require('sweetalert');
 
 /* Cerrar Notificaciones de bulma */
 
@@ -586,25 +608,28 @@ window.$(document).on('click', '#BtnDelEstCiv', function (){
 	});	
 });
 
-/*Hamburger mobile*/
-
-document.addEventListener('DOMContentLoaded', () => {
-
+// Bulma NavBar Burger Script
+document.addEventListener('DOMContentLoaded', function () {
+    // Get all "navbar-burger" elements
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-  
+    
+    // Check if there are any navbar burgers
     if ($navbarBurgers.length > 0) {
-  
-      $navbarBurgers.forEach( el => {
-        el.addEventListener('click', () => {
-  
-          const target = el.dataset.target;
-          const $target = document.getElementById(target);
-  
-          el.classList.toggle('is-active');
-          $target.classList.toggle('is-active');
-  
+        
+        // Add a click event on each of them
+        $navbarBurgers.forEach(function ($el) {
+            $el.addEventListener('click', function () {
+                
+                // Get the target from the "data-target" attribute
+                let target = $el.dataset.target;
+                let $target = document.getElementById(target);
+                
+                // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+                $el.classList.toggle('is-active');
+                $target.classList.toggle('is-active');
+                
+            });
         });
-      });
     }
-  
-  });
+    
+});

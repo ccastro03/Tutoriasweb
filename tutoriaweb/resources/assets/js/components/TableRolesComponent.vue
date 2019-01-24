@@ -7,7 +7,7 @@
         <thead>
           <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Descripcion</th>  
+            <th scope="col">Descripción</th>
             <th colspan="2"> &nbsp; </th>
           </tr>
         </thead>

@@ -1,12 +1,12 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar pais">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar nombre país">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-            <th scope="col">Codigo</th>
+            <th scope="col">Código</th>
             <th scope="col">Nombre</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>

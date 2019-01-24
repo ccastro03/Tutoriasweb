@@ -16,7 +16,6 @@
             <td v-for="ciudad in ciudades" v-if="ciudad.cod_ciudad === barrio.cod_ciudad">{{ ciudad.nombre }}</td>
             <td><a :href="'/tutoriaweb/public/barrios/' + barrio.cod_ciudad + '/' + barrio.cod_barrio + '/show'">{{ barrio.nombre }}</a></td>
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/barrios/' + barrio.cod_ciudad + '/' + barrio.cod_barrio + '/edit'" hidden></a>
 				<a :href="'/tutoriaweb/public/barrios/' + barrio.cod_ciudad + '/' + barrio.cod_barrio + '/edit'" style="color: #000;">
 				<span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
 				</a>

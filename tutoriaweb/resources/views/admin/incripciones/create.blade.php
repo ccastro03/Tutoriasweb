@@ -287,7 +287,7 @@
 						</div>						
 						
 						<div class="column is-one-fifth" style="width: 150px">
-							<label class="label">Religion</label>
+							<label class="label">Religión</label>
 							<div class="select">
 								<select name="religion" id="religion" onchange="ValidaOtReli();">
 									<option value="">Ninguna</option>
@@ -330,7 +330,7 @@
 						</div>						
 						
 						<div class="column is-two-thirds" style="width: 502px">
-							<p align="left" class="help is-info">&nbsp;&nbsp;&nbsp;&nbsp;Explica brevemente porque el estudiante sale del colegio anterior y desea ingresar a &nbsp;&nbsp;&nbsp;&nbsp;nuestra institución. *</p>
+							<p align="left" class="help is-info">&nbsp;&nbsp;&nbsp;&nbsp;Explica brevemente porqué el estudiante sale del colegio anterior y desea ingresar a &nbsp;&nbsp;&nbsp;&nbsp;nuestra institución. *</p>
 							<textarea class="textarea has-fixed-size" id="obsporque"></textarea>
 							<p class="help is-danger" id="Errobsporque" hidden>Campo obligatorio *</p>
 						</div>						
@@ -494,7 +494,7 @@
 						</div>
 						
 						<div class="column is-one-fifth" style="width: 135px">
-							<label class="label">¿Ex alumno?</label>
+							<label class="label">¿Exalumno?</label>
 							<input type="checkbox" id="exalumres" style="margin-left: 50px;">						
 						</div>						
 						
@@ -677,7 +677,7 @@
 						</div>
 
 						<div class="column is-one-fifth" style="width: 135px">
-							<label class="label">¿Ex alumno?</label>
+							<label class="label">¿Exalumno?</label>
 							<input type="checkbox" id="exalumacu" style="margin-left: 50px;">						
 						</div>
 					</div>

@@ -276,7 +276,7 @@ function GuardarEstudiante(){
 	if(genero == ""){
 		contError += 1;
 		Identifi = "#tipgenero";
-		Errores += "Debe seleccionar un genero!\n"
+		Errores += "Debe seleccionar un género!\n"
 		$("#ErrGenero").removeAttr('hidden');
 	}else{
 		$("#ErrGenero").attr('hidden','hidden');
@@ -292,7 +292,7 @@ function GuardarEstudiante(){
 	if(numdocumento == ""){
 		contError += 1;
 		Identifi = "#numdocu";
-		Errores += "Debe digitar un numero de documento valido!\n"
+		Errores += "Debe digitar un número de documento valido!\n"
 		$("#ErrNumdocu").removeAttr('hidden');
 	}else{
 		$("#ErrNumdocu").attr('hidden','hidden');
@@ -316,7 +316,7 @@ function GuardarEstudiante(){
 	if(numcelular == ""){
 		contError += 1;
 		Identifi = "#numcelular";
-		Errores += "Debe digitar un numero de celular valido!\n"
+		Errores += "Debe digitar un número de celular valido!\n"
 		$("#ErrNumcel").removeAttr('hidden');
 	}else{
 		$("#ErrNumcel").attr('hidden','hidden');
@@ -332,7 +332,7 @@ function GuardarEstudiante(){
 	if(vlpainace == ""){
 		contError += 1;
 		Identifi = "#painace";
-		Errores += "Debe seleccionar un pais valido!\n"
+		Errores += "Debe seleccionar un país valido!\n"
 		$("#ErrPainace").removeAttr('hidden');
 	}else{
 		$("#ErrPainace").attr('hidden','hidden');
@@ -414,7 +414,7 @@ function GuardarEstudiante(){
 	if(religion == ""){
 		contError += 1;
 		Identifi = "#religion";
-		Errores += "Debe seleccionar una religion valida!\n"
+		Errores += "Debe seleccionar una religión valida!\n"
 		$("#ErrReligion").removeAttr('hidden');
 	}else{
 		$("#ErrReligion").attr('hidden','hidden');
@@ -462,7 +462,7 @@ function GuardarEstudiante(){
 	if((religion == "04") && (otra_religion == "")){ 
 		contError += 1;
 		Identifi = "#otreligion";
-		Errores += "Debe digitar una religion valida!\n"
+		Errores += "Debe digitar una religión valida!\n"
 		$("#Errotreligion").removeAttr('hidden');
 	}else{
 		$("#Errotreligion").attr('hidden','hidden');
@@ -470,7 +470,7 @@ function GuardarEstudiante(){
 	if(obsporque == ""){
 		contError += 1;
 		Identifi = "#obsporque";
-		Errores += "Debe digitar un porque valido!\n"
+		Errores += "Debe digitar un porqué valido!\n"
 		$("#Errobsporque").removeAttr('hidden');
 	}else{
 		$("#Errobsporque").attr('hidden','hidden');
@@ -676,7 +676,7 @@ function GuardarResponsable(){
 	if(numdocures == ""){
 		contError += 1;
 		Identifi = "#numdocures";
-		Errores += "Debe digitar un numero de documento valido!\n"
+		Errores += "Debe digitar un número de documento valido!\n"
 		$("#ErrNumdocures").removeAttr('hidden');
 	}else{
 		$("#ErrNumdocures").attr('hidden','hidden');
@@ -692,7 +692,7 @@ function GuardarResponsable(){
 	if(painaceres == ""){
 		contError += 1;
 		Identifi = "#painaceres";
-		Errores += "Debe digitar un pais de nacimiento valido!\n"
+		Errores += "Debe digitar un país de nacimiento valido!\n"
 		$("#ErrPainaceres").removeAttr('hidden');
 	}else{
 		$("#ErrPainaceres").attr('hidden','hidden');
@@ -708,7 +708,7 @@ function GuardarResponsable(){
 	if(celures == ""){
 		contError += 1;
 		Identifi = "#celures";
-		Errores += "Debe digitar un numero de celular valido!\n"
+		Errores += "Debe digitar un número de celular valido!\n"
 		$("#ErrCelures").removeAttr('hidden');
 	}else{
 		$("#ErrCelures").attr('hidden','hidden');
@@ -724,7 +724,7 @@ function GuardarResponsable(){
 	if(proferes == ""){
 		contError += 1;
 		Identifi = "#proferes";
-		Errores += "Debe seleccionar una profesion!\n"
+		Errores += "Debe seleccionar una profesión!\n"
 		$("#ErrProferes").removeAttr('hidden');
 	}else{
 		$("#ErrProferes").attr('hidden','hidden');
@@ -756,7 +756,7 @@ function GuardarResponsable(){
 	if(dirempres == "" && proferes != "NA"){
 		contError += 1;
 		Identifi = "#dirempres";
-		Errores += "Debe digitar una direccion de empresa valida!\n"
+		Errores += "Debe digitar una dirección de empresa valida!\n"
 		$("#ErrDirempres").removeAttr('hidden');
 	}else{
 		$("#ErrDirempres").attr('hidden','hidden');
@@ -764,7 +764,7 @@ function GuardarResponsable(){
 	if(telempres == "" && proferes != "NA"){
 		contError += 1;
 		Identifi = "#telempres";
-		Errores += "Debe digitar un numero de empresa valido!\n"
+		Errores += "Debe digitar un número de empresa valido!\n"
 		$("#ErrTelempres").removeAttr('hidden');
 	}else{
 		$("#ErrTelempres").attr('hidden','hidden');
@@ -1005,40 +1005,46 @@ function GuardarAcudiente(){
 };
 
 function DevolverCambios(){
-	var numdocest = $("#numdocu").val();
-	var numdocres = $("#numdocures").val();
-	var numdocacu = $("#numdocuacu").val();
-	var codigoest = $("#codest").val();
-	
-	var usuest = $("#usrest").val();
-	var usures = $("#usrres").val();
-	var usuacu = $("#usracu").val();	
-	
-	var guest = $("#guest").val();
-	
-	var ArrDatos = {
-		"numdocest":numdocest,
-		"numdocres":numdocres,
-		"numdocacu":numdocacu,
-		"codigoest":codigoest,
-		"usuest":usuest,
-		"usures":usures,
-		"usuacu":usuacu,
-	};	
-	
-	$.ajax({
-		url: "/tutoriaweb/public/incripciones/devolverCambios",
-		dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
-		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-		data: {'ArrDatos':ArrDatos},
-		success: function(data){
-			if(guest != 1){
-				location.href = '/tutoriaweb/public/incripciones';
-			}else{
-				location.href = '/tutoriaweb/public/';
+	swal("¿Desea cancelar la Inscripción?", "Recuerde que si cancela todo su proceso se perderá.", "warning", {
+		buttons: ["No", "Si"],
+	});
+	$('.swal-button--confirm').click(function(){
+					
+		var numdocest = $("#numdocu").val();
+		var numdocres = $("#numdocures").val();
+		var numdocacu = $("#numdocuacu").val();
+		var codigoest = $("#codest").val();
+		
+		var usuest = $("#usrest").val();
+		var usures = $("#usrres").val();
+		var usuacu = $("#usracu").val();	
+		
+		var guest = $("#guest").val();
+		
+		var ArrDatos = {
+			"numdocest":numdocest,
+			"numdocres":numdocres,
+			"numdocacu":numdocacu,
+			"codigoest":codigoest,
+			"usuest":usuest,
+			"usures":usures,
+			"usuacu":usuacu,
+		};	
+		
+		$.ajax({
+			url: "/tutoriaweb/public/incripciones/devolverCambios",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'ArrDatos':ArrDatos},
+			success: function(data){
+				if(guest != 1){
+					location.href = '/tutoriaweb/public/incripciones';
+				}else{
+					location.href = '/tutoriaweb/public/';
+				}
 			}
-		}
-	});	
+		});	
+	});
 };
 
 function ValChVerificado(){

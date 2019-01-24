@@ -15,7 +15,7 @@
             <th scope="col">Fecha&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 			<th scope="col">Sede</th>
 			<th scope="col">Verificada</th>
-			<th scope="col">Citacion</th>
+			<th scope="col">Citación</th>
 			<th scope="col">Aprobada</th>
             <th colspan="3"> &nbsp; </th>
           </tr>
@@ -30,7 +30,7 @@
 			<td style="text-align: center;">{{ inscripcion.aprobada }}</td>
 
             <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" target="_blank" :href="'/tutoriaweb/public/incripciones/pdfinscripcion/'+ inscripcion.numdocest">PDF</a>
+				<a target="_blank" :href="'/tutoriaweb/public/incripciones/pdfinscripcion/'+ inscripcion.numdocest" style="color: #000;"><span class="oi oi-document" title="PDF" aria-hidden="true"></span></a>
 			</td>
           </tr>
         </tbody>

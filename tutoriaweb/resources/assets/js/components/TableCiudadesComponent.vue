@@ -6,7 +6,7 @@
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
-            <th scope="col">Codigo</th>
+            <th scope="col">Código</th>
             <th scope="col">Nombre</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>

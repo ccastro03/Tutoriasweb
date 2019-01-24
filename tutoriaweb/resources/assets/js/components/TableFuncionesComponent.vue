@@ -1,13 +1,13 @@
 <template>
   <div id="crud" class="row">
-    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar funcion">
+    <input type="text" name="name" class="input" v-model="name" placeholder="Buscar función">
     <br>
     <div class="col-md-12">
       <table class="table table-hover table-striped table is-fullwidth">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Descripcion</th>  
+            <th scope="col">Descripción</th>  
             <th colspan="2"> &nbsp; </th>
           </tr>
         </thead>
@@ -15,12 +15,8 @@
           <tr v-for="funcion in funciones" :key="funcion.id">           
             <td><a :href="'/tutoriaweb/public/funciones/' + funcion.id">{{ funcion.nombre }}</a></td>
             <td>{{ funcion.descripcion }}</td>
-            <td style="text-align: right;">
-				<a class="button is-link is-rounded is-outlined" :href="'/funciones/' + funcion.id + '/editar'" hidden>Editar</a>
-				
-				<a :href="'/tutoriaweb/public/funciones/' + funcion.id + '/editar'" style="color: #000;">
-				<span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
-				</a>
+            <td style="text-align: right;">				
+				<a :href="'/tutoriaweb/public/funciones/' + funcion.id + '/editar'" style="color: #000;"><span class="oi oi-pencil" title="Editar" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<a style="color: #000;"><span class="oi oi-trash" title="Eliminar" aria-hidden="true" id="BtnDelFunc" :attr-id="funcion.id"></span></a>				
 			</td>

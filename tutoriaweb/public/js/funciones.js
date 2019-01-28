@@ -540,7 +540,8 @@ function GuardarEstudiante(){
 								$("#liEst").removeClass("is-active");
 								$("#responsable").removeAttr('disabled');
 								$("#liRespo").addClass("is-active");
-								$("#responsable").attr('checked','checked');								
+								$("#responsable").attr('checked','checked');
+								$("#nomres").focus();								
 							}
 						});
 					});
@@ -556,6 +557,7 @@ function GuardarEstudiante(){
 					$("#responsable").removeAttr('disabled');
 					$("#liRespo").addClass("is-active");
 					$("#responsable").attr('checked','checked');
+					$("#nomres").focus();
 				}
 				
 			}
@@ -818,7 +820,8 @@ function GuardarResponsable(){
 								$("#liRespo").removeClass("is-active");
 								$("#acudiente").removeAttr('disabled');
 								$("#liAcu").addClass("is-active");
-								$("#acudiente").attr('checked','checked');								
+								$("#acudiente").attr('checked','checked');
+								$("#nomacu").focus();								
 							}
 						});
 					});					
@@ -830,7 +833,8 @@ function GuardarResponsable(){
 					$("#liRespo").removeClass("is-active");
 					$("#acudiente").removeAttr('disabled');
 					$("#liAcu").addClass("is-active");
-					$("#acudiente").attr('checked','checked');					
+					$("#acudiente").attr('checked','checked');
+					$("#nomacu").focus();					
 				}
 				
 			}
@@ -960,23 +964,7 @@ function GuardarAcudiente(){
 						success: function(data){
 							$("#numdocuacu").attr('disabled','disabled');
 							$("#usracu").val(data[2]);
-							
 							swal(data[1], "", "success");
-							$('.swal-button--confirm').click(function(){
-								swal("¿Desea terminar y enviar la inscripciòn al colegio?", "", "success", {
-									buttons: ["Cancelar", "Aceptar"],
-								});
-								$('.swal-button--confirm').click(function(){
-									swal("La inscripcion fue enviada corectamente al colegio", "", "success")
-									.then((value) => {
-										if(guest != 1){
-											location.href = '/tutoriaweb/public/incripciones';
-										}else{
-											location.href = '/tutoriaweb/public/';
-										}
-									});	
-								});
-							});
 						}
 					});
 				});				
@@ -984,21 +972,6 @@ function GuardarAcudiente(){
 				$("#numdocuacu").attr('disabled','disabled');
 				$("#usracu").val(data[2]);
 				swal(data[1], "", "success");
-				$('.swal-button--confirm').click(function(){
-					swal("¿Desea terminar y enviar la inscripciòn al colegio?", "", "success", {
-						buttons: ["Cancelar", "Aceptar"],
-					});
-					$('.swal-button--confirm').click(function(){
-						swal("La inscripcion fue enviada corectamente al colegio", "", "success")
-						.then((value) => {
-							if(guest != 1){
-								location.href = '/tutoriaweb/public/incripciones';
-							}else{
-								location.href = '/tutoriaweb/public/';
-							}
-						});	
-					});
-				});
 			}
 		}
 	});	
@@ -1037,11 +1010,19 @@ function DevolverCambios(){
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'ArrDatos':ArrDatos},
 			success: function(data){
-				if(guest != 1){
-					location.href = '/tutoriaweb/public/incripciones';
-				}else{
-					location.href = '/tutoriaweb/public/';
-				}
+				swal("¿Desea terminar y enviar la inscripciòn al colegio?", "", "success", {
+					buttons: ["Cancelar", "Aceptar"],
+				});
+				$('.swal-button--confirm').click(function(){
+					swal("La inscripcion fue enviada corectamente al colegio", "", "success")
+					.then((value) => {
+						if(guest != 1){
+							location.href = '/tutoriaweb/public/incripciones';
+						}else{
+							location.href = '/tutoriaweb/public/';
+						}
+					});	
+				});
 			}
 		});	
 	});
@@ -1077,6 +1058,8 @@ function ChEstudiante(){
 	
 	$("#liEst").addClass("is-active");
 	$("#estudiante").attr('checked','checked');
+	
+	$("#nombre").focus();
 };
 
 function ChResponsable(){
@@ -1088,6 +1071,8 @@ function ChResponsable(){
 	
 	$("#liRespo").addClass("is-active");
 	$("#responsable").attr('checked','checked');
+	
+	$("#nomres").focus();
 };
 
 function ChAcudiente(){
@@ -1099,6 +1084,8 @@ function ChAcudiente(){
 	
 	$("#liAcu").addClass("is-active");
 	$("#acudiente").attr('checked','checked');
+	
+	$("#nomacu").focus();
 };
 
 
@@ -1149,6 +1136,30 @@ function UpdInscripcion(){
 			.then((value) => {
 				location.href = '/tutoriaweb/public/incripciones';
 			});
+		}
+	});	
+};
+
+function TerminarInscripcion(){
+	var sede = $("#sede").val();	
+	var numdocumento = $("#numdocu").val();
+	
+	var ArrDatos = {
+		"sede":sede,
+		"numdocumento":numdocumento,
+	};	
+	
+	$.ajax({
+		url: "/tutoriaweb/public/incripciones/terminarInscripcion",
+		dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+		data: {'ArrDatos':ArrDatos},
+		success: function(data){
+			if(guest != 1){
+				location.href = '/tutoriaweb/public/incripciones';
+			}else{
+				location.href = '/tutoriaweb/public/';
+			}
 		}
 	});	
 };

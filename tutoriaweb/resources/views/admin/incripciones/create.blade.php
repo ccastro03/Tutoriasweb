@@ -307,21 +307,22 @@
 
 						<div class="column is-one-fifth">
 							<label class="label">Tiene cobertura?</label>
-							<input type="checkbox" id="cobertura" style="margin-left: 65px;">						
+							<input type="checkbox" id="cobertura" style="margin-left: 65px;">
+							<p>Tooltip: <p class="tooltip" data-tooltip="Tooltip Text"></p> dskhj</p>
 						</div>
 					</div>
 					
-					<div class="columns">						
-						<div class="column is-one-fifth">
-							<label class="label">Ciudad procedencia</label>
-							<input type="text" name="ciuproce" id="ciuproce" attr-value="01" value="Cali" class="input {{ $errors->has('ciuproce') ? ' is-danger' : '' }}">
-							<p class="help is-danger" id="ErrCiuproce" hidden>Campo obligatorio *</p>
-						</div>
-
+					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Colegio procedencia</label>
 							<input type="text" name="colproce" id="colproce" class="input {{ $errors->has('colproce') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrColproce" hidden>Campo obligatorio *</p>
+						</div>
+						
+						<div class="column is-one-fifth">
+							<label class="label">Ciudad colegio procedencia</label>
+							<input type="text" name="ciuproce" id="ciuproce" attr-value="01" value="Cali" class="input {{ $errors->has('ciuproce') ? ' is-danger' : '' }}">
+							<p class="help is-danger" id="ErrCiuproce" hidden>Campo obligatorio *</p>
 						</div>
 						
 						<div class="column is-one-fifth" style="margin-left: 47px; width: 168px">
@@ -693,6 +694,8 @@
 					
 					<hr>
 					<a class="button is-link is-medium is-outlined" onclick="GuardarAcudiente()">Guardar</a>
+					<a class="button is-link is-medium is-outlined" onclick="()">Pagar</a>
+					<a class="button is-link is-medium is-outlined" onclick="TerminarInscripcion()">Terminar</a>
 					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios()">Cancelar</a>
 				</form>							
 			</div>
@@ -701,6 +704,7 @@
   </div>
 </div>
 <script>
+	$("#nombre").focus();
 	/* PAISES */
 	var Arrpaises = <?php echo $paises;?>;
 	var paises = [];
@@ -789,7 +793,28 @@
 				$("#email").focus();
 			}else{
 				$("#ErrMailEstu").attr('hidden','hidden');
-		}			
+				var ext = mailestu.search(".es");
+				if(ext == -1){
+					$("#ErrMailEstu").removeAttr('hidden');
+					$("#email").focus();
+				}else{
+					$("#ErrMailEstu").attr('hidden','hidden');
+					var ext = mailestu.search(".outlook");
+					if(ext == -1){
+						$("#ErrMailEstu").removeAttr('hidden');
+						$("#email").focus();
+					}else{
+						$("#ErrMailEstu").attr('hidden','hidden');
+						var ext = mailestu.search(".");
+						if(ext == -1){
+							$("#ErrMailEstu").removeAttr('hidden');
+							$("#email").focus();
+						}else{
+							$("#ErrMailEstu").attr('hidden','hidden');
+						}						
+					}					
+				}				
+			}			
 		}
 	}
 

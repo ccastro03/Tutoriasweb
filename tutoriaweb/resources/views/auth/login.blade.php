@@ -30,12 +30,6 @@
                       @endif
                     </div>
                   </div>
-                  <div class="field">
-                    <label class="checkbox">
-                      <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                      Recordar contraseña!
-                    </label>
-                  </div>
                   <button class="button is-block is-info is-large is-fullwidth">Iniciar sesión</button>
               </form>
             </div>

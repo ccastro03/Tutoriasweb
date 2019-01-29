@@ -17,6 +17,7 @@
 			<th scope="col">Verificada</th>
 			<th scope="col">Citación</th>
 			<th scope="col">Aprobada</th>
+			<th scope="col">Pago</th>
             <th colspan="3"> &nbsp; </th>
           </tr>
         </thead>
@@ -28,6 +29,7 @@
 			<td style="text-align: center;">{{ inscripcion.verificada }}</td>
 			<td style="text-align: center;">{{ inscripcion.citacion }}</td>
 			<td style="text-align: center;">{{ inscripcion.aprobada }}</td>
+			<td style="text-align: center;">{{ inscripcion.pago }}</td>
 
             <td style="text-align: right;">
 				<a :href="'/tutoriaweb/public/incripciones/'+ inscripcion.codigo" style="color: #000;"><span class="oi oi-eye" title="Ver" aria-hidden="true"></span></a>

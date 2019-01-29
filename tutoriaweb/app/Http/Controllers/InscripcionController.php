@@ -713,18 +713,28 @@ class InscripcionController extends Controller
 		//return view('admin.reportes.reporte', ['estudiante' => ($estudiante),'responsable' => ($responsable),'acudiente' => ($acudiente)]);
 	}
 	
-	public function generarPago($codest){
+	public function generarPago($codest){		
+		$hoy = getdate();
+		$año = $hoy['year'];
+		$codcolegio = '98765423-1';
+		
 		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $codest)->get();
+		$concepto = DB::table('conceptoscobro')->where('concept_cod', '=', '01')->where('year', '=', $año)->get();
+		$colegio = DB::table('colegios')->where('cod_colegio', '=', $codcolegio)->get();
+		$grados = DB::table('grados')->get();
 		
 		$pdf = PDF::loadView('admin.reportes.pagoInscripcion', [
-		'estudiante' => ($estudiante)
+		'estudiante' => ($estudiante),
+		'concepto' => ($concepto),
+		'colegio' => ($colegio),
+		'grados' => ($grados)
 		])->setPaper('a4', 'landscape');
 		
-		return $pdf->stream('Reporte Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
-		//return view('admin.reportes.pagoInscripcion', ['estudiante' => ($estudiante)]);
+		//return $pdf->stream('Pago Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
+		return $pdf->download('Pago Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
 	}
 	
-	public function terminarInscripcion($codest){
+	public function terminarInscripcion(){
 		$ArrDatos = $_GET["ArrDatos"];
 		
 		$codbdIns = DB::table('inscripciones')->select('codigo')->orderBy('codigo', 'desc')->get();
@@ -746,5 +756,7 @@ class InscripcionController extends Controller
 			'citacion' => 'N',
 			'aprobada' => 'N'
 		]);
+		
+		return response()->json($inscripcion);		
 	}
 }

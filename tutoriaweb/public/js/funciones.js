@@ -1316,3 +1316,9 @@ function TerminarInscripcion(){
 		}
 	});	
 };
+
+function ColoqueRecibo(){
+	var numdocumento = $("#numdocu").val();
+	var concat = "/tutoriaweb/public/incripciones/generarPago/"+numdocumento
+	$("#btnpago").attr('href',concat);
+};

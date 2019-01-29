@@ -70,7 +70,7 @@
 						
 						<div class="column is-one-fifth">
 							<label class="label">Documento</label>
-							<input type="number" name="numdocu" id="numdocu" style="width: 113px;" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" >
+							<input type="number" name="numdocu" id="numdocu" style="width: 113px;" class="input {{ $errors->has('numdocu') ? ' is-danger' : '' }}" onchange="ColoqueRecibo()">
 							<p class="help is-danger" id="ErrNumdocu" hidden>Campo obligatorio *</p>
 						</div>						
 					</div>
@@ -693,7 +693,7 @@
 					
 					<hr>
 					<a class="button is-link is-medium is-outlined" onclick="GuardarAcudiente()">Guardar</a>
-					<a class="button is-link is-medium is-outlined" onclick="()">Pagar</a>
+					<a class="button is-link is-medium is-outlined" target="_blank" id="btnpago" >Recibo de Pago</a>
 					<a class="button is-link is-medium is-outlined" onclick="TerminarInscripcion()">Terminar</a>
 					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios()">Cancelar</a>
 				</form>							

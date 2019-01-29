@@ -15,9 +15,10 @@ class CreateConceptoscobroTable extends Migration
     {
         Schema::create('conceptoscobro', function (Blueprint $table) {
 			$table->string('year',4);
-			$table->string('concepto',100);
+			$table->string('concept_cod',3);
+			$table->string('concept_nom',100);
 			$table->double('valor',17,2);
-			$table->primary(['year','concepto']);
+			$table->primary(['year','concept_cod']);
             $table->timestamps();
         });
     }

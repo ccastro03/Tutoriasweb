@@ -35,9 +35,6 @@
 				<a :href="'/tutoriaweb/public/incripciones/'+ inscripcion.codigo+'/editar'" style="color: #000;"><span class="oi oi-spreadsheet" title="Estado" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;
 				<a target="_blank" :href="'/tutoriaweb/public/incripciones/pdfinscripcion/'+ inscripcion.numdocest" style="color: #000;"><span class="oi oi-document" title="PDF" aria-hidden="true"></span></a>
-				
-				&nbsp;&nbsp;
-				<a target="_blank" :href="'/tutoriaweb/public/incripciones/generarPago/'+ inscripcion.numdocest" style="color: #000;"><span class="oi oi-document" title="PAGO" aria-hidden="true"></span></a>				
 				&nbsp;
 			</td>
           </tr>

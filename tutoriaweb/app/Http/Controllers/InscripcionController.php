@@ -718,8 +718,10 @@ class InscripcionController extends Controller
 		
 		$pdf = PDF::loadView('admin.reportes.pagoInscripcion', [
 		'estudiante' => ($estudiante)
-		]);		
+		])->setPaper('a4', 'landscape');
+		
 		return $pdf->stream('Reporte Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
+		//return view('admin.reportes.pagoInscripcion', ['estudiante' => ($estudiante)]);
 	}
 	
 	public function terminarInscripcion($codest){

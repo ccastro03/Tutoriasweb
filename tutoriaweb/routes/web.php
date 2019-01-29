@@ -162,6 +162,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('/incripciones/devolverCambios', 'InscripcionController@devolverCambios');
 	Route::get('/incripciones/actualizar', 'InscripcionController@actualizar');
 	Route::get('/incripciones/terminarInscripcion', 'InscripcionController@terminarInscripcion');
+	Route::get('/incripciones/generarPago/{codest}', 'InscripcionController@generarPago');
 	Route::get('/incripciones/obtenerlistadoinscripciones', 'InscripcionController@obtenerListadoInscripciones')->middleware('auth');
 	Route::get('/incripciones/pdfinscripcion/{codest}', 'InscripcionController@pdfInscripcion')->middleware('auth');
 	Route::resource('/incripciones', 'InscripcionController',

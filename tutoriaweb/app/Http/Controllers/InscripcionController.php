@@ -55,6 +55,10 @@ class InscripcionController extends Controller
 		'obs_cita' => $ArrDatos['obscitacion'],
 		'aprobada' => $ArrDatos['chaprob'],
 		'obs_aprueba' => $ArrDatos['obsaprobada'],
+		'fechaverif' => $ArrDatos['fecverif'],
+		'fechaobserv' => $ArrDatos['feccita'],
+		'fechaaprue' => $ArrDatos['fecaproba'],
+		'fechapago' => $ArrDatos['fecpago'],
 		]);
 		
 		/* CORREO PARA LA CITACION */
@@ -707,7 +711,16 @@ class InscripcionController extends Controller
 		]);
         return $pdf->stream('Reporte Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
 		//return view('admin.reportes.reporte', ['estudiante' => ($estudiante),'responsable' => ($responsable),'acudiente' => ($acudiente)]);
-	}	
+	}
+	
+	public function generarPago($codest){
+		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $codest)->get();
+		
+		$pdf = PDF::loadView('admin.reportes.pagoInscripcion', [
+		'estudiante' => ($estudiante)
+		]);		
+		return $pdf->stream('Reporte Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
+	}
 	
 	public function terminarInscripcion($codest){
 		$ArrDatos = $_GET["ArrDatos"];

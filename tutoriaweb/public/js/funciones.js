@@ -210,6 +210,21 @@ function GuardarEstudiante(){
 	var NaceDia = fecnaci.getDate()+1;
 	var NaceMes = fecnaci.getMonth()+1;
 	var NaceYear = fecnaci.getFullYear();
+	
+	if(NaceDia<10) {
+		NaceDia='0'+NaceDia;
+	}
+	if(NaceDia == 32){
+		NaceDia = '01';
+		NaceYear = fecpago.getFullYear()+1;
+		if(NaceMes == 12){
+			NaceMes = '1';
+		}
+	}	
+	if(NaceMes<10) {
+		NaceMes='0'+NaceMes;
+	}
+	
 	var fecha_nace = NaceYear+"/"+NaceMes+"/"+NaceDia;
 	/* **************** */
 	
@@ -1010,19 +1025,14 @@ function DevolverCambios(){
 			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 			data: {'ArrDatos':ArrDatos},
 			success: function(data){
-				swal("¿Desea terminar y enviar la inscripciòn al colegio?", "", "success", {
-					buttons: ["Cancelar", "Aceptar"],
-				});
-				$('.swal-button--confirm').click(function(){
-					swal("La inscripcion fue enviada corectamente al colegio", "", "success")
-					.then((value) => {
-						if(guest != 1){
-							location.href = '/tutoriaweb/public/incripciones';
-						}else{
-							location.href = '/tutoriaweb/public/';
-						}
-					});	
-				});
+				swal("Inscripción cancelada", "", "success")
+				.then((value) => {
+					if(guest != 1){
+						location.href = '/tutoriaweb/public/incripciones';
+					}else{
+						location.href = '/tutoriaweb/public/';
+					}
+				});	
 			}
 		});	
 	});
@@ -1046,6 +1056,29 @@ function ValChCitacion(){
 	}else{
 		$("#obscitacion").attr('disabled','disabled');
 		$("#obscitacion").val("");
+	}			
+};
+
+function ValChPago(){
+	var hoy = new Date();
+	var Dia = hoy.getDate();
+	var Mes = hoy.getMonth()+1;
+	var Year = hoy.getFullYear();
+	
+	if(Dia<10) {
+		Dia='0'+Dia;
+	}
+	if(Mes<10) {
+		Mes='0'+Mes;
+	}
+	var fec_pago = Year+"-"+Mes+"-"+Dia;
+	
+	if($("#chpago").is(':checked') == true){ 
+		$("#fecpago").val(fec_pago);
+		$("#fecpago").removeAttr('disabled');
+	}else{
+		$("#fecpago").val("");
+		$("#fecpago").attr('disabled','disabled');
 	}			
 };
 
@@ -1115,6 +1148,113 @@ function UpdInscripcion(){
 		var chaprob = "N";
 	};
 	
+	if($("#chpago").is(':checked') == true){
+		var chpago = "S";
+	}else{
+		var chpago = "N";
+	};
+	
+	var fecpago = new Date($("#fecpago").val());
+	var fecverif = new Date($("#fecverif").val());
+	var feccita = new Date($("#feccita").val());
+	var fecaproba = new Date($("#fecaproba").val());
+	
+	/* Fecha pago */
+	var PagDia = fecpago.getDate()+1;
+	var PagMes = fecpago.getMonth()+1;
+	var PagYear = fecpago.getFullYear();
+	if(PagDia < 10){
+		PagDia = '0'+PagDia;	
+	}
+	if(PagDia == 32){
+		PagDia = '01';
+		PagYear = fecpago.getFullYear()+1;
+		if(PagMes == 12){
+			PagMes = '1';
+		}
+	}
+	if(PagMes < 10){
+		PagMes = '0'+PagMes;
+	}	
+	var fecha_pago = PagYear+"/"+PagMes+"/"+PagDia;
+	/* **************** */
+	
+	/* Fecha verificacion */
+	var VerDia = fecverif.getDate()+1;
+	var VerMes = fecverif.getMonth()+1;
+	var VerYear = fecverif.getFullYear();
+	if(VerDia < 10){
+		VerDia = '0'+VerDia;	
+	}
+	if(VerDia == 32){
+		VerDia = '01';
+		VerYear = fecverif.getFullYear()+1;
+		if(VerMes == 12){
+			VerMes = '1';
+		}
+	}
+	if(VerMes < 10){
+		VerMes = '0'+VerMes;
+	}	
+	var fecha_ver = VerYear+"/"+VerMes+"/"+VerDia;
+	/* **************** */	
+	
+	/* Fecha citacion */
+	var CitDia = feccita.getDate()+1;
+	var CitMes = feccita.getMonth()+1;
+	var CitYear = feccita.getFullYear();
+	if(CitDia < 10){
+		CitDia = '0'+CitDia;	
+	}
+	if(CitDia == 32){
+		CitDia = '01';
+		CitYear = feccita.getFullYear()+1;
+		if(CitMes == 12){
+			CitMes = '1';
+		}
+	}
+	if(CitMes < 10){
+		CitMes = '0'+CitMes;
+	}	
+	var fecha_cit = CitYear+"/"+CitMes+"/"+CitDia;
+	/* **************** */	
+	
+	/* Fecha aprobacion */
+	var AprDia = fecaproba.getDate()+1;
+	var AprMes = fecaproba.getMonth()+1;
+	var AprYear = fecaproba.getFullYear();
+	if(AprDia < 10){
+		AprDia = '0'+AprDia;	
+	}
+	if(AprDia == 32){
+		AprDia = '01';
+		AprYear = fecaproba.getFullYear()+1;
+		if(AprMes == 12){
+			AprMes = '1';
+		}
+	}
+	if(AprMes < 10){
+		AprMes = '0'+AprMes;
+	}	
+	var fecha_apr = AprYear+"/"+AprMes+"/"+AprDia;
+	/* **************** */	
+	
+	if (fecha_pago == "NaN/NaN/NaN"){
+		fecha_pago = "0001-01-01";
+	}
+	
+	if (fecha_ver == "NaN/NaN/NaN"){
+		fecha_ver = "0001-01-01";
+	}
+
+	if (fecha_cit == "NaN/NaN/NaN"){
+		fecha_cit = "0001-01-01";
+	}
+
+	if (fecha_apr == "NaN/NaN/NaN"){
+		fecha_apr = "0001-01-01";
+	}	
+		
 	var ArrDatos = {
 		"codInscrip":codInscrip,
 		"codsede":codsede,
@@ -1124,6 +1264,11 @@ function UpdInscripcion(){
 		"chcita":chcita,
 		"chaprob":chaprob,
 		"codEstud":codEstud,
+		"chpago":chpago,
+		"fecpago":fecha_pago,
+		"fecverif":fecha_ver,
+		"feccita":fecha_cit,
+		"fecaproba":fecha_apr,
 	};	
 	
 	$.ajax({
@@ -1155,11 +1300,19 @@ function TerminarInscripcion(){
 		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 		data: {'ArrDatos':ArrDatos},
 		success: function(data){
-			if(guest != 1){
-				location.href = '/tutoriaweb/public/incripciones';
-			}else{
-				location.href = '/tutoriaweb/public/';
-			}
+			swal("¿Desea terminar y enviar la inscripciòn al colegio?", "", "success", {
+				buttons: ["Cancelar", "Aceptar"],
+			});
+			$('.swal-button--confirm').click(function(){
+				swal("La inscripcion fue enviada corectamente al colegio", "", "success")
+				.then((value) => {
+					if(guest != 1){
+						location.href = '/tutoriaweb/public/incripciones';
+					}else{
+						location.href = '/tutoriaweb/public/';
+					}
+				});	
+			});
 		}
 	});	
 };

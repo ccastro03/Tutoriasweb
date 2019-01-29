@@ -27,6 +27,7 @@ class CreateInscripcionesTable extends Migration
 			$table->string('obs_aprueba',500)->nullable();
 			$table->date('fechaaprue')->nullable();
 			$table->string('pago',1)->nullable();
+			$table->date('fechapago')->nullable();
 			$table->primary('codigo');
             $table->timestamps();
         });

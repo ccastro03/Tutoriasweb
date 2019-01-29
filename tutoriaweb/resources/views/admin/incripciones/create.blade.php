@@ -308,7 +308,6 @@
 						<div class="column is-one-fifth">
 							<label class="label">Tiene cobertura?</label>
 							<input type="checkbox" id="cobertura" style="margin-left: 65px;">
-							<p>Tooltip: <p class="tooltip" data-tooltip="Tooltip Text"></p> dskhj</p>
 						</div>
 					</div>
 					

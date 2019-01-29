@@ -38,12 +38,12 @@
 					
 					<div class="column is-one-fifth" style="margin-left: 50px; width: 170px">
 						<label class="label">Pago</label>
-						<input type="checkbox" style="margin-left: 20px;" id="chpago">
+						<input type="checkbox" style="margin-left: 20px;" id="chpago" onclick="ValChPago()">
 					</div>
 
 					<div class="column is-one-fifth">
 						<label class="label">Fecha pago</label>
-						<input type="date" id="fecpago" class="input {{ $errors->has('fecnaci') ? ' is-danger' : '' }}" max="<?php echo date('Y-m-d');?>" value="<?php echo date('Y-m-d');?>">
+						<input type="date" id="fecpago" value="{{ $inscripciones->fechapago }}" class="input {{ $errors->has('fecpago') ? ' is-danger' : '' }}" disabled>
 					</div>					
 				</div>
 				
@@ -55,7 +55,7 @@
 
 					<div class="column is-one-fifth">
 						<label class="label">Fecha verificación</label>
-						<input type="date" id="fecverif" class="input {{ $errors->has('fecnaci') ? ' is-danger' : '' }}" max="<?php echo date('Y-m-d');?>" value="<?php echo date('Y-m-d');?>">
+						<input type="date" id="fecverif" value="{{ $inscripciones->fechaverif }}" class="input {{ $errors->has('fecnaci') ? ' is-danger' : '' }}" disabled>
 					</div>
 					
 					<div class="column is-one-fifth" style="margin-left: 35px; width: 103px">
@@ -70,7 +70,7 @@
 
 					<div class="column is-one-fifth">
 						<label class="label">Fecha citación</label>
-						<input type="date" id="feccita" class="input {{ $errors->has('fecnaci') ? ' is-danger' : '' }}" max="<?php echo date('Y-m-d');?>" value="<?php echo date('Y-m-d');?>">
+						<input type="date" id="feccita" value="{{ $inscripciones->fechaobserv }}" class="input {{ $errors->has('fecnaci') ? ' is-danger' : '' }}" disabled>
 					</div>					
 				</div>
 				
@@ -87,7 +87,7 @@
 					
 					<div class="column is-one-fifth">
 						<label class="label">Fecha aprobación</label>
-						<input type="date" id="fecaproba" class="input {{ $errors->has('fecnaci') ? ' is-danger' : '' }}" max="<?php echo date('Y-m-d');?>" value="<?php echo date('Y-m-d');?>">
+						<input type="date" id="fecaproba" value="{{ $inscripciones->fechaaprue }}" class="input {{ $errors->has('fecnaci') ? ' is-danger' : '' }}" disabled>
 					</div>					
 				</div>
 
@@ -103,6 +103,7 @@
 	var ChVerifica = "<?php echo $inscripciones->verificada;?>";
 	var ChCitacion = "<?php echo $inscripciones->citacion;?>";
 	var ChAprobada = "<?php echo $inscripciones->aprobada;?>";
+	var ChPago = "<?php echo $inscripciones->pago;?>";
 	
 	if(ChVerifica == "S"){
 		$("#chverif").attr('checked','checked');
@@ -115,5 +116,9 @@
 	if(ChAprobada == "S"){
 		$("#chaprob").attr('checked','checked');
 	}
+	
+	if(ChPago == "S"){
+		$("#chpago").attr('checked','checked');
+	}	
 </script>	
 @endsection

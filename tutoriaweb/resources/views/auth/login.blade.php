@@ -10,7 +10,7 @@
             <!-- Login Box-->
             <div class="box">
               <figure class="avatar">
-                <img src="https://placehold.it/128x128">
+                <img src="{{ asset('img/logo.png') }}" width="128" height="128">
               </figure>
               <form method="POST" action="{{ route('login') }}">
                   @csrf

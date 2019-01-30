@@ -12329,7 +12329,11 @@ input[type="radio"],
 .navbar-menu {
   background-color: transparent;
   /*-webkit-box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
-            box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);*/
+		box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);*/
   padding: 0.5rem 0;
+}
+
+.navbar-item img {
+  max-height: 52px;
 }
 

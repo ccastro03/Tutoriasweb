@@ -32,7 +32,7 @@
 	  <nav class="navbar is-info" role="navigation" aria-label="main navigation">
 		<div class="navbar-brand">
 		  <a href="/" class="navbar-item">
-			<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+			<img src="{{ asset('img/logo.png') }}" width="70" height="52">
 		  </a>
 		  <a class="navbar-burger burger" aria-label="menu" role="button" aria-expanded="false" data-target="navbarPptal">
 			<span aria-hidden="true"></span>

@@ -16,3 +16,17 @@ el hosting actual esta por 3 meses
 clave Cpanel
 sigkke2ef2tp
 Infor5335*
+
+
+no aplica seeders
+mensaje estudiante correo
+tooltips
+focus
+comprometido
+el terminar no se debe habilitar sin generar el recibo de pago
+en el recibo colocar fecha y hora de generacion
+quitar el pague hasta y las fechas
+agregar el total
+si o no en terminar inscripcion
+habilitar fechas
+imprimir desde el inicio de la hoja

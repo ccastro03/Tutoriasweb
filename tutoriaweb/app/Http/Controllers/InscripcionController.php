@@ -217,6 +217,38 @@ class InscripcionController extends Controller
 		'aseguradoras' => ($aseguradoras),'barrios' => ($barrios), 'generos' => ($generos),'tipodocumentos' => ($tipodocumentos),
 		'profesiones' => ($profesiones),'especialidades' => ($especialidades),'estcivil' => ($estcivil)]);
     }
+	
+    public function editarficha($codest)
+    {
+		$ciudades = DB::table('ciudades')->get();
+		$barrios = DB::table('barrios')->get();
+		$paises = DB::table('paises')->get();
+		$sedes = DB::table('sedes')->get();
+		$grados = DB::table('grados')->get();
+		$jornadas = DB::table('jornadas')->get();
+		$etnias = DB::table('etnias')->get();
+		$eps = DB::table('eps')->get();
+		$prepagadas = DB::table('prepagada')->get();
+		$religiones = DB::table('religion')->get();
+		$aseguradoras = DB::table('aseguradora')->get();
+		$generos = DB::table('generos')->get();
+		$tipodocumentos = DB::table('tipodocumentos')->get();
+		$profesiones = DB::table('profesiones')->get();
+		$especialidades = DB::table('especialidades')->get();
+		$estcivil = DB::table('estcivil')->get();
+		
+		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $codest)->get();
+		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $codest)->where('cod_rol', '=', '04')->get();
+		$acudiente = DB::table('responsables')->where('cod_estudiante', '=', $codest)->where('cod_rol', '=', '05')->get();
+		
+		$tpsangre = ["codigo"=>["O+","O-","B+","B-","AB+","AB-"],"nombre"=>["O+","O-","B+","B-","AB+","AB-"]];
+		
+		return view('admin.incripciones.ficha', ['ciudades' => ($ciudades),'paises' => ($paises),'sedes' => ($sedes),'grados' => ($grados),
+		'jornadas' => ($jornadas),'etnias' => ($etnias),'eps' => ($eps),'prepagadas' => ($prepagadas),'religiones' => ($religiones),
+		'aseguradoras' => ($aseguradoras),'barrios' => ($barrios), 'generos' => ($generos),'tipodocumentos' => ($tipodocumentos),
+		'profesiones' => ($profesiones),'especialidades' => ($especialidades),'estcivil' => ($estcivil),'estudiante' => ($estudiante),
+		'responsable' => ($responsable),'acudiente' => ($acudiente),'tpsangre' => ($tpsangre)]);
+    }	
 
     public function validarEstudiante(Request $request)
     {
@@ -730,8 +762,8 @@ class InscripcionController extends Controller
 		'grados' => ($grados)
 		])->setPaper('a4', 'landscape');
 		
-		//return $pdf->stream('Pago Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
-		return $pdf->download('Pago Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
+		return $pdf->stream('Pago Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
+		//return $pdf->download('Pago Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
 	}
 	
 	public function terminarInscripcion(){

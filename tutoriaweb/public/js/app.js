@@ -48767,6 +48767,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -48954,7 +48956,10 @@ var render = function() {
                     [
                       _c("span", {
                         staticClass: "oi oi-eye",
-                        attrs: { title: "Ver", "aria-hidden": "true" }
+                        attrs: {
+                          title: "Ver estado inscripción",
+                          "aria-hidden": "true"
+                        }
                       })
                     ]
                   ),
@@ -48973,7 +48978,10 @@ var render = function() {
                     [
                       _c("span", {
                         staticClass: "oi oi-spreadsheet",
-                        attrs: { title: "Estado", "aria-hidden": "true" }
+                        attrs: {
+                          title: "Ediatr estado inscripción",
+                          "aria-hidden": "true"
+                        }
                       })
                     ]
                   ),
@@ -48991,12 +48999,31 @@ var render = function() {
                     },
                     [
                       _c("span", {
-                        staticClass: "oi oi-document",
+                        staticClass: "oi oi-print",
                         attrs: { title: "PDF", "aria-hidden": "true" }
                       })
                     ]
                   ),
-                  _vm._v("\n\t\t\t\t \n\t\t\t")
+                  _vm._v("\n\t\t\t\t  \n\t\t\t\t"),
+                  _c(
+                    "a",
+                    {
+                      staticStyle: { color: "#000" },
+                      attrs: {
+                        target: "_blank",
+                        href:
+                          "/tutoriaweb/public/incripciones/generarPago/" +
+                          inscripcion.numdocest
+                      }
+                    },
+                    [
+                      _c("span", {
+                        staticClass: "oi oi-document",
+                        attrs: { title: "Recibo pago", "aria-hidden": "true" }
+                      })
+                    ]
+                  ),
+                  _vm._v("\t\t\t\t\n\t\t\t\t \n\t\t\t")
                 ])
               ])
             })

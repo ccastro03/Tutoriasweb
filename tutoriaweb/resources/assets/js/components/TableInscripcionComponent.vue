@@ -32,11 +32,13 @@
 			<td style="text-align: center;">{{ inscripcion.pago }}</td>
 
             <td style="text-align: right;">
-				<a :href="'/tutoriaweb/public/incripciones/'+ inscripcion.codigo" style="color: #000;"><span class="oi oi-eye" title="Ver" aria-hidden="true"></span></a>
+				<a :href="'/tutoriaweb/public/incripciones/'+ inscripcion.codigo" style="color: #000;"><span class="oi oi-eye" title="Ver estado inscripción" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;
-				<a :href="'/tutoriaweb/public/incripciones/'+ inscripcion.codigo+'/editar'" style="color: #000;"><span class="oi oi-spreadsheet" title="Estado" aria-hidden="true"></span></a>
+				<a :href="'/tutoriaweb/public/incripciones/'+ inscripcion.codigo+'/editar'" style="color: #000;"><span class="oi oi-spreadsheet" title="Ediatr estado inscripción" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;
-				<a target="_blank" :href="'/tutoriaweb/public/incripciones/pdfinscripcion/'+ inscripcion.numdocest" style="color: #000;"><span class="oi oi-document" title="PDF" aria-hidden="true"></span></a>
+				<a target="_blank" :href="'/tutoriaweb/public/incripciones/pdfinscripcion/'+ inscripcion.numdocest" style="color: #000;"><span class="oi oi-print" title="PDF" aria-hidden="true"></span></a>
+				&nbsp;&nbsp;
+				<a target="_blank" :href="'/tutoriaweb/public/incripciones/generarPago/'+ inscripcion.numdocest" style="color: #000;"><span class="oi oi-document" title="Recibo pago" aria-hidden="true"></span></a>				
 				&nbsp;
 			</td>
           </tr>

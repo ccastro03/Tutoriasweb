@@ -67,9 +67,10 @@
 							{{ strtoupper($estu->codigo_est) }} - Curso:
 							@foreach($grados->all() as $grad)
 								@if ($grad->codigo === $estu->grado)
-									{{ strtoupper($grad->nombre) }}
+									{{ strtoupper($grad->nombre) }}-
 								@endif
 							@endforeach
+							{{ strtoupper($estu->seccion) }}
 						</td>
 					@endforeach				
 					<td style="width: 2.7%;">
@@ -84,9 +85,10 @@
 							{{ strtoupper($estu->codigo_est) }} - Curso:
 							@foreach($grados->all() as $grad)
 								@if ($grad->codigo === $estu->grado)
-									{{ strtoupper($grad->nombre) }}
+									{{ strtoupper($grad->nombre) }}-
 								@endif
 							@endforeach
+							{{ strtoupper($estu->seccion) }}
 						</td>
 					@endforeach					
 				</tr>

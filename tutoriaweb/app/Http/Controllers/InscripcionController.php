@@ -55,6 +55,7 @@ class InscripcionController extends Controller
 		'obs_cita' => $ArrDatos['obscitacion'],
 		'aprobada' => $ArrDatos['chaprob'],
 		'obs_aprueba' => $ArrDatos['obsaprobada'],
+		'pago' => $ArrDatos['chpago'],
 		'fechaverif' => $ArrDatos['fecverif'],
 		'fechaobserv' => $ArrDatos['feccita'],
 		'fechaaprue' => $ArrDatos['fecaproba'],
@@ -189,7 +190,7 @@ class InscripcionController extends Controller
 		};		
 		/* ************************ */
 		
-		$Respuesta = array($inscrip, $estadocitares, $estadocitaacu, $estadoaprores, $estadoaproacu);
+		$Respuesta = array($inscrip,"Inscripción actualizada correctamente", $estadocitares, $estadocitaacu, $estadoaprores, $estadoaproacu);
 		return response()->json($Respuesta);
     }	
 

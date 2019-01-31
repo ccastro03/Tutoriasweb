@@ -27,8 +27,6 @@
 								<tr align="center"><td style="font-size: 18px; font-weight: bold;">Colegio {{ $cole->nombre }}</td></tr>
 								<tr align="center"><td style="font-size: 11.5px; font-weight: bold;">NIT: {{ $cole->cod_colegio }}</td></tr>
 							@endforeach
-							<tr><td>&nbsp;</td></tr>
-							<tr align="center"><td style="font-size: 13px; font-weight: bold;">{{ date("d-m-Y (H:i:s)", time()) }}</td></tr>
 						</table>						
 					</td>
 					<td style="width: 2.7%;">
@@ -51,8 +49,6 @@
 								<tr align="center"><td style="font-size: 18px; font-weight: bold;">Colegio {{ $cole->nombre }}</td></tr>
 								<tr align="center"><td style="font-size: 11.5px; font-weight: bold;">NIT: {{ $cole->cod_colegio }}</td></tr>
 							@endforeach
-							<tr><td>&nbsp;</td></tr>
-							<tr align="center"><td style="font-size: 13px; font-weight: bold;">{{ date("d-m-Y (H:i:s)", time()) }}</td></tr>							
 						</table>
 					</td>
 					<td style="width: 10%;">
@@ -139,24 +135,14 @@
 						<table style="border: 1px solid #000000;">
 							<tr>
 								@foreach($concepto->all() as $concep)
-									<td style="width: 266px; border-right: 1px solid #000000; padding-left: 5px; font-size: 13px; height: 30px;" align="left">
+									<td style="width: 266px; border-right: 1px solid #000000; padding-left: 5px; font-size: 13px;" align="left">
 										{{ ($concep->concept_nom) }}
 									</td>
-									<td style="padding-right: 5px; font-size: 13px; " align="right">
+									<td style="padding-right: 5px; font-size: 13px;" align="right">
 										${{ number_format($concep->valor) }}
 									</td>
 								@endforeach
-							</tr>
-							<tr>
-								<td style="width: 266px; border-right: 1px solid #000000; border-top: 1px solid #000000; padding-left: 5px; font-size: 13px;" align="left">
-									Total
-								</td>							
-								@foreach($concepto->all() as $concep)
-									<td style="border-top: 1px solid #000000; padding-right: 5px; font-size: 13px;" align="right">
-										${{ number_format($concep->valor) }}
-									</td>
-								@endforeach
-							</tr>								
+							</tr>						
 						</table>
 					</td>
 					<td style="width: 2.7%;">
@@ -168,27 +154,89 @@
 						<table style="border: 1px solid #000000;">
 							<tr>
 								@foreach($concepto->all() as $concep)
-									<td style="width: 372px; border-right: 1px solid #000000; padding-left: 5px; font-size: 13px; height: 30px;" align="left">
+									<td style="width: 372px; border-right: 1px solid #000000; padding-left: 5px; font-size: 13px;" align="left">
 										{{ ($concep->concept_nom) }}
 									</td>
 									<td style="padding-right: 5px; font-size: 13px;" align="right">
 										${{ number_format($concep->valor) }}
 									</td>
 								@endforeach
-							</tr>
-							<tr>
-								<td style="width: 372px; border-right: 1px solid #000000; padding-left: 5px; font-size: 13px; border-top: 1px solid #000000;" align="left">
-									Total
-								</td>							
-								@foreach($concepto->all() as $concep)
-									<td style="padding-right: 5px; font-size: 13px; border-top: 1px solid #000000;" align="right">
-										${{ number_format($concep->valor) }}
-									</td>
-								@endforeach
-							</tr>								
+							</tr>						
 						</table>
 					</td>					
 				</tr>			
+			</tbody>
+		</table>
+		
+		<table>
+			<thead>
+				<tr>
+					<td align="center" style="background-color: #E1DBDB; width: 40.8%; font-size: 15px;">
+						PAGUE HASTA
+					</td>
+					<td style="width: 2.7%;">
+						<table>
+							<tr><td>|</td></tr>
+						</table>
+					</td>
+					<td align="center" style="background-color: #E1DBDB; font-size: 15px;">
+						PAGUE HASTA
+					</td>					
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<table style="border: 1px solid #000000;">
+							<tr>
+								<td style="width: 266px; border-right: 1px solid #000000; padding-left: 5px; height: 60px;" align="center">
+									xxxxx
+								</td>
+								<td style="padding-right: 5px;" align="right">
+									xxxxx
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 266px; border-right: 1px solid #000000; padding-left: 5px; height: 60px;" align="center">
+									xxxxx
+								</td>
+								<td style="padding-right: 5px;" align="right">
+									xxxxx
+								</td>
+							</tr>							
+						</table>
+					</td>
+					<td style="width: 2.7%;">
+						<table>
+							<tr><td>|</td></tr>
+							<tr><td>|</td></tr>
+							<tr><td>|</td></tr>
+							<tr><td>|</td></tr>
+							<tr><td>|</td></tr>
+							<tr><td>|</td></tr>
+						</table>
+					</td>
+					<td>
+						<table style="border: 1px solid #000000;">
+							<tr>
+								<td style="width: 373px; border-right: 1px solid #000000; padding-left: 5px; height: 60px;" align="center">
+									xxxxx
+								</td>
+								<td style="padding-right: 5px;" align="right">
+									xxxxx
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 373px; border-right: 1px solid #000000; padding-left: 5px; height: 60px;" align="center">
+									xxxxx
+								</td>
+								<td style="padding-right: 5px;" align="right">
+									xxxxx
+								</td>
+							</tr>							
+						</table>
+					</td>					
+				</tr>				
 			</tbody>
 		</table>
 	</div>

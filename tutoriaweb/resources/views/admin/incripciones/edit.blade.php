@@ -77,7 +77,7 @@
 				<div class="columns">
 					<div class="column is-one-fifth">
 						<label class="label">Aprobada</label>
-						<input type="checkbox" id="chaprob" style="margin-left: 35px;">
+						<input type="checkbox" id="chaprob" style="margin-left: 35px;" onclick="ValChAprob()">
 					</div>
 
 					<div class="column is-one-third">

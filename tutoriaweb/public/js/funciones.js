@@ -546,6 +546,9 @@ function GuardarEstudiante(){
 							data: {'ArrDatos':ArrDatos},
 							success: function(data){
 								swal(data[1], "", "success");
+								$('.swal-button--confirm').click(function(){
+									$("#nomres").focus();
+								});								
 								$("#responsable").removeAttr('disabled');
 								$("#acudiente").removeAttr('disabled');
 								$("#numdocu").attr('disabled','disabled');
@@ -562,6 +565,9 @@ function GuardarEstudiante(){
 					});
 				}else if(data[0] == true){
 					swal(data[1], "", "success");
+					$('.swal-button--confirm').click(function(){
+						$("#nomres").focus();
+					});					
 					$("#responsable").removeAttr('disabled');
 					$("#acudiente").removeAttr('disabled');
 					$("#numdocu").attr('disabled','disabled');
@@ -829,6 +835,9 @@ function GuardarResponsable(){
 							data: {'ArrDatos':ArrDatos},
 							success: function(data){
 								swal(data[1], "", "success");
+								$('.swal-button--confirm').click(function(){
+									$("#nomacu").focus();
+								});								
 								$("#numdocures").attr('disabled','disabled');
 								$("#usrres").val(data[2]);
 								$("#responsable").removeAttr('checked');
@@ -841,7 +850,10 @@ function GuardarResponsable(){
 						});
 					});					
 				}else if(data[0] == true){
-					swal(data[1], "", "success");					
+					swal(data[1], "", "success");
+					$('.swal-button--confirm').click(function(){
+						$("#nomacu").focus();
+					});						
 					$("#numdocures").attr('disabled','disabled');
 					$("#usrres").val(data[2]);
 					$("#responsable").removeAttr('checked');
@@ -980,6 +992,9 @@ function GuardarAcudiente(){
 							$("#numdocuacu").attr('disabled','disabled');
 							$("#usracu").val(data[2]);
 							swal(data[1], "", "success");
+							$('.swal-button--confirm').click(function(){
+								$("#nomacu").focus();
+							});
 						}
 					});
 				});				
@@ -987,6 +1002,9 @@ function GuardarAcudiente(){
 				$("#numdocuacu").attr('disabled','disabled');
 				$("#usracu").val(data[2]);
 				swal(data[1], "", "success");
+				$('.swal-button--confirm').click(function(){
+					$("#nomacu").focus();
+				});					
 			}
 		}
 	});	
@@ -1047,7 +1065,28 @@ function ValChVerificado(){
 		$("#obscitacion").attr('disabled','disabled');
 		$("#sede").removeAttr('disabled');
 		$("#obscitacion").val("");
-	}			
+	}		
+
+	var hoy = new Date();
+	var Dia = hoy.getDate();
+	var Mes = hoy.getMonth()+1;
+	var Year = hoy.getFullYear();
+	
+	if(Dia<10) {
+		Dia='0'+Dia;
+	}
+	if(Mes<10) {
+		Mes='0'+Mes;
+	}
+	var fec_ver = Year+"-"+Mes+"-"+Dia;
+	
+	if($("#chverif").is(':checked') == true){ 
+		$("#fecverif").val(fec_ver);
+		$("#fecverif").removeAttr('disabled');
+	}else{
+		$("#fecverif").val("");
+		$("#fecverif").attr('disabled','disabled');
+	}	
 };
 
 function ValChCitacion(){
@@ -1056,7 +1095,28 @@ function ValChCitacion(){
 	}else{
 		$("#obscitacion").attr('disabled','disabled');
 		$("#obscitacion").val("");
-	}			
+	}
+	
+	var hoy = new Date();
+	var Dia = hoy.getDate();
+	var Mes = hoy.getMonth()+1;
+	var Year = hoy.getFullYear();
+	
+	if(Dia<10) {
+		Dia='0'+Dia;
+	}
+	if(Mes<10) {
+		Mes='0'+Mes;
+	}
+	var fec_cit = Year+"-"+Mes+"-"+Dia;
+	
+	if($("#chcita").is(':checked') == true){ 
+		$("#feccita").val(fec_cit);
+		$("#feccita").removeAttr('disabled');
+	}else{
+		$("#feccita").val("");
+		$("#feccita").attr('disabled','disabled');
+	}	
 };
 
 function ValChPago(){
@@ -1079,6 +1139,29 @@ function ValChPago(){
 	}else{
 		$("#fecpago").val("");
 		$("#fecpago").attr('disabled','disabled');
+	}			
+};
+
+function ValChAprob(){
+	var hoy = new Date();
+	var Dia = hoy.getDate();
+	var Mes = hoy.getMonth()+1;
+	var Year = hoy.getFullYear();
+	
+	if(Dia<10) {
+		Dia='0'+Dia;
+	}
+	if(Mes<10) {
+		Mes='0'+Mes;
+	}
+	var fec_apr = Year+"-"+Mes+"-"+Dia;
+	
+	if($("#chaprob").is(':checked') == true){ 
+		$("#fecaproba").val(fec_apr);
+		$("#fecaproba").removeAttr('disabled');
+	}else{
+		$("#fecaproba").val("");
+		$("#fecaproba").attr('disabled','disabled');
 	}			
 };
 
@@ -1277,7 +1360,7 @@ function UpdInscripcion(){
 		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 		data: {'ArrDatos':ArrDatos},
 		success: function(data){
-			swal(data[1], data[2], "success")
+			swal(data[1], "", "success")
 			.then((value) => {
 				location.href = '/tutoriaweb/public/incripciones';
 			});
@@ -1286,39 +1369,50 @@ function UpdInscripcion(){
 };
 
 function TerminarInscripcion(){
-	var sede = $("#sede").val();	
-	var numdocumento = $("#numdocu").val();
 	
-	var ArrDatos = {
-		"sede":sede,
-		"numdocumento":numdocumento,
-	};	
+	var vlrattr = $("#btnterminar").attr('disabled');
 	
-	$.ajax({
-		url: "/tutoriaweb/public/incripciones/terminarInscripcion",
-		dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
-		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-		data: {'ArrDatos':ArrDatos},
-		success: function(data){
-			swal("¿Desea terminar y enviar la inscripciòn al colegio?", "", "success", {
-				buttons: ["Cancelar", "Aceptar"],
-			});
-			$('.swal-button--confirm').click(function(){
-				swal("La inscripcion fue enviada corectamente al colegio", "", "success")
-				.then((value) => {
-					if(guest != 1){
-						location.href = '/tutoriaweb/public/incripciones';
-					}else{
-						location.href = '/tutoriaweb/public/';
-					}
-				});	
-			});
-		}
-	});	
+	if(vlrattr != "disabled"){
+		var sede = $("#sede").val();	
+		var numdocumento = $("#numdocu").val();
+		
+		var ArrDatos = {
+			"sede":sede,
+			"numdocumento":numdocumento,
+		};	
+		
+		$.ajax({
+			url: "/tutoriaweb/public/incripciones/terminarInscripcion",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'ArrDatos':ArrDatos},
+			success: function(data){
+				swal("¿Desea terminar y enviar la inscripciòn al colegio?", "", "success", {
+					buttons: ["No", "Si"],
+				});
+				$('.swal-button--confirm').click(function(){
+					swal("La inscripcion fue enviada corectamente al colegio", "", "success")
+					.then((value) => {
+						if(guest != 1){
+							location.href = '/tutoriaweb/public/incripciones';
+						}else{
+							location.href = '/tutoriaweb/public/';
+						}
+					});	
+				});
+			}
+		});
+	}else{
+		swal("¡Recuerde!, Debe generar el pago antes de terminar la inscripción", "", "warning");	
+	}
 };
 
 function ColoqueRecibo(){
 	var numdocumento = $("#numdocu").val();
 	var concat = "/tutoriaweb/public/incripciones/generarPago/"+numdocumento
 	$("#btnpago").attr('href',concat);
+};
+
+function ValidarPago(){
+	$("#btnterminar").removeAttr('disabled');
 };

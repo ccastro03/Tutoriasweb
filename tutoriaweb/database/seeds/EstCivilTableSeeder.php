@@ -20,11 +20,6 @@ class EstCivilTableSeeder extends Seeder
         $estcivil->save();
 		
         $estcivil = new EstadoCivil();
-        $estcivil->codigo = 'CO';
-        $estcivil->nombre = 'Comprometido(a)';
-        $estcivil->save();
-
-        $estcivil = new EstadoCivil();
         $estcivil->codigo = 'CA';
         $estcivil->nombre = 'Casado(a)';
         $estcivil->save();

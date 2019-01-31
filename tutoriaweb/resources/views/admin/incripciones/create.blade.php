@@ -5,7 +5,7 @@
 
 	<input type="radio" id="estudiante" name="nav-tab" onclick="ChEstudiante()" checked>
 	<input type="radio" id="responsable" name="nav-tab" onclick="ChResponsable()" disabled>
-	<input type="radio" id="acudiente" name="nav-tab" onclick="ChAcudiente()" disabled>
+	<input type="radio" id="acudiente" name="nav-tab" onclick="ChAcudiente()" >
 
 	<div class="tabs is-boxed" style="margin-bottom: 0px;">
 		<ul>
@@ -693,8 +693,8 @@
 					
 					<hr>
 					<a class="button is-link is-medium is-outlined" onclick="GuardarAcudiente()">Guardar</a>
-					<a class="button is-link is-medium is-outlined" target="_blank" id="btnpago" >Recibo de Pago</a>
-					<a class="button is-link is-medium is-outlined" onclick="TerminarInscripcion()">Terminar</a>
+					<a class="button is-link is-medium is-outlined" target="_blank" id="btnpago" onclick="ValidarPago()">Recibo de Pago</a>
+					<a class="button is-link is-medium is-outlined" onclick="TerminarInscripcion()" id="btnterminar" disabled>Terminar</a>
 					<a class="button is-link is-medium is-outlined" onclick="DevolverCambios()">Cancelar</a>
 				</form>							
 			</div>
@@ -781,40 +781,39 @@
 	function ValEmail(){
 		var mailestu = $("#email").val();
 		var ext = mailestu.search("@");
+		
 		if(ext == -1){
 			$("#ErrMailEstu").removeAttr('hidden');
 			$("#email").focus();
 		}else{
 			$("#ErrMailEstu").attr('hidden','hidden');
-			var ext = mailestu.search(".com");
-			if(ext == -1){
+		}
+		
+		var com = mailestu.search(".com");
+		if(com == -1){
+			$("#ErrMailEstu").removeAttr('hidden');
+			$("#email").focus();
+			
+			var es = mailestu.search(".es");
+			if(es == -1){
 				$("#ErrMailEstu").removeAttr('hidden');
 				$("#email").focus();
-			}else{
-				$("#ErrMailEstu").attr('hidden','hidden');
-				var ext = mailestu.search(".es");
-				if(ext == -1){
+				
+				var outlook = mailestu.search(".outlook");
+				if(outlook == -1){
 					$("#ErrMailEstu").removeAttr('hidden');
 					$("#email").focus();
 				}else{
 					$("#ErrMailEstu").attr('hidden','hidden');
-					var ext = mailestu.search(".outlook");
-					if(ext == -1){
-						$("#ErrMailEstu").removeAttr('hidden');
-						$("#email").focus();
-					}else{
-						$("#ErrMailEstu").attr('hidden','hidden');
-						var ext = mailestu.search(".");
-						if(ext == -1){
-							$("#ErrMailEstu").removeAttr('hidden');
-							$("#email").focus();
-						}else{
-							$("#ErrMailEstu").attr('hidden','hidden');
-						}						
-					}					
-				}				
-			}			
-		}
+				}
+				
+			}else{
+				$("#ErrMailEstu").attr('hidden','hidden');
+			}				
+			
+		}else{
+			$("#ErrMailEstu").attr('hidden','hidden');
+		}		
 	}
 
 	function ValEmailRes(){
@@ -831,7 +830,7 @@
 				$("#mailres").focus();
 			}else{
 				$("#ErrMailRes").attr('hidden','hidden');
-		}			
+			}			
 		}
 	}
 

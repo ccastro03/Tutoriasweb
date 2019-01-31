@@ -20,11 +20,6 @@ class ProfesionesTableSeeder extends Seeder
         $profe->save();
 		
         $profe = new Profesiones();
-        $profe->codigo = 'NA';
-        $profe->nombre = 'No Aplica';
-        $profe->save();
-
-        $profe = new Profesiones();
         $profe->codigo = '01';
         $profe->nombre = 'Ingeniero(a)';
         $profe->save();

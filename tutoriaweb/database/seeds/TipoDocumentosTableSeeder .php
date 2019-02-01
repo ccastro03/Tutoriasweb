@@ -21,17 +21,17 @@ class TipoDocumentosTableSeeder extends Seeder
 		
         $tpdocu = new TipoDocumentos();
         $tpdocu->codigo = 'TE';
-        $tpdocu->nombre = 'Tarjeta Extranjeria';
+        $tpdocu->nombre = 'Tarjeta Extranjería';
         $tpdocu->save();
 
         $tpdocu = new TipoDocumentos();
         $tpdocu->codigo = 'CC';
-        $tpdocu->nombre = 'Cedula Ciudadania';
+        $tpdocu->nombre = 'Cédula Ciudadanía';
         $tpdocu->save();
 
         $tpdocu = new TipoDocumentos();
         $tpdocu->codigo = 'CE';
-        $tpdocu->nombre = 'Cedula Extranjeria';
+        $tpdocu->nombre = 'Cédula Extranjería';
         $tpdocu->save();
 
         $tpdocu = new TipoDocumentos();

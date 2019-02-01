@@ -31,7 +31,7 @@ class ProfesionesTableSeeder extends Seeder
 
         $profe = new Profesiones();
         $profe->codigo = '03';
-        $profe->nombre = 'Medico(a)';
+        $profe->nombre = 'Médico(a)';
         $profe->save();
 
         $profe = new Profesiones();

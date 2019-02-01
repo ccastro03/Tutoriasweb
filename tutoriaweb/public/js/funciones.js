@@ -548,6 +548,17 @@ function GuardarEstudiante(){
 								swal(data[1], "", "success");
 								$('.swal-button--confirm').click(function(){
 									$("#nomres").focus();
+									$("#responsable").removeAttr('disabled');
+									$("#acudiente").removeAttr('disabled');
+									$("#numdocu").attr('disabled','disabled');
+									$("#codest").val(data[2]);
+									$("#usrest").val(data[3]);
+									$("#estudiante").removeAttr('checked');
+									$("#liEst").removeClass("is-active");
+									$("#responsable").removeAttr('disabled');
+									$("#liRespo").addClass("is-active");
+									$("#responsable").attr('checked','checked');
+									$("#nomres").focus();
 								});								
 								$("#responsable").removeAttr('disabled');
 								$("#acudiente").removeAttr('disabled');
@@ -566,6 +577,17 @@ function GuardarEstudiante(){
 				}else if(data[0] == true){
 					swal(data[1], "", "success");
 					$('.swal-button--confirm').click(function(){
+						$("#nomres").focus();
+						$("#responsable").removeAttr('disabled');
+						$("#acudiente").removeAttr('disabled');
+						$("#numdocu").attr('disabled','disabled');
+						$("#codest").val(data[2]);
+						$("#usrest").val(data[3]);
+						$("#estudiante").removeAttr('checked');
+						$("#liEst").removeClass("is-active");
+						$("#responsable").removeAttr('disabled');
+						$("#liRespo").addClass("is-active");
+						$("#responsable").attr('checked','checked');
 						$("#nomres").focus();
 					});					
 					$("#responsable").removeAttr('disabled');
@@ -837,6 +859,14 @@ function GuardarResponsable(){
 								swal(data[1], "", "success");
 								$('.swal-button--confirm').click(function(){
 									$("#nomacu").focus();
+									$("#numdocures").attr('disabled','disabled');
+									$("#usrres").val(data[2]);
+									$("#responsable").removeAttr('checked');
+									$("#liRespo").removeClass("is-active");
+									$("#acudiente").removeAttr('disabled');
+									$("#liAcu").addClass("is-active");
+									$("#acudiente").attr('checked','checked');
+									$("#nomacu").focus();
 								});								
 								$("#numdocures").attr('disabled','disabled');
 								$("#usrres").val(data[2]);
@@ -852,6 +882,14 @@ function GuardarResponsable(){
 				}else if(data[0] == true){
 					swal(data[1], "", "success");
 					$('.swal-button--confirm').click(function(){
+						$("#nomacu").focus();
+						$("#numdocures").attr('disabled','disabled');
+						$("#usrres").val(data[2]);
+						$("#responsable").removeAttr('checked');
+						$("#liRespo").removeClass("is-active");
+						$("#acudiente").removeAttr('disabled');
+						$("#liAcu").addClass("is-active");
+						$("#acudiente").attr('checked','checked');
 						$("#nomacu").focus();
 					});						
 					$("#numdocures").attr('disabled','disabled');
@@ -991,9 +1029,12 @@ function GuardarAcudiente(){
 						success: function(data){
 							$("#numdocuacu").attr('disabled','disabled');
 							$("#usracu").val(data[2]);
+							
 							swal(data[1], "", "success");
 							$('.swal-button--confirm').click(function(){
 								$("#nomacu").focus();
+								$("#numdocuacu").attr('disabled','disabled');
+								$("#usracu").val(data[2]);								
 							});
 						}
 					});
@@ -1001,9 +1042,12 @@ function GuardarAcudiente(){
 			}else if(data[0] == true){					
 				$("#numdocuacu").attr('disabled','disabled');
 				$("#usracu").val(data[2]);
+				
 				swal(data[1], "", "success");
 				$('.swal-button--confirm').click(function(){
 					$("#nomacu").focus();
+					$("#numdocuacu").attr('disabled','disabled');
+					$("#usracu").val(data[2]);					
 				});					
 			}
 		}
@@ -1379,19 +1423,19 @@ function TerminarInscripcion(){
 		var ArrDatos = {
 			"sede":sede,
 			"numdocumento":numdocumento,
-		};	
+		};
 		
-		$.ajax({
-			url: "/tutoriaweb/public/incripciones/terminarInscripcion",
-			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
-			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-			data: {'ArrDatos':ArrDatos},
-			success: function(data){
-				swal("¿Desea terminar y enviar la inscripciòn al colegio?", "", "success", {
-					buttons: ["No", "Si"],
-				});
-				$('.swal-button--confirm').click(function(){
-					swal("La inscripcion fue enviada corectamente al colegio", "", "success")
+		swal("¿Desea terminar y enviar la inscripción al colegio?", "", "success", {
+			buttons: ["No", "Si"],
+		});
+		$('.swal-button--confirm').click(function(){
+			$.ajax({
+				url: "/tutoriaweb/public/incripciones/terminarInscripcion",
+				dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+				method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+				data: {'ArrDatos':ArrDatos},
+				success: function(data){
+					swal("La inscripción fue enviada corectamente al colegio", "", "success")
 					.then((value) => {
 						if(guest != 1){
 							location.href = '/tutoriaweb/public/incripciones';
@@ -1399,11 +1443,11 @@ function TerminarInscripcion(){
 							location.href = '/tutoriaweb/public/';
 						}
 					});	
-				});
-			}
+				}
+			});
 		});
 	}else{
-		swal("¡Recuerde!, Debe generar el pago antes de terminar la inscripción", "", "warning");	
+		swal("¡Recuerde!", "Debe generar el pago antes de terminar la inscripción", "warning");	
 	}
 };
 

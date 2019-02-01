@@ -48836,6 +48836,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var array = response.data;
         _this2.pagination = array['paginate'];
         _this2.inscripciones = array['inscripcion']['data'];
+        _this2.estu = array['estu'];
       });
     },
     beforeDestroy: function beforeDestroy() {
@@ -48919,113 +48920,130 @@ var render = function() {
           _c(
             "tbody",
             _vm._l(_vm.inscripciones, function(inscripcion) {
-              return _c("tr", { key: inscripcion.codigo }, [
-                _c("td", [_vm._v(_vm._s(inscripcion.numdocest))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(inscripcion.fechainscrip))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(inscripcion.sede))]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _vm._v(_vm._s(inscripcion.verificada))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _vm._v(_vm._s(inscripcion.citacion))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _vm._v(_vm._s(inscripcion.aprobada))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _vm._v(_vm._s(inscripcion.pago))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "right" } }, [
-                  _c(
-                    "a",
-                    {
-                      staticStyle: { color: "#000" },
-                      attrs: {
-                        href:
-                          "/tutoriaweb/public/incripciones/" +
-                          inscripcion.codigo
-                      }
-                    },
-                    [
-                      _c("span", {
-                        staticClass: "oi oi-eye",
+              return _c(
+                "tr",
+                { key: inscripcion.codigo },
+                [
+                  _vm._l(_vm.estu, function(est) {
+                    return est.numdocumento === inscripcion.numdocest
+                      ? _c("td", [
+                          _vm._v(
+                            _vm._s(est.nombre) +
+                              " " +
+                              _vm._s(est.apellido1) +
+                              " " +
+                              _vm._s(est.apellido2)
+                          )
+                        ])
+                      : _vm._e()
+                  }),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(inscripcion.fechainscrip))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(inscripcion.sede))]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
+                    _vm._v(_vm._s(inscripcion.verificada))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
+                    _vm._v(_vm._s(inscripcion.citacion))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
+                    _vm._v(_vm._s(inscripcion.aprobada))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
+                    _vm._v(_vm._s(inscripcion.pago))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "right" } }, [
+                    _c(
+                      "a",
+                      {
+                        staticStyle: { color: "#000" },
                         attrs: {
-                          title: "Ver estado inscripción",
-                          "aria-hidden": "true"
+                          href:
+                            "/tutoriaweb/public/incripciones/" +
+                            inscripcion.codigo
                         }
-                      })
-                    ]
-                  ),
-                  _vm._v("\n\t\t\t\t  \n\t\t\t\t"),
-                  _c(
-                    "a",
-                    {
-                      staticStyle: { color: "#000" },
-                      attrs: {
-                        href:
-                          "/tutoriaweb/public/incripciones/" +
-                          inscripcion.codigo +
-                          "/editar"
-                      }
-                    },
-                    [
-                      _c("span", {
-                        staticClass: "oi oi-spreadsheet",
+                      },
+                      [
+                        _c("span", {
+                          staticClass: "oi oi-eye",
+                          attrs: {
+                            title: "Ver estado inscripción",
+                            "aria-hidden": "true"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v("\n\t\t\t\t  \n\t\t\t\t"),
+                    _c(
+                      "a",
+                      {
+                        staticStyle: { color: "#000" },
                         attrs: {
-                          title: "Ediatr estado inscripción",
-                          "aria-hidden": "true"
+                          href:
+                            "/tutoriaweb/public/incripciones/" +
+                            inscripcion.codigo +
+                            "/editar"
                         }
-                      })
-                    ]
-                  ),
-                  _vm._v("\n\t\t\t\t  \n\t\t\t\t"),
-                  _c(
-                    "a",
-                    {
-                      staticStyle: { color: "#000" },
-                      attrs: {
-                        target: "_blank",
-                        href:
-                          "/tutoriaweb/public/incripciones/pdfinscripcion/" +
-                          inscripcion.numdocest
-                      }
-                    },
-                    [
-                      _c("span", {
-                        staticClass: "oi oi-print",
-                        attrs: { title: "PDF", "aria-hidden": "true" }
-                      })
-                    ]
-                  ),
-                  _vm._v("\n\t\t\t\t  \n\t\t\t\t"),
-                  _c(
-                    "a",
-                    {
-                      staticStyle: { color: "#000" },
-                      attrs: {
-                        target: "_blank",
-                        href:
-                          "/tutoriaweb/public/incripciones/generarPago/" +
-                          inscripcion.numdocest
-                      }
-                    },
-                    [
-                      _c("span", {
-                        staticClass: "oi oi-document",
-                        attrs: { title: "Recibo pago", "aria-hidden": "true" }
-                      })
-                    ]
-                  ),
-                  _vm._v("\t\t\t\t\n\t\t\t\t \n\t\t\t")
-                ])
-              ])
+                      },
+                      [
+                        _c("span", {
+                          staticClass: "oi oi-spreadsheet",
+                          attrs: {
+                            title: "Ediatr estado inscripción",
+                            "aria-hidden": "true"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v("\n\t\t\t\t  \n\t\t\t\t"),
+                    _c(
+                      "a",
+                      {
+                        staticStyle: { color: "#000" },
+                        attrs: {
+                          target: "_blank",
+                          href:
+                            "/tutoriaweb/public/incripciones/pdfinscripcion/" +
+                            inscripcion.numdocest
+                        }
+                      },
+                      [
+                        _c("span", {
+                          staticClass: "oi oi-print",
+                          attrs: { title: "PDF", "aria-hidden": "true" }
+                        })
+                      ]
+                    ),
+                    _vm._v("\n\t\t\t\t  \n\t\t\t\t"),
+                    _c(
+                      "a",
+                      {
+                        staticStyle: { color: "#000" },
+                        attrs: {
+                          target: "_blank",
+                          href:
+                            "/tutoriaweb/public/incripciones/generarPago/" +
+                            inscripcion.numdocest
+                        }
+                      },
+                      [
+                        _c("span", {
+                          staticClass: "oi oi-document",
+                          attrs: { title: "Recibo pago", "aria-hidden": "true" }
+                        })
+                      ]
+                    ),
+                    _vm._v("\t\t\t\t\n\t\t\t\t \n\t\t\t")
+                  ])
+                ],
+                2
+              )
             })
           )
         ]
@@ -49255,7 +49273,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -49323,6 +49340,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var array = response.data;
         _this2.pagination = array['paginate'];
         _this2.inscripciones = array['inscripcion']['data'];
+        _this2.estu = array['estu'];
       });
     },
     beforeDestroy: function beforeDestroy() {
@@ -49406,50 +49424,67 @@ var render = function() {
           _c(
             "tbody",
             _vm._l(_vm.inscripciones, function(inscripcion) {
-              return _c("tr", { key: inscripcion.codigo }, [
-                _c("td", [_vm._v(_vm._s(inscripcion.numdocest))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(inscripcion.fechainscrip))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(inscripcion.sede))]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _vm._v(_vm._s(inscripcion.verificada))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _vm._v(_vm._s(inscripcion.citacion))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _vm._v(_vm._s(inscripcion.aprobada))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _vm._v(_vm._s(inscripcion.pago))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "right" } }, [
-                  _c(
-                    "a",
-                    {
-                      staticStyle: { color: "#000" },
-                      attrs: {
-                        target: "_blank",
-                        href:
-                          "/tutoriaweb/public/incripciones/pdfinscripcion/" +
-                          inscripcion.numdocest
-                      }
-                    },
-                    [
-                      _c("span", {
-                        staticClass: "oi oi-document",
-                        attrs: { title: "PDF", "aria-hidden": "true" }
-                      })
-                    ]
-                  )
-                ])
-              ])
+              return _c(
+                "tr",
+                { key: inscripcion.codigo },
+                [
+                  _vm._l(_vm.estu, function(est) {
+                    return est.numdocumento === inscripcion.numdocest
+                      ? _c("td", [
+                          _vm._v(
+                            _vm._s(est.nombre) +
+                              " " +
+                              _vm._s(est.apellido1) +
+                              " " +
+                              _vm._s(est.apellido2)
+                          )
+                        ])
+                      : _vm._e()
+                  }),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(inscripcion.fechainscrip))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(inscripcion.sede))]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
+                    _vm._v(_vm._s(inscripcion.verificada))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
+                    _vm._v(_vm._s(inscripcion.citacion))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
+                    _vm._v(_vm._s(inscripcion.aprobada))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
+                    _vm._v(_vm._s(inscripcion.pago))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "right" } }, [
+                    _c(
+                      "a",
+                      {
+                        staticStyle: { color: "#000" },
+                        attrs: {
+                          target: "_blank",
+                          href:
+                            "/tutoriaweb/public/incripciones/pdfinscripcion/" +
+                            inscripcion.numdocest
+                        }
+                      },
+                      [
+                        _c("span", {
+                          staticClass: "oi oi-document",
+                          attrs: { title: "PDF", "aria-hidden": "true" }
+                        })
+                      ]
+                    )
+                  ])
+                ],
+                2
+              )
             })
           )
         ]
@@ -49545,7 +49580,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Estudiante")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha          ")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Sede")]),
         _vm._v(" "),
@@ -49555,9 +49590,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprobada")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Pago")]),
-        _vm._v(" "),
-        _c("th", { attrs: { colspan: "3" } }, [_vm._v("   ")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Pago")])
       ])
     ])
   }

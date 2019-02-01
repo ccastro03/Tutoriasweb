@@ -23,7 +23,7 @@
         </thead>
         <tbody>
           <tr v-for="inscripcion in inscripciones" :key="inscripcion.codigo">
-            <td>{{ inscripcion.numdocest }}</td>
+			<td v-for="est in estu" v-if="est.numdocumento === inscripcion.numdocest">{{ est.nombre }} {{ est.apellido1 }} {{ est.apellido2 }}</td>
 			<td>{{ inscripcion.fechainscrip }}</td>
 			<td>{{ inscripcion.sede }}</td>
 			<td style="text-align: center;">{{ inscripcion.verificada }}</td>
@@ -121,6 +121,7 @@ export default {
         var array = response.data;
 		this.pagination = array['paginate'];
 		this.inscripciones = array['inscripcion']['data'];
+		this.estu = array['estu'];
       });
     },
 	beforeDestroy () {

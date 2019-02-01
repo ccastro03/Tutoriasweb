@@ -292,6 +292,7 @@ class InscripcionController extends Controller
 			'nombre' => $ArrDatos['nombre'],
 			'apellido1' => $ArrDatos['apellido1'],
 			'apellido2' => $ArrDatos['apellido2'],
+			'nomcomple' => $ArrDatos['nombre']." ".$ArrDatos['apellido1']." ".$ArrDatos['apellido2'],
 			'direccion' => $ArrDatos['direccion'],
 			'barrio' => $ArrDatos['barrio'],
 			'numtelefono' => $ArrDatos['numfijo'],
@@ -447,6 +448,7 @@ class InscripcionController extends Controller
 			'nombre' => $ArrDatos['nomres'],
 			'apellido1' => $ArrDatos['apelres1'],
 			'apellido2' => $ArrDatos['apelres2'],
+			'nomcomple' => $ArrDatos['nomres']." ".$ArrDatos['apelres1']." ".$ArrDatos['apelres2'],
 			'cod_pais_nace' => $ArrDatos['painaceres'],			
 			'cod_estcivi' => $ArrDatos['tipestciv'],
 			'direccion' => $ArrDatos['direcres'],
@@ -571,6 +573,7 @@ class InscripcionController extends Controller
 			'nombre' => $ArrDatos['nomacu'],
 			'apellido1' => $ArrDatos['apelacu1'],
 			'apellido2' => $ArrDatos['apelacu2'],
+			'nomcomple' => $ArrDatos['nomacu']." ".$ArrDatos['apelacu1']." ".$ArrDatos['apelacu2'],
 			'cod_pais_nace' => $ArrDatos['painaceacu'],			
 			'cod_estcivi' => $ArrDatos['tipestciv'],
 			'direccion' => $ArrDatos['direcacu'],
@@ -683,13 +686,23 @@ class InscripcionController extends Controller
 	
     public function obtenerListadoInscripciones(Request $request){
 		if($request->input('sede') != ""){
-			$inscripcion = DB::table('inscripciones')->where('sede', 'like', '%'.$request->input('sede').'%')->paginate(10);
+			
+			$cod_sede = $request->input('sede');
+			$inscripcion = DB::table('inscripciones')->where('sede', 'like', '%'.$cod_sede.'%')->paginate(20);
+			
 		}else if($request->input('codigo') != ""){
-			$inscripcion = DB::table('inscripciones')->where('numdocest', 'like', '%'.$request->input('codigo').'%')->paginate(10);
+			
+			$estudiante = $request->input('codigo');
+			$cod_estudiante = DB::table('estudiantes')->where('nomcomple', 'like', '%'.$estudiante.'%')->get();
+			$inscripcion = DB::table('inscripciones')->where('numdocest', 'like', '%'.$cod_estudiante[0]->numdocumento.'%')->paginate(20);
+			
 		}else{
-			$inscripcion = DB::table('inscripciones')->paginate(10);
-		}		
-        return response()->json(['inscripcion'=>$inscripcion, 'paginate' => [
+			$inscripcion = DB::table('inscripciones')->paginate(20);
+		}
+		
+		$estu = DB::table('estudiantes')->get();
+		
+        return response()->json(['inscripcion'=>$inscripcion,'estu'=>$estu, 'paginate' => [
                 'total'         =>  $inscripcion->total(),
                 'current_page'  =>  $inscripcion->currentPage(),
                 'per_page'      =>  $inscripcion->perPage(),

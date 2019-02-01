@@ -19,6 +19,7 @@ class CreateResponsablesTable extends Migration
 			$table->string('nombre',40)->nullable();
 			$table->string('apellido1',20)->nullable();
 			$table->string('apellido2',20)->nullable();
+			$table->string('nomcomple',120)->nullable();
 			$table->string('cod_pais_nace',3)->nullable();
 			$table->string('cod_estcivi',3)->nullable();
 			$table->string('direccion',200)->nullable();

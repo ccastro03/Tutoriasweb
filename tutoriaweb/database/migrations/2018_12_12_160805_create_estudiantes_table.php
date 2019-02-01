@@ -20,6 +20,7 @@ class CreateEstudiantesTable extends Migration
 			$table->string('nombre',40)->nullable();
 			$table->string('apellido1',20)->nullable();
 			$table->string('apellido2',20)->nullable();
+			$table->string('nomcomple',120)->nullable();
 			$table->string('cod_ciu_vive',8)->nullable();
 			$table->string('direccion',200)->nullable();
 			$table->string('barrio',10)->nullable();

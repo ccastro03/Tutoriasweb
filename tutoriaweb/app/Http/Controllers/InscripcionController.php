@@ -67,6 +67,9 @@ class InscripcionController extends Controller
 		if($ArrDatos['chcita'] == "S" && $ArrDatos['obscitacion'] != ""){
 			if(count($responsable) != 0){
 				if($responsable[0]->notifica == "S"){
+				    
+					$asunto = "Citación entrevista colegio por la inscripción del estudiante";
+					
 					$correo = new PHPMailer\PHPMailer();
 
                     //$correo->SMTPDebug = 1;
@@ -82,15 +85,17 @@ class InscripcionController extends Controller
 					$correo->SetFrom("superadmin@informaticaldia.com", "Colegio XYZ");
 					$correo->AddAddress($responsable[0]->email, $responsable[0]->nombre." ".$responsable[0]->apellido1." ".$responsable[0]->apellido2);
 					$correo->IsHTML(true);
-					$correo->Subject = "Citación entrevista colegio por la inscripción del estudiante"; //Asunto
+					$correo->Subject = utf8_decode($asunto); //Asunto
+					
 					//Cuerpo del Mensaje
-					$correo->MsgHTML($ArrDatos['obscitacion']);
+					$correo->MsgHTML($ArrDatos['obscitacion'].", Fecha de la citaci&oacute;n: ".$ArrDatos['feccita']);
 			
+					$correo->CharSet = 'UTF-8';
 					
 					if(!$correo->Send()) {
 						$estadocitares = "Hubo un error en el responsable ";
 					} else {
-						$estadocitares = "Notificación enviada correctamente al responsable";
+						$estadocitares = "Notificaci&oacute;n enviada correctamente al responsable";
 					};
 				};
 			}
@@ -112,14 +117,14 @@ class InscripcionController extends Controller
 					$correo->SetFrom("superadmin@informaticaldia.com", "Colegio XYZ");
 					$correo->AddAddress($acudiente[0]->email, $acudiente[0]->nombre." ".$acudiente[0]->apellido1." ".$acudiente[0]->apellido2);
 					$correo->IsHTML(true);
-					$correo->Subject = "Citacion entrevista colegio por la inscripción del estudiante "; //Asunto
+					$correo->Subject = "Citaci&oacute;n entrevista colegio por la inscripci&oacute;n del estudiante "; //Asunto
 					//Cuerpo del Mensaje
 					$correo->MsgHTML($ArrDatos['obscitacion']);
 					
 					if(!$correo->Send()) {
 						$estadocitaacu = "Hubo un error en el acudiente";
 					} else {
-						$estadocitaacu = "Notificación enviada correctamente al acudiente";
+						$estadocitaacu = "Notificaci&oacute;n enviada correctamente al acudiente";
 					};
 				};
 			}else{
@@ -145,14 +150,14 @@ class InscripcionController extends Controller
 					$correo->SetFrom("superadmin@informaticaldia.com", "Colegio XYZ");
 					$correo->AddAddress($responsable[0]->email, $responsable[0]->nombre." ".$responsable[0]->apellido1." ".$responsable[0]->apellido2);
 					$correo->IsHTML(true);
-					$correo->Subject = "Aprobacion de la inscripción del estudiante "; //Asunto
+					$correo->Subject = "Aprobaci&oacute;n de la inscripci&oacute;n del estudiante "; //Asunto
 					//Cuerpo del Mensaje
 					$correo->MsgHTML($ArrDatos['obsaprobada']);
 					
 					if(!$correo->Send()) {
 						$estadoaprores = "Hubo un error en el responsable";
 					} else {
-						$estadoaprores = "Notificación enviada correctamente al responsable";
+						$estadoaprores = "Notificaci&oacute;n enviada correctamente al responsable";
 					};
 				};
 			}
@@ -174,14 +179,14 @@ class InscripcionController extends Controller
 					$correo->SetFrom("superadmin@informaticaldia.com", "Colegio XYZ");
 					$correo->AddAddress($acudiente[0]->email, $acudiente[0]->nombre." ".$acudiente[0]->apellido1." ".$acudiente[0]->apellido2);
 					$correo->IsHTML(true);
-					$correo->Subject = "Aprobacion de la inscripción del estudiante "; //Asunto
+					$correo->Subject = "Aprobaci&oacute;n de la inscripción del estudiante "; //Asunto
 					//Cuerpo del Mensaje
 					$correo->MsgHTML($ArrDatos['obscitacion']."Los datos para el acceso del estudiante son: ");
 					
 					if(!$correo->Send()) {
 						$estadoaproacu = "Hubo un error en el acudiente";
 					} else {
-						$estadoaproacu = "Notificación enviada correctamente al acudiente";
+						$estadoaproacu = "Notificaci&oacute;n enviada correctamente al acudiente";
 					};
 				};
 			}else{

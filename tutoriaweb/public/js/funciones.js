@@ -1187,6 +1187,8 @@ function ValChPago(){
 };
 
 function ValChAprob(){
+	var fecha_cita = $("#feccita").val();
+	
 	var hoy = new Date();
 	var Dia = hoy.getDate();
 	var Mes = hoy.getMonth()+1;
@@ -1199,14 +1201,31 @@ function ValChAprob(){
 		Mes='0'+Mes;
 	}
 	var fec_apr = Year+"-"+Mes+"-"+Dia;
-	
-	if($("#chaprob").is(':checked') == true){ 
-		$("#fecaproba").val(fec_apr);
-		$("#fecaproba").removeAttr('disabled');
-	}else{
+		
+	if(fecha_cita >= fec_apr){
+		swal("¡Atención!", "No puede aprobar la inscripción ya que aun no se ha efectuado la citación", "warning");
+		$('.swal-button--confirm').click(function(){
+			$("#chaprob").prop('checked', false);
+			$("#fecaproba").val("");
+			$("#fecaproba").attr('disabled','disabled');
+			//$("#chaprob").attr('disabled','disabled');
+		});
+		$("#chaprob").prop('checked', false);
 		$("#fecaproba").val("");
 		$("#fecaproba").attr('disabled','disabled');
-	}			
+		//$("#chaprob").attr('disabled','disabled');
+	}else{
+		if($("#chaprob").is(':checked') == true){ 
+			$("#fecaproba").val(fec_apr);
+			$("#fecaproba").removeAttr('disabled');
+			$("#obsaprobada").removeAttr('disabled');
+			$("#obsaprobada").focus();
+		}else{
+			$("#fecaproba").val("");
+			$("#fecaproba").attr('disabled','disabled');
+			$("#obsaprobada").attr('disabled','disabled');
+		}		
+	}
 };
 
 function ChEstudiante(){

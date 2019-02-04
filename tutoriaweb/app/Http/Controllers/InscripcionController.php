@@ -45,6 +45,7 @@ class InscripcionController extends Controller
 		$estadoaprores = "";
 		$estadoaproacu = "";
 		
+		$estudian = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['codEstud'])->get();
 		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $ArrDatos['codEstud'])->where('cod_rol', '=', '04')->get();
 		$acudiente = DB::table('responsables')->where('cod_estudiante', '=', $ArrDatos['codEstud'])->where('cod_rol', '=', '05')->get();
 		
@@ -70,6 +71,29 @@ class InscripcionController extends Controller
 				    
 					$asunto = "Citación entrevista colegio por la inscripción del estudiante";
 					
+					$html = "
+					<html>
+					<head>
+					</head>
+					<body>
+						<table border='1'>
+							<tr>
+								<td bgcolor='#209cee' align='center' height='70'>
+									<strong>COLEGIO XXXXXXXX</strong>
+								</td>
+							</tr>
+							<tr>
+								<td height='30'>
+									Para nosotros como institución es grato que nos haya elegido, por tal motivo queremos invitarle a \n
+									a una entrevista el dia: <strong>".$ArrDatos['feccita']."</strong> para poder seguir con el proceso de inscripción \n
+									de su hijo <strong>".$estudian[0]->nomcomple."</strong>
+								</td>
+							</tr>
+						</table>
+					</body>
+					</html>
+					";
+					
 					$correo = new PHPMailer\PHPMailer();
 
                     //$correo->SMTPDebug = 1;
@@ -84,11 +108,11 @@ class InscripcionController extends Controller
 					$correo->From = $responsable[0]->email; // Desde donde enviamos (Para mostrar)
 					$correo->SetFrom("superadmin@informaticaldia.com", "Colegio XYZ");
 					$correo->AddAddress($responsable[0]->email, $responsable[0]->nombre." ".$responsable[0]->apellido1." ".$responsable[0]->apellido2);
-					$correo->IsHTML(true);
 					$correo->Subject = utf8_decode($asunto); //Asunto
 					
 					//Cuerpo del Mensaje
-					$correo->MsgHTML($ArrDatos['obscitacion'].", Fecha de la citaci&oacute;n: ".$ArrDatos['feccita']);
+					$correo->IsHTML(true);
+					$correo->MsgHTML($html);
 			
 					$correo->CharSet = 'UTF-8';
 					

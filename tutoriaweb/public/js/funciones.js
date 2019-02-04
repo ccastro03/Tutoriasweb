@@ -1202,7 +1202,7 @@ function ValChAprob(){
 	}
 	var fec_apr = Year+"-"+Mes+"-"+Dia;
 		
-	if(fecha_cita >= fec_apr){
+	if(fecha_cita > fec_apr){
 		swal("¡Atención!", "No puede aprobar la inscripción ya que aun no se ha efectuado la citación", "warning");
 		$('.swal-button--confirm').click(function(){
 			$("#chaprob").prop('checked', false);

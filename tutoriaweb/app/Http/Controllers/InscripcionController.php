@@ -69,30 +69,49 @@ class InscripcionController extends Controller
 			if(count($responsable) != 0){
 				if($responsable[0]->notifica == "S"){
 				    
-					$asunto = "Citación entrevista colegio por la inscripción del estudiante";
+					$asunto = "Citación entrevista por la inscripción del estudiante ".$estudian[0]->nomcomple;
 					
-					$html = "
+					$html = '
 					<html>
 					<head>
 					</head>
 					<body>
-						<table border='1'>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" width="800">
 							<tr>
-								<td bgcolor='#209cee' align='center' height='70'>
-									<strong>COLEGIO XXXXXXXX</strong>
+								<table>
+									<tr>
+										<td align="center">
+											
+										</td>
+									</tr>								
+									<tr>
+										<td align="center" bgcolor="#1bb1e5">
+											<span style="color:#fff;font-weight:900;font-size:41px;line-height:48px;font-family:Roboto,Helvetica,Arial,sans-serif" >
+												COLEGIO XXXXXXXX
+											</span>
+										</td>
+									</tr>
+								</table>
+							</tr>
+							<tr>
+								<td style="background:#fff;padding:45px" valign="top" width="740">
+									<h1 style="font-size:20pt;color:#000;font-family:Arial">Hola, '.$responsable[0]->nomcomple.'!</h1>								
+									<p style="color:#5a5b5c;font-size:10pt;font-family:Arial;line-height:1.3">
+									Para nosotros como institución es grato que nos haya elegido, por tal motivo queremos invitarle a
+									una entrevista el dia: <strong>'.$ArrDatos["feccita"].'</strong> para poder seguir con el proceso de inscripción
+									de su hijo <strong>'.$estudian[0]->nomcomple.'</strong></p>
 								</td>
 							</tr>
 							<tr>
-								<td height='30'>
-									Para nosotros como institución es grato que nos haya elegido, por tal motivo queremos invitarle a \n
-									a una entrevista el dia: <strong>".$ArrDatos['feccita']."</strong> para poder seguir con el proceso de inscripción \n
-									de su hijo <strong>".$estudian[0]->nomcomple."</strong>
+								<td valign="top">
+									<p style="font-family:Arial;font-size:8pt;color:#5a5b5c;text-align:center;padding:10px 0px">
+										Copyright@2019 INFORMATICA AL D&A. todos los derechos reservados</p>
 								</td>
-							</tr>
+							</tr>							
 						</table>
 					</body>
 					</html>
-					";
+					';
 					
 					$correo = new PHPMailer\PHPMailer();
 
@@ -783,7 +802,7 @@ class InscripcionController extends Controller
 		'profesiones' => ($profesiones),
 		'especialidades' => ($especialidades),
 		'estcivil' => ($estcivil)
-		]);
+		])->setPaper('a4', 'landscape');
         return $pdf->stream('Reporte Inscripción '.strtoupper($estudiante[0]->nombre).'_'.strtoupper($estudiante[0]->apellido1).'.pdf');
 		//return view('admin.reportes.reporte', ['estudiante' => ($estudiante),'responsable' => ($responsable),'acudiente' => ($acudiente)]);
 	}

@@ -29,9 +29,9 @@
 					<td>Nombres</td>
 					<td>Primer apellido</td>
 					<td>Segundo apellido</td>
-					<td>Genero</td>
+					<td>Género</td>
 					<td>Tipo documento</td>
-					<td>Numero documento</td>
+					<td>Número documento</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -62,7 +62,7 @@
 				<tr style="background-color: #dddddd; font-weight: bold;">
 					<td>Dirección</td>
 					<td>Barrio</td>
-					<td># Telefono</td>
+					<td># Teléfono</td>
 					<td># Celular</td>
 					<td>Email</td>
 					<td>Fecha Nacimiento</td>
@@ -89,7 +89,7 @@
 
 			<thead>
 				<tr style="background-color: #dddddd; font-weight: bold;">
-					<td>Pais nacimiento</td>
+					<td>País nacimiento</td>
 					<td>Ciudad nacimiento</td>
 					<td>RH</td>
 					<td>Sede</td>
@@ -142,7 +142,7 @@
 					<td>Nivel</td>
 					<td>Eps</td>
 					<td>Prepagada</td>
-					<td>Religion</td>
+					<td>Religión</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -219,9 +219,9 @@
 					<td>Primer apellido</td>
 					<td>Segundo apellido</td>
 					<td>Tipo documento</td>
-					<td>Numero documento</td>
+					<td>Número documento</td>
 					<td>Estado civil</td>
-					<td>Pais nacimiento</td>
+					<td>País nacimiento</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -257,10 +257,10 @@
 			<thead>
 				<tr style="background-color: #dddddd; font-weight: bold;">
 					<td>Dirección</td>
-					<td># Telefono</td>
+					<td># Teléfono</td>
 					<td># Celular</td>
 					<td>Email</td>
-					<td>Profesion</td>
+					<td>Profesión</td>
 					<td>Especialidad</td>
 					<td>Empresa</td>
 				</tr>
@@ -294,9 +294,9 @@
 				<tr style="background-color: #dddddd; font-weight: bold;">
 					<td>Cargo</td>
 					<td>Dirección empresa</td>
-					<td>Telefono empresa</td>
-					<td>Ex alumno</td>
-					<td>Notificacion E-mail</td>
+					<td>Teléfono empresa</td>
+					<td>Exalumno</td>
+					<td>Notificación E-mail</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -323,9 +323,9 @@
 					<td>Primer apellido</td>
 					<td>Segundo apellido</td>
 					<td>Tipo documento</td>
-					<td>Numero documento</td>
+					<td>Número documento</td>
 					<td>Estado civil</td>
-					<td>Pais nacimiento</td>
+					<td>País nacimiento</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -361,10 +361,10 @@
 			<thead>
 				<tr style="background-color: #dddddd; font-weight: bold;">
 					<td>Dirección</td>
-					<td># Telefono</td>
+					<td># Teléfono</td>
 					<td># Celular</td>
 					<td>Email</td>
-					<td>Profesion</td>
+					<td>Profesión</td>
 					<td>Especialidad</td>
 					<td>Empresa</td>				
 				</tr>
@@ -398,9 +398,9 @@
 				<tr style="background-color: #dddddd; font-weight: bold;">
 					<td>Cargo</td>
 					<td>Dirección empresa</td>
-					<td>Telefono empresa</td>
-					<td>Ex alumno</td>
-					<td>Notificacion E-mail</td>
+					<td>Teléfono empresa</td>
+					<td>Exalumno</td>
+					<td>Notificación E-mail</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -418,7 +418,7 @@
 	</div>
 	
 	<div style="font-family: arial, sans-serif; font-size: 12px;">
-		<label>Texto expresando el porque sale del colegio <b>{{ $estu->cole_proced }}</b> y desea ingresar a nuestra institución</label>
+		<label>Texto expresando el porqué sale del colegio <b>{{ $estu->cole_proced }}</b> y desea ingresar a nuestra institución</label>
 		@foreach($estudiante->all() as $estu)
 			<p><b>{{ $estu->observacion }}</b></p>
 		@endforeach

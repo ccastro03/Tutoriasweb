@@ -34,7 +34,7 @@
             <td style="text-align: right;">
 				<a :href="'/tutoriaweb/public/incripciones/'+ inscripcion.codigo" style="color: #000;"><span class="oi oi-eye" title="Ver estado inscripción" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;
-				<a :href="'/tutoriaweb/public/incripciones/'+ inscripcion.codigo+'/editar'" style="color: #000;"><span class="oi oi-spreadsheet" title="Ediatr estado inscripción" aria-hidden="true"></span></a>
+				<a :href="'/tutoriaweb/public/incripciones/'+ inscripcion.codigo+'/editar'" style="color: #000;"><span class="oi oi-spreadsheet" title="Editar estado inscripción" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;
 				<a target="_blank" :href="'/tutoriaweb/public/incripciones/pdfinscripcion/'+ inscripcion.numdocest" style="color: #000;"><span class="oi oi-print" title="PDF" aria-hidden="true"></span></a>
 				&nbsp;&nbsp;

@@ -44,10 +44,13 @@ class InscripcionController extends Controller
 		$estadocitaacu = "";
 		$estadoaprores = "";
 		$estadoaproacu = "";
+		$codcolegio = '98765423-1';
 		
 		$estudian = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['codEstud'])->get();
 		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $ArrDatos['codEstud'])->where('cod_rol', '=', '04')->get();
 		$acudiente = DB::table('responsables')->where('cod_estudiante', '=', $ArrDatos['codEstud'])->where('cod_rol', '=', '05')->get();
+		$colegio = DB::table('colegios')->where('cod_colegio', '=', $codcolegio)->get();
+		$usures = DB::table('users')->where('name', '=', $responsable[0]->nomcomple)->get();
 		
 		$inscrip = DB::table('inscripciones')->where('codigo', '=', $ArrDatos['codInscrip'])->update([
 		'sede' => $ArrDatos['codsede'],
@@ -65,11 +68,37 @@ class InscripcionController extends Controller
 		
 		/* CORREO PARA LA CITACION */
 		
-		if($ArrDatos['chcita'] == "S" && $ArrDatos['obscitacion'] != ""){
+		if($ArrDatos['chcita'] == "S" && $ArrDatos['obscitacion'] != "" && $ArrDatos['chaprob'] != "S"){
 			if(count($responsable) != 0){
 				if($responsable[0]->notifica == "S"){
 				    
-					$asunto = "Citación entrevista por la inscripción del estudiante ".$estudian[0]->nomcomple;
+					$asunto = "Citación entrevista por la inscripción del estudiante ".strtoupper($estudian[0]->nomcomple);
+					$ffcit = strtotime($ArrDatos["feccita"]);
+					$anio = date("Y", $ffcit);
+					$mes = date("F", $ffcit);
+					
+					if(date("l", $ffcit) === 'Monday'){$nomdia = "Lunes";};
+					if(date("l", $ffcit) === 'Tuesday'){$nomdia = "Martes";};
+					if(date("l", $ffcit) === 'Wednesday'){$nomdia = "Miercoles";};
+					if(date("l", $ffcit) === 'Thursday'){$nomdia = "Jueves";};
+					if(date("l", $ffcit) === 'Friday'){$nomdia = "Viernes";};
+					if(date("l", $ffcit) === 'Saturday'){$nomdia = "Sabado";};
+					if(date("l", $ffcit) === 'Sunday'){$nomdia = "Domingo";};
+					
+					if(date("F", $ffcit) === 'January'){$mes = "Enero";};
+					if(date("F", $ffcit) === 'February'){$mes = "Febrero";};
+					if(date("F", $ffcit) === 'March'){$mes = "Marzo";};
+					if(date("F", $ffcit) === 'April'){$mes = "Abril";};
+					if(date("F", $ffcit) === 'May'){$mes = "Mayo";};
+					if(date("F", $ffcit) === 'June'){$mes = "Junio";};
+					if(date("F", $ffcit) === 'July'){$mes = "Julio";};					
+					if(date("F", $ffcit) === 'August'){$mes = "Agosto";};
+					if(date("F", $ffcit) === 'September'){$mes = "Septiembre";};
+					if(date("F", $ffcit) === 'October'){$mes = "Octubre";};
+					if(date("F", $ffcit) === 'November'){$mes = "Noviembre";};
+					if(date("F", $ffcit) === 'December'){$mes = "Diciembre";};					 
+			
+					$fecomple = $nomdia.", ".date("d", $ffcit)." de ".$mes." de ".$anio;
 					
 					$html = '
 					<html>
@@ -78,16 +107,11 @@ class InscripcionController extends Controller
 					<body>
 						<table align="center" border="0" cellpadding="0" cellspacing="0" width="800">
 							<tr>
-								<table>
+								<table>							
 									<tr>
 										<td align="center">
-											
-										</td>
-									</tr>								
-									<tr>
-										<td align="center" bgcolor="#1bb1e5">
-											<span style="color:#fff;font-weight:900;font-size:41px;line-height:48px;font-family:Roboto,Helvetica,Arial,sans-serif" >
-												COLEGIO XXXXXXXX
+											<span style="color:#000;font-weight:900;font-size:41px;line-height:48px;font-family:Roboto,Helvetica,Arial,sans-serif" >
+											'.$colegio[0]->nombre.'
 											</span>
 										</td>
 									</tr>
@@ -95,17 +119,21 @@ class InscripcionController extends Controller
 							</tr>
 							<tr>
 								<td style="background:#fff;padding:45px" valign="top" width="740">
-									<h1 style="font-size:20pt;color:#000;font-family:Arial">Hola, '.$responsable[0]->nomcomple.'!</h1>								
-									<p style="color:#5a5b5c;font-size:10pt;font-family:Arial;line-height:1.3">
+									<h1 style="font-size:20pt;color:#000;font-family:Arial">Hola, '.strtoupper($responsable[0]->nomcomple).'!</h1>								
+									<p style="color:#5a5b5c;font-size:11pt;font-family:Arial;line-height:1.3">
 									Para nosotros como institución es grato que nos haya elegido, por tal motivo queremos invitarle a
-									una entrevista el dia: <strong>'.$ArrDatos["feccita"].'</strong> para poder seguir con el proceso de inscripción
-									de su hijo <strong>'.$estudian[0]->nomcomple.'</strong></p>
+									una entrevista el dia: <strong>'.$fecomple.'</strong> para poder continuar con el proceso de inscripción
+									de su hijo <strong>'.strtoupper($estudian[0]->nomcomple).'</strong></p>
+									
+									<p style="color:#5a5b5c;font-size:10pt;font-family:Arial;line-height:1.3">
+									Nota: tenga en cuenta la siguiente observación <strong>'.$ArrDatos["obscitacion"].'</strong>
+									</p>
 								</td>
 							</tr>
 							<tr>
 								<td valign="top">
-									<p style="font-family:Arial;font-size:8pt;color:#5a5b5c;text-align:center;padding:10px 0px">
-										Copyright@2019 INFORMATICA AL D&A. todos los derechos reservados</p>
+									<p style="font-family:Arial;font-size:9pt;color:#5a5b5c;text-align:center;padding:10px 0px">
+										Copyright@2019 <strong><a href="http://www.informaticaldia.com/tutoriaweb/public/login">INFORMÁTICA AL D&A</a></strong> todos los derechos reservados</p>
 								</td>
 							</tr>							
 						</table>
@@ -125,7 +153,7 @@ class InscripcionController extends Controller
 					$correo->Password = "spadmin123";
 					
 					$correo->From = $responsable[0]->email; // Desde donde enviamos (Para mostrar)
-					$correo->SetFrom("superadmin@informaticaldia.com", "Colegio XYZ");
+					$correo->SetFrom("superadmin@informaticaldia.com", $colegio[0]->nombre);
 					$correo->AddAddress($responsable[0]->email, $responsable[0]->nombre." ".$responsable[0]->apellido1." ".$responsable[0]->apellido2);
 					$correo->Subject = utf8_decode($asunto); //Asunto
 					
@@ -136,48 +164,69 @@ class InscripcionController extends Controller
 					$correo->CharSet = 'UTF-8';
 					
 					if(!$correo->Send()) {
-						$estadocitares = "Hubo un error en el responsable ";
+						$estadores = "Hubo un error en el responsable ";
 					} else {
-						$estadocitares = "Notificaci&oacute;n enviada correctamente al responsable";
+						$estadores = "Notificación enviada correctamente al responsable";
 					};
 				};
 			}
-			
-			if(count($acudiente) != 0){
-				if($acudiente[0]->notifica == "S"){
-					$correo = new PHPMailer\PHPMailer();
-
-                    //$correo->SMTPDebug = 1;
-					$correo->IsSMTP();
-					$correo->Host = "p3plcpnl0881.prod.phx3.secureserver.net";
-					$correo->Port = 465;	
-					$correo->SMTPSecure = "ssl";
-					$correo->SMTPAuth = true;
-					$correo->Username = "superadmin@informaticaldia.com";
-					$correo->Password = "spadmin123";
-
-					$correo->From = $acudiente[0]->email; // Desde donde enviamos (Para mostrar)
-					$correo->SetFrom("superadmin@informaticaldia.com", "Colegio XYZ");
-					$correo->AddAddress($acudiente[0]->email, $acudiente[0]->nombre." ".$acudiente[0]->apellido1." ".$acudiente[0]->apellido2);
-					$correo->IsHTML(true);
-					$correo->Subject = "Citaci&oacute;n entrevista colegio por la inscripci&oacute;n del estudiante "; //Asunto
-					//Cuerpo del Mensaje
-					$correo->MsgHTML($ArrDatos['obscitacion']);
-					
-					if(!$correo->Send()) {
-						$estadocitaacu = "Hubo un error en el acudiente";
-					} else {
-						$estadocitaacu = "Notificaci&oacute;n enviada correctamente al acudiente";
-					};
-				};
-			}else{
-				$estadocitaacu = "";
-			}				
 		};
 		
 		if($ArrDatos['chaprob'] == "S" && $ArrDatos['obsaprobada'] != ""){
 			if(count($responsable) != 0){
 				if($responsable[0]->notifica == "S"){
+					$asunto = "Aprobación inscripción del estudiante ".strtoupper($estudian[0]->nomcomple);
+					if($estudian[0]->genero === 'H'){$genero = 'Hijo';};
+					if($estudian[0]->genero === 'M'){$genero = 'Hija';};
+					
+					$html = '
+					<html>
+					<head>
+					</head>
+					<body>
+						<table align="center" border="0" cellpadding="0" cellspacing="0" width="800">
+							<tr>
+								<table>							
+									<tr>
+										<td align="center">
+											<span style="color:#000;font-weight:900;font-size:41px;line-height:48px;font-family:Roboto,Helvetica,Arial,sans-serif" >
+											'.$colegio[0]->nombre.'
+											</span>
+										</td>
+									</tr>
+								</table>
+							</tr>
+							<tr>
+								<td style="background:#fff;padding:45px" valign="top" width="740">
+									<h1 style="font-size:20pt;color:#000;font-family:Arial">Hola, '.strtoupper($responsable[0]->nomcomple).'!</h1>								
+									<p style="color:#5a5b5c;font-size:11pt;font-family:Arial;line-height:1.3">
+									Para nosotros como institución es grato informarle que la inscripción de su '.$genero.', <strong>'.strtoupper($estudian[0]->nomcomple).'</strong>
+									ha sido aprobada, le invitamos a realizar el proceso de matrícula financiera y académica a través de
+									nuestro portal <strong><a href="http://www.informaticaldia.com/tutoriaweb/public/login">INFORMÁTICA AL D&A</a></strong>
+									</p>
+									
+									<p style="color:#5a5b5c;font-size:11pt;font-family:Arial;line-height:1.3">
+									Datos de acceso al portal:<br>
+									Usuario: <strong>'.$usures[0]->email.'</strong><br>
+									Contraseña: <strong>secret</strong>
+									</p>									
+									
+									<p style="color:#5a5b5c;font-size:10pt;font-family:Arial;line-height:1.3">
+									Nota: tenga en cuenta la siguiente observación <strong>'.$ArrDatos["obsaprobada"].'</strong>
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td valign="top">
+									<p style="font-family:Arial;font-size:9pt;color:#5a5b5c;text-align:center;padding:10px 0px">
+										Copyright@2019 <strong><a href="http://www.informaticaldia.com/tutoriaweb/public/login">INFORMÁTICA AL D&A</a></strong> todos los derechos reservados</p>
+								</td>
+							</tr>							
+						</table>
+					</body>
+					</html>
+					';
+					
 					$correo = new PHPMailer\PHPMailer();
 
                     //$correo->SMTPDebug = 1;
@@ -188,57 +237,29 @@ class InscripcionController extends Controller
 					$correo->SMTPAuth = true;
 					$correo->Username = "superadmin@informaticaldia.com";
 					$correo->Password = "spadmin123";
-
+					
 					$correo->From = $responsable[0]->email; // Desde donde enviamos (Para mostrar)
-					$correo->SetFrom("superadmin@informaticaldia.com", "Colegio XYZ");
+					$correo->SetFrom("superadmin@informaticaldia.com", $colegio[0]->nombre);
 					$correo->AddAddress($responsable[0]->email, $responsable[0]->nombre." ".$responsable[0]->apellido1." ".$responsable[0]->apellido2);
-					$correo->IsHTML(true);
-					$correo->Subject = "Aprobaci&oacute;n de la inscripci&oacute;n del estudiante "; //Asunto
+					$correo->Subject = utf8_decode($asunto); //Asunto
+					
 					//Cuerpo del Mensaje
-					$correo->MsgHTML($ArrDatos['obsaprobada']);
+					$correo->IsHTML(true);
+					$correo->MsgHTML($html);
+			
+					$correo->CharSet = 'UTF-8';
 					
 					if(!$correo->Send()) {
-						$estadoaprores = "Hubo un error en el responsable";
+						$estadores = "Hubo un error en el responsable ";
 					} else {
-						$estadoaprores = "Notificaci&oacute;n enviada correctamente al responsable";
+						$estadores = "Aprobación enviada correctamente al responsable";
 					};
 				};
 			}
-			
-			if(count($acudiente) != 0){
-				if($acudiente[0]->notifica == "S"){
-					$correo = new PHPMailer\PHPMailer();
-
-                    //$correo->SMTPDebug = 1;
-					$correo->IsSMTP();
-					$correo->Host = "p3plcpnl0881.prod.phx3.secureserver.net";
-					$correo->Port = 465;	
-					$correo->SMTPSecure = "ssl";
-					$correo->SMTPAuth = true;
-					$correo->Username = "superadmin@informaticaldia.com";
-					$correo->Password = "spadmin123";
-
-					$correo->From = $acudiente[0]->email; // Desde donde enviamos (Para mostrar)
-					$correo->SetFrom("superadmin@informaticaldia.com", "Colegio XYZ");
-					$correo->AddAddress($acudiente[0]->email, $acudiente[0]->nombre." ".$acudiente[0]->apellido1." ".$acudiente[0]->apellido2);
-					$correo->IsHTML(true);
-					$correo->Subject = "Aprobaci&oacute;n de la inscripción del estudiante "; //Asunto
-					//Cuerpo del Mensaje
-					$correo->MsgHTML($ArrDatos['obscitacion']."Los datos para el acceso del estudiante son: ");
-					
-					if(!$correo->Send()) {
-						$estadoaproacu = "Hubo un error en el acudiente";
-					} else {
-						$estadoaproacu = "Notificaci&oacute;n enviada correctamente al acudiente";
-					};
-				};
-			}else{
-				$estadocitaacu = "";
-			}				
 		};		
 		/* ************************ */
 		
-		$Respuesta = array($inscrip,"Inscripción actualizada correctamente", $estadocitares, $estadocitaacu, $estadoaprores, $estadoaproacu);
+		$Respuesta = array($inscrip,"Inscripción actualizada correctamente", $estadores);
 		return response()->json($Respuesta);
     }	
 
@@ -340,7 +361,7 @@ class InscripcionController extends Controller
 			'nombre' => $ArrDatos['nombre'],
 			'apellido1' => $ArrDatos['apellido1'],
 			'apellido2' => $ArrDatos['apellido2'],
-			'nomcomple' => $ArrDatos['nombre']." ".$ArrDatos['apellido1']." ".$ArrDatos['apellido2'],
+			'nomcomple' => strtolower($ArrDatos['nombre'])." ".strtolower($ArrDatos['apellido1'])." ".strtolower($ArrDatos['apellido2']),
 			'direccion' => $ArrDatos['direccion'],
 			'barrio' => $ArrDatos['barrio'],
 			'numtelefono' => $ArrDatos['numfijo'],
@@ -419,6 +440,7 @@ class InscripcionController extends Controller
 			'nombre' => $ArrDatos['nombre'],
 			'apellido1' => $ArrDatos['apellido1'],
 			'apellido2' => $ArrDatos['apellido2'],
+			'nomcomple' => strtolower($ArrDatos['nombre'])." ".strtolower($ArrDatos['apellido1'])." ".strtolower($ArrDatos['apellido2']),
 			'direccion' => $ArrDatos['direccion'],
 			'barrio' => $ArrDatos['barrio'],
 			'numtelefono' => $ArrDatos['numfijo'],
@@ -496,7 +518,7 @@ class InscripcionController extends Controller
 			'nombre' => $ArrDatos['nomres'],
 			'apellido1' => $ArrDatos['apelres1'],
 			'apellido2' => $ArrDatos['apelres2'],
-			'nomcomple' => $ArrDatos['nomres']." ".$ArrDatos['apelres1']." ".$ArrDatos['apelres2'],
+			'nomcomple' => strtolower($ArrDatos['nomres'])." ".strtolower($ArrDatos['apelres1'])." ".strtolower($ArrDatos['apelres2']),
 			'cod_pais_nace' => $ArrDatos['painaceres'],			
 			'cod_estcivi' => $ArrDatos['tipestciv'],
 			'direccion' => $ArrDatos['direcres'],
@@ -559,6 +581,7 @@ class InscripcionController extends Controller
 				'nombre' => $ArrDatos['nomres'],
 				'apellido1' => $ArrDatos['apelres1'],
 				'apellido2' => $ArrDatos['apelres2'],
+				'nomcomple' => strtolower($ArrDatos['nomres'])." ".strtolower($ArrDatos['apelres1'])." ".strtolower($ArrDatos['apelres2']),
 				'cod_pais_nace' => $ArrDatos['painaceres'],			
 				'cod_estcivi' => $ArrDatos['tipestciv'],
 				'direccion' => $ArrDatos['direcres'],
@@ -621,7 +644,7 @@ class InscripcionController extends Controller
 			'nombre' => $ArrDatos['nomacu'],
 			'apellido1' => $ArrDatos['apelacu1'],
 			'apellido2' => $ArrDatos['apelacu2'],
-			'nomcomple' => $ArrDatos['nomacu']." ".$ArrDatos['apelacu1']." ".$ArrDatos['apelacu2'],
+			'nomcomple' => strtolower($ArrDatos['nomacu'])." ".strtolower($ArrDatos['apelacu1'])." ".strtolower($ArrDatos['apelacu2']),
 			'cod_pais_nace' => $ArrDatos['painaceacu'],			
 			'cod_estcivi' => $ArrDatos['tipestciv'],
 			'direccion' => $ArrDatos['direcacu'],
@@ -685,6 +708,7 @@ class InscripcionController extends Controller
 				'nombre' => $ArrDatos['nomacu'],
 				'apellido1' => $ArrDatos['apelacu1'],
 				'apellido2' => $ArrDatos['apelacu2'],
+				'nomcomple' => strtolower($ArrDatos['nomacu'])." ".strtolower($ArrDatos['apelacu1'])." ".strtolower($ArrDatos['apelacu2']),
 				'cod_pais_nace' => $ArrDatos['painaceacu'],			
 				'cod_estcivi' => $ArrDatos['tipestciv'],
 				'direccion' => $ArrDatos['direcacu'],
@@ -848,7 +872,8 @@ class InscripcionController extends Controller
 			'numdocest' => $ArrDatos['numdocumento'],
 			'verificada' => 'N',
 			'citacion' => 'N',
-			'aprobada' => 'N'
+			'aprobada' => 'N',
+			'pago' => 'N'
 		]);
 		
 		return response()->json($inscripcion);		

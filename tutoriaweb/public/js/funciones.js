@@ -1136,9 +1136,16 @@ function ValChVerificado(){
 function ValChCitacion(){
 	if($("#chcita").is(':checked') == true){ 
 		$("#obscitacion").removeAttr('disabled');
+		$("#obscitacion").focus();
 	}else{
+		var verdis = $("#obscitacion").attr("disabled");
+		if(verdis != 'disabled'){
+			if($("#obscitacion").val() != ""){
+				$("#obscitacion").val("");
+				$("#feccita").val("");
+			}
+		}
 		$("#obscitacion").attr('disabled','disabled');
-		$("#obscitacion").val("");
 	}
 	
 	var hoy = new Date();
@@ -1154,12 +1161,16 @@ function ValChCitacion(){
 	}
 	var fec_cit = Year+"-"+Mes+"-"+Dia;
 	
-	if($("#chcita").is(':checked') == true){ 
-		$("#feccita").val(fec_cit);
+	if($("#chcita").is(':checked') == true){
+		if($("#feccita").val() == ""){
+			$("#feccita").val(fec_cit);
+		}
 		$("#feccita").removeAttr('disabled');
 	}else{
-		$("#feccita").val("");
 		$("#feccita").attr('disabled','disabled');
+		if($("#obscitacion").val() == ""){
+			$("#feccita").val("");
+		}		
 	}	
 };
 
@@ -1208,12 +1219,10 @@ function ValChAprob(){
 			$("#chaprob").prop('checked', false);
 			$("#fecaproba").val("");
 			$("#fecaproba").attr('disabled','disabled');
-			//$("#chaprob").attr('disabled','disabled');
 		});
 		$("#chaprob").prop('checked', false);
 		$("#fecaproba").val("");
 		$("#fecaproba").attr('disabled','disabled');
-		//$("#chaprob").attr('disabled','disabled');
 	}else{
 		if($("#chaprob").is(':checked') == true){ 
 			$("#fecaproba").val(fec_apr);
@@ -1221,7 +1230,13 @@ function ValChAprob(){
 			$("#obsaprobada").removeAttr('disabled');
 			$("#obsaprobada").focus();
 		}else{
-			$("#fecaproba").val("");
+			var vrdis = $("#obsaprobada").attr("disabled");
+			if(vrdis != 'disabled'){
+				if($("#obsaprobada").val() != ""){
+					$("#obsaprobada").val("");
+					$("#fecaproba").val("");
+				}
+			}
 			$("#fecaproba").attr('disabled','disabled');
 			$("#obsaprobada").attr('disabled','disabled');
 		}		
@@ -1423,7 +1438,7 @@ function UpdInscripcion(){
 		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
 		data: {'ArrDatos':ArrDatos},
 		success: function(data){
-			swal(data[1], "", "success")
+			swal(data[1], data[2], "success")
 			.then((value) => {
 				location.href = '/tutoriaweb/public/incripciones';
 			});

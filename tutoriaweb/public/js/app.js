@@ -48995,7 +48995,7 @@ var render = function() {
                         _c("span", {
                           staticClass: "oi oi-spreadsheet",
                           attrs: {
-                            title: "Ediatr estado inscripción",
+                            title: "Editar estado inscripción",
                             "aria-hidden": "true"
                           }
                         })

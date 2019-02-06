@@ -119,7 +119,7 @@ class InscripcionController extends Controller
 							</tr>
 							<tr>
 								<td style="background:#fff;padding:45px" valign="top" width="740">
-									<h1 style="font-size:20pt;color:#000;font-family:Arial">Hola, '.strtoupper($responsable[0]->nomcomple).'!</h1>								
+									<h1 style="font-size:20pt;color:#000;font-family:Arial">Hola, señor(a) '.strtoupper($responsable[0]->nomcomple).'</h1>								
 									<p style="color:#5a5b5c;font-size:11pt;font-family:Arial;line-height:1.3">
 									Para nosotros como institución es grato que nos haya elegido, por tal motivo queremos invitarle a
 									una entrevista el dia: <strong>'.$fecomple.'</strong> para poder continuar con el proceso de inscripción
@@ -198,7 +198,7 @@ class InscripcionController extends Controller
 							</tr>
 							<tr>
 								<td style="background:#fff;padding:45px" valign="top" width="740">
-									<h1 style="font-size:20pt;color:#000;font-family:Arial">Hola, '.strtoupper($responsable[0]->nomcomple).'!</h1>								
+									<h1 style="font-size:20pt;color:#000;font-family:Arial">Hola, señor(a) '.strtoupper($responsable[0]->nomcomple).'</h1>								
 									<p style="color:#5a5b5c;font-size:11pt;font-family:Arial;line-height:1.3">
 									Para nosotros como institución es grato informarle que la inscripción de su '.$genero.', <strong>'.strtoupper($estudian[0]->nomcomple).'</strong>
 									ha sido aprobada, le invitamos a realizar el proceso de matrícula financiera y académica a través de

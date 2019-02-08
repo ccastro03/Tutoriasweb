@@ -12337,3 +12337,11 @@ input[type="radio"],
   max-height: 52px;
 }
 
+input[type='text'] {
+  text-transform: uppercase;
+}
+
+textarea {
+  text-transform: uppercase;
+}
+

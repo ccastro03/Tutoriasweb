@@ -27,7 +27,7 @@
 					<div class="columns">
 						<div class="column is-one-fifth">
 							<label class="label">Nombre</label>
-							<input type="text" name="name" id="nombre" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" >
+							<input type="text" name="name" id="nombre" onBlur="this.value=this.value.toUpperCase();" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" >
 							<p class="help is-danger" id="ErrNombre" hidden>Campo obligatorio *</p>
 						</div>
 
@@ -786,18 +786,18 @@
 			$("#ErrMailEstu").attr('hidden','hidden');
 		}
 		
-		var com = mailestu.search(".com");
-		if(com == -1){
+		var cadena = ".com";		
+		if(mailestu.toLowerCase().indexOf(cadena) == -1){
 			$("#ErrMailEstu").removeAttr('hidden');
 			$("#email").focus();
 			
-			var es = mailestu.search(".es");
-			if(es == -1){
+			var cadena = ".es";		
+			if(mailestu.toLowerCase().indexOf(cadena) == -1){
 				$("#ErrMailEstu").removeAttr('hidden');
 				$("#email").focus();
 				
-				var outlook = mailestu.search(".outlook");
-				if(outlook == -1){
+				var cadena = ".outlook";		
+				if(mailestu.toLowerCase().indexOf(cadena) == -1){
 					$("#ErrMailEstu").removeAttr('hidden');
 					$("#email").focus();
 				}else{
@@ -816,19 +816,39 @@
 	function ValEmailRes(){
 		var mailestu = $("#mailres").val();
 		var ext = mailestu.search("@");
+		
 		if(ext == -1){
 			$("#ErrMailRes").removeAttr('hidden');
 			$("#mailres").focus();
 		}else{
 			$("#ErrMailRes").attr('hidden','hidden');
-			var ext = mailestu.search(".com");
-			if(ext == -1){
+		}
+		
+		var cadena = ".com";		
+		if(mailestu.toLowerCase().indexOf(cadena) == -1){
+			$("#ErrMailRes").removeAttr('hidden');
+			$("#mailres").focus();
+			
+			var cadena = ".es";		
+			if(mailestu.toLowerCase().indexOf(cadena) == -1){
 				$("#ErrMailRes").removeAttr('hidden');
 				$("#mailres").focus();
+				
+				var cadena = ".outlook";		
+				if(mailestu.toLowerCase().indexOf(cadena) == -1){
+					$("#ErrMailRes").removeAttr('hidden');
+					$("#mailres").focus();
+				}else{
+					$("#ErrMailRes").attr('hidden','hidden');
+				}
+				
 			}else{
 				$("#ErrMailRes").attr('hidden','hidden');
-			}			
-		}
+			}				
+			
+		}else{
+			$("#ErrMailRes").attr('hidden','hidden');
+		}		
 	}
 
 	function ValEmailAcu(){
@@ -839,14 +859,33 @@
 			$("#mailacu").focus();
 		}else{
 			$("#ErrMailAcu").attr('hidden','hidden');
-			var ext = mailestu.search(".com");
-			if(ext == -1){
+		}
+
+		var cadena = ".com";		
+		if(mailestu.toLowerCase().indexOf(cadena) == -1){
+			$("#ErrMailAcu").removeAttr('hidden');
+			$("#mailacu").focus();
+			
+			var cadena = ".es";		
+			if(mailestu.toLowerCase().indexOf(cadena) == -1){
 				$("#ErrMailAcu").removeAttr('hidden');
 				$("#mailacu").focus();
+				
+				var cadena = ".outlook";		
+				if(mailestu.toLowerCase().indexOf(cadena) == -1){
+					$("#ErrMailAcu").removeAttr('hidden');
+					$("#mailacu").focus();
+				}else{
+					$("#ErrMailAcu").attr('hidden','hidden');
+				}
+				
 			}else{
 				$("#ErrMailAcu").attr('hidden','hidden');
-		}			
-		}
+			}				
+			
+		}else{
+			$("#ErrMailAcu").attr('hidden','hidden');
+		}		
 	}	
 </script>
 @endsection

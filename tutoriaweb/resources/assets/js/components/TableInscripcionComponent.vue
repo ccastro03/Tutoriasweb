@@ -23,7 +23,7 @@
         </thead>
         <tbody>
           <tr v-for="inscripcion in inscripciones" :key="inscripcion.codigo">
-			<td v-for="est in estu" v-if="est.numdocumento === inscripcion.numdocest">{{ est.nombre }} {{ est.apellido1 }} {{ est.apellido2 }}</td>
+			<td v-for="est in estu" v-if="est.numdocumento === inscripcion.numdocest">{{ est.nomcomple }}</td>
 			<td>{{ inscripcion.fechainscrip }}</td>
 			<td>{{ inscripcion.sede }}</td>
 			<td style="text-align: center;">{{ inscripcion.verificada }}</td>

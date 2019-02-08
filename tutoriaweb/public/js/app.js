@@ -48926,15 +48926,7 @@ var render = function() {
                 [
                   _vm._l(_vm.estu, function(est) {
                     return est.numdocumento === inscripcion.numdocest
-                      ? _c("td", [
-                          _vm._v(
-                            _vm._s(est.nombre) +
-                              " " +
-                              _vm._s(est.apellido1) +
-                              " " +
-                              _vm._s(est.apellido2)
-                          )
-                        ])
+                      ? _c("td", [_vm._v(_vm._s(est.nomcomple))])
                       : _vm._e()
                   }),
                   _vm._v(" "),

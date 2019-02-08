@@ -22,7 +22,7 @@
         <div class="columns">
 			<div class="column is-half">
 				<label for="nombre" class="label">Nombre</label>
-				<input type="text" name="nombre" class="input {{ $errors->has('nombre') ? ' is-danger' : '' }}" value="{{ old('name', $roles->name) }}">
+				<input type="text" name="nombre" class="input {{ $errors->has('nombre') ? ' is-danger' : '' }}" value="{{ old('name', $roles->name) }}" autofocus>
 				@if ($errors->has('nombre'))
 					<p class="help is-danger">{{ $errors->first('nombre') }}</p>
 				@endif

@@ -25,16 +25,28 @@ class InscripcionController extends Controller
     {	
 		$inscripciones = DB::table('inscripciones')->where('codigo', '=', $id)->get();
 		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $inscripciones[0]->numdocest)->get();
+		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $inscripciones[0]->numdocest)->where('cod_rol', '=', '04')->get();
 		$sedes = DB::table('sedes')->where('codigo', '=', $inscripciones[0]->sede)->get();
-		return view('admin.incripciones.show', ['inscripciones' => $inscripciones[0], 'estudiante' => $estudiante[0], 'sedes' => $sedes[0]]);
+		return view('admin.incripciones.show',[
+		'inscripciones' => $inscripciones[0],
+		'estudiante' => $estudiante[0],
+		'sedes' => $sedes[0],
+		'responsable' => $responsable[0]
+		]);
     }
 	
     public function edit($id)
     {	
 		$inscripciones = DB::table('inscripciones')->where('codigo', '=', $id)->get();
 		$estudiante = DB::table('estudiantes')->where('numdocumento', '=', $inscripciones[0]->numdocest)->get();
+		$responsable = DB::table('responsables')->where('cod_estudiante', '=', $inscripciones[0]->numdocest)->where('cod_rol', '=', '04')->get();
 		$sedes = DB::table('sedes')->get();
-		return view('admin.incripciones.edit', ['inscripciones' => $inscripciones[0], 'estudiante' => $estudiante[0], 'sedes' => $sedes]);
+		return view('admin.incripciones.edit',[
+		'inscripciones' => $inscripciones[0],
+		'estudiante' => $estudiante[0],
+		'sedes' => $sedes,
+		'responsable' => $responsable[0]
+		]);
     }
 	
     public function actualizar(Request $request)
@@ -255,6 +267,9 @@ class InscripcionController extends Controller
 						$estadores = "Aprobación enviada correctamente al responsable";
 					};
 				};
+				
+				$UpdUsrEst = DB::table('users')->where('name', '=', $estudian[0]->nomcomple)->update(['estado' => '1']);
+				$UpdUsrRes = DB::table('users')->where('name', '=', $responsable[0]->nomcomple)->update(['estado' => '1']);
 			}
 		};		
 		/* ************************ */
@@ -336,20 +351,20 @@ class InscripcionController extends Controller
 				$codigoEst = $codbdEst[0]->codigo_est + 1;
 			}
 			
-			$usuario = strtolower($ArrDatos['nombre'])."_".strtolower($ArrDatos['apellido1'])."@tw.com";
+			$usuario = strtoupper($ArrDatos['nombre']).strtoupper(substr($ArrDatos['apellido1'],0,1));
 			$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
 			
 			if($ExtUsu == true){
 				$usuario = "";
-				$usuario = strtolower($ArrDatos['nombre'])."_".strtolower($ArrDatos['apellido1'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
+				$usuario = strtoupper($ArrDatos['nombre']).strtoupper(substr($ArrDatos['apellido1'],0,1)).strtoupper(substr($ArrDatos['apellido2'],0,1));
 				$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
 				
 				if($ExtUsu2 == true){
-					$usuario = strtolower($ArrDatos['nombre'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
+					$usuario = strtoupper($ArrDatos['nombre']).strtoupper(substr($ArrDatos['apellido2'],0,1));
 					$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
 					
 					if($ExtUsu3 == true){
-						$usuario = strtolower($ArrDatos['nombre'])."_".substr(str_shuffle("0123456789"), 0, 4);
+						$usuario = strtoupper($ArrDatos['nombre'])."_".substr(str_shuffle("0123456789"), 0, 4);
 					}
 				}
 			}
@@ -359,9 +374,9 @@ class InscripcionController extends Controller
 			'tipodocumento' => $ArrDatos['tipdocu'],
 			'numdocumento' => $ArrDatos['numdocumento'],
 			'nombre' => $ArrDatos['nombre'],
-			'apellido1' => $ArrDatos['apellido1'],
-			'apellido2' => $ArrDatos['apellido2'],
-			'nomcomple' => strtolower($ArrDatos['nombre'])." ".strtolower($ArrDatos['apellido1'])." ".strtolower($ArrDatos['apellido2']),
+			'apellido1' => strtoupper($ArrDatos['apellido1']),
+			'apellido2' => strtoupper($ArrDatos['apellido2']),
+			'nomcomple' => strtoupper($ArrDatos['nombre'])." ".strtoupper($ArrDatos['apellido1'])." ".strtoupper($ArrDatos['apellido2']),
 			'direccion' => $ArrDatos['direccion'],
 			'barrio' => $ArrDatos['barrio'],
 			'numtelefono' => $ArrDatos['numfijo'],
@@ -398,7 +413,7 @@ class InscripcionController extends Controller
 			]);
 			
 			$user = DB::table('users')->insert([
-			'name' => strtolower($ArrDatos['nombre'])." ".strtolower($ArrDatos['apellido1'])." ".strtolower($ArrDatos['apellido2']),
+			'name' => strtoupper($ArrDatos['nombre'])." ".strtoupper($ArrDatos['apellido1'])." ".strtoupper($ArrDatos['apellido2']),
 			'email' => $usuario,
 			'password' => bcrypt('secret'),
 			'estado' => '0',
@@ -415,32 +430,32 @@ class InscripcionController extends Controller
 		$ArrDatos = $_GET["ArrDatos"];
 		$Exist = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['numdocumento'])->exists();
 		if($Exist == true){
-			$usuario = strtolower($ArrDatos['nombre'])."_".strtolower($ArrDatos['apellido1'])."@tw.com";
+			$usuario = strtoupper($ArrDatos['nombre']).strtoupper(substr($ArrDatos['apellido1'],0,1));
 			$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
 			
 			if($ExtUsu == true){
 				$usuario = "";
-				$usuario = strtolower($ArrDatos['nombre'])."_".strtolower($ArrDatos['apellido1'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
+				$usuario = strtoupper($ArrDatos['nombre']).strtoupper(substr($ArrDatos['apellido1'],0,1)).strtoupper(substr($ArrDatos['apellido2'],0,1));
 				$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
 				
 				if($ExtUsu2 == true){
-					$usuario = strtolower($ArrDatos['nombre'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
+					$usuario = strtoupper($ArrDatos['nombre']).strtoupper(substr($ArrDatos['apellido2'],0,1));
 					$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
 					
 					if($ExtUsu3 == true){
-						$usuario = strtolower($ArrDatos['nombre'])."_".substr(str_shuffle("0123456789"), 0, 4);
+						$usuario = strtoupper($ArrDatos['nombre'])."_".substr(str_shuffle("0123456789"), 0, 4);
 					}
 				}
-			}
+			}			
 			
 			$nom1 = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['numdocumento'])->get();
 			
 			$UdpEstu = DB::table('estudiantes')->where('numdocumento', '=', $ArrDatos['numdocumento'])->update([
 			'tipodocumento' => $ArrDatos['tipdocu'],
 			'nombre' => $ArrDatos['nombre'],
-			'apellido1' => $ArrDatos['apellido1'],
-			'apellido2' => $ArrDatos['apellido2'],
-			'nomcomple' => strtolower($ArrDatos['nombre'])." ".strtolower($ArrDatos['apellido1'])." ".strtolower($ArrDatos['apellido2']),
+			'apellido1' => strtoupper($ArrDatos['apellido1']),
+			'apellido2' => strtoupper($ArrDatos['apellido2']),
+			'nomcomple' => strtoupper($ArrDatos['nombre'])." ".strtoupper($ArrDatos['apellido1'])." ".strtoupper($ArrDatos['apellido2']),
 			'direccion' => $ArrDatos['direccion'],
 			'barrio' => $ArrDatos['barrio'],
 			'numtelefono' => $ArrDatos['numfijo'],
@@ -474,9 +489,9 @@ class InscripcionController extends Controller
 			'cod_usuario' => $usuario,
 			]);
 			
-			$nombre = strtolower($nom1[0]->nombre)." ".strtolower($nom1[0]->apellido1)." ".strtolower($nom1[0]->apellido2);
+			$nombre = strtoupper($nom1[0]->nombre)." ".strtoupper($nom1[0]->apellido1)." ".strtoupper($nom1[0]->apellido2);
 			$udpUser = DB::table('users')->where('name', '=', $nombre)->update([
-				'name' => strtolower($ArrDatos['nombre'])." ".strtolower($ArrDatos['apellido1'])." ".strtolower($ArrDatos['apellido2']),
+				'name' => strtoupper($ArrDatos['nombre'])." ".strtoupper($ArrDatos['apellido1'])." ".strtoupper($ArrDatos['apellido2']),
 				'email' => $usuario,
 			]);			
 			
@@ -493,32 +508,31 @@ class InscripcionController extends Controller
 			$Respuesta = array("0", "El responsable con numero de documento ".$ArrDatos['numdocures'].",ya existe, ¿Desea actualizar la informaciòn?");			
 			return response()->json($Respuesta);
 		}else{		
-		
-			$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."@tw.com";
+			$usuario = strtoupper($ArrDatos['nomres']).strtoupper(substr($ArrDatos['apelres1'],0,1));
 			$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
 			
 			if($ExtUsu == true){
 				$usuario = "";
-				$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."_".strtolower($ArrDatos['apelres2'])."@tw.com";
+				$usuario = strtoupper($ArrDatos['nomres']).strtoupper(substr($ArrDatos['apelres1'],0,1)).strtoupper(substr($ArrDatos['apelres2'],0,1));
 				$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
 				
 				if($ExtUsu2 == true){
-					$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
+					$usuario = strtoupper($ArrDatos['nomres']).strtoupper(substr($ArrDatos['apelres2'],0,1));
 					$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
 					
 					if($ExtUsu3 == true){
-						$usuario = strtolower($ArrDatos['nomres'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
+						$usuario = strtoupper($ArrDatos['nomres'])."_".substr(str_shuffle("0123456789"), 0, 4);
 					}
 				}
-			}
+			}			
 			
 			$responsable = DB::table('responsables')->insert([
 			'tipodocumento' => $ArrDatos['tipdocures'],
 			'numdocumento' => $ArrDatos['numdocures'],
-			'nombre' => $ArrDatos['nomres'],
-			'apellido1' => $ArrDatos['apelres1'],
-			'apellido2' => $ArrDatos['apelres2'],
-			'nomcomple' => strtolower($ArrDatos['nomres'])." ".strtolower($ArrDatos['apelres1'])." ".strtolower($ArrDatos['apelres2']),
+			'nombre' => strtoupper($ArrDatos['nomres']),
+			'apellido1' => strtoupper($ArrDatos['apelres1']),
+			'apellido2' => strtoupper($ArrDatos['apelres2']),
+			'nomcomple' => strtoupper($ArrDatos['nomres'])." ".strtoupper($ArrDatos['apelres1'])." ".strtoupper($ArrDatos['apelres2']),
 			'cod_pais_nace' => $ArrDatos['painaceres'],			
 			'cod_estcivi' => $ArrDatos['tipestciv'],
 			'direccion' => $ArrDatos['direcres'],
@@ -540,7 +554,7 @@ class InscripcionController extends Controller
 			]);
 			
 			$user = DB::table('users')->insert([
-			'name' => strtolower($ArrDatos['nomres'])." ".strtolower($ArrDatos['apelres1'])." ".strtolower($ArrDatos['apelres2']),
+			'name' => strtoupper($ArrDatos['nomres'])." ".strtoupper($ArrDatos['apelres1'])." ".strtoupper($ArrDatos['apelres2']),
 			'email' => $usuario,
 			'password' => bcrypt('secret'),
 			'estado' => '0',
@@ -556,32 +570,32 @@ class InscripcionController extends Controller
 		$ArrDatos = $_GET["ArrDatos"];
 		$Exist = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocures'])->exists();
 		if($Exist == true){
-			$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."@tw.com";
+			$usuario = strtoupper($ArrDatos['nomres']).strtoupper(substr($ArrDatos['apelres1'],0,1));
 			$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
 			
 			if($ExtUsu == true){
 				$usuario = "";
-				$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apelres1'])."_".strtolower($ArrDatos['apelres2'])."@tw.com";
+				$usuario = strtoupper($ArrDatos['nomres']).strtoupper(substr($ArrDatos['apelres1'],0,1)).strtoupper(substr($ArrDatos['apelres2'],0,1));
 				$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
 				
 				if($ExtUsu2 == true){
-					$usuario = strtolower($ArrDatos['nomres'])."_".strtolower($ArrDatos['apellido2'])."@tw.com";
+					$usuario = strtoupper($ArrDatos['nomres']).strtoupper(substr($ArrDatos['apelres2'],0,1));
 					$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
 					
 					if($ExtUsu3 == true){
-						$usuario = strtolower($ArrDatos['nomres'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
+						$usuario = strtoupper($ArrDatos['nomres'])."_".substr(str_shuffle("0123456789"), 0, 4);
 					}
 				}
-			}
+			}			
 			
 			$nom1 = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocures'])->get();
 			
 			$UdpEstu = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocures'])->update([
 				'tipodocumento' => $ArrDatos['tipdocures'],
-				'nombre' => $ArrDatos['nomres'],
-				'apellido1' => $ArrDatos['apelres1'],
-				'apellido2' => $ArrDatos['apelres2'],
-				'nomcomple' => strtolower($ArrDatos['nomres'])." ".strtolower($ArrDatos['apelres1'])." ".strtolower($ArrDatos['apelres2']),
+				'nombre' => strtoupper($ArrDatos['nomres']),
+				'apellido1' => strtoupper($ArrDatos['apelres1']),
+				'apellido2' => strtoupper($ArrDatos['apelres2']),
+				'nomcomple' => strtoupper($ArrDatos['nomres'])." ".strtoupper($ArrDatos['apelres1'])." ".strtoupper($ArrDatos['apelres2']),
 				'cod_pais_nace' => $ArrDatos['painaceres'],			
 				'cod_estcivi' => $ArrDatos['tipestciv'],
 				'direccion' => $ArrDatos['direcres'],
@@ -600,9 +614,9 @@ class InscripcionController extends Controller
 				'otra_especialidad' => $ArrDatos['otesperes']
 			]);
 			
-			$nombre = strtolower($nom1[0]->nombre)." ".strtolower($nom1[0]->apellido1)." ".strtolower($nom1[0]->apellido2);
+			$nombre = strtoupper($nom1[0]->nombre)." ".strtoupper($nom1[0]->apellido1)." ".strtoupper($nom1[0]->apellido2);
 			$udpUser = DB::table('users')->where('name', '=', $nombre)->update([
-				'name' => strtolower($ArrDatos['nomres'])." ".strtolower($ArrDatos['apelres1'])." ".strtolower($ArrDatos['apelres2']),
+				'name' => strtoupper($ArrDatos['nomres'])." ".strtoupper($ArrDatos['apelres1'])." ".strtoupper($ArrDatos['apelres2']),
 				'email' => $usuario,
 			]);			
 			
@@ -620,31 +634,31 @@ class InscripcionController extends Controller
 			$Respuesta = array("0", "El acudiente con numero de documento ".$ArrDatos['numdocuacu'].",ya existe, ¿Desea actualizar la informaciòn?");			
 			return response()->json($Respuesta);
 		}else{		
-			$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."@tw.com";
+			$usuario = strtoupper($ArrDatos['nomacu']).strtoupper(substr($ArrDatos['apelacu1'],0,1));
 			$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
 			
 			if($ExtUsu == true){
 				$usuario = "";
-				$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
+				$usuario = strtoupper($ArrDatos['nomacu']).strtoupper(substr($ArrDatos['apelacu1'],0,1)).strtoupper(substr($ArrDatos['apelacu2'],0,1));
 				$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
 				
 				if($ExtUsu2 == true){
-					$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
+					$usuario = strtoupper($ArrDatos['nomacu']).strtoupper(substr($ArrDatos['apelacu2'],0,1));
 					$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
 					
 					if($ExtUsu3 == true){
-						$usuario = strtolower($ArrDatos['nomacu'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
+						$usuario = strtoupper($ArrDatos['nomacu'])."_".substr(str_shuffle("0123456789"), 0, 4);
 					}
 				}
-			}
+			}			
 			
 			$acudiente = DB::table('responsables')->insert([
 			'tipodocumento' => $ArrDatos['tipdocuacu'],
 			'numdocumento' => $ArrDatos['numdocuacu'],
-			'nombre' => $ArrDatos['nomacu'],
-			'apellido1' => $ArrDatos['apelacu1'],
-			'apellido2' => $ArrDatos['apelacu2'],
-			'nomcomple' => strtolower($ArrDatos['nomacu'])." ".strtolower($ArrDatos['apelacu1'])." ".strtolower($ArrDatos['apelacu2']),
+			'nombre' => strtoupper($ArrDatos['nomacu']),
+			'apellido1' => strtoupper($ArrDatos['apelacu1']),
+			'apellido2' => strtoupper($ArrDatos['apelacu2']),
+			'nomcomple' => strtoupper($ArrDatos['nomacu'])." ".strtoupper($ArrDatos['apelacu1'])." ".strtoupper($ArrDatos['apelacu2']),
 			'cod_pais_nace' => $ArrDatos['painaceacu'],			
 			'cod_estcivi' => $ArrDatos['tipestciv'],
 			'direccion' => $ArrDatos['direcacu'],
@@ -666,7 +680,7 @@ class InscripcionController extends Controller
 			]);
 			
 			$user = DB::table('users')->insert([
-			'name' => strtolower($ArrDatos['nomacu'])." ".strtolower($ArrDatos['apelacu1'])." ".strtolower($ArrDatos['apelacu2']),
+			'name' => strtoupper($ArrDatos['nomacu'])." ".strtoupper($ArrDatos['apelacu1'])." ".strtoupper($ArrDatos['apelacu2']),
 			'email' => $usuario,
 			'password' => bcrypt('secret'),
 			'estado' => '0',
@@ -683,20 +697,20 @@ class InscripcionController extends Controller
 		$ArrDatos = $_GET["ArrDatos"];
 		$Exist = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocuacu'])->exists();
 		if($Exist == true){
-			$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."@tw.com";
+			$usuario = strtoupper($ArrDatos['nomacu']).strtoupper(substr($ArrDatos['apelacu1'],0,1));
 			$ExtUsu = DB::table('users')->where('email', '=', $usuario)->exists();
 			
 			if($ExtUsu == true){
 				$usuario = "";
-				$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu1'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
+				$usuario = strtoupper($ArrDatos['nomacu']).strtoupper(substr($ArrDatos['apelacu1'],0,1)).strtoupper(substr($ArrDatos['apelacu2'],0,1));
 				$ExtUsu2 = DB::table('users')->where('email', '=', $usuario)->exists();
 				
 				if($ExtUsu2 == true){
-					$usuario = strtolower($ArrDatos['nomacu'])."_".strtolower($ArrDatos['apelacu2'])."@tw.com";
+					$usuario = strtoupper($ArrDatos['nomacu']).strtoupper(substr($ArrDatos['apelacu2'],0,1));
 					$ExtUsu3 = DB::table('users')->where('email', '=', $usuario)->exists();
 					
 					if($ExtUsu3 == true){
-						$usuario = strtolower($ArrDatos['nomacu'])."_".substr(str_shuffle("0123456789"), 0, 4)."@tw.com";
+						$usuario = strtoupper($ArrDatos['nomacu'])."_".substr(str_shuffle("0123456789"), 0, 4);
 					}
 				}
 			}
@@ -705,10 +719,10 @@ class InscripcionController extends Controller
 			
 			$UdpEstu = DB::table('responsables')->where('numdocumento', '=', $ArrDatos['numdocuacu'])->update([
 				'tipodocumento' => $ArrDatos['tipdocuacu'],
-				'nombre' => $ArrDatos['nomacu'],
-				'apellido1' => $ArrDatos['apelacu1'],
-				'apellido2' => $ArrDatos['apelacu2'],
-				'nomcomple' => strtolower($ArrDatos['nomacu'])." ".strtolower($ArrDatos['apelacu1'])." ".strtolower($ArrDatos['apelacu2']),
+				'nombre' => strtoupper($ArrDatos['nomacu']),
+				'apellido1' => strtoupper($ArrDatos['apelacu1']),
+				'apellido2' => strtoupper($ArrDatos['apelacu2']),
+				'nomcomple' => strtoupper($ArrDatos['nomacu'])." ".strtoupper($ArrDatos['apelacu1'])." ".strtoupper($ArrDatos['apelacu2']),
 				'cod_pais_nace' => $ArrDatos['painaceacu'],			
 				'cod_estcivi' => $ArrDatos['tipestciv'],
 				'direccion' => $ArrDatos['direcacu'],
@@ -727,9 +741,9 @@ class InscripcionController extends Controller
 				'otra_especialidad' => $ArrDatos['otespeacu']
 			]);
 			
-			$nombre = strtolower($nom1[0]->nombre)." ".strtolower($nom1[0]->apellido1)." ".strtolower($nom1[0]->apellido2);
+			$nombre = strtoupper($nom1[0]->nombre)." ".strtoupper($nom1[0]->apellido1)." ".strtoupper($nom1[0]->apellido2);
 			$udpUser = DB::table('users')->where('name', '=', $nombre)->update([
-				'name' => strtolower($ArrDatos['nomacu'])." ".strtolower($ArrDatos['apelacu1'])." ".strtolower($ArrDatos['apelacu2']),
+				'name' => strtoupper($ArrDatos['nomacu'])." ".strtoupper($ArrDatos['apelacu1'])." ".strtoupper($ArrDatos['apelacu2']),
 				'email' => $usuario,
 			]);			
 			

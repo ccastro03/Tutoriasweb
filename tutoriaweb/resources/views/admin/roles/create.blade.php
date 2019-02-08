@@ -3,7 +3,7 @@
 @section('content')
 <div class="column is-12">
   <div class="panel">
-    <p class="panel-heading">Creación de roles</p>
+    <p class="panel-heading">Creación de <b>roles</b></p>
     <div class="panel-block">
       <form class="long-form" action="{{ url('roles') }}" method="post">
         @csrf
@@ -20,7 +20,7 @@
         <div class="columns">
 			<div class="column">
 				<label for="codigo" class="label">Codigo</label>
-				<input type="text" name="codigo" id="codigo" class="input {{ $errors->has('codigo') ? ' is-danger' : '' }}" value="{{ old('codigo') }}" placeholder="Ingrese el codigo">
+				<input type="text" name="codigo" id="codigo" autofocus class="input {{ $errors->has('codigo') ? ' is-danger' : '' }}" value="{{ old('codigo') }}" placeholder="Ingrese el codigo">
 				@if ($errors->has('codigo'))
 					<p class="help is-danger">{{ $errors->first('codigo') }}</p>
 				@endif
@@ -52,5 +52,5 @@
       </form>      
     </div>   
   </div>
-</div>  
+</div>
 @endsection

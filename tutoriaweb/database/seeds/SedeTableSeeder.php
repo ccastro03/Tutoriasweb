@@ -32,6 +32,11 @@ class SedesTableSeeder extends Seeder
         $sedes = new Sedes();
         $sedes->codigo = '04';
         $sedes->nombre = 'Occidente';
-        $sedes->save();		
+        $sedes->save();
+		
+        $sedes = new Sedes();
+        $sedes->codigo = '05';
+        $sedes->nombre = 'Única';
+        $sedes->save();			
     }
 }

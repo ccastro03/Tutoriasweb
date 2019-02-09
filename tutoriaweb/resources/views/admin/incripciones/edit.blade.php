@@ -31,7 +31,7 @@
 									@else
 										<option value="{{ $sede->codigo }}">{{ strtoupper($sede->nombre) }}</option>
 									@endif
-								@endforeach							
+								@endforeach
 							</select>
 						</div>
 						<p class="help is-danger" id="ErrSede" hidden>Campo obligatorio *</p>
@@ -99,6 +99,7 @@
         
 			<div class="panel-block">
 				<a class="button is-link is-medium is-outlined" onclick="UpdInscripcion()">Guardar</a>
+				&nbsp;
 				<a href="{{ url('incripciones') }}" class="button is-medium is-link is-outlined">Salir</a>
 			</div>
 			</form>      

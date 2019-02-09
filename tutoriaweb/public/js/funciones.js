@@ -11,6 +11,8 @@ $(function() {
 	$("#obscitacion").attr('disabled','disabled');
 	$("#chaprob").attr('disabled','disabled');
 	$("#obsaprobada").attr('disabled','disabled');
+	$("#chverif").attr('disabled','disabled');
+	$("#fecverif").attr('disabled','disabled');	
 	
 	$("#otproferes").attr('disabled','disabled');
 	$("#otesperes").attr('disabled','disabled');
@@ -26,6 +28,10 @@ $(function() {
 	if($("#chcita").is(':checked') == true){ 
 		$("#chaprob").removeAttr('disabled');
 	}
+	
+	if($("#chpago").is(':checked') == true){ 
+		$("#chverif").removeAttr('disabled');
+	}	
 
 	/* ESTUDIANTE */
 	var numdocu = document.getElementById("numdocu");
@@ -1012,46 +1018,48 @@ function GuardarAcudiente(){
 		"codigoest":codigoest
 	};
 	
-	$.ajax({
-		url: "/tutoriaweb/public/incripciones/validarAcudiente",
-		dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
-		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-		data: {'ArrDatos':ArrDatos},
-		success: function(data){
-			if(data[0] == 0){
-				swal(data[1], "", "warning");
-				$('.swal-button--confirm').click(function(){
-					$.ajax({
-						url: "/tutoriaweb/public/incripciones/actualizarAcudiente",
-						dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
-						method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-						data: {'ArrDatos':ArrDatos},
-						success: function(data){
-							$("#numdocuacu").attr('disabled','disabled');
-							$("#usracu").val(data[2]);
-							
-							swal(data[1], "", "success");
-							$('.swal-button--confirm').click(function(){
-								$("#nomacu").focus();
+	if(numdocuacu != ""){
+		$.ajax({
+			url: "/tutoriaweb/public/incripciones/validarAcudiente",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'ArrDatos':ArrDatos},
+			success: function(data){
+				if(data[0] == 0){
+					swal(data[1], "", "warning");
+					$('.swal-button--confirm').click(function(){
+						$.ajax({
+							url: "/tutoriaweb/public/incripciones/actualizarAcudiente",
+							dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+							method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+							data: {'ArrDatos':ArrDatos},
+							success: function(data){
 								$("#numdocuacu").attr('disabled','disabled');
-								$("#usracu").val(data[2]);								
-							});
-						}
-					});
-				});				
-			}else if(data[0] == true){					
-				$("#numdocuacu").attr('disabled','disabled');
-				$("#usracu").val(data[2]);
-				
-				swal(data[1], "", "success");
-				$('.swal-button--confirm').click(function(){
-					$("#nomacu").focus();
+								$("#usracu").val(data[2]);
+								
+								swal(data[1], "", "success");
+								$('.swal-button--confirm').click(function(){
+									$("#nomacu").focus();
+									$("#numdocuacu").attr('disabled','disabled');
+									$("#usracu").val(data[2]);								
+								});
+							}
+						});
+					});				
+				}else if(data[0] == true){					
 					$("#numdocuacu").attr('disabled','disabled');
-					$("#usracu").val(data[2]);					
-				});					
+					$("#usracu").val(data[2]);
+					
+					swal(data[1], "", "success");
+					$('.swal-button--confirm').click(function(){
+						$("#nomacu").focus();
+						$("#numdocuacu").attr('disabled','disabled');
+						$("#usracu").val(data[2]);					
+					});					
+				}
 			}
-		}
-	});	
+		});	
+	}
 };
 
 function DevolverCambios(){
@@ -1315,135 +1323,139 @@ function UpdInscripcion(){
 		var chpago = "N";
 	};
 	
-	var fecpago = new Date($("#fecpago").val());
-	var fecverif = new Date($("#fecverif").val());
-	var feccita = new Date($("#feccita").val());
-	var fecaproba = new Date($("#fecaproba").val());
-	
-	/* Fecha pago */
-	var PagDia = fecpago.getDate()+1;
-	var PagMes = fecpago.getMonth()+1;
-	var PagYear = fecpago.getFullYear();
-	if(PagDia < 10){
-		PagDia = '0'+PagDia;	
-	}
-	if(PagDia == 32){
-		PagDia = '01';
-		PagYear = fecpago.getFullYear()+1;
-		if(PagMes == 12){
-			PagMes = '1';
-		}
-	}
-	if(PagMes < 10){
-		PagMes = '0'+PagMes;
-	}	
-	var fecha_pago = PagYear+"/"+PagMes+"/"+PagDia;
-	/* **************** */
-	
-	/* Fecha verificacion */
-	var VerDia = fecverif.getDate()+1;
-	var VerMes = fecverif.getMonth()+1;
-	var VerYear = fecverif.getFullYear();
-	if(VerDia < 10){
-		VerDia = '0'+VerDia;	
-	}
-	if(VerDia == 32){
-		VerDia = '01';
-		VerYear = fecverif.getFullYear()+1;
-		if(VerMes == 12){
-			VerMes = '1';
-		}
-	}
-	if(VerMes < 10){
-		VerMes = '0'+VerMes;
-	}	
-	var fecha_ver = VerYear+"/"+VerMes+"/"+VerDia;
-	/* **************** */	
-	
-	/* Fecha citacion */
-	var CitDia = feccita.getDate()+1;
-	var CitMes = feccita.getMonth()+1;
-	var CitYear = feccita.getFullYear();
-	if(CitDia < 10){
-		CitDia = '0'+CitDia;	
-	}
-	if(CitDia == 32){
-		CitDia = '01';
-		CitYear = feccita.getFullYear()+1;
-		if(CitMes == 12){
-			CitMes = '1';
-		}
-	}
-	if(CitMes < 10){
-		CitMes = '0'+CitMes;
-	}	
-	var fecha_cit = CitYear+"/"+CitMes+"/"+CitDia;
-	/* **************** */	
-	
-	/* Fecha aprobacion */
-	var AprDia = fecaproba.getDate()+1;
-	var AprMes = fecaproba.getMonth()+1;
-	var AprYear = fecaproba.getFullYear();
-	if(AprDia < 10){
-		AprDia = '0'+AprDia;	
-	}
-	if(AprDia == 32){
-		AprDia = '01';
-		AprYear = fecaproba.getFullYear()+1;
-		if(AprMes == 12){
-			AprMes = '1';
-		}
-	}
-	if(AprMes < 10){
-		AprMes = '0'+AprMes;
-	}	
-	var fecha_apr = AprYear+"/"+AprMes+"/"+AprDia;
-	/* **************** */	
-	
-	if (fecha_pago == "NaN/NaN/NaN"){
-		fecha_pago = "0001-01-01";
-	}
-	
-	if (fecha_ver == "NaN/NaN/NaN"){
-		fecha_ver = "0001-01-01";
-	}
-
-	if (fecha_cit == "NaN/NaN/NaN"){
-		fecha_cit = "0001-01-01";
-	}
-
-	if (fecha_apr == "NaN/NaN/NaN"){
-		fecha_apr = "0001-01-01";
-	}	
+	if(chpago == "N"){
+		swal("El pago de la inscripción no se ha efectuado, por tal motivo no puedes continuar", "", "error");
+	}else{
+		var fecpago = new Date($("#fecpago").val());
+		var fecverif = new Date($("#fecverif").val());
+		var feccita = new Date($("#feccita").val());
+		var fecaproba = new Date($("#fecaproba").val());
 		
-	var ArrDatos = {
-		"codInscrip":codInscrip,
-		"codsede":codsede,
-		"obscitacion":obscitacion,
-		"obsaprobada":obsaprobada,
-		"chverif":chverif,
-		"chcita":chcita,
-		"chaprob":chaprob,
-		"codEstud":codEstud,
-		"chpago":chpago,
-		"fecpago":fecha_pago,
-		"fecverif":fecha_ver,
-		"feccita":fecha_cit,
-		"fecaproba":fecha_apr,
-	};	
-	
-	$.ajax({
-		url: "/tutoriaweb/public/incripciones/actualizar",
-		dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
-		method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
-		data: {'ArrDatos':ArrDatos},
-		success: function(data){
-			swal(data[1], data[2], "success")
-			.then((value) => {
-				location.href = '/tutoriaweb/public/incripciones';
-			});
+		/* Fecha pago */
+		var PagDia = fecpago.getDate()+1;
+		var PagMes = fecpago.getMonth()+1;
+		var PagYear = fecpago.getFullYear();
+		if(PagDia < 10){
+			PagDia = '0'+PagDia;	
 		}
-	});	
+		if(PagDia == 32){
+			PagDia = '01';
+			PagYear = fecpago.getFullYear()+1;
+			if(PagMes == 12){
+				PagMes = '1';
+			}
+		}
+		if(PagMes < 10){
+			PagMes = '0'+PagMes;
+		}	
+		var fecha_pago = PagYear+"/"+PagMes+"/"+PagDia;
+		/* **************** */
+		
+		/* Fecha verificacion */
+		var VerDia = fecverif.getDate()+1;
+		var VerMes = fecverif.getMonth()+1;
+		var VerYear = fecverif.getFullYear();
+		if(VerDia < 10){
+			VerDia = '0'+VerDia;	
+		}
+		if(VerDia == 32){
+			VerDia = '01';
+			VerYear = fecverif.getFullYear()+1;
+			if(VerMes == 12){
+				VerMes = '1';
+			}
+		}
+		if(VerMes < 10){
+			VerMes = '0'+VerMes;
+		}	
+		var fecha_ver = VerYear+"/"+VerMes+"/"+VerDia;
+		/* **************** */	
+		
+		/* Fecha citacion */
+		var CitDia = feccita.getDate()+1;
+		var CitMes = feccita.getMonth()+1;
+		var CitYear = feccita.getFullYear();
+		if(CitDia < 10){
+			CitDia = '0'+CitDia;	
+		}
+		if(CitDia == 32){
+			CitDia = '01';
+			CitYear = feccita.getFullYear()+1;
+			if(CitMes == 12){
+				CitMes = '1';
+			}
+		}
+		if(CitMes < 10){
+			CitMes = '0'+CitMes;
+		}	
+		var fecha_cit = CitYear+"/"+CitMes+"/"+CitDia;
+		/* **************** */	
+		
+		/* Fecha aprobacion */
+		var AprDia = fecaproba.getDate()+1;
+		var AprMes = fecaproba.getMonth()+1;
+		var AprYear = fecaproba.getFullYear();
+		if(AprDia < 10){
+			AprDia = '0'+AprDia;	
+		}
+		if(AprDia == 32){
+			AprDia = '01';
+			AprYear = fecaproba.getFullYear()+1;
+			if(AprMes == 12){
+				AprMes = '1';
+			}
+		}
+		if(AprMes < 10){
+			AprMes = '0'+AprMes;
+		}	
+		var fecha_apr = AprYear+"/"+AprMes+"/"+AprDia;
+		/* **************** */	
+		
+		if (fecha_pago == "NaN/NaN/NaN"){
+			fecha_pago = "0001-01-01";
+		}
+		
+		if (fecha_ver == "NaN/NaN/NaN"){
+			fecha_ver = "0001-01-01";
+		}
+
+		if (fecha_cit == "NaN/NaN/NaN"){
+			fecha_cit = "0001-01-01";
+		}
+
+		if (fecha_apr == "NaN/NaN/NaN"){
+			fecha_apr = "0001-01-01";
+		}	
+			
+		var ArrDatos = {
+			"codInscrip":codInscrip,
+			"codsede":codsede,
+			"obscitacion":obscitacion,
+			"obsaprobada":obsaprobada,
+			"chverif":chverif,
+			"chcita":chcita,
+			"chaprob":chaprob,
+			"codEstud":codEstud,
+			"chpago":chpago,
+			"fecpago":fecha_pago,
+			"fecverif":fecha_ver,
+			"feccita":fecha_cit,
+			"fecaproba":fecha_apr,
+		};	
+		
+		$.ajax({
+			url: "/tutoriaweb/public/incripciones/actualizar",
+			dataType:'json',  // tipo de datos que te envia el archivo que se ejecuto                              
+			method: "GET", // metodo por el cual vas a enviar los parametros GET o POST
+			data: {'ArrDatos':ArrDatos},
+			success: function(data){
+				swal(data[1], data[2], "success")
+				.then((value) => {
+					location.href = '/tutoriaweb/public/incripciones';
+				});
+			}
+		});
+	}
 };
 
 function TerminarInscripcion(){

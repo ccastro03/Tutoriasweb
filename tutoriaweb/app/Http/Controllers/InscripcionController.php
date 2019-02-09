@@ -138,7 +138,7 @@ class InscripcionController extends Controller
 									de su hijo <strong>'.strtoupper($estudian[0]->nomcomple).'</strong></p>
 									
 									<p style="color:#5a5b5c;font-size:10pt;font-family:Arial;line-height:1.3">
-									Nota: tenga en cuenta la siguiente observación <strong>'.$ArrDatos["obscitacion"].'</strong>
+									Nota: <strong>'.$ArrDatos["obscitacion"].'</strong>
 									</p>
 								</td>
 							</tr>
@@ -182,6 +182,8 @@ class InscripcionController extends Controller
 					};
 				};
 			}
+		}else{
+			$estadores = "";			
 		};
 		
 		if($ArrDatos['chaprob'] == "S" && $ArrDatos['obsaprobada'] != ""){
@@ -224,7 +226,7 @@ class InscripcionController extends Controller
 									</p>									
 									
 									<p style="color:#5a5b5c;font-size:10pt;font-family:Arial;line-height:1.3">
-									Nota: tenga en cuenta la siguiente observación <strong>'.$ArrDatos["obsaprobada"].'</strong>
+									Nota: <strong>'.$ArrDatos["obsaprobada"].'</strong>
 									</p>
 								</td>
 							</tr>
@@ -271,7 +273,9 @@ class InscripcionController extends Controller
 				$UpdUsrEst = DB::table('users')->where('name', '=', $estudian[0]->nomcomple)->update(['estado' => '1']);
 				$UpdUsrRes = DB::table('users')->where('name', '=', $responsable[0]->nomcomple)->update(['estado' => '1']);
 			}
-		};		
+		}else{
+			$estadores = "";			
+		};
 		/* ************************ */
 		
 		$Respuesta = array($inscrip,"Inscripción actualizada correctamente", $estadores);

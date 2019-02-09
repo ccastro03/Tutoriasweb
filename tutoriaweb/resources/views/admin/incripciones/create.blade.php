@@ -330,7 +330,7 @@
 						</div>						
 						
 						<div class="column is-two-thirds" style="width: 502px">
-							<p align="left" class="help is-info">&nbsp;&nbsp;&nbsp;&nbsp;Explica brevemente porqué el estudiante sale del colegio anterior y desea ingresar a &nbsp;&nbsp;&nbsp;&nbsp;nuestra institución. *</p>
+							<p align="left" class="help is-info">&nbsp;&nbsp;&nbsp;&nbsp;Explique brevemente porqué el estudiante sale del colegio anterior y desea ingresar a &nbsp;&nbsp;&nbsp;&nbsp;nuestra institución. *</p>
 							<textarea class="textarea has-fixed-size" id="obsporque"></textarea>
 							<p class="help is-danger" id="Errobsporque" hidden>Campo obligatorio *</p>
 						</div>						

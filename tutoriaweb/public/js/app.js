@@ -49259,12 +49259,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -49422,33 +49416,13 @@ var render = function() {
                 [
                   _vm._l(_vm.estu, function(est) {
                     return est.numdocumento === inscripcion.numdocest
-                      ? _c("td", [
-                          _vm._v(
-                            _vm._s(est.nombre) +
-                              " " +
-                              _vm._s(est.apellido1) +
-                              " " +
-                              _vm._s(est.apellido2)
-                          )
-                        ])
+                      ? _c("td", [_vm._v(_vm._s(est.nomcomple))])
                       : _vm._e()
                   }),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(inscripcion.fechainscrip))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(inscripcion.sede))]),
-                  _vm._v(" "),
-                  _c("td", { staticStyle: { "text-align": "center" } }, [
-                    _vm._v(_vm._s(inscripcion.verificada))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticStyle: { "text-align": "center" } }, [
-                    _vm._v(_vm._s(inscripcion.citacion))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticStyle: { "text-align": "center" } }, [
-                    _vm._v(_vm._s(inscripcion.aprobada))
-                  ]),
                   _vm._v(" "),
                   _c("td", { staticStyle: { "text-align": "center" } }, [
                     _vm._v(_vm._s(inscripcion.pago))
@@ -49575,12 +49549,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Sede")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Verificada")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Citación")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprobada")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Pago")])
       ])

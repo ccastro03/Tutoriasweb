@@ -43,13 +43,4 @@
 		</div>
 	</div>	
 </div>
-<script>
-	// $(document).ready(function(){
-		// setInterval(loadInscripciones,5000);
-	// });
-
-	// function loadInscripciones(){
-		// $("#appPrueba").load("/incripciones/obtenerlistadoinscripciones");
-	// }
-</script>
 @endsection

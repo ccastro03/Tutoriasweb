@@ -14,20 +14,14 @@
 			<th scope="col">Estudiante</th>
             <th scope="col">Fecha</th>
 			<th scope="col">Sede</th>
-			<th scope="col">Verificada</th>
-			<th scope="col">Citación</th>
-			<th scope="col">Aprobada</th>
 			<th scope="col">Pago</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="inscripcion in inscripciones" :key="inscripcion.codigo">
-            <td v-for="est in estu" v-if="est.numdocumento === inscripcion.numdocest">{{ est.nombre }} {{ est.apellido1 }} {{ est.apellido2 }}</td>
+            <td v-for="est in estu" v-if="est.numdocumento === inscripcion.numdocest">{{ est.nomcomple }}</td>
 			<td>{{ inscripcion.fechainscrip }}</td>
 			<td>{{ inscripcion.sede }}</td>
-			<td style="text-align: center;">{{ inscripcion.verificada }}</td>
-			<td style="text-align: center;">{{ inscripcion.citacion }}</td>
-			<td style="text-align: center;">{{ inscripcion.aprobada }}</td>
 			<td style="text-align: center;">{{ inscripcion.pago }}</td>
 
             <td style="text-align: right;">

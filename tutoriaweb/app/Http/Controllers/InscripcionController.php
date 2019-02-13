@@ -145,7 +145,7 @@ class InscripcionController extends Controller
 							<tr>
 								<td valign="top">
 									<p style="font-family:Arial;font-size:9pt;color:#5a5b5c;text-align:center;padding:10px 0px">
-										Copyright@2019 <strong><a href="http://www.informaticaldia.com/tutoriaweb/public/login">INFORMÁTICA AL D&A</a></strong> todos los derechos reservados</p>
+										Copyright@2019 <strong>INFORMATICA AL D&A</strong> todos los derechos reservados</p>
 								</td>
 							</tr>							
 						</table>
@@ -157,12 +157,12 @@ class InscripcionController extends Controller
 
                     //$correo->SMTPDebug = 1;
 					$correo->IsSMTP();
-					$correo->Host = "p3plcpnl0881.prod.phx3.secureserver.net";
-					$correo->Port = 465;	
-					$correo->SMTPSecure = "ssl";
 					$correo->SMTPAuth = true;
-					$correo->Username = "superadmin@informaticaldia.com";
-					$correo->Password = "spadmin123";
+					$correo->SMTPSecure = 'tls';
+					$correo->Host = "smtp.gmail.com";
+					$correo->Username = "spinformadia@gmail.com";
+					$correo->Password = "Spinfor123**";
+					$correo->Port = 25;				
 					
 					$correo->From = $responsable[0]->email; // Desde donde enviamos (Para mostrar)
 					$correo->SetFrom("superadmin@informaticaldia.com", $colegio[0]->nombre);
@@ -171,7 +171,7 @@ class InscripcionController extends Controller
 					
 					//Cuerpo del Mensaje
 					$correo->IsHTML(true);
-					$correo->MsgHTML($html);
+					$correo->Body = $html;
 			
 					$correo->CharSet = 'UTF-8';
 					
@@ -216,7 +216,7 @@ class InscripcionController extends Controller
 									<p style="color:#5a5b5c;font-size:11pt;font-family:Arial;line-height:1.3">
 									Para nosotros como institución es grato informarle que la inscripción de su '.$genero.', <strong>'.strtoupper($estudian[0]->nomcomple).'</strong>
 									ha sido aprobada, le invitamos a realizar el proceso de matrícula financiera y académica a través de
-									nuestro portal <strong><a href="http://www.informaticaldia.com/tutoriaweb/public/login">INFORMÁTICA AL D&A</a></strong>
+									nuestro portal <strong>INFORMÁTICA AL D&A</strong>
 									</p>
 									
 									<p style="color:#5a5b5c;font-size:11pt;font-family:Arial;line-height:1.3">
@@ -233,7 +233,7 @@ class InscripcionController extends Controller
 							<tr>
 								<td valign="top">
 									<p style="font-family:Arial;font-size:9pt;color:#5a5b5c;text-align:center;padding:10px 0px">
-										Copyright@2019 <strong><a href="http://www.informaticaldia.com/tutoriaweb/public/login">INFORMÁTICA AL D&A</a></strong> todos los derechos reservados</p>
+										Copyright@2019 <strong>INFORMÁTICA AL D&A</strong> todos los derechos reservados</p>
 								</td>
 							</tr>							
 						</table>
@@ -243,23 +243,23 @@ class InscripcionController extends Controller
 					
 					$correo = new PHPMailer\PHPMailer();
 
-                    //$correo->SMTPDebug = 1;
+                    $correo->SMTPDebug = 1;
 					$correo->IsSMTP();
-					$correo->Host = "p3plcpnl0881.prod.phx3.secureserver.net";
-					$correo->Port = 465;	
-					$correo->SMTPSecure = "ssl";
 					$correo->SMTPAuth = true;
-					$correo->Username = "superadmin@informaticaldia.com";
-					$correo->Password = "spadmin123";
+					$correo->SMTPSecure = 'tls';
+					$correo->Host = "smtp.gmail.com";
+					$correo->Username = "spinformadia@gmail.com";
+					$correo->Password = "Spinfor123**";
+					$correo->Port = 25;				
 					
 					$correo->From = $responsable[0]->email; // Desde donde enviamos (Para mostrar)
-					$correo->SetFrom("superadmin@informaticaldia.com", $colegio[0]->nombre);
+					$correo->SetFrom("spinformadia@gmail.com", $colegio[0]->nombre);
 					$correo->AddAddress($responsable[0]->email, $responsable[0]->nombre." ".$responsable[0]->apellido1." ".$responsable[0]->apellido2);
 					$correo->Subject = utf8_decode($asunto); //Asunto
 					
 					//Cuerpo del Mensaje
 					$correo->IsHTML(true);
-					$correo->MsgHTML($html);
+					$correo->Body = $html;
 			
 					$correo->CharSet = 'UTF-8';
 					
@@ -776,16 +776,19 @@ class InscripcionController extends Controller
 	
     public function obtenerListadoInscripciones(Request $request){
 		if($request->input('sede') != ""){
-			
 			$cod_sede = $request->input('sede');
 			$inscripcion = DB::table('inscripciones')->where('sede', 'like', '%'.$cod_sede.'%')->paginate(20);
-			
 		}else if($request->input('codigo') != ""){
-			
 			$estudiante = $request->input('codigo');
-			$cod_estudiante = DB::table('estudiantes')->where('nomcomple', 'like', '%'.$estudiante.'%')->get();
-			$inscripcion = DB::table('inscripciones')->where('numdocest', 'like', '%'.$cod_estudiante[0]->numdocumento.'%')->paginate(20);
+			$cod_estudiante = DB::table('estudiantes')->where('nomcomple', 'like', '%'.strtoupper($estudiante).'%')->get();
+
+			if(count($cod_estudiante) != 0){
+				$dian = $cod_estudiante[0]->numdocumento;
+			}else{
+				$dian = " ";
+			}
 			
+			$inscripcion = DB::table('inscripciones')->where('numdocest', 'like', '%'.$dian.'%')->paginate(20);			
 		}else{
 			$inscripcion = DB::table('inscripciones')->paginate(20);
 		}

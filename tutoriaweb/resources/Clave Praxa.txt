@@ -5,12 +5,12 @@ Nit: 12.546.393-7
 
 Acceso a godday
 user:aquilespalacio1
-pass:DeCa52255225
+pass:DeCa52255335
 
 Primero adquirir el dominio y luego el web hosting
-(se debe pagar con tarjeta de crédito)
+(se debe pagar con tarjeta de crÃ©dito)
 
-el dominio actual esta por un año
+el dominio actual esta por un aÃ±o
 el hosting actual esta por 3 meses
 
 clave Cpanel
